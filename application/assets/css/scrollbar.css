@@ -1,0 +1,565 @@
+@charset "UTF-8";
+
+
+/*
+Fishbecat Reset CSS
+(c) 2008, 小魚扮貓 http://www.fishbecat.com/
+Based on YUI http://developer.yahoo.com/yui/reset/ and Eric Meyer http://meyerweb.com/eric/tools/css/reset/
+version: 1.2 | create: 20080901 | update: 20101127
+*/
+
+.odd{background-color:#292929;}   
+.even{background-color:#ffffff;}  
+/**/
+#mwt_mwt_slider_scroll
+{
+  top: 60px;
+  /*left:-700px;*/
+  right:-760px;
+  width:760px;  
+  position:fixed;
+  z-index:999;
+}
+ 
+#mwt_slider_content{
+  background-color:#047ac3;
+  height: 600px;
+
+}
+ 
+#mwt_fb_tab {
+  font-family: "微軟正黑體";
+  position:absolute;
+  top:200px;
+  /*right:-24px;*/
+  right:760px;
+  width:40px;
+  height:110px;
+  background-color:#047ac3;
+  color:#ffffff;
+  text-align:center;
+  padding:9px 0;
+
+  border-top-left-radius:8px;
+  border-bottom-left-radius:8px;
+}
+
+#mwt_fb_tab span {
+  display:block;
+  height:20px;
+  padding:1px 0;
+  line-height:12px;
+  text-transform:uppercase;
+  font-size:16px;
+}
+
+.icon_arrow{
+  background-image:url(../img/arrow.png);
+  position:relative;
+  top:2px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  z-index:1003;
+}
+
+/*===================================================*/
+
+.tab_header_top{
+  position: relative;
+  top:22px;
+  left:20px;
+  background-color: #047ac3;
+  width: 8px;
+  height: 24px;
+}
+
+.tab_header_txt{
+  position: relative;
+  top:2px;
+  left:40px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.tab_header_line{
+  position: relative;
+  top:34px;
+  left:20px;
+  background-color: #047ac3;
+  width: 680px;
+  height: 1px;
+}
+
+
+
+/*===================================================*/
+
+/*.tab4, .tab5{
+  
+}*/
+
+.tab4_all{
+  position:absolute;
+  top:30px;
+  left:0px;
+}
+
+.tab5_all{
+  position:absolute;
+  top:30px;
+  left:0px;
+}
+
+.t_01{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top:40px;
+  left:30px;
+}
+
+.t_01_icon{
+  position: relative;
+  top:0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+.t_01_txt{
+  position: relative;
+  top:-15px;
+  left: 20px;
+}
+
+.t_01_01{
+  position: relative;
+  top:10px;
+  left: 140px;
+}
+
+
+.t_02{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: 25px;
+  left: 62px;
+}
+
+
+.t_02_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_02_txt{
+  position: relative;
+  top:-15px;
+  left: 20px;
+}
+
+
+.t_02_01{
+  position: relative;
+  top: -5px;
+  left: 140px;
+}
+
+
+.t_03{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: 10px;
+  left: 47px;
+}
+
+
+.t_03_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_03_txt{
+  position: relative;
+  top:-15px;
+  left: 20px;
+}
+
+
+.t_03_01{
+  position: relative;
+  top: -20px;
+  left: 140px;
+}
+
+
+.t_04{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: -5px;
+  left: 63px;
+}
+
+
+.t_04_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_04_txt{
+  position: relative;
+  top:-15px;
+  left: 20px;
+}
+
+
+.t_04_01{
+  position: relative;
+  top: -35px;
+  left: 140px;
+}
+
+
+.t_05{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: 40px;
+  left: 33px;
+}
+
+
+.t_05_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_05_txt{
+  position: relative;
+  top:-15px;
+  left: 20px;
+}
+
+
+.t_05_01{
+  position: relative;
+  top: 10px;
+  left: 140px;
+}
+
+
+.t_06{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: 25px;
+  left: 65px;
+}
+
+
+.t_06_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_06_txt{
+  position: relative;
+  top:-15px;
+  left: 20px;
+}
+
+
+.t_06_01{
+  position: relative;
+  top: -5px;
+  left: 140px;
+}
+
+
+.t_07{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: 10px;
+  left: 65px;
+}
+
+
+.t_07_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_07_txt{
+  position: relative;
+  top:-15px;
+  left: 20px;
+}
+
+
+.t_07_01{
+  position: relative;
+  top: -20px;
+  left: 140px;
+}
+
+
+.t_08{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: -5px;
+  left: 65px;
+}
+
+
+.t_08_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_08_txt{
+  position: relative;
+  top:-15px;
+  left: 20px;
+}
+
+
+.t_08_01{
+  position: relative;
+  top: -35px;
+  left: 140px;
+}
+
+
+.t_09{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: -20px;
+  left: 65px;
+}
+
+
+.t_09_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_09_txt{
+  position: relative;
+  top:-15px;
+  left: 20px;
+}
+
+
+.t_09_01{
+  position: relative;
+  top: -50px;
+  left: 140px;
+}
+
+
+.t_10{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: -35px;
+  left: 35px;
+}
+
+
+.t_10_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_10_txt{
+  position: relative;
+  top:-15px;
+  left: 18px;
+}
+
+
+.t_10_01{
+  position: relative;
+  top: -65px;
+  left: 140px;
+}
+
+
+.t_11{
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  top: -50px;
+  left: 67px;
+}
+
+
+.t_11_icon{
+  position: relative;
+  top: 0px;
+  left: 0px;
+  background-image: url(../img/icon_01.png);
+  width: 15px;
+  height: 14px;
+}
+
+
+.t_11_txt{
+  position: relative;
+  top:-15px;
+  left: 18px;
+}
+
+
+.t_11_01{
+  position: relative;
+  top: -80px;
+  left: 140px;
+}
+
+
+/*===================================================*/
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tab_bg{
+  position: relative;
+  top:20px;
+  left:20px;
+  width:720px;
+  height:555px;
+  border: 1px solid #999;
+  background-color: #ffffff;
+  z-index:999;
+}
+
+.abgne_tab {
+  clear: left;
+  width: 600px;
+  margin: 10px 0;
+  z-index:1001;
+  position: relative;
+  top:30px;
+  left:32px;
+}
+.tabs {
+  width: 100%;
+  height: 40px;
+  /*border-bottom: 1px solid #999;*/
+  border-bottom: none;
+  border-left: 1px solid #999;
+}
+.tabs li {
+  float: left;
+  height: 39px;
+  line-height: 39px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: -1px;  
+  border: 1px solid #999;
+  border-left: none;
+  background: #e1e1e1;
+}
+.tabs li a {
+  display: block;
+  padding: 0 20px;
+  color: #000;
+  border: 1px solid #fff;
+  text-decoration: none;
+}
+.tabs li a:hover {
+  background: #ccc;
+}
+.tabs li.active  {
+  background: #fff;
+  border-bottom: 1px solid#fff;
+}
+.tabs li.active a:hover {
+  background: #fff;
+}
+
+
+.tab_container {
+ /* clear: left;*/
+  width:655px;
+  height:400px;
+  border: 1px solid #999;
+  /*border-top: none;*/
+  background: #fff;
+  overflow:auto;
+}
+.tab_container .tab_content {
+   padding: 20px;
+   
+}
+.tab_container .tab_content h2 {
+  margin: 0 20 30px;
+}
+
+
+
+/* ================================================*/
+/*隱藏註冊欄位*/
+/*#reg_account_text, #reg_account_input, #reg_passwd_text, #reg_passwd_input, 
+#reg_passwd_text_checked, #reg_passwd_input_checked, #identity, #options, 
+#error_reg_01,#error_reg_02,#error_reg_03,#error_reg_04,.btn-primary_02,#tips_title,#tips_01,#tips_02{
+  display:none;  
+}*/
+
