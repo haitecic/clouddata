@@ -83,6 +83,13 @@ class Account_management extends CI_Controller{
 				//儲存至Session中
 				$username = $result['surname'].$result['given_names'];
 				$this->session->set_userdata('username', $username);
+				$this->session->set_userdata('first_item', 'year');
+				$this->session->set_userdata('second_item', 'idea_name');
+				$this->session->set_userdata('third_item', 'proposed_unit');
+				$this->session->set_userdata('fourth_item', 'proposer');
+				$this->session->set_userdata('fifth_item', 'proposed_date');
+				$this->session->set_userdata('sixth_item', 'PM_in_charge');
+				$this->session->set_userdata('seventh_item', 'closed_case');
 				header('Location:project_list');
 				//$this->project->list_all_projects();				
 				/*
@@ -117,7 +124,7 @@ class Account_management extends CI_Controller{
 		if(!empty($result))   //帳號密碼輸入錯誤
 		{
 			echo "該帳號已被註冊!";
-		}		
+		}
 	}
 	
 	public function reg_passwd_check()
@@ -128,7 +135,7 @@ class Account_management extends CI_Controller{
 		if(!empty($result))   //帳號密碼輸入錯誤
 		{
 			echo "該帳號已被註冊!";
-		}		
+		}
 	}
 	
 	

@@ -7,6 +7,7 @@ class Project_model extends CI_Model{
 		date_default_timezone_set('Asia/Taipei');  //設定時區
 	}
 	
+	
 	/**
 	get_all_projects_count()：取得符合搜尋條件的專案數量
 	*/	
@@ -179,7 +180,35 @@ class Project_model extends CI_Model{
 			$search_word = explode(' ', $search_content);
 			for($i=0;$i<count($search_word);$i++)
 			{
-				$rule1 = $rule1."(`name` LIKE '%".$search_word[$i]."%' OR `year` LIKE '%".$search_word[$i]."%' OR `haitec_unit` LIKE '%".$search_word[$i]."%' OR `outer_unit` LIKE '%".$search_word[$i]."%' OR `pm` LIKE '%".$search_word[$i]."%' OR `keyword` LIKE '%".$search_word[$i]."%' OR `file_content` LIKE '%".$search_word[$i]."%')"; // 
+                $rule1 = $rule1."(`year` LIKE '%".$search_word[$i]."%' OR 
+				`idea_id` LIKE '%".$search_word[$i]."%' OR 
+				`idea_name` LIKE '%".$search_word[$i]."%' OR 
+     			`idea_source` LIKE '%".$search_word[$i]."%' OR 
+				`idea_description` LIKE '%".$search_word[$i]."%' OR 
+				`inner_or_outer` LIKE '%".$search_word[$i]."%' OR
+				`stage` LIKE '%".$search_word[$i]."%' OR
+				`stage_detail` LIKE '%".$search_word[$i]."%' OR
+				`progress_description` LIKE '%".$search_word[$i]."%' OR
+				`proposed_unit` LIKE '%".$search_word[$i]."%' OR
+				`proposer` LIKE '%".$search_word[$i]."%' OR
+				`proposed_date` LIKE BINARY'%".$search_word[$i]."%' OR
+				`valid_project` LIKE '%".$search_word[$i]."%' OR
+				`established_date` LIKE BINARY'%".$search_word[$i]."%' OR
+				`joint_unit` LIKE '%".$search_word[$i]."%' OR
+				`joint_person` LIKE '%".$search_word[$i]."%' OR
+				`co_worker` LIKE '%".$search_word[$i]."%' OR
+				`idea_examination` LIKE '%".$search_word[$i]."%' OR
+				`Idea` LIKE '%".$search_word[$i]."%' OR
+				`Requirement` LIKE '%".$search_word[$i]."%' OR
+				`Feasibility` LIKE '%".$search_word[$i]."%' OR
+				`Prototype` LIKE '%".$search_word[$i]."%' OR
+				`note` LIKE '%".$search_word[$i]."%' OR
+				`adoption` LIKE '%".$search_word[$i]."%' OR
+				`applied_patent` LIKE '%".$search_word[$i]."%' OR
+				`resurrection_application_qualified` LIKE '%".$search_word[$i]."%' OR
+				`resurrection_applied` LIKE '%".$search_word[$i]."%' OR
+				`PM_in_charge` LIKE '%".$search_word[$i]."%' OR 
+				`closed_case` LIKE '%".$search_word[$i]."%')";
 				if(($i+1) != count($search_word))
 				{
 					$rule1 = $rule1." AND ";
@@ -188,19 +217,29 @@ class Project_model extends CI_Model{
 		}
 		else
 		{
-			$rule1 = "`name` LIKE '%%' ";
+			$rule1 = "`year` LIKE '%%' ";
  
 		}
-	
+	    //載入session項目
+		$first_item=$this->session->userdata('first_item');
+		$second_item=$this->session->userdata('second_item');
+		$third_item=$this->session->userdata('third_item');
+		$fourth_item=$this->session->userdata('fourth_item');
+		$fifth_item=$this->session->userdata('fifth_item');
+		$sixth_item=$this->session->userdata('sixth_item');
+		$seventh_item=$this->session->userdata('seventh_item');
+		$item="`id`, `$first_item`, `$second_item`, `$third_item`, `$fourth_item`, `$fifth_item`, `$sixth_item`, `$seventh_item` ";
 		//$query_string = "SELECT data_by_order.* FROM ( SELECT `project`.`id` as project_id, `project_name`, `project`.`pm`, `project`.`status`, `project`.`phase`, `organization`.`id` as collaborate_id, `org_name` as institute, `unit_class` as class, `project`.`update_datetime`, record.`id` as last_record_id FROM `project` JOIN `project_history_record` as record on `record`.`project_id` = `project`.`id` JOIN `organization` on organization.`record_id` = `record`.`id` WHERE `unit_class` in ('1', '2', '3') AND `level_class` = 1 AND (".$rule1.") ORDER BY record.`id` DESC) AS data_by_order GROUP BY data_by_order.`project_id` order by `last_record_id` desc limit ".$start_record.','. $show_record;
-		$query_string = "SELECT project.id, project.name, project.year, project.haitec_unit, project.outer_unit, project.pm, car_model_estimate, exhibition, status, keyword, create_datetime, update_datetime FROM `project_basic_info` as `project` LEFT OUTER JOIN `project_attachment` on `project`.`id` = `project_id` WHERE ".$rule1. "GROUP BY `project_id`";
+		//$query_string = "SELECT project.id, project.name, project.year, project.haitec_unit, project.outer_unit, project.pm, car_model_estimate, exhibition, status, keyword, create_datetime, update_datetime FROM `project_basic_info` as `project` LEFT OUTER JOIN `project_attachment` on `project`.`id` = `project_id` WHERE ".$rule1. "GROUP BY `project_id`";
 		//$query_string = "SELECT project.id, project.name, project.year, project.haitec_unit, project.outer_unit, project.pm, car_model_estimate, exhibition, status, keyword, create_datetime, update_datetime, count(`project_id`) as file_number FROM `project_basic_info` as `project` left join `project_attachment` on `project_id` = `project`.`id` WHERE project.id='61' Group by `project_id`";
+		//讀取資料
+		$query_string = "SELECT " . $item . "FROM `project_all` WHERE ".$rule1;
 		
 		$query = $this->db->query($query_string);	
 		$result = $query->result_array();		
 		$data_count = count($result);
 		//資料轉換
-		for($i=0; $i<$data_count; $i++)
+		/*for($i=0; $i<$data_count; $i++)
 		{
 			if($result[$i]['car_model_estimate'] == 1)
 			{
@@ -226,7 +265,7 @@ class Project_model extends CI_Model{
 			{
 				$result[$i]['status'] = "結案";
 			}	
-		}
+		}*/
 		return $result;
 	}
 	
@@ -871,8 +910,8 @@ class Project_model extends CI_Model{
 	*/	
 	public function get_specific_project_info($project_id) 
 	{
-		$this->db->select('id as project_id, idea_id, name, year, haitec_unit, outer_unit, pm, car_model_estimate, exhibition, status, keyword');
-		$this->db->from('project_basic_info');	
+		$this->db->select('*');
+		$this->db->from('project_all');	
 		$this->db->where('id', $project_id);
 		$query = $this->db->get();	
 		$result = $query->row_array();	
@@ -900,7 +939,7 @@ class Project_model extends CI_Model{
 	public function edit_project_info($project_id)
 	{	
 		//修改資料庫專案資料
-		$data = array('name'=>$this->input->post('project_name'),
+		/*$data = array('name'=>$this->input->post('project_name'),
 			'year'=>$this->input->post('year'),
 			'haitec_unit'=>$this->input->post('haitec_unit'),
 			'outer_unit'=>$this->input->post('outer_unit'),
@@ -912,7 +951,7 @@ class Project_model extends CI_Model{
 			'idea_id'=>$this->input->post('idea_id'),
 			'update_datetime'=>date('Y-m-d H:i:s'));
 		$this->db->where('id', $project_id);		
-		$this->db->update('project_basic_info', $data);
+		$this->db->update('project_basic_info', $data);*/
 		//建立專案相關檔案存放的資料夾
 		//mkdir("application/assets/project_attachment/".$new_project_id, 0777);
 		//搬移檔案至指定資料夾
@@ -992,5 +1031,139 @@ class Project_model extends CI_Model{
 			'update_datetime'=>date('Y-m-d H:i:s'));
 		$this->db->where('id', $institute_id);		
 		return $this->db->update('institute', $data);
+	}
+	
+	/**
+	get_all_institute_basic_info()：取得所有法人基本資料
+	*/
+	public function get_all_institute_basic_info($search_rule)  //取得所有法人資料
+	{
+		if($search_rule == null)  //沒有設定搜尋條件
+		{
+			$query = $this->db->get('institute');  //查詢學校專案資料表的資料
+			return $query->result_array();
+		}
+		else
+		{
+			$search_field = array('institute' => $search_rule, 'department' => $search_rule, 'introduction'=> $search_rule, 'contact_name' => $search_rule, 'contact_phone'=>$search_rule, 'contact_email'=>$search_rule);  //需搜尋的欄位與搜尋值 
+			$this->db->select('*')->from('institute')->or_like($search_field);//查詢學校專案資料表的資料
+			$query = $this->db->get();	
+			return $query->result_array();
+		}
+	}
+	
+	/**
+	get_specific_institute_basic_info()：取得特定法人基本資料
+	*/
+	public function get_specific_institute_basic_info($start_record, $show_record  = 5, $search_rule)
+	{
+		if($search_rule == null)  //沒有設定搜尋條件
+		{
+			$this->db->select('*')->from('institute')->limit($show_record, $start_record); //查詢學校專案資料表的資料
+			$query = $this->db->get();	
+			return $query->result_array();
+		}
+		else  //有設定搜尋條件
+		{
+			$search_field = array('institute' => $search_rule, 'department' => $search_rule, 'introduction'=> $search_rule, 'contact_name' => $search_rule, 'contact_phone'=>$search_rule, 'contact_email'=>$search_rule);  //需搜尋的欄位與搜尋值 , 'contact_name' => $search_rule, 'contact_phone'=>$search_rule, 'contact_email'=>$search_rule
+			$this->db->select('*')->from('institute')->or_like($search_field)->limit($show_record, $start_record); //查詢學校專案資料表的資料
+			$query = $this->db->get();	
+			return $query->result_array();
+		}
+	}	
+	
+	/**
+	get_one_specific_institute_basic_info()：取得特定法人基本資料
+	*/
+	public function get_one_specific_institute_basic_info($institute_id)
+	{
+		$query = $this->db->get_where('institute', array('id' => $institute_id));
+		return $query->row_array();
+	}
+	/**
+	create_institute()：新增資料到資料庫中
+	*/	
+	public function create_institute()
+	{
+		$data = array('institute'=>$this->input->post('institute'),
+			'department'=>$this->input->post('department'),
+			'address'=>$this->input->post('address'),
+			'website'=>$this->input->post('website'),
+			'memo'=>$this->input->post('memo'),
+			'contact_name'=>$this->input->post('contact_name'),
+			'contact_sex'=>$this->input->post('contact_sex'),
+			'contact_phone'=>$this->input->post('contact_phone'),
+			'contact_email'=>$this->input->post('contact_email'),
+			'contact_address'=>$this->input->post('contact_address'),
+			'update_datetime'=>date('Y-m-d H:i:s'));
+		return $this->db->insert('institute', $data);	
+	}	
+	
+	/**
+	update_institute()：更新法人資料
+	*/	
+	public function update_institute($institute_id)
+	{
+		$data = array('institute'=>$this->input->post('institute'),
+			'department'=>$this->input->post('department'),
+			'address'=>$this->input->post('address'),
+			'website'=>$this->input->post('website'),
+			'memo'=>$this->input->post('memo'),
+			'contact_name'=>$this->input->post('contact_name'),
+			'contact_sex'=>$this->input->post('contact_sex'),
+			'contact_phone'=>$this->input->post('contact_phone'),
+			'contact_email'=>$this->input->post('contact_email'),
+			'contact_address'=>$this->input->post('contact_address'),
+			'update_datetime'=>date('Y-m-d H:i:s'));
+		$this->db->where('id', $institute_id);		
+		return $this->db->update('institute', $data);	
+	}	
+	
+	/**
+	delete_institute()：刪除法人資料
+	*/	
+	public function delete_institute($institute_id)
+	{
+		$this->db->where('id', $institute_id);
+		$this->db->delete('institute'); 
+	}
+	
+	/**
+	get_all_institute_project()：取得特定法人的所有專案資料
+	*/	
+	public function get_all_institute_project($institute_id, $search_rule)
+	{
+		if($search_rule == null)  //沒有設定搜尋條件
+		{
+			$query = $this->db->get_where('institute_project', array('institute_id' => $institute_id));
+			return $query->result_array();
+		}
+		else
+		{
+			$search_field = array('institute' => $search_rule, 'department' => $search_rule, 'introduction'=> $search_rule, 'contact_name' => $search_rule, 'contact_phone'=>$search_rule, 'contact_email'=>$search_rule);  //需搜尋的欄位與搜尋值 
+			$this->db->select('*')->from('institute_project')->where('institute_id', $institute_id)->or_like($search_field);//查詢學校專案資料表的資料
+			$query = $this->db->get();	
+			return $query->result_array();
+		} 
+	}
+
+		/**
+	get_specific_institute_project()：取得特定法人在特定分頁所需呈現的專案資料
+	*/
+	public function get_specific_institute_project($institute_id ,$start_record, $show_record  = 5, $search_rule)
+	{
+		if($search_rule == null)  //沒有設定搜尋條件
+		{
+			$this->db->select('*')->from('institute_project')->where('institute_id',$institute_id)->limit($show_record, $start_record); //查詢學校專案資料表的資料
+			$query = $this->db->get();	
+			return $query->result_array();
+		}
+		else  //有設定搜尋條件
+		{
+			$search_field = array('institute' => $search_rule, 'department' => $search_rule, 'introduction'=> $search_rule, 'contact_name' => $search_rule, 'contact_phone'=>$search_rule, 'contact_email'=>$search_rule);  //需搜尋的欄位與搜尋值 , 'contact_name' => $search_rule, 'contact_phone'=>$search_rule, 'contact_email'=>$search_rule
+			$this->db->select('*')->from('institute_project')->where('institute_id',$institute_id)->or_like($search_field)->limit($show_record, $start_record); //查詢學校專案資料表的資料
+			$query = $this->db->get();	
+			return $query->result_array();
+		}
 	}
 }

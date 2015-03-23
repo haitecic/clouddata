@@ -152,8 +152,26 @@ class Project extends CI_Controller{
 		$this->load->view('pages/project_list2', $data);
 		$this->load->view('templates/footer_new');
 	}*/
+	//調整預覽項目
+	public function adjust_item()
+	{
+		if(!$this->session->userdata('username'))  //判斷使用者是否由login頁面登入
+		{	
+			redirect('login');
+		}
+	$this->session->set_userdata('first_item', $this->input->post('first'));
+	$this->session->set_userdata('second_item', $this->input->post('second'));
+	$this->session->set_userdata('third_item', $this->input->post('third'));
+	$this->session->set_userdata('fourth_item', $this->input->post('fourth'));
+	$this->session->set_userdata('fifth_item', $this->input->post('fifth'));
+	$this->session->set_userdata('sixth_item', $this->input->post('sixth'));
+	$this->session->set_userdata('seventh_item', $this->input->post('seventh'));
+	$search=$this->input->post('searchbar');
+	//redirect(project_list/100/$search");
+	redirect("project_list");
+	}
 	
-	public function list_all_projects($page = 0, $search=null,$message='')  //瀏覽所有專案資料
+	public function list_all_projects($page = 0, $search_bar=null,$message='')  //瀏覽所有專案資料
 	{			
 		if(!$this->session->userdata('username'))  //判斷使用者是否由login頁面登入
 		{	
@@ -167,10 +185,10 @@ class Project extends CI_Controller{
         $data['project_location'] = site_url("/application/assets/project");
 		$data['plugins_location'] = site_url("/application/assets/plugins");
 		$data['message'] = $message;
-		$search_bar = $this->input->post('search_bar');
+		if($search_bar==null) $search_bar = $this->input->post('search_bar');
 		$data['search'] = $search_bar;
 		$data['project_list'] = $this->project_model->get_specific_projects_data($search_bar);  //取得搜尋條件設定的專案資料
-		$data['number_file'] = $this->project_model->get_number_file();
+		//$data['number_file'] = $this->project_model->get_number_file();
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/navbar', $data);
 		$this->load->view('pages/project_list3', $data);
@@ -325,92 +343,6 @@ class Project extends CI_Controller{
 	}
 	
 	/**
-	edit_project_data：編輯專案資料(新20150317)
-	*/
-	public function edit_project_data($project_id)
-	{	
-		if(!$this->session->userdata('username'))
-		{	
-			redirect('login');
-		}
-		$data['title'] = '專案管理';
-		$data['username'] = $this->session->userdata('username');
-		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
-		$data['js_location'] = site_url("/application/assets/js");  
-		$data['img_location'] = site_url("/application/assets/img");
-        $data['project_location'] = site_url("/application/assets/project");
-		$data['plugins_location'] = site_url("/application/assets/plugins");
-		/*從資料庫撈資料*/
-		$data['project_basic_info'] = $this->project_model->get_specific_project_info($project_id);  //取得專案基本資料
-		$data['project_attachfile'] = $this->project_model->get_specific_project_attachfile($project_id);  //取得專案夾帶檔案
-		$this->form_validation->set_error_delimiters('<label style="margin-left:5px;color:red;font-weight:100">','</label>');  //錯誤訊息顯示的樣式
-		//設定表單欄位資料的驗證規則
-		$this->form_validation->set_rules('project_name', '專案名稱', 'trim|max_length[100]|required|xss_clean');
-		$this->form_validation->set_rules('year', '專案年份', 'trim|xss_clean|required|max_length[4]');		
-		$this->form_validation->set_rules('haitec_unit', '華創單位', 'trim|xss_clean|required|max_length[100]');
-		$this->form_validation->set_rules('outer_unit', '外部單位', 'trim|xss_clean|required|max_length[100]');
-		$this->form_validation->set_rules('pm', '創意中心負責人', 'trim|xss_clean|required|max_length[100]');
-		$this->form_validation->set_rules('keyword', '關鍵字', 'trim|xss_clean|required|max_length[100]');
-		$this->form_validation->set_rules('idea_id', '創意提案編號', 'trim|xss_clean|required');  //|max_length[7]
-		//撰寫表單驗證通過與不通過的對應處理方式
-		if($this->form_validation->run() === FALSE)  //當表單驗證不通過
-		{		
-			$this->load->view('templates/header', $data);
-			$this->load->view('templates/navbar', $data);
-			$this->load->view('pages/project_edit', $data);
-			$this->load->view('templates/footer',$data);
-		}
-		else  //當表單驗證通過
-		{
-			$this->project_model->edit_project_info($project_id);  //編輯專案紀錄
-			$message = "edit";  
-			redirect('project_list');
-		}	
-	}
-	
-	/**
-	edit_project_data：編輯專案資料
-	*/
-	/*public function edit_project_data($project_id)
-	{		
-		if(!$this->session->userdata('username'))
-		{	
-			redirect('login');
-		}
-		$data['title'] = '專案管理';
-		$data['username'] = $this->session->userdata('username');
-		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
-		$data['js_location'] = site_url("/application/assets/js");  
-		$data['img_location'] = site_url("/application/assets/img");
-        $data['project_location'] = site_url("/application/assets/project");		
-		$specific_project_basic_info = $this->project_model->get_specific_project_data($project_id);  //列出專案基本資料  
-		$data['project_basic_info']	= $specific_project_basic_info;
-		$collaborate_objects = $this->project_model->get_all_collaborate_object();  //取得特定選擇頁數所需呈現的專案資料
-		$data['collaborate_objects'] = $collaborate_objects;
-		$this->form_validation->set_error_delimiters('<label style="margin-left:5px;color:red;font-weight:100">','</label>');  //錯誤訊息顯示的樣式
-		//設定表單欄位資料的驗證規則
-		$this->form_validation->set_rules('project_name', '專案名稱', 'trim|max_length[30]|required|xss_clean');
-		$this->form_validation->set_rules('pm', '管理者', 'trim|xss_clean');
-		$this->form_validation->set_rules('collaborate_id', '合作對象', 'trim|xss_clean');
-		$this->form_validation->set_rules('status', '專案狀態', 'trim|xss_clean');
-		$this->form_validation->set_rules('phase', '執行階段', 'trim|xss_clean');
-		//撰寫表單驗證通過與不通過的對應處理方式
-		if($this->form_validation->run() === FALSE)  //當表單驗證不通過
-		{
-			$this->load->view('templates/header', $data);
-			$this->load->view('templates/navbar', $data);
-			$this->load->view('pages/project_edit', $data);		
-			$this->load->view('templates/footer');
-		}
-		else  //當表單驗證通過
-		{
-			$this->project_model->update_specific_project_data($project_id);  //編輯專案紀錄
-			$message = "專案編輯成功!";  
-			$this->list_all_projects(0, null, $message);  //回瀏覽專案頁面
-		}
-	}*/
-	
-	/**
 	project_file_upload：專案檔案上傳
 	*/
 	public function project_file_upload()
@@ -437,6 +369,50 @@ class Project extends CI_Controller{
 				//echo "Uploaded File :".$_FILES["file"]["name"];
 			}
 		}
+	}
+	
+	/**
+	edit_project_data：編輯專案資料(新20150317)
+	*/
+	public function edit_project_data($project_id)
+	{	
+		if(!$this->session->userdata('username'))
+		{	
+			redirect('login');
+		}
+		$data['title'] = '專案管理';
+		$data['username'] = $this->session->userdata('username');
+		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
+		$data['js_location'] = site_url("/application/assets/js");  
+		$data['img_location'] = site_url("/application/assets/img");
+        $data['project_location'] = site_url("/application/assets/project");
+		$data['plugins_location'] = site_url("/application/assets/plugins");
+		/*從資料庫撈資料*/
+		$data['project_basic_info'] = $this->project_model->get_specific_project_info($project_id);  //取得專案基本資料
+		$data['project_attachfile'] = $this->project_model->get_specific_project_attachfile($project_id);  //取得專案夾帶檔案
+		$this->form_validation->set_error_delimiters('<label style="margin-left:5px;color:red;font-weight:100">','</label>');  //錯誤訊息顯示的樣式
+		//設定表單欄位資料的驗證規則
+		/*$this->form_validation->set_rules('project_name', '專案名稱', 'trim|max_length[100]|required|xss_clean');
+		$this->form_validation->set_rules('year', '專案年份', 'trim|xss_clean|required|max_length[4]');		
+		$this->form_validation->set_rules('haitec_unit', '華創單位', 'trim|xss_clean|required|max_length[100]');
+		$this->form_validation->set_rules('outer_unit', '外部單位', 'trim|xss_clean|required|max_length[100]');
+		$this->form_validation->set_rules('pm', '創意中心負責人', 'trim|xss_clean|required|max_length[100]');
+		$this->form_validation->set_rules('keyword', '關鍵字', 'trim|xss_clean|required|max_length[100]');*/
+		$this->form_validation->set_rules('idea_id', '創意提案編號', 'trim|xss_clean|required');  //|max_length[7]
+		//撰寫表單驗證通過與不通過的對應處理方式
+		if($this->form_validation->run() === FALSE)  //當表單驗證不通過
+		{		
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/navbar', $data);
+			$this->load->view('pages/project_edit', $data);
+			$this->load->view('templates/footer',$data);
+		}
+		else  //當表單驗證通過
+		{
+			$this->project_model->edit_project_info($project_id);  //編輯專案紀錄
+			$message = "edit";  
+			redirect('project_list');
+		}	
 	}
 	
 	/**

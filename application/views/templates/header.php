@@ -6,9 +6,9 @@ header('Content-Type: text/html; charset=utf-8');
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-	<!--<meta name="description" content="">-->
-    <!--<meta name="author" content="">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 	<!--<link rel="icon" href="<?php //echo $img_location;?>/haitec_logo.jpg">-->
     <title><?php echo $title ?></title>
 	<link href="<?php echo $plugins_location;?>/bootstrap/bootstrap.css" rel="stylesheet">
@@ -24,6 +24,29 @@ header('Content-Type: text/html; charset=utf-8');
 	<link href="<?php echo $plugins_location;?>/chartist/chartist.min.css" rel="stylesheet">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	
+	<!--彈出視窗js-->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<!--<script type="text/javascript">
+			$(function() {
+				$("#dialog").dialog({
+					autoOpen : false,
+					show : {
+						effect : "blind",
+						duration : 500
+					},
+					hide : {
+						effect : "blind",
+						duration : 500
+					}
+				});
+				$("#opener").click(function() {
+					$("#dialog").dialog("open");
+				});
+			});
+		</script>-->
+	<!---->
 	<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">-->
 	<!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
 	<!--<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>-->
