@@ -1,4 +1,7 @@
 <!--Start Container-->
+<script>
+
+</script>
 <div id="main" class="container-fluid" style="background-color:#FBFBF0">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12" style="background-color:#ffffff; height:30px;background-color:#FBFBF0;"></div>
@@ -7,8 +10,12 @@
 		<!--<div class="btn btn-primary qq-upload-button" style="border-color:#6483E4;background-color:#6483E4;width: auto;text-align:right;float:left;margin-left:50px;margin-top:-40px;margin-bottom:10px;"><!--;right:575-->
 			<!--<div id="sub_button" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i> 資料送出</div>-->
 			<!--<div id="list_project_button" onclick="list_project()" style="font-family: Adobe 繁黑體 Std; font-size:16px;"><i></i>專案列表</div>-->
-		<!--</div>-->
+		<!--</div>-->		
 		<?php
+		if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username)
+		{
+			echo "<div style='text-align:center;font-size:14pt;color:blue'>使用者 ".$project_basic_info['current_user']." 正在編輯此專案，故您目前只能查看此專案資料。</div><br/>";
+		}		
 		echo validation_errors();
 		$attributes = array('class' => 'form-horizontal', 'role'=>'form', 'id' => 'project_create_form', 'name'=>'project_create_form');
 		echo form_open('project_edit/'. $project_basic_info['id'], $attributes);
@@ -283,7 +290,7 @@
 			</div>			-->
 			<!--<div id="ajax-content"></div>--> <!-- 載入重要資料!!! -->
 			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
-			<div style="margin-left:15px" id="dragandrophandler">Drag & Drop Files Here(or <a href="#" id="browse_file" onclick="browse_file()">Browse</a> Files.)</div>
+			<div style="margin-left:15px;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">Drag & Drop Files Here(or <a href="#" id="browse_file" onclick="browse_file()">Browse</a> Files.)</div>
 			<div id="file_list" class="statusbar" style="width:1300px;margin-left:15px;padding-bottom:10px">
 				<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
 				<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
@@ -314,7 +321,7 @@
 					</div>
 					<div class="progressBar" style="margin-left:10px;width:200px;background-color:#0BA1B5"><div style="padding-left:160px;text-align:right">100%</div></div>
 					<span style="margin-left:75px;width:100px"><?php echo $file['create_time'];?></span>
-					<div id="file_<?php echo $i;?>" style="margin-left:100px" class="abort" onclick="delete_file(<?php echo $i;?>)" style='margin-left:50px'>Delete</div>
+					<div id="file_<?php echo $i;?>" class="abort" onclick="delete_file(<?php echo $i;?>)" style="margin-left:50px;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username) { echo "display:none";}?>">Delete</div>
 					<input type="hidden" id="file_id_<?php echo $i;?>" name="file_id" value="<?php echo $file['instance_file_name'];?>"/>
 				</div>
 			<?php
@@ -327,10 +334,11 @@
 			<input type="hidden" id="file_success_upload_count" name="file_success_upload_count" value="0"></input> <!--計算上傳成功的檔案數量-->
 			<input type="hidden" id="delete_file_count" name="delete_file_count" value="0"></input> <!--原本上傳之檔案被刪除的數量-->
 			<input type="hidden" id="upload_file_dir" name="upload_file_dir"></input> <!--伺服器暫存使用者上傳檔案的資料夾-->
-			<div class="btn btn-primary qq-upload-button" style="width: auto;align:center"><!--;right:575-->
-				<!--<div id="sub_button" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i> 資料送出</div>-->
-				<div type="submit" id="sub_button" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i>資料送出</div>
-			</div>			
+			<input type="hidden" id="current_user" name="current_user" value="<?php echo $project_basic_info['current_user'];?>"></input> <!--目前正在編輯的使用者-->
+			<input type="hidden" id="login_user" name="login_user" value="<?php echo $username;?>"></input> <!--使用者(自己)-->
+			<div class="btn btn-primary qq-upload-button" style="width: auto;align:center;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username) { echo "display:none";}?>">
+				<div type="submit" id="sub_button" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i>確認送出</div>
+			</div>						
 		</form>
 		</div>	
 		<br/>
@@ -395,13 +403,61 @@ function change_year_border_display_onblur(object, event)
 	}
 }*/
 
+
+
 //If the files are dropped outside the div, file is opened in the browser window. To avoid that we can prevent ‘drop’ event on document.
 $(document).ready(function()
 {		
+	function project_set_unblocked()
+	{
+		//var txt;
+		//var r = confirm("Press a button!");
+		//if (r == true) {
+		//	txt = "You pressed OK!";
+		//} else {
+		//	txt = "You pressed Cancel!";
+		//}		
+		var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_set_unblocked";
+		$.ajax({
+			url:request_url,  
+			data:{			 //The data to send(will be converted to a query string)
+				id:<?php echo $project_basic_info['id'];?>
+			},
+			type:"POST",		 //Whether this is a POST or GET request
+			dataType:"text", //回傳的資料型態
+			//Code to run if the request succeeds. The response is passed to the function
+			success:function(str){
+				//alert(str);
+			},
+			async:false,
+			//Code to run if the request fails; the raw request and status codes are passed to the function
+			error:function(xhr, status, errorThrown){
+				alert("Sorry, there was a problem!");
+				console.log("Error: " + errorThrown);
+				console.log("Status: " + status);
+				console.dir( xhr );
+			},
+			complete:function( xhr, status ){
+				//alert("確定要跳出編輯頁面嗎?");
+			}
+		});					
+	}
+	$(window).on('beforeunload', function(){		
+		var current_user = document.getElementById("current_user").value;
+		var login_user = document.getElementById("login_user").value;
+		if(current_user == login_user || current_user == "")  /*唯有當自己跳出編輯頁面，才解鎖*/
+		{
+			project_set_unblocked();		  
+		}			
+	});
+	
 	var upload_file_dir = Date.now();
 	document.getElementById("upload_file_dir").value = upload_file_dir;
 	var obj = $("#dragandrophandler");
-	var file_list = $("#file_list");	
+	var file_list = $("#file_list");		
+	/*$( window ).unload(function() {
+		project_set_unblocked();
+	});*/
 	$("#sub_button").click(function () {  //按下資料送出的處理函數
 		/*
 		Validation Field
@@ -648,7 +704,8 @@ function createStatusbar(obj)
     this.size = $("<div class='filesize' style='margin-left:45px;width:128px'></div>").appendTo(this.statusbar);
     this.progressBar = $("<div class='progressBar' style='width:200px'><div></div></div>").appendTo(this.statusbar);
     this.create_time = $("<span style='padding-left:80px;width:150px'></span>").appendTo(this.statusbar);
-	this.abort = $("<div id='"+(rowCount-1)+"' class='abort' style='margin-left:102px'>Delete</div>").appendTo(this.statusbar);
+	/*this.abort = $("<div id='"+(rowCount-1)+"' class='abort' style='margin-left:102px'>Delete</div>").appendTo(this.statusbar);*/
+	this.abort = $("<div id='"+(rowCount-1)+"' class='abort' style='margin-left:102px;'>Delete</div>").appendTo(this.statusbar);
 	this.is_send = $("<div id='is_send_"+(rowCount-1)+"' style='display:none'>false</div>").appendTo(this.statusbar);
 	this.file_number = $("<div style='display:none'>"+(rowCount-1)+"</div>").appendTo(this.statusbar);
 	obj.after(this.statusbar);
@@ -716,8 +773,8 @@ function sendFileToServer(formData, status)
 {	
 	//var uploadURL = "http://10.204.96.250/project_manager/project_file_upload";
 	//var uploadURL = "http://10.204.96.233/project_manager/project_file_upload";
-	var uploadURL = "http://localhost/project_management/project_file_upload";
-	//var uploadURL = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_manager/project_file_upload";
+	//var uploadURL = "http://localhost/project_management/project_file_upload";
+	var uploadURL = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_file_upload";
     var extraData ={};	//Extra Data.
     var jqXHR=$.ajax({  //Perform an asynchronous HTTP (Ajax) request.
         xhr: function() {

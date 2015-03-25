@@ -295,17 +295,7 @@
 				<div class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;" >
 					<table class="table table-bordered table-striped table-hover table-heading table-datatable" style="border:#BBBBBB 1px solid;font-family:微軟正黑體" id="datatable-2">
 						<thead style="border:#BBBBBB 1px solid;">
-							<!--<tr>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_project_name" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_year" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_haitec_unit" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_outer_unit" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_pm" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_car_model_estimate" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_exhibition" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_status" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"></th>
-							</tr>-->
+							<!---->
 							<?php
 							$all_item[0]=$this->session->userdata('first_item');
 							$all_item[1]=$this->session->userdata('second_item');
@@ -315,7 +305,7 @@
 							$all_item[6]=$this->session->userdata('seventh_item');
 							for($i=0; $i<=6; $i++)
 							{
-									switch($all_item[$i])
+								switch($all_item[$i])
 								{
 									case "year":
 									     $all_item[$i]="年份";
@@ -421,14 +411,33 @@
 								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[5] ?></td>
 								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[6] ?></td>
 							</tr>
+							<!--<tr>
+								<th style="border:#BBBBBB 1px solid;"><label></label></th>
+								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_project_name" value="Filter..." class="search_init" /></label></th>
+								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_year" value="Filter..." class="search_init" /></label></th>
+								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_haitec_unit" value="Filter..." class="search_init" /></label></th>
+								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_outer_unit" value="Filter..." class="search_init" /></label></th>
+								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_pm" value="Filter..." class="search_init" /></label></th>
+								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_car_model_estimate" value="Filter..." class="search_init" /></label></th>
+								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_exhibition" value="Filter..." class="search_init" /></label></th>
+							</tr>-->
 						</thead>
 						<tbody>	
 							<?php
+							$i=0;
 							foreach($project_list as $project_data)
-							{
-								
-								echo '<tr>';
-								echo '<td style="text-align:center"><input style="width:35px;height:25px" type="image" src="'.$img_location.'/edit.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
+							{	
+							?>		
+							<tr id="<?php echo "row_".$i?>" onmouseover="check_is_blocked(<?php echo $i;?>)">
+							<?php								
+								if($project_data['is_blocked']==1)
+								{
+									echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:31px;height:24px" type="image" src="'.$img_location.'/read6.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
+								}
+								else if($project_data['is_blocked']==2)
+								{
+									echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:35px;height:25px" type="image" src="'.$img_location.'/edit3.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
+								}
 								echo '<td>'.$project_data[$this->session->userdata('first_item')].'</td>';
 								echo '<td>'.$project_data[$this->session->userdata('second_item')].'</td>';
 								echo '<td>'.$project_data[$this->session->userdata('third_item')].'</td>';
@@ -444,7 +453,11 @@
 										echo '<td><a onclick="browse_file('. $project_data['id'].')">檔案數：'.$a['file_number'].'</a></td>';
 									}  
 								}*/
+								?>
+								<input type="hidden" id="row_project_<?php echo $i;?>" value="<?php echo $project_data['id']?>"/>
+								<?php
 								echo '</tr>';
+								$i++;
 							}
 							?>
 							<!--<tr>
@@ -510,6 +523,43 @@ $(document).ready(function() {
 	//WinMove();  //移動表格視窗
 });
 
+function check_is_blocked(row_id)
+{
+	var project_id = document.getElementById("row_project_"+row_id).value;
+	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_check_is_blocked";
+	var block_status;
+	$.ajax({
+		url:request_url,  
+		data:{			 //The data to send(will be converted to a query string)
+			id:project_id
+		},
+		type:"POST",		 //Whether this is a POST or GET request
+		dataType:"text", //回傳的資料型態
+		//Code to run if the request succeeds. The response is passed to the function
+		success:function(str){
+			block_status = $.trim(str);
+			if(block_status == "block")
+			{	
+				document.getElementById("row_img_"+row_id).src = "<?php echo $img_location?>/read6.png";
+				}
+			else if(block_status == "unblock")
+			{
+				document.getElementById("row_img_"+row_id).src = "<?php echo $img_location?>/edit3.png";
+			}
+		},
+		async:true,
+		//Code to run if the request fails; the raw request and status codes are passed to the function
+		error:function(xhr, status, errorThrown){
+			alert("Sorry, there was a problem!");
+			console.log("Error: " + errorThrown);
+			console.log("Status: " + status);
+			console.dir( xhr );
+		},
+		complete:function( xhr, status ){
+		}
+	});
+	//alert(document.getElementById("row_project_"+row_id).value);
+}
 function browse_file(project_id)
 {
 	var searchbar=document.getElementById("search_bar").value;

@@ -372,6 +372,26 @@ class Project extends CI_Controller{
 	}
 	
 	/**
+	project_check_is_blocked():檢查專案的最新狀態
+	*/
+	public function project_check_is_blocked()
+	{	
+		$project_id = $this->input->post('id');  //取得被block住的專案編號
+		$is_blocked = $this->project_model->get_project_is_blocked($project_id);  //更改專案狀態(註記為unblock)
+		echo $is_blocked;
+	}
+	
+	/**
+	project_set_unblocked():設定專案狀態為unblocked
+	*/
+	public function project_set_unblocked()
+	{	
+		$project_id = $this->input->post('id');  //取得被block住的專案編號
+		$this->project_model->set_project_unblocked($project_id);  //更改專案狀態(註記為unblock)
+		echo "success";
+	}	
+	
+	/**
 	edit_project_data：編輯專案資料(新20150317)
 	*/
 	public function edit_project_data($project_id)
@@ -381,13 +401,14 @@ class Project extends CI_Controller{
 			redirect('login');
 		}
 		$data['title'] = '專案管理';
-		$data['username'] = $this->session->userdata('username');
+		$username = $this->session->userdata('username');
+		$data['username'] = $username;
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
 		$data['js_location'] = site_url("/application/assets/js");  
 		$data['img_location'] = site_url("/application/assets/img");
         $data['project_location'] = site_url("/application/assets/project");
 		$data['plugins_location'] = site_url("/application/assets/plugins");
-		/*從資料庫撈資料*/
+		/*從資料庫撈資料*/		
 		$data['project_basic_info'] = $this->project_model->get_specific_project_info($project_id);  //取得專案基本資料
 		$data['project_attachfile'] = $this->project_model->get_specific_project_attachfile($project_id);  //取得專案夾帶檔案
 		$this->form_validation->set_error_delimiters('<label style="margin-left:5px;color:red;font-weight:100">','</label>');  //錯誤訊息顯示的樣式
@@ -402,6 +423,10 @@ class Project extends CI_Controller{
 		//撰寫表單驗證通過與不通過的對應處理方式
 		if($this->form_validation->run() === FALSE)  //當表單驗證不通過
 		{		
+			if($data['project_basic_info']["is_blocked"] == 2)
+			{
+				$this->project_model->set_project_blocked($project_id, $username);  //更改專案狀態(註記為block)
+			}
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/navbar', $data);
 			$this->load->view('pages/project_edit', $data);

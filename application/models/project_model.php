@@ -228,7 +228,7 @@ class Project_model extends CI_Model{
 		$fifth_item=$this->session->userdata('fifth_item');
 		$sixth_item=$this->session->userdata('sixth_item');
 		$seventh_item=$this->session->userdata('seventh_item');
-		$item="`id`, `$first_item`, `$second_item`, `$third_item`, `$fourth_item`, `$fifth_item`, `$sixth_item`, `$seventh_item` ";
+		$item="`id`, `is_blocked`, `current_user`, `$first_item`, `$second_item`, `$third_item`, `$fourth_item`, `$fifth_item`, `$sixth_item`, `$seventh_item` ";
 		//$query_string = "SELECT data_by_order.* FROM ( SELECT `project`.`id` as project_id, `project_name`, `project`.`pm`, `project`.`status`, `project`.`phase`, `organization`.`id` as collaborate_id, `org_name` as institute, `unit_class` as class, `project`.`update_datetime`, record.`id` as last_record_id FROM `project` JOIN `project_history_record` as record on `record`.`project_id` = `project`.`id` JOIN `organization` on organization.`record_id` = `record`.`id` WHERE `unit_class` in ('1', '2', '3') AND `level_class` = 1 AND (".$rule1.") ORDER BY record.`id` DESC) AS data_by_order GROUP BY data_by_order.`project_id` order by `last_record_id` desc limit ".$start_record.','. $show_record;
 		//$query_string = "SELECT project.id, project.name, project.year, project.haitec_unit, project.outer_unit, project.pm, car_model_estimate, exhibition, status, keyword, create_datetime, update_datetime FROM `project_basic_info` as `project` LEFT OUTER JOIN `project_attachment` on `project`.`id` = `project_id` WHERE ".$rule1. "GROUP BY `project_id`";
 		//$query_string = "SELECT project.id, project.name, project.year, project.haitec_unit, project.outer_unit, project.pm, car_model_estimate, exhibition, status, keyword, create_datetime, update_datetime, count(`project_id`) as file_number FROM `project_basic_info` as `project` left join `project_attachment` on `project_id` = `project`.`id` WHERE project.id='61' Group by `project_id`";
@@ -276,9 +276,25 @@ class Project_model extends CI_Model{
 		$query_string = "SELECT project.name, project_attachment.id, project_attachment.file_content ,project_attachment.project_id, project_attachment.file_name, project_attachment.instance_file_name FROM `project_basic_info` as `project` LEFT OUTER JOIN `project_attachment` on  `project`.`id` = `project_id` WHERE project.id=". $project_id;
 		$query = $this->db->query($query_string);	
 		$result = $query->result_array();			
-		return $result;
-		
-		
+		return $result;		
+	}
+	
+	/*設定專案鎖住中*/
+	public function set_project_blocked($project_id, $username)
+	{
+		$data = array('is_blocked'=>1,
+			'current_user'=>$username);
+		$this->db->where('id', $project_id);		
+		return $this->db->update('project_all', $data);
+	}
+	
+	/*設定專案鎖住中*/
+	public function set_project_unblocked($project_id)
+	{
+		$data = array('is_blocked'=>2,
+			'current_user'=>null);
+		$this->db->where('id', $project_id);		
+		return $this->db->update('project_all', $data);
 	}
 	
 	/**
@@ -916,7 +932,7 @@ class Project_model extends CI_Model{
 		$query = $this->db->get();	
 		$result = $query->row_array();	
 		return $result;			 
-	}
+	}	
 	
 	/**
 	get_specific_project_attachfile($project_id)：取得特定專案的附加檔案資料
@@ -931,6 +947,27 @@ class Project_model extends CI_Model{
 		$query = $this->db->get();	
 		$result = $query->result_array();	
 		return $result;			 
+	}
+	
+	/**
+	get_project_is_blocked($project_id)：取得特定專案是否被鎖住
+	$project_id：專案編號
+	*/	
+	public function get_project_is_blocked($project_id) 
+	{
+		$this->db->select('is_blocked');
+		$this->db->from('project_all');	
+		$this->db->where('id', $project_id);
+		$query = $this->db->get();	
+		$result = $query->row_array();	
+		if($result['is_blocked'] == 1)
+		{
+			return "block";
+		}
+		else if($result['is_blocked'] == 2) 
+		{
+			return "unblock";
+		}	 
 	}
 	
 	/**
