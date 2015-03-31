@@ -432,7 +432,7 @@
 							<?php								
 								if($project_data['is_blocked']==1)
 								{
-									echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:31px;height:24px" type="image" src="'.$img_location.'/read6.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
+									echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:30px;height:24px" type="image" src="'.$img_location.'/read6.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
 								}
 								else if($project_data['is_blocked']==2)
 								{
