@@ -181,10 +181,19 @@ class Project_model extends CI_Model{
 			for($i=0;$i<count($search_word);$i++)
 			{
                 $rule1 = $rule1."(`year` LIKE '%".$search_word[$i]."%' OR 
+				`km_id` LIKE '%".$search_word[$i]."%' OR
 				`idea_id` LIKE '%".$search_word[$i]."%' OR 
 				`idea_name` LIKE '%".$search_word[$i]."%' OR 
      			`idea_source` LIKE '%".$search_word[$i]."%' OR 
-				`idea_description` LIKE '%".$search_word[$i]."%' OR 
+				`idea_description` LIKE '%".$search_word[$i]."%' OR
+				`scenario_d` LIKE '%".$search_word[$i]."%' OR
+				`function_d` LIKE '%".$search_word[$i]."%' OR
+				`distinction_d` LIKE '%".$search_word[$i]."%' OR
+				`value_d` LIKE '%".$search_word[$i]."%' OR
+				`feasibility_d` LIKE '%".$search_word[$i]."%' OR
+				`market_survey` LIKE '%".$search_word[$i]."%' OR
+				`km_survey` LIKE '%".$search_word[$i]."%' OR
+				`dep_item` LIKE '%".$search_word[$i]."%' OR
 				`inner_or_outer` LIKE '%".$search_word[$i]."%' OR
 				`stage` LIKE '%".$search_word[$i]."%' OR
 				`stage_detail` LIKE '%".$search_word[$i]."%' OR
@@ -919,7 +928,15 @@ class Project_model extends CI_Model{
 		}		
 		return ;
 	}
-	
+	//get_img_name($km_id)：取得圖片名稱與數量
+	public function get_img_name($km_id)
+    {
+		
+		$str="select name, description from project_img where `km_id`='$km_id'";
+		$query = $this->db->query($str);	
+		$result = $query->result_array();
+		return $result;			 	
+	}	
 	/**
 	get_specific_project_info($project_id)：取得特定專案資料
 	$project_id：專案編號
