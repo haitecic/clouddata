@@ -56,125 +56,67 @@
 		        <form action="project/adjust_item" method="post">
 		        <input id="adjust_searchbar" type="hidden" name="searchbar">				
 				<h4 class="page-header">欄位列表</h4>
-				欄位數量
-				<select id="item_number" name="item_number">
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-				</select>
 				<?php 
 				//$title_array陣列存放select調整欄位選單的名稱
-				$title_array = array('0' => '第一欄', 
-				                     '1' => '第二欄', 
-									 '2' => '第三欄', 
-									 '3' => '第四欄', 
-									 '4' => '第五欄', 
-									 '5' => '第六欄', 
-									 '6' => '第七欄');
-				$titlename_array = array('0' => 'first', 
-									 '1' => 'second', 
-									 '2' => 'third', 
-									 '3' => 'fourth', 
-									 '4' => 'fifth', 
-									 '5' => 'sixth', 
-									 '6' => 'seventh');
-				$item_array = array('0' => 'first_item', 
-				                     '1' => 'second_item', 
-									 '2' => 'third_item', 
-									 '3' => 'fourth_item', 
-									 '4' => 'fifth_item', 
-									 '5' => 'sixth_item', 
-									 '6' => 'seventh_item');
+				$title_array = array('0' => '第一欄', '1' => '第二欄', '2' => '第三欄', '3' => '第四欄', '4' => '第五欄', '5' => '第六欄', '6' => '第七欄');
+				$titlename_array = array('0' => 'first', '1' => 'second', '2' => 'third', '3' => 'fourth', '4' => 'fifth', '5' => 'sixth', '6' => 'seventh');
+				//$item_array存放列表上有顯示的欄位
+				$item_array = array('0' => 'first_item', '1' => 'second_item', '2' => 'third_item', '3' => 'fourth_item', '4' => 'fifth_item', '5' => 'sixth_item', '6' => 'seventh_item');
 				?>
-				<label for="first_col">第一欄</label>
+				<!--<label for="first_col">第一欄</label>
 				<select disabled id="first_col" name="first">
 					<option value="idea_id">創意提案名稱</option>
-				</select>
+				</select>-->
 				<?php
+				//印出六個欄位選單
 				for ($i=1; $i<=6; $i++)
 				{					
-                    echo  $title_array[$i] . "<select id='mySelect' name='" .$titlename_array[$i]. "'>";
-					$all_item[$i]=$this->session->userdata($item_array[$i]);  //目前的欄位名稱
-					if('year'==$all_item[$i]) echo "<option value='year' SELECTED>年分</option>";
-					else echo "<option value='year' >年分</option>";
-					if('km_id'==$all_item[$i]) echo "<option value='km_id' SELECTED>km文件編號</option>";
-					else echo "<option value='km_id' >km文件編號</option>";
-					if('idea_id'==$all_item[$i]) echo "<option value='idea_id' SELECTED>創意提案編號</option>";
-					else echo "<option value='idea_id' >創意提案編號</option>";
-					if('idea_name'==$all_item[$i]) echo "<option value='idea_name' SELECTED>創意提案名稱</option>";
-					else echo "<option value='idea_name' >創意提案名稱</option>";
-					if('idea_source'==$all_item[$i]) echo "<option value='idea_source' SELECTED>創意提案來源</option>";
-					else echo "<option value='idea_source' >創意提案來源</option>";
-					if('scenario_d'==$all_item[$i]) echo "<option value='scenario_d' SELECTED>情境說明</option>";
-					else echo "<option value='scenario_d' >情境說明</option>";
-					if('function_d'==$all_item[$i]) echo "<option value='function_d' SELECTED>功能構想</option>";
-					else echo "<option value='function_d' >功能構想</option>";
-					if('distinction_d'==$all_item[$i]) echo "<option value='distinction_d' SELECTED>差異化</option>";
-					else echo "<option value='distinction_d' >差異化</option>";
-					if('value_d'==$all_item[$i]) echo "<option value='value_d' SELECTED>價值性</option>";
-					else echo "<option value='value_d' >價值性</option>";
-					if('feasibility_d'==$all_item[$i]) echo "<option value='feasibility_d' SELECTED>可行性</option>";
-					else echo "<option value='feasibility_d' >可行性</option>";
-					if('market_survey'==$all_item[$i]) echo "<option value='market_survey' SELECTED>市場搜尋</option>";
-					else echo "<option value='market_survey' >市場搜尋</option>";
-					if('km_survey'==$all_item[$i]) echo "<option value='km_survey' SELECTED>km平台搜尋</option>";
-					else echo "<option value='km_survey' >km平台搜尋</option>";
-					if('dep_item'==$all_item[$i]) echo "<option value='dep_item' SELECTED>研發項目確認</option>";
-					else echo "<option value='dep_item' >研發項目確認</option>";
-					if('idea_description'==$all_item[$i]) echo "<option value='idea_description' SELECTED>提案說明</option>";
-					else echo "<option value='idea_description' >提案說明</option>";
-					if('inner_or_outer'==$all_item[$i]) echo "<option value='inner_or_outer' SELECTED>提案類別</option>";
-					else echo "<option value='inner_or_outer' >提案類別</option>";
-					if('stage'==$all_item[$i]) echo "<option value='stage' SELECTED>階段狀態</option>";
-					else echo "<option value='stage' >階段狀態</option>";
-					if('stage_detail'==$all_item[$i]) echo "<option value='stage_detail' SELECTED>階段細項狀態</option>";
-					else echo "<option value='stage_detail' >階段細項狀態</option>";
-					if('progress_description'==$all_item[$i]) echo "<option value='progress_description' SELECTED>進度說明</option>";
-					else echo "<option value='progress_description' >進度說明</option>";
-					if('proposed_unit'==$all_item[$i]) echo "<option value='proposed_unit' SELECTED>提案單位</option>";
-					else echo "<option value='proposed_unit' >提案單位</option>";
-					if('proposer'==$all_item[$i]) echo "<option value='proposer' SELECTED>提案人</option>";
-					else echo "<option value='proposer' >提案人</option>";
-					if('proposed_date'==$all_item[$i]) echo "<option value='proposed_date' SELECTED>提案日期</option>";
-					else echo "<option value='proposed_date' >提案日期</option>";
-					if('valid_project'==$all_item[$i]) echo "<option value='valid_project' SELECTED>有效提案</option>";
-					else echo "<option value='valid_project' >有效提案</option>";
-					if('established_date'==$all_item[$i]) echo "<option value='established_date' SELECTED>立案日期</option>";
-					else echo "<option value='established_date' >立案日期</option>";
-					if('joint_unit'==$all_item[$i]) echo "<option value='joint_unit' SELECTED>協辦單位</option>";
-					else "<option value='joint_unit' >協辦單位</option>";
-					if('joint_person'==$all_item[$i]) echo "<option value='joint_person' SELECTED>協辦窗口</option>";
-					else echo "<option value='joint_person' >協辦窗口</option>";
-					if('co_worker'==$all_item[$i]) echo "<option value='co_worker' SELECTED>承作廠商</option>";
-					else echo "<option value='co_worker' >承作廠商</option>";
-					if('idea_examination'==$all_item[$i]) echo "<option value='idea_examination' SELECTED>提案審核進度</option>";
-					else echo "<option value='idea_examination'>提案審核進度</option>";
-					 if('Idea'==$all_item[$i]) echo "<option value='Idea' SELECTED>Idea</option>";
-					 else echo "<option value='Idea'>Idea</option>";
-					if('Requirement'==$all_item[$i]) echo "<option value='Requirement' SELECTED>Requirement</option>";
-					else echo "<option value='Requirement' >Requirement</option>";
-					if('Feasibility'==$all_item[$i]) echo "<option value='Feasibility' SELECTED>Feasibility</option>";
-					else echo "<option value='Feasibility' >Feasibility</option>";
-					if('Prototype'==$all_item[$i]) echo "<option value='Prototype' SELECTED>Prototype</option>";
-					else echo "<option value='Prototype' >Prototype</option>";
-					if('note'==$all_item[$i]) echo "<option value='note' SELECTED>備註</option>";
-					else echo "<option value='note' >備註</option>";
-					if('adoption'==$all_item[$i]) echo "<option value='adoption' SELECTED>導入車型</option>";
-					else echo "<option value='adoption' >導入車型</option>";
-					if('applied_patent'==$all_item[$i]) echo "<option value='applied_patent' SELECTED>專利申請</option>";
-					else echo "<option value='applied_patent' >專利申請</option>";
-					if('resurrection_application_qualified'==$all_item[$i]) echo "<option value='resurrection_application_qualified SELECTED>具敗部復活申請資格</option>";
-					else echo "<option value='resurrection_application_qualified >具敗部復活申請資格</option>";
-					if('resurrection_applied'==$all_item[$i]) echo"<option value='resurrection_applied' SELECTED>申請敗部復活</option>";
-					else echo "<option value='resurrection_applied' >申請敗部復活</option>";
-					if('PM_in_charge'==$all_item[$i]) echo "<option value='PM_in_charge' SELECTED>創意中心窗口</option>";
-					else echo "<option value='PM_in_charge' >創意中心窗口</option>";
-					if('closed_case'==$all_item[$i]) echo "<option value='closed_case' SELECTED>結案</option>";
-					else echo "<option value='closed_case' >結案</option>";
-					echo "</select>";
-					echo "<br>";
+                    echo $title_array[$i];
+					$all_item[$i]=$this->session->userdata($item_array[$i]);  //取得該欄位目前顯示的欄位名稱
+				?>
+					<select id="col_<?php echo $i;?>" name="<?php echo $titlename_array[$i];?>">
+						<option value="null" <?php if($all_item[$i] == "null"){ echo " selected";} ?>>無</option>
+						<option value="year" <?php if($all_item[$i] == "year"){ echo " selected";} ?>>年分</option>
+						<option value="km_id" <?php if($all_item[$i] == "km_id"){ echo " selected";} ?> >KM文件編號</option>
+						<option value="idea_id" <?php if($all_item[$i] == "idea_id"){ echo " selected";} ?> >創意提案編號</option>
+						<option value="idea_name" <?php if($all_item[$i] == "idea_name"){ echo " selected";} ?> >創意提案名稱</option>
+						<option value="idea_source" <?php if($all_item[$i] == "idea_source"){ echo " selected";} ?> >創意提案來源</option>
+						<option value="scenario_d" <?php if($all_item[$i] == "scenario_d"){ echo " selected";} ?> >情境說明</option>
+						<option value="function_d" <?php if($all_item[$i] == "function_d"){ echo " selected";} ?> >功能構想</option>
+						<option value="distinction_d" <?php if($all_item[$i] == "distinction_d"){ echo " selected";} ?> >差異化</option>
+						<option value="value_d" <?php if($all_item[$i] == "value_d"){ echo " selected";} ?> >價值性</option>
+						<option value="feasibility_d" <?php if($all_item[$i] == "feasibility_d"){ echo " selected";} ?> >可行性</option>
+						<option value="market_survey" <?php if($all_item[$i] == "market_survey"){ echo " selected";} ?> >市場搜尋</option>
+						<option value="km_survey" <?php if($all_item[$i] == "km_survey"){ echo " selected";} ?> >KM平台搜尋</option>
+						<option value="dep_item" <?php if($all_item[$i] == "dep_item"){ echo " selected";} ?> >研發項目確認</option>
+						<option value="idea_description" <?php if($all_item[$i] == "idea_description"){ echo " selected";} ?> >提案說明</option>
+						<option value="inner_or_outer" <?php if($all_item[$i] == "inner_or_outer"){ echo " selected";} ?> >提案類別</option>
+						<option value="stage" <?php if($all_item[$i] == "stage"){ echo " selected";} ?> >階段狀態</option>
+						<option value="stage_detail" <?php if($all_item[$i] == "stage_detail"){ echo " selected";} ?> >階段細項狀態</option>
+						<option value="progress_description" <?php if($all_item[$i] == "progress_description"){ echo " selected";} ?> >進度說明</option>
+						<option value="proposed_unit" <?php if($all_item[$i] == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
+						<option value="proposer" <?php if($all_item[$i] == "proposer"){ echo " selected";} ?> >提案人</option>
+						<option value="proposed_date" <?php if($all_item[$i] == "proposed_date"){ echo " selected";} ?> >提案日期</option>
+						<option value="valid_project" <?php if($all_item[$i] == "valid_project"){ echo " selected";} ?> >有效提案</option>
+						<option value="established_date" <?php if($all_item[$i] == "established_date"){ echo " selected";} ?> >立案日期</option>
+						<option value="joint_unit" <?php if($all_item[$i] == "joint_unit"){ echo " selected";} ?> >協辦單位</option>
+						<option value="joint_person" <?php if($all_item[$i] == "joint_person"){ echo " selected";} ?> >協辦窗口</option>
+						<option value="co_worker" <?php if($all_item[$i] == "co_worker"){ echo " selected";} ?> >承作廠商</option>
+						<option value="idea_examination" <?php if($all_item[$i] == "idea_examination"){ echo " selected";} ?> >提案審核進度</option>
+						<option value="Idea" <?php if($all_item[$i] == "Idea"){ echo " selected";} ?> >Idea</option>
+						<option value="Requirement" <?php if($all_item[$i] == "Requirement"){ echo " selected";} ?> >Requirement</option>
+						<option value="Feasibility" <?php if($all_item[$i] == "Feasibility"){ echo " selected";} ?> >Feasibility</option>
+						<option value="Prototype" <?php if($all_item[$i] == "Prototype"){ echo " selected";} ?> >Prototype</option>
+						<option value="note" <?php if($all_item[$i] == "note"){ echo " selected";} ?> >備註</option>
+						<option value="adoption" <?php if($all_item[$i] == "adoption"){ echo " selected";} ?> >導入車型</option>
+						<option value="applied_patent" <?php if($all_item[$i] == "applied_patent"){ echo " selected";} ?> >專利申請</option>
+						<option value="resurrection_application_qualified" <?php if($all_item[$i] == "resurrection_application_qualified"){ echo " selected";} ?> >具敗部復活申請資格</option>
+						<option value="resurrection_applied" <?php if($all_item[$i] == "resurrection_applied"){ echo " selected";} ?> >申請敗部復活</option>
+						<option value="PM_in_charge" <?php if($all_item[$i] == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
+						<option value="closed_case" <?php if($all_item[$i] == "closed_case"){ echo " selected";} ?> >結案</option>
+					</select>
+					<br/>
+				<?php
 				}
 				?>
 				<input type="submit"  value="確定" onclick="convey()">
