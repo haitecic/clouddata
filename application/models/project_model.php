@@ -230,20 +230,20 @@ class Project_model extends CI_Model{
  
 		}
 	    //載入session項目
-		$first_item=$this->session->userdata('first_item');  //即idea_name
-		$second_item=$this->session->userdata('second_item');
-		$third_item=$this->session->userdata('third_item');
-		$fourth_item=$this->session->userdata('fourth_item');
-		$fifth_item=$this->session->userdata('fifth_item');
-		$sixth_item=$this->session->userdata('sixth_item');
-		$seventh_item=$this->session->userdata('seventh_item');
-		$item="`id`, `is_blocked`, `current_user`, `$first_item`, `$second_item`, `$third_item`, `$fourth_item`, `$fifth_item`, `$sixth_item`, `$seventh_item` ";
-		//$query_string = "SELECT data_by_order.* FROM ( SELECT `project`.`id` as project_id, `project_name`, `project`.`pm`, `project`.`status`, `project`.`phase`, `organization`.`id` as collaborate_id, `org_name` as institute, `unit_class` as class, `project`.`update_datetime`, record.`id` as last_record_id FROM `project` JOIN `project_history_record` as record on `record`.`project_id` = `project`.`id` JOIN `organization` on organization.`record_id` = `record`.`id` WHERE `unit_class` in ('1', '2', '3') AND `level_class` = 1 AND (".$rule1.") ORDER BY record.`id` DESC) AS data_by_order GROUP BY data_by_order.`project_id` order by `last_record_id` desc limit ".$start_record.','. $show_record;
-		//$query_string = "SELECT project.id, project.name, project.year, project.haitec_unit, project.outer_unit, project.pm, car_model_estimate, exhibition, status, keyword, create_datetime, update_datetime FROM `project_basic_info` as `project` LEFT OUTER JOIN `project_attachment` on `project`.`id` = `project_id` WHERE ".$rule1. "GROUP BY `project_id`";
-		//$query_string = "SELECT project.id, project.name, project.year, project.haitec_unit, project.outer_unit, project.pm, car_model_estimate, exhibition, status, keyword, create_datetime, update_datetime, count(`project_id`) as file_number FROM `project_basic_info` as `project` left join `project_attachment` on `project_id` = `project`.`id` WHERE project.id='61' Group by `project_id`";
+		$col_name_list = array("idea_name", 
+							$this->session->userdata('second_item'),
+							$this->session->userdata('third_item'),
+							$this->session->userdata('fourth_item'),
+							$this->session->userdata('fifth_item'),
+							$this->session->userdata('sixth_item'),
+							$this->session->userdata('seventh_item'));
+		$item = "`id`, `is_blocked`, `current_user`";
+		for($i=0;$i<count($col_name_list);$i++)
+		{
+			$item = $item . ',`' . $col_name_list[$i] . '`';
+		}
 		//讀取資料
 		$query_string = "SELECT " . $item . "FROM `project_all` WHERE ".$rule1;
-		
 		$query = $this->db->query($query_string);	
 		$result = $query->result_array();		
 		//$data_count = count($result);

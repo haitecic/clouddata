@@ -58,7 +58,7 @@
 				<h4 class="page-header">欄位列表</h4>
 				<?php 
 				//$title_array陣列存放select調整欄位選單的名稱
-				$title_array = array('0' => '第一欄', '1' => '第二欄', '2' => '第三欄', '3' => '第四欄', '4' => '第五欄', '5' => '第六欄', '6' => '第七欄');
+				$title_array = array('0' => '欄位', '1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六');
 				$titlename_array = array('0' => 'first', '1' => 'second', '2' => 'third', '3' => 'fourth', '4' => 'fifth', '5' => 'sixth', '6' => 'seventh');
 				//$item_array存放列表上有顯示的欄位
 				$item_array = array('0' => 'first_item', '1' => 'second_item', '2' => 'third_item', '3' => 'fourth_item', '4' => 'fifth_item', '5' => 'sixth_item', '6' => 'seventh_item');
@@ -379,11 +379,11 @@ $(document).ready(function() {
 	// Add Drag-n-Drop feature
 	//WinMove();  //移動表格視窗	
 	//當搜尋框有內容，則反白搜尋框的文字
-	var search = "<?php echo $search?>";
-	if(search != "")
-	{
-		searchPrompt(search, false);
-	}
+	//var search = "<?php echo $search?>";
+	//if(search != "")
+	//{
+	//	searchPrompt(search, false);
+	//}
 });
 
 function check_is_blocked(row_id)
