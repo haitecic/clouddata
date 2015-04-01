@@ -57,7 +57,7 @@
 <script>
 function start_search()
 {
-	document.project_search_form.submit();
+	document.project_search_form.submit();	
 }
 </script>
 <!--End Header-->

@@ -1,21 +1,9 @@
 <!--Start Container-->
-<script>
-
-</script>
 <div id="main" class="container-fluid" style="background-color:#FBFBF0">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12" style="background-color:#ffffff; height:30px;background-color:#FBFBF0;"></div>
-		<div style="padding-left:24px"><span style="font-size:21pt;">專案資料</span><span style="font-size:14pt">( <span style="color:red">*</span> 為必填欄位 )</span></div>
-		<br/>
-		<?php
-//        for ($i=0;$i<count($project_img) ;$i++)
-//		    {
-//			echo "<img src='" . site_url() . "application/assets/data_img/" . $project_img[$i]['name'] . "' >";
-//			echo "<br>";
-//			
-//			}
-        		
-		?>
+		<div style="padding-left:24px"><span style="font-size:21pt">專案資料</span><span style="font-size:14pt">( <span style="color:red">*</span> 為必填欄位 )</span></div>
+		<br/>		
 		<!--<img src="<?php echo site_url()?>application/assets/data_img/<?php echo $project_img['name']?>" >-->
 		<!--<div class="btn btn-primary qq-upload-button" style="border-color:#6483E4;background-color:#6483E4;width: auto;text-align:right;float:left;margin-left:50px;margin-top:-40px;margin-bottom:10px;"><!--;right:575-->
 			<!--<div id="sub_button" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i> 資料送出</div>-->
@@ -29,39 +17,67 @@
 		echo validation_errors();
 		$attributes = array('class' => 'form-horizontal', 'role'=>'form', 'id' => 'project_create_form', 'name'=>'project_create_form');
 		echo form_open('project_edit/'. $project_basic_info['id'], $attributes);
-		        for ($i=0;$i<count($project_img) ;$i++)
-		    {
-			echo "<label class='col-sm-1  col-sm-offset-1 control-label'><img src='" . site_url() . "application/assets/data_img/" . $project_img[$i]['name'] . "' ></label>";
-			echo "<div class='col-xs-12 col-sm-12' style='height:5px; '></div>";
-			echo "<div style='float:left;margin-left:130px; font-size:17px;'>" . $project_img[$i]['description'] . "</div>";
-			echo "<div class='col-xs-12 col-sm-12' style='height:5px; '></div>";
-			}
-		?>	
-			
+		?>
+		<div class="form-group">
+		<?php
+		for ($i=0;$i<count($project_img) ;$i++)
+		{
+			//echo "<label class='col-sm-1 col-sm-offset-1 control-label'><img src='" . site_url() . "application/assets/data_img/" . $project_img[$i]['name'] . "' ></label>";
+			?>
+			<div class="col-sm-3 col-sm-offset-1">
+				<img class="thumbnail" src="<?php echo site_url()."application/assets/data_img/".$project_img[$i]['name'];?>" alt="示意圖1">
+			</div>	
+			<?php
+			//echo "<label class='col-sm-1 col-sm-offset-1 control-label'><img src='" . site_url() . "application/assets/data_img/" . $project_img[$i]['name'] . "' ></label>";
+			//echo "<div class='col-xs-12 col-sm-12' style='height:5px; '></div>";
+			//echo "<div style='float:left;margin-left:130px; font-size:17px;'>" . $project_img[$i]['description'] . "</div>";
+			//echo "<div class='col-xs-12 col-sm-12' style='height:5px; '></div>";
+		}
+		?>
+		</div>
+		<div class="form-group">
 			<label class="col-sm-1  col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>專案主題</label>
 			<div class="col-sm-4">
-				<input readonly type="text" value="<?php echo $project_basic_info['idea_name'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="project_name" name="project_name" placeholder="" data-toggle="tooltip" data-placement="bottom" title="專案主題" style="font-size:17px; font-family:微軟正黑體;">  
+				<!--<input readonly type="text" value="<?php echo $project_basic_info['idea_name'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="project_name" name="project_name" placeholder="" data-toggle="tooltip" data-placement="bottom" title="專案主題" style="font-size:17px; font-family:微軟正黑體;">--> 
+				<p class="form-control-static" style="font-size:12pt;font-family:微軟正黑體"><?php echo $project_basic_info['idea_name'];?></p>
 			</div>
-			<div class="col-xs-12 col-sm-12" style="height:5px; "></div>
+		</div>
+		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>情境說明</label>
 			<div class="col-sm-10">
-				<input readonly type="text" value="<?php echo $project_basic_info['scenario_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="進度說明" style="font-size:17px; font-family:微軟正黑體;">  
+				<!--<input readonly type="text" value="<?php echo $project_basic_info['scenario_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="情境說明" style="font-size:17px; font-family:微軟正黑體;">-->
+				<p class="form-control-static" style="font-size:12pt;font-family:微軟正黑體"><?php echo $project_basic_info['scenario_d'];?></p>
 			</div>
-			<div class="col-xs-12 col-sm-12" style="height:5px; "></div>
+		</div>
+		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>功能構想</label>
 			<div class="col-sm-10">
-				<input readonly type="text" value="<?php echo $project_basic_info['function_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="進度說明" style="font-size:17px; font-family:微軟正黑體;">  
+				<!--<input readonly type="text" value="<?php echo $project_basic_info['function_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="功能構想" style="font-size:17px; font-family:微軟正黑體;">-->  
+				<p class="form-control-static" style="font-size:12pt;font-family:微軟正黑體"><?php echo $project_basic_info['function_d'];?></p>
 			</div>
-			<div class="col-xs-12 col-sm-12" style="height:5px; "></div>
+		</div>
+		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>差異化</label>
 			<div class="col-sm-10">
-				<input readonly type="text" value="<?php echo $project_basic_info['distinction_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="進度說明" style="font-size:17px; font-family:微軟正黑體;">  
+				<!--<input readonly type="text" value="<?php echo $project_basic_info['distinction_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="進度說明" style="font-size:17px; font-family:微軟正黑體;">--> 
+				<p class="form-control-static"><?php echo $project_basic_info['distinction_d'];?></p>
 			</div>
-			<div class="col-xs-12 col-sm-12" style="height:5px; "></div>
+		</div>
+		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>價值性</label>
 			<div class="col-sm-10">
-				<input readonly type="text" value="<?php echo $project_basic_info['value_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="進度說明" style="font-size:17px; font-family:微軟正黑體;">  
+				<!--<?php echo $project_basic_info['value_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="進度說明" style="font-size:17px; font-family:微軟正黑體;">-->
+				<p class="form-control-static"><?php echo $project_basic_info['value_d'];?></p>
 			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>可行性</label>
+			<div class="col-sm-10">
+				<!--<?php echo $project_basic_info['feasibility_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="可行性" style="font-size:17px; font-family:微軟正黑體;">-->
+				<p class="form-control-static"><?php echo $project_basic_info['feasibility_d'];?></p>
+			</div>
+		</div>
+			<!--
 			<div class="col-xs-12 col-sm-12" style="height:5px; "></div>
 			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>可行性</label>
 			<div class="col-sm-10">
@@ -227,130 +243,8 @@
 			<div class="col-sm-4">
 				<input readonly type="text" value="<?php echo $project_basic_info['closed_case'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="closed_case" name="closed_case" data-toggle="tooltip" data-placement="bottom" title="結案" style="font-size:17px; font-family:微軟正黑體;">  
 			</div>
-			<!--<div class="form-group">	
-				<label class="col-sm-1  col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>專案主題</label>
-				<div class="col-sm-4">
-					<input type="text" value="<?php echo $project_basic_info['idea_name'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="project_name" name="project_name" placeholder="" data-toggle="tooltip" data-placement="bottom" title="專案主題" style="font-size:17px; font-family:微軟正黑體;">  
-				</div>					
-				<label class="col-sm-1  control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>提案編號</label>
-				<div class="col-sm-2">
-					<input type="text" value="<?php echo $project_basic_info['idea_id']?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" id="idea_id" name="idea_id" class="form-control" placeholder="創意提案編號" data-toggle="tooltip" data-placement="bottom" title="創意提案編號" style="font-size:17px; font-family:微軟正黑體;">  
-				</div>
-				<label class="col-sm-1  control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>提案年份</label>
-				<div class="col-sm-2">
-					<input type="text" value="<?php echo $project_basic_info['year'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_year_border_display(this)" onblur="change_year_border_display_onblur(this,event)" class="form-control" id="year" name="year" placeholder="請輸入西元年(例如:2015)" data-toggle="tooltip" data-placement="bottom" title="專案年份" style="width:85px;font-size:17px; font-family:微軟正黑體;">  
-				</div>
-			</div>			
-			<div class="col-xs-12 col-sm-12" style="height:3px; "></div>--><!--background-color:#ffffff; -->
-			<!--<div class="form-group">	
-				<label class="col-sm-1  col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>提案單位</label>
-				<div class="col-sm-4">
-					<input type="text" value="<?php echo $project_basic_info['proposed_unit'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="haitec_unit" name="haitec_unit" data-toggle="tooltip" data-placement="bottom" title="華創單位" style="font-size:17px; font-family:微軟正黑體;" placeholder="多個單位請以分號(;)區隔">  
-				</div>
-				<label class="col-sm-1  control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>提案人</label>
-				<div class="col-sm-4">
-					<input type="text" value="<?php echo $project_basic_info['proposer'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="haitec_unit" name="haitec_unit" data-toggle="tooltip" data-placement="bottom" title="華創單位" style="font-size:17px; font-family:微軟正黑體;" placeholder="多個單位請以分號(;)區隔">  
-				</div>	
-			</div>
-			<div class="col-xs-12 col-sm-12" style="height:3px; "></div>-->
-			<!--<div class="form-group">	
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>創意中心負責人</label>
-				<div class="col-sm-4">
-					<input type="text" value="<?php echo $project_basic_info['PM_in_charge'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="PM_in_charge" name="PM_in_charge" data-toggle="tooltip" data-placement="bottom" title="創意中心負責人" style="font-size:17px; font-family:微軟正黑體;" placeholder="多個負責人請以分號(;)區隔">  
-				</div>
-				<label class="col-sm-2  control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="margin-left:-25px;color:red;font-size:13pt">* </span>提案類別</label>
-				<div class="col-sm-4">
-					<input type="text" value="<?php echo $project_basic_info['inner_or_outer'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="inner_or_outer" name="inner_or_outer" data-toggle="tooltip" data-placement="bottom" title="提案類別" style="font-size:17px; font-family:微軟正黑體;" placeholder="內部提案or外部提案">  
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-12" style="height:3px; "></div>-->
-			<!--<div class="form-group">	
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>階段狀態</label>
-				<div class="col-sm-4">
-					<input type="text" value="<?php echo $project_basic_info['PM_in_charge'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="PM_in_charge" name="PM_in_charge" data-toggle="tooltip" data-placement="bottom" title="創意中心負責人" style="font-size:17px; font-family:微軟正黑體;" placeholder="多個負責人請以分號(;)區隔">  
-				</div>
-				<label class="col-sm-1  control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>階段細項狀態</label>
-				<div class="col-sm-4">
-					<input type="text" value="<?php echo $project_basic_info['inner_or_outer'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="inner_or_outer" name="inner_or_outer" data-toggle="tooltip" data-placement="bottom" title="提案類別" style="font-size:17px; font-family:微軟正黑體;" placeholder="內部提案or外部提案">  
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-12" style="height:3px; "></div>-->
-			<!--<div class="row form-group">	
-				<label class="col-sm-2 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>納入車型評估</label>
-				<div class="col-sm-3">
-					<div class="radio-inline">
-						<label>
-							<input type="radio" value="1" name="car_model_estimate" <?php //if($project_basic_info['car_model_estimate'] == 1){echo " checked";}?>>是
-							<i class="fa fa-circle-o"></i>
-						</label>
-					</div>
-					<div class="radio-inline">
-						<label>
-							<input type="radio" value="2" name="car_model_estimate"	<?php //if($project_basic_info['car_model_estimate'] == 2){echo " checked";}?>>否
-							<i class="fa fa-circle-o"></i>
-						</label>
-					</div>
-				</div>	
-				<label class="col-sm-2   control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>完成試作供覽</label>
-				<div class="col-sm-4">
-					<div class="radio-inline">
-						<label>
-							<input type="radio" value="1" name="exhibition" <?php //if($project_basic_info['exhibition'] == 1){echo " checked";}?>>是
-							<i class="fa fa-circle-o"></i>
-						</label>
-					</div>
-					<div class="radio-inline">
-						<label>
-							<input  type="radio" value="2" name="exhibition" <?php //if($project_basic_info['exhibition'] == 2){echo " checked";}?>>否
-							<i class="fa fa-circle-o"></i>
-						</label>
-					</div>
-				</div>	
-			</div>
 			-->
-			<!--<div class="row form-group">	
-				<label class="col-sm-2   control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>狀態</label>
-				<div class="col-sm-4">
-					<div class="radio-inline">
-						<label>
-							<input type="radio" name="status" value="1" <?php //if($project_basic_info['status'] == 1){echo " checked";}?>>執行中
-							<i class="fa fa-circle-o"></i>
-						</label>
-					</div>
-					<div class="radio-inline">
-						<label>
-							<input  type="radio" name="status" value="2" <?php //if($project_basic_info['status'] == 2){echo " checked";}?>>結案
-							<i class="fa fa-circle-o"></i>
-						</label>
-					</div>
-				</div>	
-			</div>-->			
-			<div class="form-group">	
-				<!--<label class="col-sm-1  col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>關鍵字</label>
-				<div class="col-sm-2">
-					<input type="text" value="<?php //echo $project_basic_info['keyword']?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" id="keyword" name="keyword" class="form-control" placeholder="關鍵字請以分號(;)區隔" data-toggle="tooltip" data-placement="bottom" title="專案主題" style="width:900px;font-size:17px; font-family:微軟正黑體;">  
-				</div>	-->			
-			</div>			
-			
-		<!--</form>-->	
-
-		<!--<div class="col-xs-12 col-sm-12" style="background-color:#ffffff; height:20px;"></div>-->
-
-		<!--Start Content-->
-		<!--<div id="content" class="col-xs-12 col-sm-12">-->
-			<!--<div id="about">
-				<div class="about-inner">
-					<h4 class="page-header">Open-source admin theme for you</h4>
-					<p>DevOOPS team</p>
-					<p>Homepage - <a href="http://devoops.me" target="_blank">http://devoops.me</a></p>
-					<p>Email - <a href="mailto:devoopsme@gmail.com">devoopsme@gmail.com</a></p>
-					<p>Twitter - <a href="http://twitter.com/devoopsme" target="_blank">http://twitter.com/devoopsme</a></p>
-					<p>Donate - BTC 123Ci1ZFK5V7gyLsyVU36yPNWSB5TDqKn3</p>
-				</div>
-			</div>-->
-			<!--<div class="preloader">
-				<img src="<?php echo $img_location?>/devoops_getdata.gif" class="devoops-getdata" alt="preloader"/>
-			</div>			-->
+						
 			<!--<div id="ajax-content"></div>--> <!-- 載入重要資料!!! -->
 			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
 			<div style="margin-left:15px;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">Drag & Drop Files Here(or <a href="#" id="browse_file" onclick="browse_file()">Browse</a> Files.)</div>

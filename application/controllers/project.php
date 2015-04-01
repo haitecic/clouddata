@@ -159,16 +159,16 @@ class Project extends CI_Controller{
 		{	
 			redirect('login');
 		}
-	$this->session->set_userdata('first_item', $this->input->post('first'));
-	$this->session->set_userdata('second_item', $this->input->post('second'));
-	$this->session->set_userdata('third_item', $this->input->post('third'));
-	$this->session->set_userdata('fourth_item', $this->input->post('fourth'));
-	$this->session->set_userdata('fifth_item', $this->input->post('fifth'));
-	$this->session->set_userdata('sixth_item', $this->input->post('sixth'));
-	$this->session->set_userdata('seventh_item', $this->input->post('seventh'));
-	$search=$this->input->post('searchbar');
-	//redirect(project_list/100/$search");
-	redirect("project_list");
+		$this->session->set_userdata('first_item', "idea_name");
+		$this->session->set_userdata('second_item', $this->input->post('second'));
+		$this->session->set_userdata('third_item', $this->input->post('third'));
+		$this->session->set_userdata('fourth_item', $this->input->post('fourth'));
+		$this->session->set_userdata('fifth_item', $this->input->post('fifth'));
+		$this->session->set_userdata('sixth_item', $this->input->post('sixth'));
+		$this->session->set_userdata('seventh_item', $this->input->post('seventh'));
+		$search=$this->input->post('searchbar');
+		//redirect(project_list/100/$search");
+		redirect("project_list");
 	}
 	
 	public function list_all_projects($page = 0, $search_bar=null,$message='')  //瀏覽所有專案資料

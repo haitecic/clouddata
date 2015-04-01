@@ -230,7 +230,7 @@ class Project_model extends CI_Model{
  
 		}
 	    //載入session項目
-		$first_item=$this->session->userdata('first_item');
+		$first_item=$this->session->userdata('first_item');  //即idea_name
 		$second_item=$this->session->userdata('second_item');
 		$third_item=$this->session->userdata('third_item');
 		$fourth_item=$this->session->userdata('fourth_item');
@@ -246,7 +246,7 @@ class Project_model extends CI_Model{
 		
 		$query = $this->db->query($query_string);	
 		$result = $query->result_array();		
-		$data_count = count($result);
+		//$data_count = count($result);
 		//資料轉換
 		/*for($i=0; $i<$data_count; $i++)
 		{

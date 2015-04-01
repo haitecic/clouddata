@@ -52,35 +52,51 @@
 			    <div id="opener" class="btn btn-primary qq-upload-button" style="width: auto;text-align:right;float:left;margin-left:10px;">
 			    <div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
 				</div>				
-                	<div id="hidden_window" title="瀏覽項目">
-		        <form action="project/adjust_item" method=post>
-		        <input id="adjust_searchbar" type="hidden" name="searchbar">
+        <div id="hidden_window" title="瀏覽項目">
+		        <form action="project/adjust_item" method="post">
+		        <input id="adjust_searchbar" type="hidden" name="searchbar">				
 				<h4 class="page-header">欄位列表</h4>
-<?php $title_array = array('0' => '第一欄', 
-				                           '1' => '第二欄', 
-										   '2' => '第三欄', 
-										   '3' => '第四欄', 
-										   '4' => '第五欄', 
-										   '5' => '第六欄', 
-										   '6' => '第七欄');
-					$titlename_array = array('0' => 'first', 
-				                           '1' => 'second', 
-										   '2' => 'third', 
-										   '3' => 'fourth', 
-										   '4' => 'fifth', 
-										   '5' => 'sixth', 
-										   '6' => 'seventh');
-					$item_array = array('0' => 'first_item', 
-				                           '1' => 'second_item', 
-										   '2' => 'third_item', 
-										   '3' => 'fourth_item', 
-										   '4' => 'fifth_item', 
-										   '5' => 'sixth_item', 
-										   '6' => 'seventh_item');
-					for ($i=0; $i<=6; $i++)
-					{										   
+				欄位數量
+				<select id="item_number" name="item_number">
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+				</select>
+				<?php 
+				//$title_array陣列存放select調整欄位選單的名稱
+				$title_array = array('0' => '第一欄', 
+				                     '1' => '第二欄', 
+									 '2' => '第三欄', 
+									 '3' => '第四欄', 
+									 '4' => '第五欄', 
+									 '5' => '第六欄', 
+									 '6' => '第七欄');
+				$titlename_array = array('0' => 'first', 
+									 '1' => 'second', 
+									 '2' => 'third', 
+									 '3' => 'fourth', 
+									 '4' => 'fifth', 
+									 '5' => 'sixth', 
+									 '6' => 'seventh');
+				$item_array = array('0' => 'first_item', 
+				                     '1' => 'second_item', 
+									 '2' => 'third_item', 
+									 '3' => 'fourth_item', 
+									 '4' => 'fifth_item', 
+									 '5' => 'sixth_item', 
+									 '6' => 'seventh_item');
+				?>
+				<label for="first_col">第一欄</label>
+				<select disabled id="first_col" name="first">
+					<option value="idea_id">創意提案名稱</option>
+				</select>
+				<?php
+				for ($i=1; $i<=6; $i++)
+				{					
                     echo  $title_array[$i] . "<select id='mySelect' name='" .$titlename_array[$i]. "'>";
-					$all_item[$i]=$this->session->userdata($item_array[$i]);
+					$all_item[$i]=$this->session->userdata($item_array[$i]);  //目前的欄位名稱
 					if('year'==$all_item[$i]) echo "<option value='year' SELECTED>年分</option>";
 					else echo "<option value='year' >年分</option>";
 					if('km_id'==$all_item[$i]) echo "<option value='km_id' SELECTED>km文件編號</option>";
@@ -159,153 +175,151 @@
 					else echo "<option value='closed_case' >結案</option>";
 					echo "</select>";
 					echo "<br>";
-					}
-					?>
-                    					
-
-        <input type=submit  value="確定" onclick="convey()">
-		</form>		
+				}
+				?>
+				<input type="submit"  value="確定" onclick="convey()">
+			</form>		
 		</div>
-
-				<div class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;" >
-					<table class="table table-bordered table-striped table-hover table-heading table-datatable" style="border:#BBBBBB 1px solid;font-family:微軟正黑體" id="datatable-2">
-						<thead style="border:#BBBBBB 1px solid;">
-							<!---->
-							<?php
-							$all_item[0]=$this->session->userdata('first_item');
-							$all_item[1]=$this->session->userdata('second_item');
-							$all_item[2]=$this->session->userdata('third_item');
-							$all_item[3]=$this->session->userdata('fourth_item');
-							$all_item[4]=$this->session->userdata('fifth_item');
-							$all_item[6]=$this->session->userdata('seventh_item');
-							for($i=0; $i<=6; $i++)
+			<div class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;" >
+				<table class="table table-bordered table-striped table-hover table-heading table-datatable" style="border:#BBBBBB 1px solid;font-family:微軟正黑體" id="datatable-2">
+					<thead style="border:#BBBBBB 1px solid;">
+						<!---->
+						<?php
+						$all_item[0]=$this->session->userdata('first_item');
+						$all_item[1]=$this->session->userdata('second_item');
+						$all_item[2]=$this->session->userdata('third_item');
+						$all_item[3]=$this->session->userdata('fourth_item');
+						$all_item[4]=$this->session->userdata('fifth_item');
+						$all_item[6]=$this->session->userdata('seventh_item');
+						for($i=0; $i<=6; $i++)
+						{
+							switch($all_item[$i])
 							{
-								switch($all_item[$i])
-								{
-									case "year":
-									     $all_item[$i]="年份";
-										 break;
-									case "idea_id":
-										$all_item[$i]='編號';
-										break;
-									case "km_id":
-										$all_item[$i]='km文件編號';
-										break;
-									case "idea_name":
-										$all_item[$i]='創意提案名稱';
-										break;
-									case "idea_source":
-										$all_item[$i]='創意提案來源';
-										break;
-									case "scenario_d":
-										$all_item[$i]='情境說明';
-										break;
-									case "function_d":
-										$all_item[$i]='功能架構';
-										break;
-									case "distinction_d":
-										$all_item[$i]='差異化';
-										break;
-									case "value_d":
-										$all_item[$i]='價值性';
-										break;
-									case "feasibility_d":
-										$all_item[$i]='可行性';
-										break;
-									case "market_survey":
-										$all_item[$i]='市場搜尋';
-										break;
-									case "km_survey":
-										$all_item[$i]='km平台搜尋';
-										break;
-									case "dep_item":
-										$all_item[$i]='研發項目確認';
-										break;										
-										case "idea_description":
-										$all_item[$i]='提案說明';
-										break;	
-									case "inner_or_outer":
-										$all_item[$i]='提案類別';
-										break;
-									case "stage":
-										$all_item[$i]='階段狀態';
-										break;
-									case "stage_detail":
-										$all_item[$i]='階段細項狀態';
-										break;
-									case "progress_description":
-										$all_item[$i]='進度說明';
-										break;
-									case "proposed_unit":
-										$all_item[$i]='提案單位';
-										break;
-									case "proposer":
-										$all_item[$i]='提案人';
-										break;
-									case "proposed_date":
-										$all_item[$i]='提案日期';
-										break;
-									case "valid_project":
-										$all_item[$i]='有效提案';
-										break;
-									case "established_date":
-										$all_item[$i]='立案日期';
-										break;
-									case "joint_unit":
-										$all_item[$i]='協辦單位';
-										break;		
-									case "joint_person":
-										$all_item[$i]='協辦窗口';
-										break;
-									case "co_worker":
-										$all_item[$i]='承作廠商';
-										break;
-									case "idea_examination":
-										$all_item[$i]='提案審核進度';
-										break;
-									case "Idea":
-										$all_item[$i]='IDC';
-										break;
-									case "Requirement":
-										$all_item[$i]='RSD';
-										break;
-									case "Feasibility":
-										$all_item[$i]='FSC';
-										break;
-									case "Prototype":
-										$all_item[$i]='PMA';
-										break;	
-									case "note":
-										$all_item[$i]='備註';
-										break;	
-									case "adoption":
-										$all_item[$i]='導入車型';
-										break;			
-									case "applied_patent":
-										$all_item[$i]='專利申請';
-										break;	
-									case "resurrection_application_qualified":
-										$all_item[$i]='具敗部復活申請資格';
-										break;
-									case "resurrection_applied":
-										$all_item[$i]='申請敗部復活';
-										break;	
-									case "PM_in_charge":
-										$all_item[$i]='創意中心窗口';
-										break;
-									case "closed_case":
-										$all_item[$i]='結案';
-										break;							
-									default:
-										break;
-								}
+								case "year":
+								     $all_item[$i]="年份";
+									 break;
+								case "idea_id":
+									$all_item[$i]='編號';
+									break;
+								case "km_id":
+									$all_item[$i]='km文件編號';
+									break;
+								case "idea_name":
+									$all_item[$i]='創意提案名稱';
+									break;
+								case "idea_source":
+									$all_item[$i]='創意提案來源';
+									break;
+								case "scenario_d":
+									$all_item[$i]='情境說明';
+									break;
+								case "function_d":
+									$all_item[$i]='功能架構';
+									break;
+								case "distinction_d":
+									$all_item[$i]='差異化';
+									break;
+								case "value_d":
+									$all_item[$i]='價值性';
+									break;
+								case "feasibility_d":
+									$all_item[$i]='可行性';
+									break;
+								case "market_survey":
+									$all_item[$i]='市場搜尋';
+									break;
+								case "km_survey":
+									$all_item[$i]='km平台搜尋';
+									break;
+								case "dep_item":
+									$all_item[$i]='研發項目確認';
+									break;										
+									case "idea_description":
+									$all_item[$i]='提案說明';
+									break;	
+								case "inner_or_outer":
+									$all_item[$i]='提案類別';
+									break;
+								case "stage":
+									$all_item[$i]='階段狀態';
+									break;
+								case "stage_detail":
+									$all_item[$i]='階段細項狀態';
+									break;
+								case "progress_description":
+									$all_item[$i]='進度說明';
+									break;
+								case "proposed_unit":
+									$all_item[$i]='提案單位';
+									break;
+								case "proposer":
+									$all_item[$i]='提案人';
+									break;
+								case "proposed_date":
+									$all_item[$i]='提案日期';
+									break;
+								case "valid_project":
+									$all_item[$i]='有效提案';
+									break;
+								case "established_date":
+									$all_item[$i]='立案日期';
+									break;
+								case "joint_unit":
+									$all_item[$i]='協辦單位';
+									break;		
+								case "joint_person":
+									$all_item[$i]='協辦窗口';
+									break;
+								case "co_worker":
+									$all_item[$i]='承作廠商';
+									break;
+								case "idea_examination":
+									$all_item[$i]='提案審核進度';
+									break;
+								case "Idea":
+									$all_item[$i]='IDC';
+									break;
+								case "Requirement":
+									$all_item[$i]='RSD';
+									break;
+								case "Feasibility":
+									$all_item[$i]='FSC';
+									break;
+								case "Prototype":
+									$all_item[$i]='PMA';
+									break;	
+								case "note":
+									$all_item[$i]='備註';
+									break;	
+								case "adoption":
+									$all_item[$i]='導入車型';
+									break;			
+								case "applied_patent":
+									$all_item[$i]='專利申請';
+									break;	
+								case "resurrection_application_qualified":
+									$all_item[$i]='具敗部復活申請資格';
+									break;
+								case "resurrection_applied":
+									$all_item[$i]='申請敗部復活';
+									break;	
+								case "PM_in_charge":
+									$all_item[$i]='創意中心窗口';
+									break;
+								case "closed_case":
+									$all_item[$i]='結案';
+									break;							
+								default:
+									break;
 							}
-							    
-								
-							?>
+						}
+						    
+							
+						?>
 							<tr>
 								<td id="a" style="width:20px;border:#BBBBBB 1px solid;background:#FBFBF0"></td>
-							    <td style="border:#BBBBBB 1px solid;"><?php echo $all_item[0] ?></td>
+							    <!--<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[0] ?></td>-->
+								<td style="border:#BBBBBB 1px solid;">創意提案名稱</td>
 								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[1] ?></td>
 								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[2] ?></td>
 								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[3] ?></td>
@@ -325,66 +339,65 @@
 							</tr>-->
 						</thead>
 						<tbody>	
-							<?php
-							$i=0;
-							foreach($project_list as $project_data)
-							{	
-							?>		
-							<tr id="<?php echo "row_".$i?>" onmouseover="check_is_blocked(<?php echo $i;?>)">
-							<?php								
-								if($project_data['is_blocked']==1)
-								{
-									echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:30px;height:24px" type="image" src="'.$img_location.'/read6.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
-								}
-								else if($project_data['is_blocked']==2)
-								{
-									echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:35px;height:25px" type="image" src="'.$img_location.'/edit3.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
-								}
-								echo '<td>'.$project_data[$this->session->userdata('first_item')].'</td>';
-								echo '<td>'.$project_data[$this->session->userdata('second_item')].'</td>';
-								echo '<td>'.$project_data[$this->session->userdata('third_item')].'</td>';
-								echo '<td>'.$project_data[$this->session->userdata('fourth_item')].'</td>';
-								echo '<td>'.$project_data[$this->session->userdata('fifth_item')].'</td>';
-								echo '<td>'.$project_data[$this->session->userdata('sixth_item')].'</td>';
-								echo '<td>'.$project_data[$this->session->userdata('seventh_item')].'</td>';
-//								echo '<td><a onclick="browse_file('. $project_data['id'].')">檔案數：'.$project_data['file_number'].'</a></td>';
-								/*foreach($number_file as $a)
-								{
-									if ($a['project_id']==$project_data['id'])
-									{
-										echo '<td><a onclick="browse_file('. $project_data['id'].')">檔案數：'.$a['file_number'].'</a></td>';
-									}  
-								}*/
-								?>
-								<input type="hidden" id="row_project_<?php echo $i;?>" value="<?php echo $project_data['id']?>"/>
-								<?php
-								echo '</tr>';
-								$i++;
+						<?php
+						$i=0;
+						foreach($project_list as $project_data)
+						{	
+						?>		
+						<tr id="<?php echo "row_".$i?>" onmouseover="check_is_blocked(<?php echo $i;?>)">
+						<?php								
+							if($project_data['is_blocked']==1)
+							{
+								echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:30px;height:24px" type="image" src="'.$img_location.'/read6.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
 							}
+							else if($project_data['is_blocked']==2)
+							{
+								echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:35px;height:25px" type="image" src="'.$img_location.'/edit3.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
+							}
+							echo '<td>'.$project_data[$this->session->userdata('first_item')].'</td>';
+							echo '<td>'.$project_data[$this->session->userdata('second_item')].'</td>';
+							echo '<td>'.$project_data[$this->session->userdata('third_item')].'</td>';
+							echo '<td>'.$project_data[$this->session->userdata('fourth_item')].'</td>';
+							echo '<td>'.$project_data[$this->session->userdata('fifth_item')].'</td>';
+							echo '<td>'.$project_data[$this->session->userdata('sixth_item')].'</td>';
+							echo '<td>'.$project_data[$this->session->userdata('seventh_item')].'</td>';
+//							echo '<td><a onclick="browse_file('. $project_data['id'].')">檔案數：'.$project_data['file_number'].'</a></td>';
+							/*foreach($number_file as $a)
+							{
+								if ($a['project_id']==$project_data['id'])
+								{
+									echo '<td><a onclick="browse_file('. $project_data['id'].')">檔案數：'.$a['file_number'].'</a></td>';
+								}  
+							}*/
 							?>
-							<!--<tr>
-								<td>專案主題1</td>
-								<td>2009</td>
-								<td>創意中心</td>
-								<td>鴻海集團</td>
-								<td>陳健發</td>
-								<td>是</td>
-								<td>是</td>
-								<td>是</td>
-							</tr>-->
-						</tbody>
-						<!--<tfoot>
-							<tr>
-								<th>Rate</th>
-								<th>Distro</th>
-								<th>Votes</th>
-								<th>Homepage</th>
-								<th>Version</th>
-								<th>Version</th>
-							</tr>
-						</tfoot>-->
-					</table>
-				</div>
+							<input type="hidden" id="row_project_<?php echo $i;?>" value="<?php echo $project_data['id']?>"/>
+							<?php
+							echo '</tr>';
+							$i++;
+						}
+						?>
+						<!--<tr>
+							<td>專案主題1</td>
+							<td>2009</td>
+							<td>創意中心</td>
+							<td>鴻海集團</td>
+							<td>陳健發</td>
+							<td>是</td>
+							<td>是</td>
+							<td>是</td>
+						</tr>-->
+					</tbody>
+					<!--<tfoot>
+						<tr>
+							<th>Rate</th>
+							<th>Distro</th>
+							<th>Votes</th>
+							<th>Homepage</th>
+							<th>Version</th>
+							<th>Version</th>
+						</tr>
+					</tfoot>-->
+				</table>
 			</div>
 		</div>
 	</div>
@@ -422,7 +435,13 @@ $(document).ready(function() {
 	// Load Datatables and run plugin on tables 
 	LoadDataTablesScripts(AllTables);
 	// Add Drag-n-Drop feature
-	//WinMove();  //移動表格視窗
+	//WinMove();  //移動表格視窗	
+	//當搜尋框有內容，則反白搜尋框的文字
+	var search = "<?php echo $search?>";
+	if(search != "")
+	{
+		searchPrompt(search, false);
+	}
 });
 
 function check_is_blocked(row_id)
@@ -515,6 +534,194 @@ function create_project()
 	//location.href = 'http://localhost/project_manager/project_create';
 	location.href = 'project_create';
 }
+
+/*
+ * This is the function that actually highlights a text string by
+ * adding HTML tags before and after all occurrences of the search
+ * term. You can pass your own tags if you'd like, or if the
+ * highlightStartTag or highlightEndTag parameters are omitted or
+ * are empty strings then the default <font> tags will be used.
+ */
+function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag) 
+{
+	// the highlightStartTag and highlightEndTag parameters are optional
+	if ((!highlightStartTag) || (!highlightEndTag)) {
+		highlightStartTag = "<font style='background-color:yellow;'>";
+		highlightEndTag = "</font>";
+	}
+	
+	// find all occurences of the search term in the given text,
+	// and add some "highlight" tags to them (we're not using a
+	// regular expression search, because we want to filter out
+	// matches that occur within HTML tags and script blocks, so
+	// we have to do a little extra validation)
+	var newText = "";
+	var i = -1;
+	var lcSearchTerm = searchTerm.toLowerCase();
+	var lcBodyText = bodyText.toLowerCase();
+		
+	while (bodyText.length > 0) 
+	{
+		i = lcBodyText.indexOf(lcSearchTerm, i+1);
+		if (i < 0) 
+		{
+			newText += bodyText;
+			bodyText = "";
+		} 
+		else 
+		{
+			// skip anything inside an HTML tag
+			if (bodyText.lastIndexOf(">", i) >= bodyText.lastIndexOf("<", i)) 
+			{
+				// skip anything inside a <script> block
+				if (lcBodyText.lastIndexOf("/script>", i) >= lcBodyText.lastIndexOf("<script", i)) 
+				{
+					newText += bodyText.substring(0, i) + highlightStartTag + bodyText.substr(i, searchTerm.length) + highlightEndTag;
+					bodyText = bodyText.substr(i + searchTerm.length);
+					lcBodyText = bodyText.toLowerCase();
+					i = -1;
+				}
+			}
+		}
+	}
+	
+	return newText;
+}
+
+
+/*
+ * This is sort of a wrapper function to the doHighlight function.
+ * It takes the searchText that you pass, optionally splits it into
+ * separate words, and transforms the text on the current web page.
+ * Only the "searchText" parameter is required; all other parameters
+ * are optional and can be omitted.
+ */
+function highlightSearchTerms(searchText, treatAsPhrase, warnOnFailure, highlightStartTag, highlightEndTag)
+{
+	// if the treatAsPhrase parameter is true, then we should search for 
+	// the entire phrase that was entered; otherwise, we will split the
+	// search string so that each word is searched for and highlighted
+	// individually
+	if (treatAsPhrase) 
+	{
+		searchArray = [searchText];
+	} 
+	else 
+	{
+		searchArray = searchText.split(" ");
+	}
+	
+	if (!document.body || typeof(document.body.innerHTML) == "undefined") 
+	{
+		if (warnOnFailure) 
+		{
+			alert("Sorry, for some reason the text of this page is unavailable. Searching will not work.");
+		}
+		return false;
+	}
+	
+	var bodyText = document.body.innerHTML;
+	for (var i = 0; i < searchArray.length; i++) 
+	{
+		bodyText = doHighlight(bodyText, searchArray[i], highlightStartTag, highlightEndTag);
+	}
+	document.body.innerHTML = bodyText;
+	return true;
+}
+
+
+/*
+ * This displays a dialog box that allows a user to enter their own
+ * search terms to highlight on the page, and then passes the search
+ * text or phrase to the highlightSearchTerms function. All parameters
+ * are optional.
+ */
+function searchPrompt(defaultText, treatAsPhrase, textColor, bgColor)
+{
+	// This function prompts the user for any words that should
+	// be highlighted on this web page
+	if (!defaultText) {
+		defaultText = "";
+	}
+	
+	// we can optionally use our own highlight tag values
+	if ((!textColor) || (!bgColor)) 
+	{
+		highlightStartTag = "";
+		highlightEndTag = "";
+	} 
+	else 
+	{
+		highlightStartTag = "<font style='color:" + textColor + "; background-color:" + bgColor + ";'>";
+		highlightEndTag = "</font>";
+	}
+	
+	/*searchText = prompt(promptText, defaultText);
+	
+	if (!searchText)  {
+		alert("No search terms were entered. Exiting function.");
+		return false;
+	}*/
+	
+	return highlightSearchTerms(defaultText, treatAsPhrase, true, highlightStartTag, highlightEndTag);
+}
+
+
+/*
+ * This function takes a referer/referrer string and parses it
+ * to determine if it contains any search terms. If it does, the
+ * search terms are passed to the highlightSearchTerms function
+ * so they can be highlighted on the current page.
+ */
+function highlightGoogleSearchTerms(referrer)
+{
+	// This function has only been very lightly tested against
+	// typical Google search URLs. If you wanted the Google search
+	// terms to be automatically highlighted on a page, you could
+	// call the function in the onload event of your <body> tag, 
+	// like this:
+	//   <body onload='highlightGoogleSearchTerms(document.referrer);'>
+	
+	//var referrer = document.referrer;
+	if (!referrer) {
+	return false;
+	}
+	
+	var queryPrefix = "q=";
+	var startPos = referrer.toLowerCase().indexOf(queryPrefix);
+	if ((startPos < 0) || (startPos + queryPrefix.length == referrer.length)) {
+	return false;
+	}
+	
+	var endPos = referrer.indexOf("&", startPos);
+	if (endPos < 0) {
+	endPos = referrer.length;
+	}
+	
+	var queryString = referrer.substring(startPos + queryPrefix.length, endPos);
+	// fix the space characters
+	queryString = queryString.replace(/%20/gi, " ");
+	queryString = queryString.replace(/\+/gi, " ");
+	// remove the quotes (if you're really creative, you could search for the
+	// terms within the quotes as phrases, and everything else as single terms)
+	queryString = queryString.replace(/%22/gi, "");
+	queryString = queryString.replace(/\"/gi, "");
+	
+	return highlightSearchTerms(queryString, false);
+}
+
+
+/*
+ * This function is just an easy way to test the highlightGoogleSearchTerms
+ * function.
+ */
+function testHighlightGoogleSearchTerms()
+{
+	var referrerString = "http://www.google.com/search?q=javascript%20highlight&start=0";
+	referrerString = prompt("Test the following referrer string:", referrerString);
+	return highlightGoogleSearchTerms(referrerString);
+}
+
 </script>
 <!--彈出視窗-->
 		<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />

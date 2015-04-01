@@ -83,8 +83,8 @@ class Account_management extends CI_Controller{
 				//儲存至Session中
 				$username = $result['surname'].$result['given_names'];
 				$this->session->set_userdata('username', $username);
-				$this->session->set_userdata('first_item', 'year');
-				$this->session->set_userdata('second_item', 'idea_name');
+				$this->session->set_userdata('first_item', 'idea_name');
+				$this->session->set_userdata('second_item', 'year');
 				$this->session->set_userdata('third_item', 'proposed_unit');
 				$this->session->set_userdata('fourth_item', 'proposer');
 				$this->session->set_userdata('fifth_item', 'proposed_date');
