@@ -53,7 +53,7 @@
 			    <div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
 				</div>				
         <div id="hidden_window" title="瀏覽項目">
-		        <form action="project/adjust_item" method="post">
+		        <form action="project/adjust_item" method="post" onsubmit="return validate()">
 		        <input id="adjust_searchbar" type="hidden" name="searchbar">				
 				<h4 class="page-header">欄位列表</h4>
 				<?php 
@@ -119,6 +119,7 @@
 				<?php
 				}
 				?>
+				<br/>
 				<input type="submit"  value="確定" onclick="convey()">
 			</form>		
 		</div>
@@ -261,13 +262,50 @@
 							<tr>
 								<td id="a" style="width:20px;border:#BBBBBB 1px solid;background:#FBFBF0"></td>
 							    <!--<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[0] ?></td>-->
-								<td style="border:#BBBBBB 1px solid;">創意提案名稱</td>
-								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[1] ?></td>
-								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[2] ?></td>
-								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[3] ?></td>
-								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[4] ?></td>
-								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[5] ?></td>
-								<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[6] ?></td>
+								<?php
+								if($this->session->userdata('first_item') != "null")
+								{
+								?>
+									<td style="border:#BBBBBB 1px solid;min-width:250px">創意提案名稱</td>
+								<?php
+								}
+								if($this->session->userdata('second_item') != "null")
+								{
+								?>
+									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[1] ?></td>
+								<?php
+								}
+								if($this->session->userdata('third_item') != "null")
+								{
+								?>
+									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[2] ?></td>
+								<?php
+								}
+								if($this->session->userdata('fourth_item') != "null")
+								{
+								?>
+									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[3] ?></td>
+								<?php
+								}
+								if($this->session->userdata('fifth_item') != "null")
+								{
+								?>
+									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[4] ?></td>
+								<?php
+								}
+								if($this->session->userdata('sixth_item') != "null")
+								{
+								?>
+									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[5] ?></td>
+								<?php
+								}
+								if($this->session->userdata('seventh_item') != "null")
+								{
+								?>
+									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[6] ?></td>
+								<?php
+								}
+								?>
 							</tr>
 							<!--<tr>
 								<th style="border:#BBBBBB 1px solid;"><label></label></th>
@@ -296,14 +334,41 @@
 							{
 								echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:35px;height:25px" type="image" src="'.$img_location.'/edit3.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
 							}
-							echo '<td>'.$project_data[$this->session->userdata('first_item')].'</td>';
-							echo '<td>'.$project_data[$this->session->userdata('second_item')].'</td>';
-							echo '<td>'.$project_data[$this->session->userdata('third_item')].'</td>';
-							echo '<td>'.$project_data[$this->session->userdata('fourth_item')].'</td>';
-							echo '<td>'.$project_data[$this->session->userdata('fifth_item')].'</td>';
-							echo '<td>'.$project_data[$this->session->userdata('sixth_item')].'</td>';
-							echo '<td>'.$project_data[$this->session->userdata('seventh_item')].'</td>';
-//							echo '<td><a onclick="browse_file('. $project_data['id'].')">檔案數：'.$project_data['file_number'].'</a></td>';
+							if($this->session->userdata('first_item') != "null")
+							{
+								echo '<td>'.$project_data[$this->session->userdata('first_item')];
+								if($search != "")
+								{
+									$arr = array('year'=>"年分",'idea_id'=>"提案編號",'km_id'=>"文件編號",'idea_name'=>"創意提案名稱",'idea_source'=>"創意提案來源",'idea_description'=>"創意提案來源",'scenario_d'=>"情境說明",'function_d'=>"功能構想",'distinction_d'=>"差異化",'value_d'=>"價值性",'feasibility_d'=>"可行性",'market_survey'=>"市場搜尋",'km_survey'=>"km平台搜尋",'dep_item'=>"研發項目確認",'inner_or_outer'=>"提案類別",'stage'=>"階段狀態",'stage_detail'=>"階段細項狀態",'progress_description'=>"進度說明",'proposed_unit'=>"提案單位",'proposer'=>"提案人",'proposed_date'=>"提案日期",'valid_project'=>"有效提案",'established_date'=>"立案日期",'joint_unit'=>"協辦單位",'joint_person'=>"協辦窗口",'note'=>"備註", 'PM_in_charge'=>"創意中心窗口");
+									echo '<br/><span style="font-size:10pt;color:blue">'.$arr[$column[$i]].'：'.$key_sentence[$i].'</span>';  //.'('.$column[$i].')'
+								}
+								echo '</td>';
+							}
+							if($this->session->userdata('second_item') != "null")
+							{
+								echo '<td>'.$project_data[$this->session->userdata('second_item')].'</td>';
+							}
+							if($this->session->userdata('third_item') != "null")
+							{
+								echo '<td>'.$project_data[$this->session->userdata('third_item')].'</td>';
+							}
+							if($this->session->userdata('fourth_item') != "null")
+							{
+								echo '<td>'.$project_data[$this->session->userdata('fourth_item')].'</td>';
+							}
+							if($this->session->userdata('fifth_item') != "null")
+							{
+								echo '<td>'.$project_data[$this->session->userdata('fifth_item')].'</td>';
+							}
+							if($this->session->userdata('sixth_item') != "null")
+							{
+								echo '<td>'.$project_data[$this->session->userdata('sixth_item')].'</td>';
+							}
+							if($this->session->userdata('seventh_item') != "null")
+							{
+								echo '<td>'.$project_data[$this->session->userdata('seventh_item')].'</td>';
+							}
+							//echo '<td><a onclick="browse_file('. $project_data['id'].')">檔案數：'.$project_data['file_number'].'</a></td>';
 							/*foreach($number_file as $a)
 							{
 								if ($a['project_id']==$project_data['id'])
@@ -313,8 +378,8 @@
 							}*/
 							?>
 							<input type="hidden" id="row_project_<?php echo $i;?>" value="<?php echo $project_data['id']?>"/>
-							<?php
-							echo '</tr>';
+							</tr>
+						<?php
 							$i++;
 						}
 						?>
@@ -349,6 +414,29 @@
 	<!--<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>-->
 	<div id="dialog" style="width:500px" title="Dialog Title"></div>
 <script type="text/javascript">
+function validate()
+{
+	var i=1;
+	var is_all_null_value = true;
+	for(i=1;i<=6;i++)
+	{
+		if(document.getElementById("col_"+i).value != "null")
+		{
+			is_all_null_value = false;
+			break;
+		}
+	}
+	if(is_all_null_value == true)
+	{
+		alert("至少需選擇一個欄位項目");
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
 function edit(project_id)
 {
 	//document.getElementById("link_"+id).click();
@@ -379,11 +467,11 @@ $(document).ready(function() {
 	// Add Drag-n-Drop feature
 	//WinMove();  //移動表格視窗	
 	//當搜尋框有內容，則反白搜尋框的文字
-	//var search = "<?php echo $search?>";
-	//if(search != "")
-	//{
-	//	searchPrompt(search, false);
-	//}
+	var search = "<?php echo $search?>";
+	if(search != "")
+	{
+		searchPrompt(search, false);
+	}
 });
 
 function check_is_blocked(row_id)

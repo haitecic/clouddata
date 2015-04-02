@@ -227,7 +227,6 @@ class Project_model extends CI_Model{
 		else
 		{
 			$rule1 = "`year` LIKE '%%' ";
- 
 		}
 	    //載入session項目
 		$col_name_list = array("idea_name", 
@@ -240,10 +239,14 @@ class Project_model extends CI_Model{
 		$item = "`id`, `is_blocked`, `current_user`";
 		for($i=0;$i<count($col_name_list);$i++)
 		{
-			$item = $item . ',`' . $col_name_list[$i] . '`';
+			if($col_name_list[$i] != "null")
+			{
+				$item = $item . ',`' . $col_name_list[$i] . '`';
+			}
 		}
 		//讀取資料
-		$query_string = "SELECT " . $item . "FROM `project_all` WHERE ".$rule1;
+		//$query_string = "SELECT " . $item . "FROM `project_all` WHERE ".$rule1;
+		$query_string = "SELECT * FROM `project_all` WHERE ".$rule1;
 		$query = $this->db->query($query_string);	
 		$result = $query->result_array();		
 		//$data_count = count($result);
@@ -280,8 +283,6 @@ class Project_model extends CI_Model{
 	
 	public function get_project_files($project_id)
 	{
-		
-
 		$query_string = "SELECT project.name, project_attachment.id, project_attachment.file_content ,project_attachment.project_id, project_attachment.file_name, project_attachment.instance_file_name FROM `project_basic_info` as `project` LEFT OUTER JOIN `project_attachment` on  `project`.`id` = `project_id` WHERE project.id=". $project_id;
 		$query = $this->db->query($query_string);	
 		$result = $query->result_array();			

@@ -187,12 +187,120 @@ class Project extends CI_Controller{
 		$data['message'] = $message;
 		if($search_bar==null) $search_bar = $this->input->post('search_bar');
 		$data['search'] = $search_bar;
-		$data['project_list'] = $this->project_model->get_specific_projects_data($search_bar);  //取得搜尋條件設定的專案資料
+		$project_list = $this->project_model->get_specific_projects_data($search_bar);  //取得搜尋條件設定的專案資料
+		$data['project_list'] = $project_list;
+		//相關句子搜尋
+		
+		if($search_bar != null)
+		{
+			$search_word = explode(' ', $search_bar);
+			$key_sentence = array();  //存放關鍵句子
+			foreach($project_list as $project)
+			{
+				$temp = array();
+				$temp_score = array();
+				$all_content = "";
+				foreach($project as $index => $content)
+				{
+					$all_content = $all_content.$content.',';					
+				}
+				$all_content = str_replace('。','.',$all_content);
+				$all_content = str_replace('，',',',$all_content);
+				$all_content = str_replace('；',';',$all_content);
+				$temp = preg_split("/[?!,-.;]+/",$all_content);
+				foreach($temp as $index=>$sentence)
+				{
+					$score = 0;
+					for($j=0;$j<count($search_word);$j++)
+					{
+						if(strpos($sentence, $search_word[$j]) !== false)
+						{
+							$score = $score + 1;
+						}
+					}
+					array_push($temp_score, (int)$score);					
+				}				
+				//$value = max($temp_score);
+				//$maxs = array_keys($temp_score, max($temp_score));
+				//echo "<br/><br/><br/>".(int)$maxs;
+				$first_score = 0;
+				//array_push($key_sentence, $temp[(int)$maxs]);
+				$sen = 0;
+				foreach($temp as $index=>$sentence)
+				{		
+					if($temp_score[$index] > $first_score)  //$first_score
+					{
+						$sen = $sentence;
+						//array_push($key_sentence, $sentence);
+						$first_score = $temp_score[$index];
+						//break;						
+					}					
+				}	
+				array_push($key_sentence, $sen);				
+				//echo $sentence.'<br/>';
+				//break;				
+			}
+			//$str = 'Fry me a Beaver. Fry me a Beaver! Fry me a Beaver? Fry me Beaver no. 4?! Fry me many Beavers... End';
+			//$sentences = preg_split('/(?<=[.?!])\s+(?=[a-z])/i', $str);
+			//$content_segment = array();
+			$data['key_sentence'] = $key_sentence;				
+			$column = array();
+			$k=0;
+			foreach($project_list as $project)
+			{			
+				foreach($project as $index => $content)
+				{					
+					if(strpos($content, $key_sentence[$k]) !== false)
+					{											
+						array_push($column, $index);
+						break;
+					}
+				}
+				$k++;
+			}
+			$data['column'] = $column;
+		}
+		
 		//$data['number_file'] = $this->project_model->get_number_file();
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/navbar', $data);
 		$this->load->view('pages/project_list3', $data);
 		$this->load->view('templates/footer',$data);
+	}
+	//全形半形轉換
+	function nf_to_wf($strs)
+	{  
+		$nft = array(
+			"(", ")", "[", "]", "{", "}", ".", ",", ";", ":",
+			"-", "?", "!", "@", "#", "$", "%", "&", "|", "\\",
+			"/", "+", "=", "*", "~", "`", "'", "\"", "<", ">",
+			"^", "_",
+			"0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+			"a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+			"k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+			"u", "v", "w", "x", "y", "z",
+			"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+			"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+			"U", "V", "W", "X", "Y", "Z",
+			" "
+		);
+		$wft = array(
+			"（", "）", "〔", "〕", "｛", "｝", "﹒", "，", "；", "：",
+			"－", "？", "！", "＠", "＃", "＄", "％", "＆", "｜", "＼",
+			"／", "＋", "＝", "＊", "～", "、", "、", "＂", "＜", "＞",
+			"︿", "＿",
+			"０", "１", "２", "３", "４", "５", "６", "７", "８", "９",
+			"ａ", "ｂ", "ｃ", "ｄ", "ｅ", "ｆ", "ｇ", "ｈ", "ｉ", "ｊ",
+			"ｋ", "ｌ", "ｍ", "ｎ", "ｏ", "ｐ", "ｑ", "ｒ", "ｓ", "ｔ",
+			"ｕ", "ｖ", "ｗ", "ｘ", "ｙ", "ｚ",
+			"Ａ", "Ｂ", "Ｃ", "Ｄ", "Ｅ", "Ｆ", "Ｇ", "Ｈ", "Ｉ", "Ｊ",
+			"Ｋ", "Ｌ", "Ｍ", "Ｎ", "Ｏ", "Ｐ", "Ｑ", "Ｒ", "Ｓ", "Ｔ",
+			"Ｕ", "Ｖ", "Ｗ", "Ｘ", "Ｙ", "Ｚ",
+			"　"
+		);
+		// 轉半形
+		$strtmp = str_replace($wft, $nft, $strs);
+		return $strtmp;
 	}
 	
 	public function project_file($project_id, $search_bar="")  //瀏覽所有專案資料

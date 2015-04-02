@@ -2,7 +2,7 @@
 <div id="main" class="container-fluid" style="background-color:#FBFBF0">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12" style="background-color:#ffffff; height:30px;background-color:#FBFBF0;"></div>
-		<div style="padding-left:24px"><span style="font-size:21pt">專案資料</span><span style="font-size:14pt">( <span style="color:red">*</span> 為必填欄位 )</span></div>
+		<div style="padding-left:24px"><span style="font-size:21pt;font-family:微軟正黑體"><?php echo $project_basic_info['idea_name'];?></span></div>
 		<br/>		
 		<!--<img src="<?php echo site_url()?>application/assets/data_img/<?php echo $project_img['name']?>" >-->
 		<!--<div class="btn btn-primary qq-upload-button" style="border-color:#6483E4;background-color:#6483E4;width: auto;text-align:right;float:left;margin-left:50px;margin-top:-40px;margin-bottom:10px;"><!--;right:575-->
@@ -36,42 +36,35 @@
 		?>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-1  col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>專案主題</label>
-			<div class="col-sm-4">
-				<!--<input readonly type="text" value="<?php echo $project_basic_info['idea_name'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="project_name" name="project_name" placeholder="" data-toggle="tooltip" data-placement="bottom" title="專案主題" style="font-size:17px; font-family:微軟正黑體;">--> 
-				<p class="form-control-static" style="font-size:12pt;font-family:微軟正黑體"><?php echo $project_basic_info['idea_name'];?></p>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>情境說明</label>
+			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">情境說明</label>
 			<div class="col-sm-10">
 				<!--<input readonly type="text" value="<?php echo $project_basic_info['scenario_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="情境說明" style="font-size:17px; font-family:微軟正黑體;">-->
 				<p class="form-control-static" style="font-size:12pt;font-family:微軟正黑體"><?php echo $project_basic_info['scenario_d'];?></p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>功能構想</label>
+			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">功能構想</label>
 			<div class="col-sm-10">
 				<!--<input readonly type="text" value="<?php echo $project_basic_info['function_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="功能構想" style="font-size:17px; font-family:微軟正黑體;">-->  
 				<p class="form-control-static" style="font-size:12pt;font-family:微軟正黑體"><?php echo $project_basic_info['function_d'];?></p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>差異化</label>
+			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">差異化</label>
 			<div class="col-sm-10">
 				<!--<input readonly type="text" value="<?php echo $project_basic_info['distinction_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="進度說明" style="font-size:17px; font-family:微軟正黑體;">--> 
 				<p class="form-control-static"><?php echo $project_basic_info['distinction_d'];?></p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>價值性</label>
+			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">價值性</label>
 			<div class="col-sm-10">
 				<!--<?php echo $project_basic_info['value_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="進度說明" style="font-size:17px; font-family:微軟正黑體;">-->
 				<p class="form-control-static"><?php echo $project_basic_info['value_d'];?></p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>可行性</label>
+			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">可行性</label>
 			<div class="col-sm-10">
 				<!--<?php echo $project_basic_info['feasibility_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="可行性" style="font-size:17px; font-family:微軟正黑體;">-->
 				<p class="form-control-static"><?php echo $project_basic_info['feasibility_d'];?></p>
@@ -247,7 +240,7 @@
 						
 			<!--<div id="ajax-content"></div>--> <!-- 載入重要資料!!! -->
 			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
-			<div style="margin-left:15px;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">Drag & Drop Files Here(or <a href="#" id="browse_file" onclick="browse_file()">Browse</a> Files.)</div>
+			<div style="margin-left:15px;font-family:微軟正黑體;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">請拖曳檔案到此(<a href="#" id="browse_file" onclick="browse_file()">瀏覽</a>檔案)</div>
 			<div id="file_list" class="statusbar" style="width:1300px;margin-left:15px;padding-bottom:10px">
 				<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
 				<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
