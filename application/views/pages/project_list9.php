@@ -1,54 +1,53 @@
-<div id="main" class="container-fluid" style="background-color:#FBFBF0;font-color:#635F5F;font-family: Adobe 繁黑體 Std"><!--8E8D93-->
+<div id="main" class="container-fluid" style="background-color:#FBFBF0;font-color:#635F5F;font-family: Adobe 繁黑體 Std;"><!--8E8D93-->
 	<div class="row">
-		<div class="col-xs-12">
-			<div class="box" style="margin-top:15px">
-				<div class="box-header">
-					<div class="box-name">
-						<i class="fa fa-linux"></i>
-						<span>專案資料表</span>
-					</div>
-					<div class="box-icons">
-						<a class="collapse-link" onclick="collapse">
-							<i class="fa fa-chevron-up"></i>
-						</a>
-					</div>
-					<div class="no-move"></div>				
+		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
+			<div class="box-header" style="margin-left:-15px;margin-right:-15px">
+				<div class="box-name">
+					<i class="fa fa-linux"></i>
+					<span>專案資料表</span>
 				</div>
-				<div class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體" >
-					<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="width: auto;text-align:right;float:left;margin-left:10px;font-size:16pt;;border-color:#5181A6;background-color:#5181A6"><!--border-color:#C3DEB7;background-color:#C3DEB7;color:#821EC7 96BBDE-->
-						<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
-					</div>
-					<table id="project_list_tbl" class="display" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid">
-						<thead>
-							<tr>
-								<th>First name</th>
-								<th>Last name</th>
-								<th>Position</th>
-								<th>Office</th>
-								<th>Start date</th>
-								<th>Salary</th>
-								<th>Salary</th>
-							</tr>
-						</thead>
-						<tfoot>
-							<tr>
-								<th>First name</th>
-								<th>Last name</th>
-								<th>Position</th>
-								<th>Office</th>
-								<th>Start date</th>
-								<th>Salary</th>
-								<th>Salary</th>
-							</tr>
-						</tfoot>
-					</table>
+				<div class="box-icons">
+					<a class="collapse-link" onclick="collapse">
+						<i class="fa fa-chevron-up"></i>
+					</a>
 				</div>
+				<div class="no-move"></div>				
+			</div>
+			<div class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px">
+				<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:7px;top:-10px;z-index:50;width: auto;font-size:16pt;border-color:#5181A6;background-color:#5181A6"><!--border-color:#C3DEB7;background-color:#C3DEB7;color:#821EC7 96BBDE-->
+					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
+				</div>
+				<table id="project_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px">
+					<thead>
+						<tr>
+							<th>First name</th>
+							<th>Last name</th>
+							<th>Position</th>
+							<th>Office</th>
+							<th>Start date</th>
+							<th>Salary</th>
+							<th>Salary</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>First name</th>
+							<th>Last name</th>
+							<th>Position</th>
+							<th>Office</th>
+							<th>Start date</th>
+							<th>Salary</th>
+							<th>Salary</th>
+						</tr>
+					</tfoot>
+				</table>
 			</div>
 		</div>
 	</div>
 </div>
-<div id="column_choose_form" title="瀏覽項目" style="postion:relative;z-index:1000">
+<div id="column_choose_menu" title="瀏覽項目" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
 	<!--<form action="project/adjust_item" method="post" onsubmit="return validate()">-->
+		<div style="text-align:center">
 		<?php 
 		//$title_array陣列存放select調整欄位選單的名稱
 		$title_array = array('0' => '欄位', '1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六');
@@ -66,7 +65,7 @@
 			echo $title_array[$i];
 			$all_item[$i]=$this->session->userdata($item_array[$i]);  //取得該欄位目前顯示的欄位名稱
 		?>
-		<select id="col_<?php echo $i;?>" name="<?php echo $titlename_array[$i];?>">
+		<select id="col_<?php echo $i;?>" name="<?php echo $titlename_array[$i];?>" style="margin-bottom:10px">
 			<option value="null" <?php if($all_item[$i] == "null"){ echo " selected";} ?>>無</option>
 			<option value="year" <?php if($all_item[$i] == "year"){ echo " selected";} ?>>年分</option>
 			<option value="km_id" <?php if($all_item[$i] == "km_id"){ echo " selected";} ?> >KM文件編號</option>
@@ -111,8 +110,9 @@
 		<?php
 		}
 		?>
-		<br/>
-	<input type="button"  value="確定" onclick="adjust_display_column()">
+		<input type="button" value="確定" onclick="adjust_display_column()">
+	</div>
+	<!--</form>-->
 </div>
 <script>
 $(document).ready(function() {
@@ -132,19 +132,23 @@ $(document).ready(function() {
 調整瀏覽項目dialog
 */			
 $(function() {
-	$("#column_choose_form").dialog({
+	$("#column_choose_menu").dialog({
 		autoOpen : false,
 		show : {
 			effect : "blind",
-			duration : 500
+			duration : 300
 		},
+		position: { 
+			my: "center top", 
+			at: "center top", 
+			of: "#project_list_tbl" },
 		hide : {
 			effect : "blind",
-			duration : 500
+			duration : 300
 		}						
 	});
 	$("#column_adjustment_btn").click(function() {		
-		$("#column_choose_form").dialog("open");
+		$("#column_choose_menu").dialog("open");
 	});
 });	
 </script>
