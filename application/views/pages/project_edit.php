@@ -35,6 +35,12 @@
 		}
 		?>
 		</div>
+		<!--<div class="form-group">
+			<label class="col-sm-1  col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt"></span>提案編號</label>
+			<div class="col-sm-4">-->
+				<input readonly type="hidden" value="<?php echo $project_basic_info['idea_id']?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" id="idea_id" name="idea_id" class="form-control" placeholder="創意提案編號" data-toggle="tooltip" data-placement="bottom" title="創意提案編號" style="font-size:17px; font-family:微軟正黑體;">  
+			<!--</div>
+		</div>-->
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">情境說明</label>
 			<div class="col-sm-10">
@@ -77,10 +83,7 @@
 				<input readonly type="text" value="<?php echo $project_basic_info['feasibility_d'];?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" class="form-control" id="progress_description" name="progress_description" data-toggle="tooltip" data-placement="bottom" title="進度說明" style="font-size:17px; font-family:微軟正黑體;">  
 			</div>
 			<div class="col-xs-12 col-sm-12" style="height:5px; "></div>			
-			<label class="col-sm-1  col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>提案編號</label>
-			<div class="col-sm-4">
-				<input readonly type="text" value="<?php echo $project_basic_info['idea_id']?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" id="idea_id" name="idea_id" class="form-control" placeholder="創意提案編號" data-toggle="tooltip" data-placement="bottom" title="創意提案編號" style="font-size:17px; font-family:微軟正黑體;">  
-			</div>
+
 			<div class="col-xs-12 col-sm-12" style="height:5px; "></div>
 			<label class="col-sm-1  col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt">* </span>km文件編號</label>
 			<div class="col-sm-4">

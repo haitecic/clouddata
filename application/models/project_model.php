@@ -1021,6 +1021,9 @@ class Project_model extends CI_Model{
 				$ori_file_name = $this->input->post('upload_file_'.$i);
 				$ext = end(explode('.', $ori_file_name));	
 				$des_file_name = $project_id.'_'.time().$i.'.'.$ext;
+				echo "<br><br><br><br><br>";
+				echo $ori_file_dir . $ori_file_name;
+				echo $new_file_dir . $des_file_name;
 				rename(iconv("UTF-8","BIG5//IGNORE",$ori_file_dir . $ori_file_name), iconv("UTF-8","BIG5//IGNORE",$new_file_dir . $des_file_name));  //move the file to the folder named by project ID
 				//Get the content of the upload file
 				$file_content = "";

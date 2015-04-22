@@ -480,8 +480,8 @@ class Project extends CI_Controller{
 		$this->form_validation->set_rules('haitec_unit', '華創單位', 'trim|xss_clean|required|max_length[100]');
 		$this->form_validation->set_rules('outer_unit', '外部單位', 'trim|xss_clean|required|max_length[100]');
 		$this->form_validation->set_rules('pm', '創意中心負責人', 'trim|xss_clean|required|max_length[100]');
-		$this->form_validation->set_rules('keyword', '關鍵字', 'trim|xss_clean|required|max_length[100]');*/
-		$this->form_validation->set_rules('idea_id', '創意提案編號', 'trim|xss_clean|required');  //|max_length[7]
+		$this->form_validation->set_rules('keyword', '關鍵字', 'trim|xss_clean|required|max_length[100]');*/ 
+		$this->form_validation->set_rules('idea_id', '創意提案編號', 'trim|xss_clean|required'); //|max_length[7]
 		//撰寫表單驗證通過與不通過的對應處理方式
 		if($this->form_validation->run() === FALSE)  //當表單驗證不通過
 		{		
