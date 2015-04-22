@@ -71,6 +71,13 @@ $route['project_file/(:num)'] = 'project/project_file/$1';
 $route['project_file/(:num)/(:any)'] = 'project/project_file/$1/$2';
 $route['project_edit/(:any)'] = 'project/edit_project_data/$1';
 $route['project/test_template'] = 'project/test_template';
+$route['project/index'] = 'project/index';
+$route['data/getTable'] = 'project/getTable';
+$route['data/getTable1'] = 'project/getTable1';
+$route['data/getTable2'] = 'project/getTable2';
+$route['data/getTable3'] = 'account_management/getTable3';
+$route['data/getTable4'] = 'data/getTable4';
+$route['get_data'] = 'project/get_data';
 //$route['institute/register'] = 'institute/register';
 $route['default_controller'] = 'institute/register';
 

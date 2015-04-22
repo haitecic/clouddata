@@ -23,15 +23,19 @@ header('Content-Type: text/html; charset=utf-8');
 	<link href="<?php echo $css_location;?>/style_v2.css" rel="stylesheet">
 	<link href="<?php echo $css_location;?>/jqueryDatatable.css" rel="stylesheet">
 	<link href="<?php echo $plugins_location;?>/chartist/chartist.min.css" rel="stylesheet">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script src="http://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
-	<!--彈出視窗js-->
+	
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>-->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	<!--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
-	<script src="http://cdn.datatables.net/plug-ins/1.10.6/i18n/Chinese-traditional.json"></script>
-		<!--<script type="text/javascript">
+	<!--彈出視窗js-->
+	<!--<script src="http://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+	<script src="http://cdn.datatables.net/plug-ins/1.10.6/i18n/Chinese-traditional.json"></script>-->
+	<!--<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>application/css/jquery.dataTables.css"></link>-->
+
+    <!--<script type="text/javascript" src="<?php echo $js_datatable_location ?>/jquery-1.8.2.min.js"></script>-->
+
+	<!--<script type="text/javascript">
 			$(function() {
 				$("#dialog").dialog({
 					autoOpen : false,

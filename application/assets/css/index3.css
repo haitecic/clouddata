@@ -1084,3 +1084,9 @@ body{
 	background-color: #00bcff;
 }
 
+table tr th{
+	border-left-width: 1px; 
+	border-left-style: solid; 
+	border-left-color: rgb(204, 204, 204);
+}
+

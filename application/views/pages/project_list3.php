@@ -277,7 +277,7 @@
 									}
 									?>
 								</tr>
-								<tr>
+								<!--<tr>
 									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_project_name" value="filter..." class="search_init" /></label></th>
 									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_project_name" value="filter..." class="search_init" /></label></th>
 									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_year" value="filter..." class="search_init" /></label></th>
@@ -286,7 +286,7 @@
 									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_pm" value="filter..." class="search_init" /></label></th>
 									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_car_model_estimate" value="filter..." class="search_init" /></label></th>
 									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_exhibition" value="filter..." class="search_init" /></label></th>
-								</tr>
+								</tr>-->
 							</thead>								
 						</table>					
 					<!--<div style="新細明體">
@@ -317,11 +317,26 @@
 			</div>
 		</div>
 	</div>
+	<table cellpadding="0" cellspacing="0" border="0" id="data" width="100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+			<th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+			<th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot></tfoot>
+</table>
 </div>	
 	<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">-->
 	<link rel="stylesheet" href="<?php echo $css_location.'/jquery_ui.css'; ?>">
 	<div id="dialog" style="width:500px" title="Dialog Title"></div>
-	
 <script type="text/javascript">
 var oTable;  //table物件
 function validate()
@@ -425,7 +440,7 @@ function reloadTable(arr, start_record)
 	//BTable.fnPageChange(2,true);*/
 }
 
-function TestTable2(){
+/*function TestTable2(){
 	var col_arr = [];
 	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
@@ -469,12 +484,66 @@ function TestTable2(){
 	header_inputs.each( function (i) {
 		asInitVals[i] = this.value;
 	});
-}
+}*/
+/*
+function TestTable2(){
+	var col_arr = [];
+	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	{
+		col_arr[col_arr.length] = document.getElementById('col_' + i).value;
+	}	
+	var postData = {"column1":col_arr[0],"column2":col_arr[1],"column3":col_arr[2],"column4":col_arr[3],
+					"column5":col_arr[4],"column6":col_arr[5],"column7":col_arr[6],"column8":col_arr[6]};
+	
+	var asInitVals = [];
+	var URLs='http://127.0.0.1/project_management/datatable_server_processing.php';
+	//var URLs='http://127.0.0.1/project_management/project/data_processing';
+	oTable = $('#datatable-2').dataTable( {
+		"sScrollY": "400px",
+		"bProcessing": true,
+	    "bServerSide": true,
+	    "sServerMethod": "GET",
+	    "sAjaxSource": "http://127.0.0.1/project_management20150415/data/getTable",
+	    "iDisplayLength": 10,
+	    "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+	    "aaSorting": [[0, 'asc']],
+	    "aoColumns": [
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true }
+	    ]
+	});
+	var header_inputs = $("#datatable-2 thead input");
+	header_inputs.on('keyup', function(){
+		// Filter on the column (the index) of this element 
+		oTable.fnFilter( this.value, header_inputs.index(this) );
+	})
+	.on('focus', function(){
+		if ( this.className == "search_init" ){
+			this.className = "";
+			this.value = "";
+		}
+	})
+	.on('blur', function (i) {
+		if ( this.value == "" ){
+			this.className = "search_init";
+			this.value = asInitVals[header_inputs.index(this)];
+		}
+	});
+	header_inputs.each( function (i) {
+		asInitVals[i] = this.value;
+	});
+}*/
 
 function AllTables(){
 	//TestTable1();
 	//load_table();
-	TestTable2();
+	//TestTable2();
 	//TestTable3();
 	LoadSelect2Script(MakeSelect2);
 	$('#datatable-2_filter').hide();
@@ -485,9 +554,30 @@ function MakeSelect2(){
 		$(this).find('label input[type=text]').attr('placeholder', 'Search');
 	});
 }
-$(document).ready(function() {	
+$(document).ready(function() {
+	//LoadDataTablesScripts(AllTables);	
+	$('#data').dataTable({
+		"sScrollY": "400px",
+		"bProcessing": true,
+	    "bServerSide": true,
+	    "sServerMethod": "GET",
+	    "sAjaxSource": "http://127.0.0.1/project_management20150415/data/getTable",
+	    "iDisplayLength": 10,
+	    "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+	    "aaSorting": [[0, 'asc']],
+	    "aoColumns": [
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true },
+			{ "bVisible": true, "bSearchable": true, "bSortable": true }
+	    ]
+	}).fnSetFilteringDelay(700);
 	// Load Datatables and run plugin on tables 	
-	LoadDataTablesScripts(AllTables);
+	
 
 	// Add Drag-n-Drop feature
 	//WinMove();  //移動表格視窗	

@@ -16,6 +16,7 @@ class Project extends CI_Controller{
 		//$this->load->library('file_conversion');  //載入擷取檔案純文字內容的程式庫
 		$this->load->helper('html');  		
 		$this->load->model('project_model');  //載入已定義的模型與資料庫做連接		
+		$this->load->database();
 		//$this->output->cache(180);
 		//取消快取	
 		$this->output->set_header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');  
@@ -182,6 +183,10 @@ class Project extends CI_Controller{
 		$data['username'] = $this->session->userdata('username');
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
 		$data['js_location'] = site_url("/application/assets/js");  
+		$data['js_path'] = site_url("/application/js");  
+		$data['css_path'] = site_url("/application/css");  
+		$data['plugin_path'] = site_url("/application/plugin");
+		//$data['a'] = site_url("/application/css1");  
 		$data['img_location'] = site_url("/application/assets/img");
         $data['project_location'] = site_url("/application/assets/project");
 		$data['plugins_location'] = site_url("/application/assets/plugins");
@@ -250,10 +255,10 @@ class Project extends CI_Controller{
 			$data['column'] = $column;
 		}
 		//$data['number_file'] = $this->project_model->get_number_file();
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/header1', $data);
 		$this->load->view('templates/navbar', $data);
-		$this->load->view('pages/project_list3', $data);
-		$this->load->view('templates/footer',$data);
+		$this->load->view('pages/project_list9', $data);
+		//$this->load->view('templates/footer',$data);
 	}
 	
 	public function project_file($project_id, $search_bar="")  //瀏覽所有專案資料
@@ -503,7 +508,7 @@ class Project extends CI_Controller{
 	}
 	
 	public function data_processing()
-	{/*
+	{
 		// DB table to use
 		$table = 'project_all'; 
 		// Table's primary key
@@ -540,15 +545,402 @@ class Project extends CI_Controller{
 			'pass' => '0310a0919',
 			'db'   => 'project_resource',
 			'host' => '127.0.0.1'
-		);	*/	
-		echo '{"draw":2,"recordsTotal":1188,"recordsFiltered":1188,"data":[["2012","1210027","36813","開門防撞裝置","1st Jan 70","$36,813","自身經驗",""],["2014","1405021","50870","椅背-氣囊式頂腰仕樣","1st Jan 70","$50,870","2014協力會差異化提案","內容請詳閱附件。"],["2012","1210028","36814","車內自動閱讀裝置","1st Jan 70","$36,814","自身經驗",""],["2013","1306017",null,"微結構光導晝行燈","1st Jan 70","$0","2013年ARTC於華創進行前瞻技術展示會",null],["2014","1405022","50869","椅背 - 側翼支撐氣囊","1st Jan 70","$50,869","2014協力會差異化提案","內容請詳閱附件。"],["2012","1204001","33659","單一投影機共用於投影式儀錶及抬頭顯示器","1st Jan 70","$33,659","與廠商技術交流(揚明光學)。",""],["2012","1210029","36831","風力發電機","1st Jan 70","$36,831","高速公路",""],["2013","1306018",null,"車輛翻覆警示系統","1st Jan 70","$0","2013年ARTC於華創進行前瞻技術展示會",null],["2014","1405023","50865","座椅自動感應包覆機能仕樣","1st Jan 70","$50,865","2014協力會差異化提案","內容請詳閱附件。"]]}';
+		);		
+		//echo '{"draw":2,"recordsTotal":1188,"recordsFiltered":1188,"data":[["2012","1210027","36813","開門防撞裝置","1st Jan 70","$36,813","自身經驗",""],["2014","1405021","50870","椅背-氣囊式頂腰仕樣","1st Jan 70","$50,870","2014協力會差異化提案","內容請詳閱附件。"],["2012","1210028","36814","車內自動閱讀裝置","1st Jan 70","$36,814","自身經驗",""],["2013","1306017",null,"微結構光導晝行燈","1st Jan 70","$0","2013年ARTC於華創進行前瞻技術展示會",null],["2014","1405022","50869","椅背 - 側翼支撐氣囊","1st Jan 70","$50,869","2014協力會差異化提案","內容請詳閱附件。"],["2012","1204001","33659","單一投影機共用於投影式儀錶及抬頭顯示器","1st Jan 70","$33,659","與廠商技術交流(揚明光學)。",""],["2012","1210029","36831","風力發電機","1st Jan 70","$36,831","高速公路",""],["2013","1306018",null,"車輛翻覆警示系統","1st Jan 70","$0","2013年ARTC於華創進行前瞻技術展示會",null],["2014","1405023","50865","座椅自動感應包覆機能仕樣","1st Jan 70","$50,865","2014協力會差異化提案","內容請詳閱附件。"]]}';
 		//echo $this->ssp->simple( $_GET, $sql_details, $table, $primaryKey, $columns);  // 物件方法名稱必須是小寫
 		//redirect("login");
 		//$this->output->set_content_type('application/json');
 		//$this->output->set_output(json_encode(SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )));
-		//echo json_encode(SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns ));
+		echo json_encode(SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns ));
 
 	}
+	
+	public function data()
+	{
+		$this->load->view('index');
+	}
+	
+	public function getTable()
+    {
+        /* Array of database columns which should be read and sent back to DataTables. Use a space where
+         * you want to insert a non-database field (for example a counter or static image)
+         */
+       // $aColumns = array('id', 'first_name', 'last_name');
+        $aColumns = array('id', 'idea_name', 'km_id', 'idea_source', 'idea_description', 'scenario_d', 'function_d', 'value_d');
+        // DB table to use
+        $sTable = 'project_all';
+        //
+    
+        $iDisplayStart = $this->input->get_post('iDisplayStart', true);
+        $iDisplayLength = $this->input->get_post('iDisplayLength', true);
+        $iSortCol_0 = $this->input->get_post('iSortCol_0', true);
+        $iSortingCols = $this->input->get_post('iSortingCols', true);
+        $sSearch = $this->input->get_post('sSearch', true);
+        $sEcho = $this->input->get_post('sEcho', true);
+    
+        // Paging
+        if(isset($iDisplayStart) && $iDisplayLength != '-1')
+        {
+            $this->db->limit($this->db->escape_str($iDisplayLength), $this->db->escape_str($iDisplayStart));
+        }
+        
+        // Ordering
+        if(isset($iSortCol_0))
+        {
+            for($i=0; $i<intval($iSortingCols); $i++)
+            {
+                $iSortCol = $this->input->get_post('iSortCol_'.$i, true);
+                $bSortable = $this->input->get_post('bSortable_'.intval($iSortCol), true);
+                $sSortDir = $this->input->get_post('sSortDir_'.$i, true);
+    
+                if($bSortable == 'true')
+                {
+                    $this->db->order_by($aColumns[intval($this->db->escape_str($iSortCol))], $this->db->escape_str($sSortDir));
+                }
+            }
+        }
+        
+        /* 
+         * Filtering
+         * NOTE this does not match the built-in DataTables filtering which does it
+         * word by word on any field. It's possible to do here, but concerned about efficiency
+         * on very large tables, and MySQL's regex functionality is very limited
+         */
+        if(isset($sSearch) && !empty($sSearch))
+        {
+            for($i=0; $i<count($aColumns); $i++)
+            {
+                $bSearchable = $this->input->get_post('bSearchable_'.$i, true);
+                
+                // Individual column filtering
+                if(isset($bSearchable) && $bSearchable == 'true')
+                {
+                    $this->db->or_like($aColumns[$i], $this->db->escape_like_str($sSearch));
+                }
+            }
+        }
+        
+        // Select Data
+        $this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $aColumns)), false);
+        $rResult = $this->db->get($sTable);
+    
+        // Data set length after filtering
+        $this->db->select('FOUND_ROWS() AS found_rows');
+        $iFilteredTotal = $this->db->get()->row()->found_rows;
+    
+        // Total data set length
+        $iTotal = $this->db->count_all($sTable);
+    
+        // Output
+        $output = array(
+            'sEcho' => intval($sEcho),
+            'iTotalRecords' => $iTotal,
+            'iTotalDisplayRecords' => $iFilteredTotal,
+            'aaData' => array()
+        );
+		
+		/*$output = array(
+            'draw' => intval($sEcho),
+            'recordsTotal' => $iTotal,
+            'recordsFiltered' => $iFilteredTotal,
+            'data' => array()
+        );*/
+        
+        foreach($rResult->result_array() as $aRow)
+        {
+            $row = array();
+            
+            foreach($aColumns as $col)
+            {
+                $row[] = $aRow[$col];
+            }
+    
+            $output['aaData'][] = $row;
+        }
+    
+        echo json_encode($output);
+    }
+	
+	public function getTable2()
+	{
+		echo '{"draw": 1,"recordsTotal": 57,"recordsFiltered": 57,"data": [
+    {"name": "Tiger Nixon","position": "System Architect","salary": "$320,800","start_date": "2011/04/25",
+      "office": "Edinburgh","extn": "5421"},{"name": "Garrett Winters","position": "Accountant",
+      "salary": "$170,750",
+      "start_date": "2011/07/25",
+      "office": "Tokyo",
+      "extn": "8422"
+    },
+    {
+      "name": "Ashton Cox",
+      "position": "Junior Technical Author",
+      "salary": "$86,000",
+      "start_date": "2009/01/12",
+      "office": "San Francisco",
+      "extn": "1562"
+    },
+    {
+      "name": "Cedric Kelly",
+      "position": "Senior Javascript Developer",
+      "salary": "$433,060",
+      "start_date": "2012/03/29",
+      "office": "Edinburgh",
+      "extn": "6224"
+    },
+    {
+      "name": "Airi Satou",
+      "position": "Accountant",
+      "salary": "$162,700",
+      "start_date": "2008/11/28",
+      "office": "Tokyo",
+      "extn": "5407"
+    },
+    {
+      "name": "Brielle Williamson",
+      "position": "Integration Specialist",
+      "salary": "$372,000",
+      "start_date": "2012/12/02",
+      "office": "New York",
+      "extn": "4804"
+    },
+    {
+      "name": "Herrod Chandler",
+      "position": "Sales Assistant",
+      "salary": "$137,500",
+      "start_date": "2012/08/06",
+      "office": "San Francisco",
+      "extn": "9608"
+    },
+    {
+      "name": "Rhona Davidson",
+      "position": "Integration Specialist",
+      "salary": "$327,900",
+      "start_date": "2010/10/14",
+      "office": "Tokyo",
+      "extn": "6200"
+    },
+    {
+      "name": "Colleen Hurst",
+      "position": "Javascript Developer",
+      "salary": "$205,500",
+      "start_date": "2009/09/15",
+      "office": "San Francisco",
+      "extn": "2360"
+    },
+    {
+      "name": "Sonya Frost",
+      "position": "Software Engineer",
+      "salary": "$103,600",
+      "start_date": "2008/12/13",
+      "office": "Edinburgh",
+      "extn": "1667"
+    }
+  ]
+}';
+	}
+	
+	public function getTable1()
+    {
+        /* Array of database columns which should be read and sent back to DataTables. Use a space where
+         * you want to insert a non-database field (for example a counter or static image)
+         */
+       // $aColumns = array('id', 'first_name', 'last_name');
+        $aColumns = array('id', 'idea_name', 'km_id', 'idea_source', 'idea_description', 'scenario_d', 'function_d', 'value_d');
+        // DB table to use
+        $sTable = 'project_all';
+        //
+    
+        $iDisplayStart = $this->input->get_post('start', true);
+        $iDisplayLength = $this->input->get_post('length', true);
+        $iSortCol_0 = $this->input->get_post('iSortCol_0', true);
+        $iSortingCols = $this->input->get_post('iSortingCols', true);
+        $sSearch = $this->input->get_post('sSearch', true);
+        $sEcho = $this->input->get_post('sEcho', true);
+    
+        // Paging
+        if(isset($iDisplayStart) && $iDisplayLength != '-1')
+        {
+            $this->db->limit($this->db->escape_str($iDisplayLength), $this->db->escape_str($iDisplayStart));
+        }
+        
+        // Ordering
+        if(isset($iSortCol_0))
+        {
+            for($i=0; $i<intval($iSortingCols); $i++)
+            {
+                $iSortCol = $this->input->get_post('iSortCol_'.$i, true);
+                $bSortable = $this->input->get_post('bSortable_'.intval($iSortCol), true);
+                $sSortDir = $this->input->get_post('sSortDir_'.$i, true);
+    
+                if($bSortable == 'true')
+                {
+                    $this->db->order_by($aColumns[intval($this->db->escape_str($iSortCol))], $this->db->escape_str($sSortDir));
+                }
+            }
+        }
+        
+        /* 
+         * Filtering
+         * NOTE this does not match the built-in DataTables filtering which does it
+         * word by word on any field. It's possible to do here, but concerned about efficiency
+         * on very large tables, and MySQL's regex functionality is very limited
+         */
+        if(isset($sSearch) && !empty($sSearch))
+        {
+            for($i=0; $i<count($aColumns); $i++)
+            {
+                $bSearchable = $this->input->get_post('bSearchable_'.$i, true);
+                
+                // Individual column filtering
+                if(isset($bSearchable) && $bSearchable == 'true')
+                {
+                    $this->db->or_like($aColumns[$i], $this->db->escape_like_str($sSearch));
+                }
+            }
+        }
+        
+        // Select Data
+        $this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $aColumns)), false);
+        $rResult = $this->db->get($sTable);
+    
+        // Data set length after filtering
+        $this->db->select('FOUND_ROWS() AS found_rows');
+        $iFilteredTotal = $this->db->get()->row()->found_rows;
+    
+        // Total data set length
+        $iTotal = $this->db->count_all($sTable);
+    
+        // Output
+        $output = array(
+            'sEcho' => intval($sEcho),
+            'iTotalRecords' => $iTotal,
+            'iTotalDisplayRecords' => $iFilteredTotal,
+            'aaData' => array()
+        );
+		
+		/*$output = array(
+            'draw' => intval($sEcho),
+            'recordsTotal' => $iTotal,
+            'recordsFiltered' => $iFilteredTotal,
+            'data' => array()
+        );*/
+        
+        foreach($rResult->result_array() as $aRow)
+        {
+            $row = array();
+            
+            foreach($aColumns as $col)
+            {
+                $row[] = $aRow[$col];
+            }
+    
+            $output['aaData'][] = $row;
+        }
+    
+        echo json_encode($output);
+    }
+	
+	public function get_data()
+    {
+        /* Array of database columns which should be read and sent back to DataTables. Use a space where
+         * you want to insert a non-database field (for example a counter or static image)
+         */
+       // $aColumns = array('id', 'first_name', 'last_name');
+        $aColumns = array('id', 'idea_name', 'km_id', 'idea_source', 'idea_description', 'scenario_d', 'function_d', 'value_d');
+        // DB table to use
+        $sTable = 'project_all';
+        //
+    
+        $iDisplayStart = $this->input->get_post('iDisplayStart', true);
+        $iDisplayLength = $this->input->get_post('iDisplayLength', true);
+        $iSortCol_0 = $this->input->get_post('iSortCol_0', true);
+        $iSortingCols = $this->input->get_post('iSortingCols', true);
+        $sSearch = $this->input->get_post('sSearch', true);
+        $sEcho = $this->input->get_post('sEcho', true);
+    
+        // Paging
+        if(isset($iDisplayStart) && $iDisplayLength != '-1')
+        {
+            $this->db->limit($this->db->escape_str($iDisplayLength), $this->db->escape_str($iDisplayStart));
+        }
+        
+        // Ordering
+        if(isset($iSortCol_0))
+        {
+            for($i=0; $i<intval($iSortingCols); $i++)
+            {
+                $iSortCol = $this->input->get_post('iSortCol_'.$i, true);
+                $bSortable = $this->input->get_post('bSortable_'.intval($iSortCol), true);
+                $sSortDir = $this->input->get_post('sSortDir_'.$i, true);
+    
+                if($bSortable == 'true')
+                {
+                    $this->db->order_by($aColumns[intval($this->db->escape_str($iSortCol))], $this->db->escape_str($sSortDir));
+                }
+            }
+        }
+        
+        /* 
+         * Filtering
+         * NOTE this does not match the built-in DataTables filtering which does it
+         * word by word on any field. It's possible to do here, but concerned about efficiency
+         * on very large tables, and MySQL's regex functionality is very limited
+         */
+        if(isset($sSearch) && !empty($sSearch))
+        {
+            for($i=0; $i<count($aColumns); $i++)
+            {
+                $bSearchable = $this->input->get_post('bSearchable_'.$i, true);
+                
+                // Individual column filtering
+                if(isset($bSearchable) && $bSearchable == 'true')
+                {
+                    $this->db->or_like($aColumns[$i], $this->db->escape_like_str($sSearch));
+                }
+            }
+        }
+        
+        // Select Data
+        $this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $aColumns)), false);
+        $rResult = $this->db->get($sTable);
+    
+        // Data set length after filtering
+        $this->db->select('FOUND_ROWS() AS found_rows');
+        $iFilteredTotal = $this->db->get()->row()->found_rows;
+    
+        // Total data set length
+        $iTotal = $this->db->count_all($sTable);
+    
+        // Output
+        /*$output = array(
+            'sEcho' => intval($sEcho),
+            'iTotalRecords' => $iTotal,
+            'iTotalDisplayRecords' => $iFilteredTotal,
+            'aaData' => array()
+        );*/
+		
+		$output = array(
+            'draw' => intval($sEcho),
+            'recordsTotal' => $iTotal,
+            'recordsFiltered' => $iFilteredTotal,
+            'data' => array()
+        );
+        
+        foreach($rResult->result_array() as $aRow)
+        {
+            $row = array();
+            
+            foreach($aColumns as $col)
+            {
+                $row[] = $aRow[$col];
+            }
+    
+            $output['data'][] = $row;
+        }
+    
+        //echo json_encode($output);
+		
+    }
 	
 	public function aa()
 	{

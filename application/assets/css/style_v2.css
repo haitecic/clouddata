@@ -310,7 +310,7 @@ a.show-sidebar:hover {
   position: relative;
   border: 1px solid #ccc;
   background: transparent;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 .full-content .box {
   border: 0;
@@ -2250,3 +2250,26 @@ border-radius: 50%;}
     display: none;
   }
 }
+
+
+thead th{
+	border-right-width: 1px; 
+	border-right-style: solid; 
+	border-right-color: rgb(204, 204, 204);
+}
+
+td{
+	border-right-width: 1px; 
+	border-right-style: solid; 
+	border-right-color: rgb(204, 204, 204);
+}
+
+.dataTables_length{
+	position:relative;
+	left:1155px;
+	top:0px;
+	text-align:right;
+	padding-bottom:10px;
+	font-size:11pt;
+}
+
