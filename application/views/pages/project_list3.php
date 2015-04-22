@@ -1,419 +1,329 @@
 <!--註:相關檔案js/devoops.js中的TestTable2-->
 <!--Start Container-->
 <div id="main" class="container-fluid" style="font-color:#635F5F;font-family: Adobe 繁黑體 Std"><!--8E8D93-->
-	<div class="row">
-		<!--Start Content-->
-		<div id="content" class="col-xs-12 col-sm-12">
-			<div id="about">
-				<div class="about-inner">
-					<h4 class="page-header">Open-source admin theme for you</h4>
-					<p>DevOOPS team</p>
-					<p>Homepage - <a href="http://devoops.me" target="_blank">http://devoops.me</a></p>
-					<p>Email - <a href="mailto:devoopsme@gmail.com">devoopsme@gmail.com</a></p>
-					<p>Twitter - <a href="http://twitter.com/devoopsme" target="_blank">http://twitter.com/devoopsme</a></p>
-					<p>Donate - BTC 123Ci1ZFK5V7gyLsyVU36yPNWSB5TDqKn3</p>
+	<!--Start Content-->
+	<div id="content" class="col-xs-12 col-sm-12">		
+		<!--資料表-->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<div class="box-name">
+							<i class="fa fa-linux"></i>
+							<span>專案資料表</span>
+						</div>
+						<div class="box-icons">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+						</div>
+						<div class="no-move"></div>				
+					</div>	
+					<div class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;" >
+						<div class="btn btn-primary qq-upload-button" style="width: auto;text-align:right;float:left;margin-left:50px;"><!--;right:575-->
+							<!--<div id="sub_button" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i> 資料送出</div>-->
+							<div id="create_project_button" onclick="create_project()" style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>+ 新增專案</div>
+						</div>
+						<div id="opener" class="btn btn-primary qq-upload-button" style="width: auto;text-align:right;float:left;margin-left:10px;">
+							<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
+						</div>				
+						<div id="hidden_window" title="瀏覽項目">
+							<form action="project/adjust_item" method="post" onsubmit="return validate()">
+								<input id="adjust_searchbar" type="hidden" name="searchbar">				
+								<h4 class="page-header">欄位列表</h4>
+								<?php 
+								//$title_array陣列存放select調整欄位選單的名稱
+								$title_array = array('0' => '欄位', '1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六');
+								$titlename_array = array('0' => 'first', '1' => 'second', '2' => 'third', '3' => 'fourth', '4' => 'fifth', '5' => 'sixth', '6' => 'seventh');
+								//$item_array存放列表上有顯示的欄位
+								$item_array = array('0' => 'first_item', '1' => 'second_item', '2' => 'third_item', '3' => 'fourth_item', '4' => 'fifth_item', '5' => 'sixth_item', '6' => 'seventh_item');
+								//印出六個欄位選單
+								?>
+								<select id="col_0" name="first" style="display:none">
+									<option value="idea_name" selected></option>
+								</select>
+								<?php
+								for ($i=1; $i<=6; $i++)
+								{					
+									echo $title_array[$i];
+									$all_item[$i]=$this->session->userdata($item_array[$i]);  //取得該欄位目前顯示的欄位名稱
+								?>
+								<select id="col_<?php echo $i;?>" name="<?php echo $titlename_array[$i];?>">
+									<option value="null" <?php if($all_item[$i] == "null"){ echo " selected";} ?>>無</option>
+									<option value="year" <?php if($all_item[$i] == "year"){ echo " selected";} ?>>年分</option>
+									<option value="km_id" <?php if($all_item[$i] == "km_id"){ echo " selected";} ?> >KM文件編號</option>
+									<option value="idea_id" <?php if($all_item[$i] == "idea_id"){ echo " selected";} ?> >創意提案編號</option>
+									<option value="idea_name" <?php if($all_item[$i] == "idea_name"){ echo " selected";} ?> >創意提案名稱</option>
+									<option value="idea_source" <?php if($all_item[$i] == "idea_source"){ echo " selected";} ?> >創意提案來源</option>
+									<option value="scenario_d" <?php if($all_item[$i] == "scenario_d"){ echo " selected";} ?> >情境說明</option>
+									<option value="function_d" <?php if($all_item[$i] == "function_d"){ echo " selected";} ?> >功能構想</option>
+									<option value="distinction_d" <?php if($all_item[$i] == "distinction_d"){ echo " selected";} ?> >差異化</option>
+									<option value="value_d" <?php if($all_item[$i] == "value_d"){ echo " selected";} ?> >價值性</option>
+									<option value="feasibility_d" <?php if($all_item[$i] == "feasibility_d"){ echo " selected";} ?> >可行性</option>
+									<option value="market_survey" <?php if($all_item[$i] == "market_survey"){ echo " selected";} ?> >市場搜尋</option>
+									<option value="km_survey" <?php if($all_item[$i] == "km_survey"){ echo " selected";} ?> >KM平台搜尋</option>
+									<option value="dep_item" <?php if($all_item[$i] == "dep_item"){ echo " selected";} ?> >研發項目確認</option>
+									<option value="idea_description" <?php if($all_item[$i] == "idea_description"){ echo " selected";} ?> >提案說明</option>
+									<option value="inner_or_outer" <?php if($all_item[$i] == "inner_or_outer"){ echo " selected";} ?> >提案類別</option>
+									<option value="stage" <?php if($all_item[$i] == "stage"){ echo " selected";} ?> >階段狀態</option>
+									<option value="stage_detail" <?php if($all_item[$i] == "stage_detail"){ echo " selected";} ?> >階段細項狀態</option>
+									<option value="progress_description" <?php if($all_item[$i] == "progress_description"){ echo " selected";} ?> >進度說明</option>
+									<option value="proposed_unit" <?php if($all_item[$i] == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
+									<option value="proposer" <?php if($all_item[$i] == "proposer"){ echo " selected";} ?> >提案人</option>
+									<option value="proposed_date" <?php if($all_item[$i] == "proposed_date"){ echo " selected";} ?> >提案日期</option>
+									<option value="valid_project" <?php if($all_item[$i] == "valid_project"){ echo " selected";} ?> >有效提案</option>
+									<option value="established_date" <?php if($all_item[$i] == "established_date"){ echo " selected";} ?> >立案日期</option>
+									<option value="joint_unit" <?php if($all_item[$i] == "joint_unit"){ echo " selected";} ?> >協辦單位</option>
+									<option value="joint_person" <?php if($all_item[$i] == "joint_person"){ echo " selected";} ?> >協辦窗口</option>
+									<option value="co_worker" <?php if($all_item[$i] == "co_worker"){ echo " selected";} ?> >承作廠商</option>
+									<option value="idea_examination" <?php if($all_item[$i] == "idea_examination"){ echo " selected";} ?> >提案審核進度</option>
+									<option value="Idea" <?php if($all_item[$i] == "Idea"){ echo " selected";} ?> >Idea</option>
+									<option value="Requirement" <?php if($all_item[$i] == "Requirement"){ echo " selected";} ?> >Requirement</option>
+									<option value="Feasibility" <?php if($all_item[$i] == "Feasibility"){ echo " selected";} ?> >Feasibility</option>
+									<option value="Prototype" <?php if($all_item[$i] == "Prototype"){ echo " selected";} ?> >Prototype</option>
+									<option value="note" <?php if($all_item[$i] == "note"){ echo " selected";} ?> >備註</option>
+									<option value="adoption" <?php if($all_item[$i] == "adoption"){ echo " selected";} ?> >導入車型</option>
+									<option value="applied_patent" <?php if($all_item[$i] == "applied_patent"){ echo " selected";} ?> >專利申請</option>
+									<option value="resurrection_application_qualified" <?php if($all_item[$i] == "resurrection_application_qualified"){ echo " selected";} ?> >具敗部復活申請資格</option>
+									<option value="resurrection_applied" <?php if($all_item[$i] == "resurrection_applied"){ echo " selected";} ?> >申請敗部復活</option>
+									<option value="PM_in_charge" <?php if($all_item[$i] == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
+									<option value="closed_case" <?php if($all_item[$i] == "closed_case"){ echo " selected";} ?> >結案</option>
+								</select>
+								<br/>
+								<?php
+								}
+								?>
+								<br/>
+								<input type="button"  value="確定" onclick="convey()">
+							</form>		
+						</div>
+						<table class="display table table-bordered table-striped table-heading table-datatable" style="width:99%;margin-left:6px;margin-right:6px;border:#BBBBBB 1px solid;font-family:微軟正黑體;margin-top:-50px" id="datatable-2">
+							<thead>								
+								<?php
+								$all_item[0]=$this->session->userdata('first_item');
+								$all_item[1]=$this->session->userdata('second_item');
+								$all_item[2]=$this->session->userdata('third_item');
+								$all_item[3]=$this->session->userdata('fourth_item');
+								$all_item[4]=$this->session->userdata('fifth_item');
+								$all_item[5]=$this->session->userdata('sixth_item');
+								$all_item[6]=$this->session->userdata('seventh_item');
+								for($i=0; $i<=6; $i++)
+								{
+									switch($all_item[$i])
+									{
+										case "year":
+											$all_item[$i]="年份";
+											break;
+										case "idea_id":
+											$all_item[$i]='編號';
+											break;
+										case "km_id":
+											$all_item[$i]='km文件編號';
+											break;
+										case "idea_name":
+											$all_item[$i]='創意提案名稱';
+											break;
+										case "idea_source":
+											$all_item[$i]='創意提案來源';
+											break;
+										case "scenario_d":
+											$all_item[$i]='情境說明';
+											break;
+										case "function_d":
+											$all_item[$i]='功能架構';
+											break;
+										case "distinction_d":
+											$all_item[$i]='差異化';
+											break;
+										case "value_d":
+											$all_item[$i]='價值性';
+											break;
+										case "feasibility_d":
+											$all_item[$i]='可行性';
+											break;
+										case "market_survey":
+											$all_item[$i]='市場搜尋';
+											break;
+										case "km_survey":
+											$all_item[$i]='km平台搜尋';
+											break;
+										case "dep_item":
+											$all_item[$i]='研發項目確認';
+											break;										
+											case "idea_description":
+											$all_item[$i]='提案說明';
+											break;	
+										case "inner_or_outer":
+											$all_item[$i]='提案類別';
+											break;
+										case "stage":
+											$all_item[$i]='階段狀態';
+											break;
+										case "stage_detail":
+											$all_item[$i]='階段細項狀態';
+											break;
+										case "progress_description":
+											$all_item[$i]='進度說明';
+											break;
+										case "proposed_unit":
+											$all_item[$i]='提案單位';
+											break;
+										case "proposer":
+											$all_item[$i]='提案人';
+											break;
+										case "proposed_date":
+											$all_item[$i]='提案日期';
+											break;
+										case "valid_project":
+											$all_item[$i]='有效提案';
+											break;
+										case "established_date":
+											$all_item[$i]='立案日期';
+											break;
+										case "joint_unit":
+											$all_item[$i]='協辦單位';
+											break;		
+										case "joint_person":
+											$all_item[$i]='協辦窗口';
+											break;
+										case "co_worker":
+											$all_item[$i]='承作廠商';
+											break;
+										case "idea_examination":
+											$all_item[$i]='提案審核進度';
+											break;
+										case "Idea":
+											$all_item[$i]='IDC';
+											break;
+										case "Requirement":
+											$all_item[$i]='RSD';
+											break;
+										case "Feasibility":
+											$all_item[$i]='FSC';
+											break;
+										case "Prototype":
+											$all_item[$i]='PMA';
+											break;	
+										case "note":
+											$all_item[$i]='備註';
+											break;	
+										case "adoption":
+											$all_item[$i]='導入車型';
+											break;			
+										case "applied_patent":
+											$all_item[$i]='專利申請';
+											break;	
+										case "resurrection_application_qualified":
+											$all_item[$i]='具敗部復活申請資格';
+											break;
+										case "resurrection_applied":
+											$all_item[$i]='申請敗部復活';
+											break;	
+										case "PM_in_charge":
+											$all_item[$i]='創意中心窗口';
+											break;
+										case "closed_case":
+											$all_item[$i]='結案';
+											break;							
+										default:
+											break;
+									}
+								}	
+								?>
+								<tr>
+									<th id="a" style="border:#D2D2D2 1px solid;width:20px;background:#FBFBF0"></th>
+									<?php
+									if($this->session->userdata('first_item') != "null")
+									{
+									?>
+										<th style="min-width:250px;border:#D2D2D2 1px solid;">創意提案名稱</th>
+									<?php
+									}
+									if($this->session->userdata('second_item') != "null")
+									{
+									?>
+										<th style="border:#D2D2D2 1px solid;"><?php echo $all_item[1] ?></th>
+									<?php
+									}
+									if($this->session->userdata('third_item') != "null")
+									{
+									?>
+										<th style="border:#D2D2D2 1px solid;"><?php echo $all_item[2] ?></th>
+									<?php
+									}
+									if($this->session->userdata('fourth_item') != "null")
+									{
+									?>
+										<th style="border:#D2D2D2 1px solid;"><?php echo $all_item[3] ?></th>
+									<?php
+									}
+									if($this->session->userdata('fifth_item') != "null")
+									{
+									?>
+										<th style="border:#D2D2D2 1px solid;"><?php echo $all_item[4] ?></th>
+									<?php
+									}
+									if($this->session->userdata('sixth_item') != "null")
+									{
+									?>
+										<th style="border:#D2D2D2 1px solid;"><?php echo $all_item[5] ?></th>
+									<?php
+									}
+									if($this->session->userdata('seventh_item') != "null")
+									{
+									?>
+										<th style="border:#D2D2D2 1px solid;"><?php echo $all_item[6] ?></th>
+									<?php
+									}
+									?>
+								</tr>
+								<tr>
+									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_project_name" value="filter..." class="search_init" /></label></th>
+									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_project_name" value="filter..." class="search_init" /></label></th>
+									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_year" value="filter..." class="search_init" /></label></th>
+									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_haitec_unit" value="filter..." class="search_init" /></label></th>
+									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_outer_unit" value="filter..." class="search_init" /></label></th>
+									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_pm" value="filter..." class="search_init" /></label></th>
+									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_car_model_estimate" value="filter..." class="search_init" /></label></th>
+									<th style="border:#D2D2D2 1px solid;"><label><input type="text" name="search_exhibition" value="filter..." class="search_init" /></label></th>
+								</tr>
+							</thead>								
+						</table>					
+					<!--<div style="新細明體">
+						<table id="example" class="display" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>First_name</th>
+									<th>Last name</th>
+									<th>Position</th>
+									<th>Office</th>
+									<th>Start date</th>
+									<th>Salary</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>First name</th>
+									<th>Last name</th>
+									<th>Position</th>
+									<th>Office</th>
+									<th>Start date</th>
+									<th>Salary</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>-->
 				</div>
-			</div>
-			<div class="preloader">
-				<img src="img/devoops_getdata.gif" class="devoops-getdata" alt="preloader"/>
-			</div>
-			<!--start<div id="ajax-content"></div>-->
-			<div class="col-xs-12 col-sm-12"></div><!-- style="background-color:#ffffff; height:10px; -->
-			<!--資料表-->
-	<div class="row">
-		<div class="col-xs-12">
-			<div class="box" style="border:0px">
-				<!--<div class="box-header">
-					<div class="box-name">
-						<i class="fa fa-linux"></i>
-						<span>專案資料表</span>
-					</div>
-					<div class="box-icons">
-						<a class="collapse-link">
-							<i class="fa fa-chevron-up"></i>
-						</a>
-						<a class="expand-link">
-							<i class="fa fa-expand"></i>
-						</a>
-						<a class="close-link">
-							<i class="fa fa-times"></i>
-						</a>
-					</div>
-					<div class="no-move"></div>				
-				</div>
-				-->
-				<div style="float:left;margin-left:15px;font-size:22pt;margin-top:20px;font-family:新細明體"><!--;right:575-->
-					專案資料
-				</div>				
-				<div class="btn btn-primary qq-upload-button" style="width: auto;text-align:right;float:left;margin-left:50px;"><!--;right:575-->
-					<!--<div id="sub_button" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i> 資料送出</div>-->
-					<div id="create_project_button" onclick="create_project()" style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>+ 新增專案</div>
-				</div>
-			    <div id="opener" class="btn btn-primary qq-upload-button" style="width: auto;text-align:right;float:left;margin-left:10px;">
-			    <div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
-				</div>				
-        <div id="hidden_window" title="瀏覽項目">
-		        <form action="project/adjust_item" method="post" onsubmit="return validate()">
-		        <input id="adjust_searchbar" type="hidden" name="searchbar">				
-				<h4 class="page-header">欄位列表</h4>
-				<?php 
-				//$title_array陣列存放select調整欄位選單的名稱
-				$title_array = array('0' => '欄位', '1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六');
-				$titlename_array = array('0' => 'first', '1' => 'second', '2' => 'third', '3' => 'fourth', '4' => 'fifth', '5' => 'sixth', '6' => 'seventh');
-				//$item_array存放列表上有顯示的欄位
-				$item_array = array('0' => 'first_item', '1' => 'second_item', '2' => 'third_item', '3' => 'fourth_item', '4' => 'fifth_item', '5' => 'sixth_item', '6' => 'seventh_item');
-				?>
-				<!--<label for="first_col">第一欄</label>
-				<select disabled id="first_col" name="first">
-					<option value="idea_id">創意提案名稱</option>
-				</select>-->
-				<?php
-				//印出六個欄位選單
-				for ($i=1; $i<=6; $i++)
-				{					
-                    echo $title_array[$i];
-					$all_item[$i]=$this->session->userdata($item_array[$i]);  //取得該欄位目前顯示的欄位名稱
-				?>
-					<select id="col_<?php echo $i;?>" name="<?php echo $titlename_array[$i];?>">
-						<option value="null" <?php if($all_item[$i] == "null"){ echo " selected";} ?>>無</option>
-						<option value="year" <?php if($all_item[$i] == "year"){ echo " selected";} ?>>年分</option>
-						<option value="km_id" <?php if($all_item[$i] == "km_id"){ echo " selected";} ?> >KM文件編號</option>
-						<option value="idea_id" <?php if($all_item[$i] == "idea_id"){ echo " selected";} ?> >創意提案編號</option>
-						<option value="idea_name" <?php if($all_item[$i] == "idea_name"){ echo " selected";} ?> >創意提案名稱</option>
-						<option value="idea_source" <?php if($all_item[$i] == "idea_source"){ echo " selected";} ?> >創意提案來源</option>
-						<option value="scenario_d" <?php if($all_item[$i] == "scenario_d"){ echo " selected";} ?> >情境說明</option>
-						<option value="function_d" <?php if($all_item[$i] == "function_d"){ echo " selected";} ?> >功能構想</option>
-						<option value="distinction_d" <?php if($all_item[$i] == "distinction_d"){ echo " selected";} ?> >差異化</option>
-						<option value="value_d" <?php if($all_item[$i] == "value_d"){ echo " selected";} ?> >價值性</option>
-						<option value="feasibility_d" <?php if($all_item[$i] == "feasibility_d"){ echo " selected";} ?> >可行性</option>
-						<option value="market_survey" <?php if($all_item[$i] == "market_survey"){ echo " selected";} ?> >市場搜尋</option>
-						<option value="km_survey" <?php if($all_item[$i] == "km_survey"){ echo " selected";} ?> >KM平台搜尋</option>
-						<option value="dep_item" <?php if($all_item[$i] == "dep_item"){ echo " selected";} ?> >研發項目確認</option>
-						<option value="idea_description" <?php if($all_item[$i] == "idea_description"){ echo " selected";} ?> >提案說明</option>
-						<option value="inner_or_outer" <?php if($all_item[$i] == "inner_or_outer"){ echo " selected";} ?> >提案類別</option>
-						<option value="stage" <?php if($all_item[$i] == "stage"){ echo " selected";} ?> >階段狀態</option>
-						<option value="stage_detail" <?php if($all_item[$i] == "stage_detail"){ echo " selected";} ?> >階段細項狀態</option>
-						<option value="progress_description" <?php if($all_item[$i] == "progress_description"){ echo " selected";} ?> >進度說明</option>
-						<option value="proposed_unit" <?php if($all_item[$i] == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
-						<option value="proposer" <?php if($all_item[$i] == "proposer"){ echo " selected";} ?> >提案人</option>
-						<option value="proposed_date" <?php if($all_item[$i] == "proposed_date"){ echo " selected";} ?> >提案日期</option>
-						<option value="valid_project" <?php if($all_item[$i] == "valid_project"){ echo " selected";} ?> >有效提案</option>
-						<option value="established_date" <?php if($all_item[$i] == "established_date"){ echo " selected";} ?> >立案日期</option>
-						<option value="joint_unit" <?php if($all_item[$i] == "joint_unit"){ echo " selected";} ?> >協辦單位</option>
-						<option value="joint_person" <?php if($all_item[$i] == "joint_person"){ echo " selected";} ?> >協辦窗口</option>
-						<option value="co_worker" <?php if($all_item[$i] == "co_worker"){ echo " selected";} ?> >承作廠商</option>
-						<option value="idea_examination" <?php if($all_item[$i] == "idea_examination"){ echo " selected";} ?> >提案審核進度</option>
-						<option value="Idea" <?php if($all_item[$i] == "Idea"){ echo " selected";} ?> >Idea</option>
-						<option value="Requirement" <?php if($all_item[$i] == "Requirement"){ echo " selected";} ?> >Requirement</option>
-						<option value="Feasibility" <?php if($all_item[$i] == "Feasibility"){ echo " selected";} ?> >Feasibility</option>
-						<option value="Prototype" <?php if($all_item[$i] == "Prototype"){ echo " selected";} ?> >Prototype</option>
-						<option value="note" <?php if($all_item[$i] == "note"){ echo " selected";} ?> >備註</option>
-						<option value="adoption" <?php if($all_item[$i] == "adoption"){ echo " selected";} ?> >導入車型</option>
-						<option value="applied_patent" <?php if($all_item[$i] == "applied_patent"){ echo " selected";} ?> >專利申請</option>
-						<option value="resurrection_application_qualified" <?php if($all_item[$i] == "resurrection_application_qualified"){ echo " selected";} ?> >具敗部復活申請資格</option>
-						<option value="resurrection_applied" <?php if($all_item[$i] == "resurrection_applied"){ echo " selected";} ?> >申請敗部復活</option>
-						<option value="PM_in_charge" <?php if($all_item[$i] == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
-						<option value="closed_case" <?php if($all_item[$i] == "closed_case"){ echo " selected";} ?> >結案</option>
-					</select>
-					<br/>
-				<?php
-				}
-				?>
-				<br/>
-				<input type="submit"  value="確定" onclick="convey()">
-			</form>		
-		</div>
-			<div class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;" >
-				<table class="table table-bordered table-striped table-hover table-heading table-datatable" style="border:#BBBBBB 1px solid;font-family:微軟正黑體" id="datatable-2">
-					<thead style="border:#BBBBBB 1px solid;">
-						<!---->
-						<?php
-						$all_item[0]=$this->session->userdata('first_item');
-						$all_item[1]=$this->session->userdata('second_item');
-						$all_item[2]=$this->session->userdata('third_item');
-						$all_item[3]=$this->session->userdata('fourth_item');
-						$all_item[4]=$this->session->userdata('fifth_item');
-						$all_item[6]=$this->session->userdata('seventh_item');
-						for($i=0; $i<=6; $i++)
-						{
-							switch($all_item[$i])
-							{
-								case "year":
-								     $all_item[$i]="年份";
-									 break;
-								case "idea_id":
-									$all_item[$i]='編號';
-									break;
-								case "km_id":
-									$all_item[$i]='km文件編號';
-									break;
-								case "idea_name":
-									$all_item[$i]='創意提案名稱';
-									break;
-								case "idea_source":
-									$all_item[$i]='創意提案來源';
-									break;
-								case "scenario_d":
-									$all_item[$i]='情境說明';
-									break;
-								case "function_d":
-									$all_item[$i]='功能架構';
-									break;
-								case "distinction_d":
-									$all_item[$i]='差異化';
-									break;
-								case "value_d":
-									$all_item[$i]='價值性';
-									break;
-								case "feasibility_d":
-									$all_item[$i]='可行性';
-									break;
-								case "market_survey":
-									$all_item[$i]='市場搜尋';
-									break;
-								case "km_survey":
-									$all_item[$i]='km平台搜尋';
-									break;
-								case "dep_item":
-									$all_item[$i]='研發項目確認';
-									break;										
-									case "idea_description":
-									$all_item[$i]='提案說明';
-									break;	
-								case "inner_or_outer":
-									$all_item[$i]='提案類別';
-									break;
-								case "stage":
-									$all_item[$i]='階段狀態';
-									break;
-								case "stage_detail":
-									$all_item[$i]='階段細項狀態';
-									break;
-								case "progress_description":
-									$all_item[$i]='進度說明';
-									break;
-								case "proposed_unit":
-									$all_item[$i]='提案單位';
-									break;
-								case "proposer":
-									$all_item[$i]='提案人';
-									break;
-								case "proposed_date":
-									$all_item[$i]='提案日期';
-									break;
-								case "valid_project":
-									$all_item[$i]='有效提案';
-									break;
-								case "established_date":
-									$all_item[$i]='立案日期';
-									break;
-								case "joint_unit":
-									$all_item[$i]='協辦單位';
-									break;		
-								case "joint_person":
-									$all_item[$i]='協辦窗口';
-									break;
-								case "co_worker":
-									$all_item[$i]='承作廠商';
-									break;
-								case "idea_examination":
-									$all_item[$i]='提案審核進度';
-									break;
-								case "Idea":
-									$all_item[$i]='IDC';
-									break;
-								case "Requirement":
-									$all_item[$i]='RSD';
-									break;
-								case "Feasibility":
-									$all_item[$i]='FSC';
-									break;
-								case "Prototype":
-									$all_item[$i]='PMA';
-									break;	
-								case "note":
-									$all_item[$i]='備註';
-									break;	
-								case "adoption":
-									$all_item[$i]='導入車型';
-									break;			
-								case "applied_patent":
-									$all_item[$i]='專利申請';
-									break;	
-								case "resurrection_application_qualified":
-									$all_item[$i]='具敗部復活申請資格';
-									break;
-								case "resurrection_applied":
-									$all_item[$i]='申請敗部復活';
-									break;	
-								case "PM_in_charge":
-									$all_item[$i]='創意中心窗口';
-									break;
-								case "closed_case":
-									$all_item[$i]='結案';
-									break;							
-								default:
-									break;
-							}
-						}
-						    
-							
-						?>
-							<tr>
-								<td id="a" style="width:20px;border:#BBBBBB 1px solid;background:#FBFBF0"></td>
-							    <!--<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[0] ?></td>-->
-								<?php
-								if($this->session->userdata('first_item') != "null")
-								{
-								?>
-									<td style="border:#BBBBBB 1px solid;min-width:250px">創意提案名稱</td>
-								<?php
-								}
-								if($this->session->userdata('second_item') != "null")
-								{
-								?>
-									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[1] ?></td>
-								<?php
-								}
-								if($this->session->userdata('third_item') != "null")
-								{
-								?>
-									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[2] ?></td>
-								<?php
-								}
-								if($this->session->userdata('fourth_item') != "null")
-								{
-								?>
-									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[3] ?></td>
-								<?php
-								}
-								if($this->session->userdata('fifth_item') != "null")
-								{
-								?>
-									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[4] ?></td>
-								<?php
-								}
-								if($this->session->userdata('sixth_item') != "null")
-								{
-								?>
-									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[5] ?></td>
-								<?php
-								}
-								if($this->session->userdata('seventh_item') != "null")
-								{
-								?>
-									<td style="border:#BBBBBB 1px solid;"><?php echo $all_item[6] ?></td>
-								<?php
-								}
-								?>
-							</tr>
-							<!--<tr>
-								<th style="border:#BBBBBB 1px solid;"><label></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_project_name" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_year" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_haitec_unit" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_outer_unit" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_pm" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_car_model_estimate" value="Filter..." class="search_init" /></label></th>
-								<th style="border:#BBBBBB 1px solid;"><label><input type="text" name="search_exhibition" value="Filter..." class="search_init" /></label></th>
-							</tr>-->
-						</thead>
-						<tbody>	
-						<?php
-						$i=0;
-						foreach($project_list as $project_data)
-						{	
-						?>		
-						<tr id="<?php echo "row_".$i?>" onmouseover="check_is_blocked(<?php echo $i;?>)">
-						<?php								
-							if($project_data['is_blocked']==1)
-							{
-								echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:30px;height:24px" type="image" src="'.$img_location.'/read6.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
-							}
-							else if($project_data['is_blocked']==2)
-							{
-								echo '<td style="text-align:center"><input id="row_img_'.$i.'" style="width:35px;height:25px" type="image" src="'.$img_location.'/edit3.png" alt="edit" name="Test" id="Test" onclick="edit('.$project_data['id'].');"/></td>';
-							}
-							if($this->session->userdata('first_item') != "null")
-							{
-								echo '<td>'.$project_data[$this->session->userdata('first_item')];
-								if($search != "")
-								{
-									$arr = array('year'=>"年分",'idea_id'=>"提案編號",'km_id'=>"文件編號",'idea_name'=>"創意提案名稱",'idea_source'=>"創意提案來源",'idea_description'=>"創意提案來源",'scenario_d'=>"情境說明",'function_d'=>"功能構想",'distinction_d'=>"差異化",'value_d'=>"價值性",'feasibility_d'=>"可行性",'market_survey'=>"市場搜尋",'km_survey'=>"km平台搜尋",'dep_item'=>"研發項目確認",'inner_or_outer'=>"提案類別",'stage'=>"階段狀態",'stage_detail'=>"階段細項狀態",'progress_description'=>"進度說明",'proposed_unit'=>"提案單位",'proposer'=>"提案人",'proposed_date'=>"提案日期",'valid_project'=>"有效提案",'established_date'=>"立案日期",'joint_unit'=>"協辦單位",'joint_person'=>"協辦窗口",'note'=>"備註", 'PM_in_charge'=>"創意中心窗口");
-									echo '<br/><span style="font-size:10pt;color:blue">'.$arr[$column[$i]].'：'.$key_sentence[$i].'</span>';  //.'('.$column[$i].')'
-								}
-								echo '</td>';
-							}
-							if($this->session->userdata('second_item') != "null")
-							{
-								echo '<td>'.$project_data[$this->session->userdata('second_item')].'</td>';
-							}
-							if($this->session->userdata('third_item') != "null")
-							{
-								echo '<td>'.$project_data[$this->session->userdata('third_item')].'</td>';
-							}
-							if($this->session->userdata('fourth_item') != "null")
-							{
-								echo '<td>'.$project_data[$this->session->userdata('fourth_item')].'</td>';
-							}
-							if($this->session->userdata('fifth_item') != "null")
-							{
-								echo '<td>'.$project_data[$this->session->userdata('fifth_item')].'</td>';
-							}
-							if($this->session->userdata('sixth_item') != "null")
-							{
-								echo '<td>'.$project_data[$this->session->userdata('sixth_item')].'</td>';
-							}
-							if($this->session->userdata('seventh_item') != "null")
-							{
-								echo '<td>'.$project_data[$this->session->userdata('seventh_item')].'</td>';
-							}
-							//echo '<td><a onclick="browse_file('. $project_data['id'].')">檔案數：'.$project_data['file_number'].'</a></td>';
-							/*foreach($number_file as $a)
-							{
-								if ($a['project_id']==$project_data['id'])
-								{
-									echo '<td><a onclick="browse_file('. $project_data['id'].')">檔案數：'.$a['file_number'].'</a></td>';
-								}  
-							}*/
-							?>
-							<input type="hidden" id="row_project_<?php echo $i;?>" value="<?php echo $project_data['id']?>"/>
-							</tr>
-						<?php
-							$i++;
-						}
-						?>
-						<!--<tr>
-							<td>專案主題1</td>
-							<td>2009</td>
-							<td>創意中心</td>
-							<td>鴻海集團</td>
-							<td>陳健發</td>
-							<td>是</td>
-							<td>是</td>
-							<td>是</td>
-						</tr>-->
-					</tbody>
-					<!--<tfoot>
-						<tr>
-							<th>Rate</th>
-							<th>Distro</th>
-							<th>Votes</th>
-							<th>Homepage</th>
-							<th>Version</th>
-							<th>Version</th>
-						</tr>
-					</tfoot>-->
-				</table>
 			</div>
 		</div>
 	</div>
+</div>	
 	<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">-->
 	<link rel="stylesheet" href="<?php echo $css_location.'/jquery_ui.css'; ?>">
-	<!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
-	<!--<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>-->
 	<div id="dialog" style="width:500px" title="Dialog Title"></div>
+	
 <script type="text/javascript">
+var oTable;  //table物件
 function validate()
 {
 	var i=1;
@@ -442,16 +352,130 @@ function edit(project_id)
 	//document.getElementById("link_"+id).click();
 	location.href="project_edit/"+project_id;
 }
-// Run Datables plugin and create 3 variants of settings
+//調整瀏覽的欄位項目
 function convey(){
-document.getElementById("adjust_searchbar").value=document.getElementById("search_bar").value;
+	document.getElementById("adjust_searchbar").value=document.getElementById("search_bar").value;
+	var i;
+	var col_arr = [];
+	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	{
+		col_arr[col_arr.length] = document.getElementById('col_' + i).value;
+	}	
+	var table = $('#datatable-2').DataTable();
+	//var start_record = oTable.fnPagingInfo().iPage;  //取得之前使用者瀏覽的分頁頁數
+	var start_record = oTable.fnPagingInfo().iStart;
+	table.destroy();  //DataTables provides a destroy() method to destroy an old table, so you would be able to initialise a new one in its place. 
+	LoadDataTablesScripts(reloadTable(col_arr, start_record));
 }
 
+/**
+reloadTable
+arr:the column to be displayed.
+start_record:the start record of the new page
+*/
+
+function reloadTable(arr, start_record)
+{	
+	var postData = {"column1":arr[0],"column2":arr[1],"column3":arr[2],"column4":arr[3],
+					"column5":arr[4],"column6":arr[5],"column7":arr[6],"column8":arr[6]};
+	var URLs='http://127.0.0.1/project_management/datatable_server_processing.php';
+	oTable = $('#datatable-2').dataTable( {
+		aaSorting: [[ 0, "asc" ]],
+		serverSide: true,
+		bSortCellsTop: true,	//若thead中有2個列，設定排序按鈕要放置在哪個列		
+		bFilter: false, 
+		displayStart: start_record,
+		bInfo: false,
+		ajax:{
+			url: URLs,
+			data:{			 //The data to send(will be converted to a query string)
+				myData:postData
+			},
+			type:'POST',
+			async:false
+			/*success:function(json){ 				
+				//var jsonString = JSON.stringify(json);  //將json物件轉成字串
+				//document.write(jsonString);
+				//$("<h1>").text(json.title).appendTo("body");
+				//$("<div class=\"content\">").html(json.html).appendTo("body");
+			}	*/		
+		}
+	});	
+	/*var header_inputs = $("#datatable-2 thead input");  //destroy後, 再reload input會抓不到
+	header_inputs.on('keyup', function(){
+		// Filter on the column (the index) of this element 
+		oTable.fnFilter( this.value, header_inputs.index(this) );
+	})	
+	.on('focus', function(){
+		if ( this.className == "search_init" ){
+			this.className = "";
+			this.value = "";
+		}
+	})
+	.on('blur', function (i) {
+		if ( this.value == "" ){
+			this.className = "search_init";
+			this.value = asInitVals[header_inputs.index(this)];
+		}
+	});	
+	header_inputs.each( function (i) {
+		asInitVals[i] = this.value;
+	});
+	//$(".dataTables_length select").addClass("select2-offscreen");
+	//BTable.fnPageChange(2,true);*/
+}
+
+function TestTable2(){
+	var col_arr = [];
+	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	{
+		col_arr[col_arr.length] = document.getElementById('col_' + i).value;
+	}	
+	var postData = {"column1":col_arr[0],"column2":col_arr[1],"column3":col_arr[2],"column4":col_arr[3],
+					"column5":col_arr[4],"column6":col_arr[5],"column7":col_arr[6],"column8":col_arr[6]};
+	
+	var asInitVals = [];
+	var URLs='http://127.0.0.1/project_management/datatable_server_processing.php';
+	//var URLs='http://127.0.0.1/project_management/project/data_processing';
+	oTable = $('#datatable-2').dataTable( {
+		aaSorting: [[ 0, "asc" ]],
+		serverSide: true,
+		bSortCellsTop: true,	//若thead中有2個列，設定排序按鈕要放置在哪個列	
+		ajax:{
+			url: URLs,
+			type:'POST',
+			data:{			 //The data to send(will be converted to a query string)
+				myData:postData
+			}
+		}
+	});
+	var header_inputs = $("#datatable-2 thead input");
+	header_inputs.on('keyup', function(){
+		// Filter on the column (the index) of this element 
+		oTable.fnFilter( this.value, header_inputs.index(this) );
+	})
+	.on('focus', function(){
+		if ( this.className == "search_init" ){
+			this.className = "";
+			this.value = "";
+		}
+	})
+	.on('blur', function (i) {
+		if ( this.value == "" ){
+			this.className = "search_init";
+			this.value = asInitVals[header_inputs.index(this)];
+		}
+	});
+	header_inputs.each( function (i) {
+		asInitVals[i] = this.value;
+	});
+}
 
 function AllTables(){
-	TestTable1();
+	//TestTable1();
+	//load_table();
 	TestTable2();
-	TestTable3();
+	//TestTable3();
 	LoadSelect2Script(MakeSelect2);
 	$('#datatable-2_filter').hide();
 }
@@ -461,9 +485,10 @@ function MakeSelect2(){
 		$(this).find('label input[type=text]').attr('placeholder', 'Search');
 	});
 }
-$(document).ready(function() {
-	// Load Datatables and run plugin on tables 
+$(document).ready(function() {	
+	// Load Datatables and run plugin on tables 	
 	LoadDataTablesScripts(AllTables);
+
 	// Add Drag-n-Drop feature
 	//WinMove();  //移動表格視窗	
 	//當搜尋框有內容，則反白搜尋框的文字
@@ -773,9 +798,11 @@ function testHighlightGoogleSearchTerms()
 				$("#opener").click(function() {
 					$("#hidden_window").dialog("open");
 				});
-			});
+			});			
 		</script>
-<!---->
+
+
+
 
 
  

@@ -12,6 +12,7 @@ class Project extends CI_Controller{
 		$this->load->library('form_validation');  //載入表單驗證程式庫
 		$this->load->library('typography');	
 		$this->load->library('file_conversion');  //載入擷取檔案純文字內容的程式庫
+		$this->load->library('ssp');
 		//$this->load->library('file_conversion');  //載入擷取檔案純文字內容的程式庫
 		$this->load->helper('html');  		
 		$this->load->model('project_model');  //載入已定義的模型與資料庫做連接		
@@ -189,8 +190,7 @@ class Project extends CI_Controller{
 		$data['search'] = $search_bar;
 		$project_list = $this->project_model->get_specific_projects_data($search_bar);  //取得搜尋條件設定的專案資料
 		$data['project_list'] = $project_list;
-		//相關句子搜尋
-		
+		//相關句子搜尋		
 		if($search_bar != null)
 		{
 			$search_word = explode(' ', $search_bar);
@@ -500,6 +500,64 @@ class Project extends CI_Controller{
 			$message = "edit";  
 			redirect('project_list');
 		}	
+	}
+	
+	public function data_processing()
+	{/*
+		// DB table to use
+		$table = 'project_all'; 
+		// Table's primary key
+		$primaryKey = 'id';
+ 
+		// Array of database columns which should be read and sent back to DataTables.
+		// The `db` parameter represents the column name in the database, while the `dt`
+		// parameter represents the DataTables column identifier. In this case simple
+		// indexes		
+		$columns = array(
+		array( 'db' => 'year', 'dt' => 0 ),
+		array( 'db' => 'idea_id', 'dt' => 1 ),
+		array( 'db' => 'km_id', 'dt' => 2 ),
+		array( 'db' => 'idea_name', 'dt' => 3 ),
+		array(
+			'db'        => 'established_date',
+			'dt'        => 4,
+			'formatter' => function( $d, $row ) {
+				return date( 'jS M y', strtotime($d));
+			}
+		),
+		array(
+			'db'        => 'km_id',
+			'dt'        => 5,
+			'formatter' => function( $d, $row ) {
+				return '$'.number_format($d);
+			}
+		),
+		array( 'db' => 'idea_source', 'dt' => 6 ),
+		array( 'db' => 'value_d', 'dt' => 7 ));
+		// SQL server connection information
+		$sql_details = array(
+			'user' => 'root',
+			'pass' => '0310a0919',
+			'db'   => 'project_resource',
+			'host' => '127.0.0.1'
+		);	*/	
+		echo '{"draw":2,"recordsTotal":1188,"recordsFiltered":1188,"data":[["2012","1210027","36813","開門防撞裝置","1st Jan 70","$36,813","自身經驗",""],["2014","1405021","50870","椅背-氣囊式頂腰仕樣","1st Jan 70","$50,870","2014協力會差異化提案","內容請詳閱附件。"],["2012","1210028","36814","車內自動閱讀裝置","1st Jan 70","$36,814","自身經驗",""],["2013","1306017",null,"微結構光導晝行燈","1st Jan 70","$0","2013年ARTC於華創進行前瞻技術展示會",null],["2014","1405022","50869","椅背 - 側翼支撐氣囊","1st Jan 70","$50,869","2014協力會差異化提案","內容請詳閱附件。"],["2012","1204001","33659","單一投影機共用於投影式儀錶及抬頭顯示器","1st Jan 70","$33,659","與廠商技術交流(揚明光學)。",""],["2012","1210029","36831","風力發電機","1st Jan 70","$36,831","高速公路",""],["2013","1306018",null,"車輛翻覆警示系統","1st Jan 70","$0","2013年ARTC於華創進行前瞻技術展示會",null],["2014","1405023","50865","座椅自動感應包覆機能仕樣","1st Jan 70","$50,865","2014協力會差異化提案","內容請詳閱附件。"]]}';
+		//echo $this->ssp->simple( $_GET, $sql_details, $table, $primaryKey, $columns);  // 物件方法名稱必須是小寫
+		//redirect("login");
+		//$this->output->set_content_type('application/json');
+		//$this->output->set_output(json_encode(SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )));
+		//echo json_encode(SSP::simple( $_POST, $sql_details, $table, $primaryKey, $columns ));
+
+	}
+	
+	public function aa()
+	{
+		echo $response = array( 'sEcho' => 5,
+                   'iTotalRecords' => 5,
+                   'iTotalDisplayRecords' => 5,
+                   'aaData' => array(array('id' => 1, 'name' => 'stackoverflow'),
+                                     array('id' => 2, 'name' => 'google')),
+                 ); 
 	}
 	
 	/**
@@ -1277,4 +1335,5 @@ class Project extends CI_Controller{
 			$this->load->view('pages/formsuccess');
 		}
 	}*/
+	
 }

@@ -2468,27 +2468,58 @@ function TestTable1(){
 		}
 	});
 }
+
+function load_table()
+{
+	$('#example').dataTable( {
+        "processing": true,
+        "serverSide": true,		
+        //"ajax": "http://127.0.0.1/project_management/datatable_server_processing.php"
+		"ajax": "http://127.0.0.1/project_management/project/data_processing"
+    } );
+}
 //
 // Function for table, located in element with id = datatable-2
 //
+/*
 function TestTable2(){
 	var asInitVals = [];
 	var oTable = $('#datatable-2').dataTable( {
-		"aaSorting": [[ 0, "asc" ]],
-		"sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
-		"sPaginationType": "bootstrap",
-		/*"oLanguage": {
-			"sLengthMenu": '_MENU_'
-		},*/
-		/*"oLanguage": {
-			"sSearch": "Filter All：",
-			"sLengthMenu": '_MENU_'
-		},*/
-		bAutoWidth: false
+		//"baaSorting": [[ 1, "asc" ]],
+		//"sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+		//"sPaginationType": "bootstrap",
+		//"bprocessing": true,
+        serverSide: true,
+		//"bSortCellsTop": true,	//若thead中有2個列，設定排序按鈕要放置在哪個列
+		ajax : {
+			url:'http://127.0.0.1/project_management/data_processing',
+			type:'GET'
+		}
+		//"ajax": "http://127.0.0.1/project_management/data_processing",
+        //"ajax": "http://127.0.0.1/jquery_learning/datatable_server_processing.php",
+		//"sAjaxSource": "http://127.0.0.1/jquery_learning/datatable_server_processing.php",
+		//"fnServerData": function ( sSource, aoData, fnCallback ) {			
+		//	$.ajax({
+        //        'url': sSource,
+        //        'data': data,
+        //        'type': 'POST',
+        //        'success': callback,
+        //        'dataType': 'json',
+        //        'cache': true
+		//	});			
+		//}
+		//"oLanguage": {
+		//	"sLengthMenu": '_MENU_'
+		//},
+		//"oLanguage": {
+		//	"sSearch": "Filter All：",
+		//	"sLengthMenu": '_MENU_'
+		//},
+		//bAutoWidth: false
 	});
 	var header_inputs = $("#datatable-2 thead input");
 	header_inputs.on('keyup', function(){
-		/* Filter on the column (the index) of this element */
+		// Filter on the column (the index) of this element 
 		oTable.fnFilter( this.value, header_inputs.index(this) );
 	})
 	.on('focus', function(){
@@ -2506,7 +2537,7 @@ function TestTable2(){
 	header_inputs.each( function (i) {
 		asInitVals[i] = this.value;
 	});
-}
+}*/
 //
 // Function for table, located in element with id = datatable-3
 //

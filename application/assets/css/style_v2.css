@@ -462,13 +462,13 @@ table.no-border-bottom tr:last-child td {
   border-top: 1px solid #bbb;
 }
 .table-bordered {
-    border: 1px solid #bbb;
+    border: 1px solid #D2D2D2;
 }
 .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
-  border: 1px solid #bbb;
+  /*border: 1px solid #bbb;*/
 }
 .table > thead > tr > th {
-  border-bottom: 2px solid #bbb;
+  /*border-bottom: 2px solid #bbb;*/
 }
 .dataTables_wrapper {
   overflow: hidden;

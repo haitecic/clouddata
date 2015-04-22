@@ -66,6 +66,7 @@ $route['project_create'] = 'project/create_project_data';
 $route['project_file_upload'] = 'project/project_file_upload';
 $route['project_set_unblocked'] = 'project/project_set_unblocked';
 $route['project_check_is_blocked'] = 'project/project_check_is_blocked';
+$route['project/data_processing'] = 'project/data_processing';
 $route['project_file/(:num)'] = 'project/project_file/$1';
 $route['project_file/(:num)/(:any)'] = 'project/project_file/$1/$2';
 $route['project_edit/(:any)'] = 'project/edit_project_data/$1';
