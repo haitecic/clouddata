@@ -1,3 +1,4 @@
+<?php $column_mapping = array("idea_id"=>"創意提案編號", "year"=>"年分", "km_id"=>"KM文件編號", "idea_name"=>"創意提案名稱", "idea_source"=>"創意提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "market_survey"=>"市場搜尋", "km_survey"=>"KM平台搜尋", "dep_item"=>"研發項目確認", "idea_description"=>"提案說明", "inner_or_outer"=>"提案類別", "stage"=>"階段狀態", "stage_detail"=>"階段細項狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "proposed_date"=>"提案日期", "valid_project"=>"有效提案", "established_date"=>"立案日期", "joint_unit"=>"協辦單位", "joint_person"=>"協辦窗口", "co_worker"=>"承作廠商", "idea_examination"=>"提案審核進度", "Idea"=>"Idea", "Requirement"=>"Requirement", "Feasibility"=>"Feasibility", "Prototype"=>"Prototype", "note"=>"備註", "adoption"=>"導入車型", "applied_patent"=>"專利申請", "resurrection_application_qualified"=>"具敗部復活申請資格", "resurrection_applied"=>"申請敗部復活", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案");?>
 <div id="main" class="container-fluid" style="background-color:#FBFBF0;font-color:#635F5F;font-family: Adobe 繁黑體 Std;"><!--8E8D93-->
 	<div class="row">
 		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
@@ -7,37 +8,37 @@
 					<span>專案資料表</span>
 				</div>
 				<div class="box-icons">
-					<a class="collapse-link" onclick="collapse">
+					<a class="collapse-link" onclick="collapse()">
 						<i class="fa fa-chevron-up"></i>
 					</a>
 				</div>
 				<div class="no-move"></div>				
 			</div>
-			<div class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px">
+			<div id="project_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block">
 				<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:7px;top:-10px;z-index:50;width: auto;font-size:16pt;border-color:#5181A6;background-color:#5181A6"><!--border-color:#C3DEB7;background-color:#C3DEB7;color:#821EC7 96BBDE-->
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
 				</div>
 				<table id="project_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px">
 					<thead>
 						<tr>
-							<th>First name</th>
-							<th>Last name</th>
-							<th>Position</th>
-							<th>Office</th>
-							<th>Start date</th>
-							<th>Salary</th>
-							<th>Salary</th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('first_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('second_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('third_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fourth_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fifth_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('sixth_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('seventh_item')];?></th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
-							<th>First name</th>
-							<th>Last name</th>
-							<th>Position</th>
-							<th>Office</th>
-							<th>Start date</th>
-							<th>Salary</th>
-							<th>Salary</th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('first_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('second_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('third_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fourth_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fifth_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('sixth_item')];?></th>
+							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('seventh_item')];?></th>
 						</tr>
 					</tfoot>
 				</table>
