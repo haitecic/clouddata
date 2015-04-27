@@ -21,24 +21,24 @@
 				<table id="project_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px">
 					<thead>
 						<tr>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('first_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('second_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('third_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fourth_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fifth_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('sixth_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('seventh_item')];?></th>
+							<th id="project_list_head0" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
+							<th id="project_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></th>
+							<th id="project_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></th>
+							<th id="project_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></th>
+							<th id="project_list_head4" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fifth_item') != "null"){echo $column_mapping[$this->session->userdata('fifth_item')];}?></th>
+							<th id="project_list_head5" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('sixth_item') != "null"){echo $column_mapping[$this->session->userdata('sixth_item')];}?></th>
+							<th id="project_list_head6" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('seventh_item') != "null"){echo $column_mapping[$this->session->userdata('seventh_item')];}?></th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('first_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('second_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('third_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fourth_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fifth_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('sixth_item')];?></th>
-							<th style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('seventh_item')];?></th>
+							<th id="project_list_foot0" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('first_item')];?></th>
+							<th id="project_list_foot1" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('second_item')];?></th>
+							<th id="project_list_foot2" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('third_item')];?></th>
+							<th id="project_list_foot3" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fourth_item')];?></th>
+							<th id="project_list_foot4" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('fifth_item')];?></th>
+							<th id="project_list_foot5" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('sixth_item')];?></th>
+							<th id="project_list_foot6" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('seventh_item')];?></th>
 						</tr>
 					</tfoot>
 				</table>
