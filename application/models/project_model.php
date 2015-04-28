@@ -1224,10 +1224,10 @@ class Project_model extends CI_Model{
 	public function get_datatable_record($parameter, $DB_table, $columns)
 	{
 		// Ordering
-        if(isset($parameter['order_column']))
+        /*if(isset($parameter['order_column']))
         {
 			$this->db->order_by($columns[intval($this->db->escape_str($parameter['order_column']))], $this->db->escape_str($parameter['order_method']));
-        }
+        }*/
         
         //
         //Filtering
@@ -1235,8 +1235,82 @@ class Project_model extends CI_Model{
         //word by word on any field. It's possible to do here, but concerned about efficiency
         //on very large tables, and MySQL's regex functionality is very limited
         //
-        if(isset($parameter['search']) && !empty($parameter['search']))
+		
+		if(isset($parameter['search']) && !empty($parameter['search']))
         {
+			$search_content = $parameter['search'];
+			//分析搜尋框輸入的內容
+			$rule = "";	
+			$search_word = explode(' ', $search_content);
+			for($i=0;$i<count($search_word);$i++)
+			{
+				$rule = $rule."(`year` LIKE '%".$search_word[$i]."%' OR 
+				`km_id` LIKE '%".$search_word[$i]."%' OR
+				`idea_id` LIKE '%".$search_word[$i]."%' OR 
+				`idea_name` LIKE '%".$search_word[$i]."%' OR 
+				`idea_source` LIKE '%".$search_word[$i]."%' OR 
+				`idea_description` LIKE '%".$search_word[$i]."%' OR
+				`scenario_d` LIKE '%".$search_word[$i]."%' OR
+				`function_d` LIKE '%".$search_word[$i]."%' OR
+				`distinction_d` LIKE '%".$search_word[$i]."%' OR
+				`value_d` LIKE '%".$search_word[$i]."%' OR
+				`feasibility_d` LIKE '%".$search_word[$i]."%' OR
+				`market_survey` LIKE '%".$search_word[$i]."%' OR
+				`km_survey` LIKE '%".$search_word[$i]."%' OR
+				`dep_item` LIKE '%".$search_word[$i]."%' OR
+				`inner_or_outer` LIKE '%".$search_word[$i]."%' OR
+				`stage` LIKE '%".$search_word[$i]."%' OR
+				`stage_detail` LIKE '%".$search_word[$i]."%' OR
+				`progress_description` LIKE '%".$search_word[$i]."%' OR
+				`proposed_unit` LIKE '%".$search_word[$i]."%' OR
+				`proposer` LIKE '%".$search_word[$i]."%' OR
+				`proposed_date` LIKE BINARY'%".$search_word[$i]."%' OR
+				`valid_project` LIKE '%".$search_word[$i]."%' OR
+				`established_date` LIKE BINARY'%".$search_word[$i]."%' OR
+				`joint_unit` LIKE '%".$search_word[$i]."%' OR
+				`joint_person` LIKE '%".$search_word[$i]."%' OR
+				`co_worker` LIKE '%".$search_word[$i]."%' OR
+				`idea_examination` LIKE '%".$search_word[$i]."%' OR
+				`Idea` LIKE '%".$search_word[$i]."%' OR
+				`Requirement` LIKE '%".$search_word[$i]."%' OR
+				`Feasibility` LIKE '%".$search_word[$i]."%' OR
+				`Prototype` LIKE '%".$search_word[$i]."%' OR
+				`note` LIKE '%".$search_word[$i]."%' OR
+				`adoption` LIKE '%".$search_word[$i]."%' OR
+				`applied_patent` LIKE '%".$search_word[$i]."%' OR
+				`resurrection_application_qualified` LIKE '%".$search_word[$i]."%' OR
+				`resurrection_applied` LIKE '%".$search_word[$i]."%' OR
+				`PM_in_charge` LIKE '%".$search_word[$i]."%' OR 
+				`closed_case` LIKE '%".$search_word[$i]."%')";
+				if(($i+1) != count($search_word))
+				{
+					$rule = $rule." AND ";
+				}
+			}	
+		}
+		else
+		{
+			$rule = "`year` LIKE '%%' ";
+		}
+		
+		//setting select clause	
+		/*$select_items = '`'.$columns[0].'`';
+		for($j=1;$j<count($columns);$j++)
+		{
+			if($columns[$j] != "null")
+			{
+				$select_items = $select_items.',`' . $columns[$j] . '`';
+			}
+		}
+		$query_string = "SELECT SQL_CALC_FOUND_ROWS $select_items FROM `$DB_table` WHERE $rule limit ".$parameter['start_record'].','.$parameter['display_length'];
+		*/
+		$order_column = $columns[intval($this->db->escape_str($parameter['order_column']))];
+		$order_method = $this->db->escape_str($parameter['order_method']);
+		$query_string = "SELECT SQL_CALC_FOUND_ROWS * FROM `project_all` WHERE ".$rule.' ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];
+		$rResult = $this->db->query($query_string);
+		/*
+        if(isset($parameter['search']) && !empty($parameter['search']))
+        {	
             for($i=0; $i<count($columns); $i++)
             {
                 //$bSearchable = $this->input->get_post('bSearchable_'.$i, true);
@@ -1264,21 +1338,16 @@ class Project_model extends CI_Model{
         }		
         $this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $select_columns)), false);
         $rResult = $this->db->get($DB_table);
-    
+		*/
         // Data set length after filtering
-        $this->db->select('FOUND_ROWS() AS found_rows');
-        $iFilteredTotal = $this->db->get()->row()->found_rows;
-    
+		
+		$query = $this->db->query('SELECT FOUND_ROWS() AS `found_rows`');
+		$iFilteredTotal = $query->row()->found_rows;
+		
+        //$this->db->select('FOUND_ROWS() AS found_rows');
+        //$iFilteredTotal = $this->db->get()->row()->found_rows;
         // Total data set length
         $iTotal = $this->db->count_all($DB_table);
-    
-        // Output
-        //$output = array(
-        //    'sEcho' => intval($sEcho),
-        //    'iTotalRecords' => $iTotal,
-        //    'iTotalDisplayRecords' => $iFilteredTotal,
-        //    'aaData' => array()
-        //);
 		
 		$output = array(
             'draw' => intval($parameter['draw']),

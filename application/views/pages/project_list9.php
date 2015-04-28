@@ -46,7 +46,7 @@
 		</div>
 	</div>
 </div>
-<div id="column_choose_menu" title="瀏覽項目" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
+<div id="project_column_choose_menu" title="瀏覽項目" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
 	<!--<form action="project/adjust_item" method="post" onsubmit="return validate()">-->
 		<div style="text-align:center">
 		<?php 
@@ -121,19 +121,20 @@ $(document).ready(function() {
 	var order_column = 0;
 	var order_method = "asc";
 	var display_columns = [];
+	var search_str = "<?php echo $search;?>";
 	var i;	
 	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
 		display_columns[display_columns.length] = document.getElementById('col_' + i).value;
 	}
-	load_project_list(start_record, order_column, order_method, display_columns);
+	load_project_list(start_record, order_column, order_method, search_str, display_columns);
 } );
 
 /**
 調整瀏覽項目dialog
 */			
 $(function() {
-	$("#column_choose_menu").dialog({
+	$("#project_column_choose_menu").dialog({
 		autoOpen : false,
 		show : {
 			effect : "blind",
@@ -149,7 +150,7 @@ $(function() {
 		}						
 	});
 	$("#column_adjustment_btn").click(function() {		
-		$("#column_choose_menu").dialog("open");
+		$("#project_column_choose_menu").dialog("open");
 	});
 });	
 </script>

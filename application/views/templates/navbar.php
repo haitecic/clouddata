@@ -59,5 +59,10 @@ function start_search()
 {
 	document.project_search_form.submit();	
 }
+
+$("#search_bar").keypress(function(event){       
+    if (event.keyCode == 13) 
+		$("#project_search_form").submit();
+});
 </script>
 <!--End Header-->
