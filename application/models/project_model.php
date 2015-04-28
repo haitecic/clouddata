@@ -1252,6 +1252,7 @@ class Project_model extends CI_Model{
             }
         }
         $this->db->limit($parameter['display_length'], $parameter['start_record']);
+		
         // Select Data
 		$select_columns = array();
 		for($i=0; $i<count($columns); $i++)
