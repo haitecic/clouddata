@@ -293,7 +293,25 @@
 				<div type="submit" id="sub_button" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i>確認送出</div>
 			</div>						
 		</form>
-		</div>	
+		<?php
+		for($i=0; $i<count($project_attachfile); $i++)
+		{
+
+		echo "<div class='fotorama' data-nav='thumbs' data-width='200' data-height='200' data-allowfullscreen='true'>";
+		  foreach($preview_img as $file)
+		     {
+
+			 
+				if($file['project_attachment_id']==$project_attachfile[$i]['id'])
+					{
+					echo "<img src='" . site_url() . "application/assets/project_attachment/".$project_basic_info['id']."_convert/" . $file['file_name'] . "'>";
+					}
+			 }
+		    
+		echo "</div>"; 
+		echo "<br>";
+		}
+		?>
 		<br/>
 		<!--End Content-->
 	</div>

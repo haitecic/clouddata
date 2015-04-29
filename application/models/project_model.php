@@ -938,6 +938,14 @@ class Project_model extends CI_Model{
 		$result = $query->result_array();
 		return $result;			 	
 	}	
+	//取得預覽圖片路徑
+	public function get_preview_img($project_id)
+	{
+	    $str="select id, file_name, project_attachment_id from project_attachment_pdf_to_image where `project_id`='$project_id'";
+		$query = $this->db->query($str);	
+		$result = $query->result_array();
+		return $result;		
+	}
 	/**
 	get_specific_project_info($project_id)：取得特定專案資料
 	$project_id：專案編號
@@ -1021,12 +1029,10 @@ class Project_model extends CI_Model{
 				$ori_file_name = $this->input->post('upload_file_'.$i);
 				$ext = end(explode('.', $ori_file_name));	
 				$des_file_name = $project_id.'_'.time().$i.'.'.$ext;
-				echo "<br><br><br><br><br>";
-				echo $ori_file_dir . $ori_file_name;
-				echo $new_file_dir . $des_file_name;
+				$file_completename = $project_id.'_'.time().$i;//檔案名，不含附檔名
 				rename(iconv("UTF-8","BIG5//IGNORE",$ori_file_dir . $ori_file_name), iconv("UTF-8","BIG5//IGNORE",$new_file_dir . $des_file_name));  //move the file to the folder named by project ID
 				//Get the content of the upload file
-				$file_content = "";
+				$file_content = "";	
 				/*switch($ext)
 				{
 					case "pptx":
@@ -1047,8 +1053,8 @@ class Project_model extends CI_Model{
 						$file_content = $this->file_conversion->convertToText();
 						break;
 					
-				}
-				$file_content = preg_replace('/\s+/', '', $file_content);*/
+				}*/
+				//$file_content = preg_replace('/\s+/', '', $file_content);
 				//新增檔案至資料庫
 				$project_file = array('project_id'=>$project_id,
 				'file_name'=>$ori_file_name,
