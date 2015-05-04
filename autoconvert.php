@@ -67,18 +67,18 @@ for($j=0; $j<count($ready_to_convert); $j++)
 	$var_return='0';//當pdf每一張都轉成png時，var_return會回傳'1'
 	for($x=0; $var_return==0; $x++)
 		{
-		$photo_file_name = $dir_path . '/' . $ready_to_convert[$j]['filename'] . '_' .$x . '.png';
+		$photo_file_name = $dir_path . '/' . $ready_to_convert[$j]['filename'] . '_' .$x . '.jpg';
 		if($ready_to_convert[$j]['type']!='pdf')
 			{
-			$imagemagick_command = "sudo convert $pdf_file_name" . "[" . $x . "] -colorspace RGB -geometry 2000 $photo_file_name";
+			$imagemagick_command = "sudo convert $pdf_file_name" . "[" . $x . "] -density 5000 -quality 100 $photo_file_name";
 			}
 		else{
-			$imagemagick_command = "sudo convert $old_file_name" . "[" . $x . "] -colorspace RGB -geometry 2000 $photo_file_name";
+			$imagemagick_command = "sudo convert $old_file_name" . "[" . $x . "] -density 5000 -quality 100 $photo_file_name";
 			}
 		exec($imagemagick_command, $output, $var_return);
 		if($var_return!=0) break;
 		//轉圖資訊紀錄於資料庫
-		$photofilename = $ready_to_convert[$j]['filename'] . '_' .$x . '.png';
+		$photofilename = $ready_to_convert[$j]['filename'] . '_' .$x . '.jpg';
 		$query="insert into project_attachment_pdf_to_image (project_id, project_attachment_id, file_name) 
 		        value ('{$ready_to_convert[$j]['dir_name']}', '{$ready_to_convert[$j]['attachment_id']}', '{$photofilename}')";
 		mysql_query($query);

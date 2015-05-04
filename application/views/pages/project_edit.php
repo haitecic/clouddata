@@ -297,14 +297,14 @@
 		for($i=0; $i<count($project_attachfile); $i++)
 		{
 
-		echo "<div class='fotorama' data-nav='thumbs' data-width='200' data-height='200' data-allowfullscreen='true'>";
+		echo "<div class='fotorama' data-nav='thumbs' data-width='200' data-height='200' data-allowfullscreen='native'>";
 		  foreach($preview_img as $file)
 		     {
 
 			 
 				if($file['project_attachment_id']==$project_attachfile[$i]['id'])
 					{
-					echo "<img src='" . site_url() . "application/assets/project_attachment/".$project_basic_info['id']."_convert/" . $file['file_name'] . "'>";
+					echo "<img href='" . site_url() . "application/assets/project_attachment/".$project_basic_info['id']."_convert/" . $file['file_name'] . "'>";
 					}
 			 }
 		    
