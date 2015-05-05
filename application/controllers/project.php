@@ -412,7 +412,7 @@ class Project extends CI_Controller{
 	project_file_upload：專案檔案上傳
 	*/
 	public function project_file_upload()
-	{	
+	{
 		if(isset($_POST['upload_file_dir']) && !empty($_POST['upload_file_dir']))
 		{
 			$output_dir = './uploads/'.$_POST['upload_file_dir'];
@@ -478,6 +478,7 @@ class Project extends CI_Controller{
 		$data['project_basic_info'] = $this->project_model->get_specific_project_info($project_id);  //取得專案基本資料
 		$data['project_attachfile'] = $this->project_model->get_specific_project_attachfile($project_id);  //取得專案夾帶檔案
 		$data['project_img']        = $this->project_model->get_img_name($data['project_basic_info']['km_id']);
+		$data['preview_img']        = $this->project_model->get_preview_img($project_id);
 		$this->form_validation->set_error_delimiters('<label style="margin-left:5px;color:red;font-weight:100">','</label>');  //錯誤訊息顯示的樣式
 		//設定表單欄位資料的驗證規則
 		/*$this->form_validation->set_rules('project_name', '專案名稱', 'trim|max_length[100]|required|xss_clean');
@@ -485,8 +486,8 @@ class Project extends CI_Controller{
 		$this->form_validation->set_rules('haitec_unit', '華創單位', 'trim|xss_clean|required|max_length[100]');
 		$this->form_validation->set_rules('outer_unit', '外部單位', 'trim|xss_clean|required|max_length[100]');
 		$this->form_validation->set_rules('pm', '創意中心負責人', 'trim|xss_clean|required|max_length[100]');
-		$this->form_validation->set_rules('keyword', '關鍵字', 'trim|xss_clean|required|max_length[100]');*/
-		$this->form_validation->set_rules('idea_id', '創意提案編號', 'trim|xss_clean|required');  //|max_length[7]
+		$this->form_validation->set_rules('keyword', '關鍵字', 'trim|xss_clean|required|max_length[100]');*/ 
+		$this->form_validation->set_rules('idea_id', '創意提案編號', 'trim|xss_clean|required'); //|max_length[7]
 		//撰寫表單驗證通過與不通過的對應處理方式
 		if($this->form_validation->run() === FALSE)  //當表單驗證不通過
 		{		

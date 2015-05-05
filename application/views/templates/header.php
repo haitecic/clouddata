@@ -23,11 +23,19 @@ header('Content-Type: text/html; charset=utf-8');
 	<link href="<?php echo $css_location;?>/style_v2.css" rel="stylesheet">
 	<link href="<?php echo $css_location;?>/jqueryDatatable.css" rel="stylesheet">
 	<link href="<?php echo $plugins_location;?>/chartist/chartist.min.css" rel="stylesheet">
+<<<<<<< HEAD
 	
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>-->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+=======
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<!--gallery-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- 33 KB -->
+	<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.js"></script> <!-- 16 KB -->
+>>>>>>> dc96945f345d7eeb0a9dd199e117b72d9d836713
 	<!--彈出視窗js-->
 	<!--<script src="http://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
 	<script src="http://cdn.datatables.net/plug-ins/1.10.6/i18n/Chinese-traditional.json"></script>-->
