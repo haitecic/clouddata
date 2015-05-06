@@ -23,6 +23,7 @@ class Data extends CI_Controller
 		$this->session->set_userdata('fifth_item', $obj['column4']);
 		$this->session->set_userdata('sixth_item', $obj['column5']);
 		$this->session->set_userdata('seventh_item', $obj['column6']);
+		array_push($columns, 'id');
 		for($i=0; $i<7;$i++)
 		{
 		//	if($obj['column'.$i] != "null")

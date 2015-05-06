@@ -4,9 +4,10 @@
 </head>
 <?php
 //連結到本機端資料庫project_resource
-$database_host="localhost";
+//$database_host="localhost";
+$database_host="10.204.97.166";
 $username="root";
-$password="1q2w3e4r";
+$password="0310a0919";
 $database_name="project_resource";
 $db_connect=mysql_connect($database_host, $username, $password);
 $db_select=mysql_select_db($database_name);

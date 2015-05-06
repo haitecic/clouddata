@@ -2278,3 +2278,132 @@ td{
 	padding-top:25px;
 }
 
+/*登入面板設定*/
+.login_pannel{
+  top: 120px;
+  right:40%;
+  width:240px;  
+  height: 360px;
+  position:fixed;
+  z-index:20000;
+  background-color:blue;
+  background-image: url("img/panel_bg.png");
+  border: 1px solid #6a6a6a;
+  display: none;
+  border-radius:3px;
+}
+
+ /*登入面板半透明背景設定*/
+.background_mask{
+  top:0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  position:fixed;
+  background-color: #000000;
+  display: none;
+  opacity:0.6;
+  z-index: 19999;
+  /*cursor: pointer;*/
+}
+/*PDF檔案預覽區塊*/
+.preview_pdf{
+	width:70%;
+	height:90%;
+	display:none;
+	position:fixed;
+	top:6%;
+	left:17%;
+	z-index:20000;
+}
+
+#dragandrophandler
+{
+	border:2px dotted #0B85A1;
+	width:1320px;
+	height:150px;
+	color:#92AAB0;
+	text-align:center;
+	vertical-align:middle;
+	padding:10px 10px 10 10px;
+	margin-top:15px;
+	font-size:200%;
+}
+.progressBar 
+{
+	width: 200px;
+	height: 22px;
+	border: 1px solid #ddd;
+	border-radius: 5px; 
+	overflow: hidden;
+	display:inline-block;
+	margin:0px 10px 5px 5px;
+	vertical-align:top;
+}
+
+.progressBar div 
+{
+	height: 100%;
+	color: #fff;
+	text-align: right;
+	line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+	width: 0;
+	background-color: #0ba1b5; border-radius: 3px; 
+}
+.statusbar
+{
+	border-top:1px solid #A9CCD1;
+	min-height:25px;
+	width:700px;
+	padding:10px 10px 0px 10px;
+	vertical-align:top;
+}
+.statusbar:nth-child(odd)
+{
+	background:#EBEFF0;
+}
+
+.file_preview
+{
+	display:inline-block;
+	vertical-align:top;
+	width:30px;
+}
+
+.file_download
+{
+	display:inline-block;
+	vertical-align:top;
+	width:30px;
+}
+
+.filename
+{
+	display:inline-block;
+	vertical-align:top;
+	width:425px;
+	margin-left:30px;
+}
+.filesize
+{
+	display:inline-block;
+	vertical-align:top;
+	color:#30693D;
+	width:50px;
+	margin-left:10px;
+	margin-right:5px;
+}
+.abort
+{
+	background-color:#A8352F;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;display:inline-block;
+	color:#fff;
+	font-family:arial;font-size:11px;font-weight:normal;
+	padding:4px 15px;
+	cursor:pointer;
+	vertical-align:top;
+	margin-left:70px;
+}
+

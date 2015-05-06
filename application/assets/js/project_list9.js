@@ -23,13 +23,14 @@ function load_project_list(start_record, order_column, order_method, search_str,
 			}
 		}, 
 		"columns": [
-            { "data": 0 },
-            { "data": 1 },
-            { "data": 2 },
-            { "data": 3 },
-            { "data": 4 },
-            { "data": 5 },
-			{ "data": 6 }
+			{ "name": 0, "orderable": false },
+            { "name": 1 },
+            { "name": 2 },
+            { "name": 3 },
+            { "name": 4 },
+            { "name": 5 },
+            { "name": 6 },
+			{ "name": 7 }
         ]
     } );
 	var i;	
@@ -70,13 +71,14 @@ function load_news_list(start_record, order_column, order_method, search_str, di
 			}
 		}, 
 		"columns": [
-            { "data": 0 },
+            { "data": 0, "orderable": false},
             { "data": 1 },
             { "data": 2 },
             { "data": 3 },
             { "data": 4 },
             { "data": 5 },
-			{ "data": 6 }
+			{ "data": 6 },
+			{ "data": 7 }
         ]
     } );
 	var i;	
@@ -117,13 +119,14 @@ function load_external_tech_list(start_record, order_column, order_method, searc
 			}
 		}, 
 		"columns": [
-            { "data": 0 },
+			{ "data": 0, "orderable": false},
             { "data": 1 },
             { "data": 2 },
             { "data": 3 },
             { "data": 4 },
             { "data": 5 },
-			{ "data": 6 }
+            { "data": 6 },
+			{ "data": 7 }
         ]
     } );
 	var i;	
@@ -164,13 +167,14 @@ function load_manager_opinion_list(start_record, order_column, order_method, sea
 			}
 		}, 
 		"columns": [
-            { "data": 0 },
+            { "data": 0, "orderable": false},
             { "data": 1 },
             { "data": 2 },
             { "data": 3 },
             { "data": 4 },
             { "data": 5 },
-			{ "data": 6 }
+            { "data": 6 },
+			{ "data": 7 }
         ]
     } );
 	var i;	
@@ -345,5 +349,10 @@ function manager_opinion_collapse()
 		manager_opinion_list_content.style.display = "block";
 	}
 	$("#manager_opinion_column_choose_menu").dialog("close");
+}
+
+function edit_project(project_id)
+{
+	location.href="project_edit/"+project_id;
 }
 

@@ -965,7 +965,7 @@ class Project_model extends CI_Model{
 	*/	
 	public function get_specific_project_attachfile($project_id) 
 	{
-		$this->db->select('id, file_name, instance_file_name, create_time');
+		$this->db->select('*');
 		$this->db->from('project_attachment');		
 		$this->db->where('project_attachment.project_id', $project_id);
 		$this->db->order_by("create_time", "desc"); 
@@ -1377,7 +1377,15 @@ class Project_model extends CI_Model{
 				}
 				else
 				{
-					$row[$i] = $aRow[$col];
+					if($col == 'id')
+					{
+						$row[$i] = "<input id=\"row_img_$i\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/edit3.png\" alt=\"edit\" onclick=\"edit_project($aRow[$col])\"/>";
+						//$row[$i] = "<img src=\"./application/assets/img/edit3.png\">";
+					}
+					else
+					{
+						$row[$i] = $aRow[$col];
+					}
 				}
 				$i++;
                 //$row[$col] = $aRow[$col];  //json格式：欄位名稱與欄位值一對　例如:'idea_id':'14223'
