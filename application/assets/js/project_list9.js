@@ -194,7 +194,7 @@ function load_manager_opinion_list(start_record, order_column, order_method, sea
 function adjust_project_display_column()
 {
 	var start_record = project_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 0;
+	var order_column = 1;
 	var order_method = "asc";
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;

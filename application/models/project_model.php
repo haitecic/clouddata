@@ -1290,7 +1290,11 @@ class Project_model extends CI_Model{
 				`resurrection_application_qualified` LIKE '%".$search_word[$i]."%' OR
 				`resurrection_applied` LIKE '%".$search_word[$i]."%' OR
 				`PM_in_charge` LIKE '%".$search_word[$i]."%' OR 
-				`closed_case` LIKE '%".$search_word[$i]."%')";
+				`closed_case` LIKE '%".$search_word[$i]."%' OR
+				`convert_to_pdf` LIKE '%".$search_word[$i]."%' OR
+				`file_name` LIKE '%".$search_word[$i]."%' OR
+				`instance_file_name` LIKE '%".$search_word[$i]."%' OR
+				`file_content` LIKE '%".$search_word[$i]."%')";
 				if(($i+1) != count($search_word))
 				{
 					$rule = $rule." AND ";
@@ -1313,9 +1317,10 @@ class Project_model extends CI_Model{
 		}
 		$query_string = "SELECT SQL_CALC_FOUND_ROWS $select_items FROM `$DB_table` WHERE $rule limit ".$parameter['start_record'].','.$parameter['display_length'];
 		*/
+		$select_column = "`project_all.id`, `year`"
 		$order_column = $columns[intval($this->db->escape_str($parameter['order_column']))];
 		$order_method = $this->db->escape_str($parameter['order_method']);
-		$query_string = "SELECT SQL_CALC_FOUND_ROWS * FROM `project_all` WHERE ".$rule.' ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];
+		$query_string = "SELECT SQL_CALC_FOUND_ROWS * FROM `project_all` LEFT JOIN `project_attachment` ON `project_all`.`id` = `project_attachment`.`project_id` WHERE ".$rule.' GROUP BY `project_all`.`id` ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];
 		$rResult = $this->db->query($query_string);
 		/*
         if(isset($parameter['search']) && !empty($parameter['search']))
