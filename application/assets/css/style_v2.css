@@ -2407,3 +2407,24 @@ td{
 	margin-left:70px;
 }
 
+/*
+@-webkit-keyframes example {
+    from {white-space:nowrap;}
+    to {white-space:normal;}
+}
+
+
+@keyframes example {
+    from {white-space:nowrap;}
+    to {white-space:normal;}
+}*/
+
+.search_result_hint
+{
+	font-size:10pt;
+	text-overflow:ellipsis;
+	width:300px;
+	overflow:hidden;
+	white-space:nowrap;
+}
+

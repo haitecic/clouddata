@@ -356,3 +356,15 @@ function edit_project(project_id)
 	location.href="project_edit/"+project_id;
 }
 
+function show_more_content(row)
+{	
+	if(row.style.whiteSpace == "normal")
+	{			
+		row.style.whiteSpace = "nowrap";
+	}
+	else if(row.style.whiteSpace == "nowrap")
+	{
+		row.style.whiteSpace = "normal";
+	}
+}
+

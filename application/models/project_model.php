@@ -1289,7 +1289,7 @@ class Project_model extends CI_Model{
 				`applied_patent` LIKE '%".$search_word[$i]."%' OR
 				`resurrection_application_qualified` LIKE '%".$search_word[$i]."%' OR
 				`resurrection_applied` LIKE '%".$search_word[$i]."%' OR
-				`PM_in_charge` LIKE '%".$search_word[$i]."%' OR 
+				`PM_in_charge` LIKE '%".$search_word[$i]."%' OR
 				`closed_case` LIKE '%".$search_word[$i]."%' OR
 				`convert_to_pdf` LIKE '%".$search_word[$i]."%' OR
 				`file_name` LIKE '%".$search_word[$i]."%' OR
@@ -1317,10 +1317,10 @@ class Project_model extends CI_Model{
 		}
 		$query_string = "SELECT SQL_CALC_FOUND_ROWS $select_items FROM `$DB_table` WHERE $rule limit ".$parameter['start_record'].','.$parameter['display_length'];
 		*/
-		$select_column = "`project_all.id`, `year`"
+		//$select_column = 'SQL_CALC_FOUND_ROWS `project_all`.`id`, `year`, `km_id`, `idea_id`, `idea_name`, `idea_source`, `idea_description`, `scenario_d`, `function_d`,`distinction_d`,`value_d`,`feasibility_d`,`market_survey`,`km_survey`,`dep_item`,`inner_or_outer`,`stage`,`stage_detail`,`progress_description`,`proposed_unit`,`proposer`,`proposed_date`,`valid_project`,`established_date`,`joint_unit`,`joint_person`,`co_worker`,`idea_examination`,`Idea`,`Requirement`,`Feasibility`,`Prototype`,`note`,`adoption`,`applied_patent`,`resurrection_application_qualified`,`resurrection_applied`,`PM_in_charge`,`closed_case`';
 		$order_column = $columns[intval($this->db->escape_str($parameter['order_column']))];
 		$order_method = $this->db->escape_str($parameter['order_method']);
-		$query_string = "SELECT SQL_CALC_FOUND_ROWS * FROM `project_all` LEFT JOIN `project_attachment` ON `project_all`.`id` = `project_attachment`.`project_id` WHERE ".$rule.' GROUP BY `project_all`.`id` ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];
+		$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM (SELECT `project_all`.`id`, `year`, `km_id`, `idea_id`, `idea_name`, `idea_source`, `idea_description`, `scenario_d`, `function_d`,`distinction_d`,`value_d`,`feasibility_d`,`market_survey`,`km_survey`,`dep_item`,`inner_or_outer`,`stage`,`stage_detail`,`progress_description`,`proposed_unit`,`proposer`,`proposed_date`,`valid_project`,`established_date`,`joint_unit`,`joint_person`,`co_worker`,`idea_examination`,`Idea`,`Requirement`,`Feasibility`,`Prototype`,`note`,`adoption`,`applied_patent`,`resurrection_application_qualified`,`resurrection_applied`,`PM_in_charge`,`closed_case` FROM `project_all` LEFT JOIN `project_attachment` ON `project_all`.`id` = `project_attachment`.`project_id` WHERE '.$rule.' GROUP BY `project_all`.`id`) AS T ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];
 		$rResult = $this->db->query($query_string);
 		/*
         if(isset($parameter['search']) && !empty($parameter['search']))
@@ -1369,9 +1369,69 @@ class Project_model extends CI_Model{
             'recordsFiltered' => intval($iFilteredTotal),
             'data' => array()
         );
-		
-		foreach($rResult->result_array() as $aRow)
+		$a = 0;
+		$column_mapping = array("idea_id"=>"創意提案編號", "year"=>"年分", "km_id"=>"KM文件編號", "idea_name"=>"創意提案名稱", "idea_source"=>"創意提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "market_survey"=>"市場搜尋", "km_survey"=>"KM平台搜尋", "dep_item"=>"研發項目確認", "idea_description"=>"提案說明", "inner_or_outer"=>"提案類別", "stage"=>"階段狀態", "stage_detail"=>"階段細項狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "proposed_date"=>"提案日期", "valid_project"=>"有效提案", "established_date"=>"立案日期", "joint_unit"=>"協辦單位", "joint_person"=>"協辦窗口", "co_worker"=>"承作廠商", "idea_examination"=>"提案審核進度", "Idea"=>"Idea", "Requirement"=>"Requirement", "Feasibility"=>"Feasibility", "Prototype"=>"Prototype", "note"=>"備註", "adoption"=>"導入車型", "applied_patent"=>"專利申請", "resurrection_application_qualified"=>"具敗部復活申請資格", "resurrection_applied"=>"申請敗部復活", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案");
+		foreach($rResult->result_array() as $project)
         {
+			$key_sentence = "";  //存放關鍵句子
+			$column = "";  //存放關鍵句子所在的欄位		
+			$search_result_hint = "";  //查詢結果提示字串			
+			if(isset($parameter['search']) && !empty($parameter['search']))
+			{
+				$search_content = $parameter['search'];
+				$search_word = explode(' ', $search_content);
+				$temp = array();
+				$temp_score = array();
+				$all_content = "";
+				foreach($project as $index => $content)
+				{
+					$all_content = $all_content.$content.',';					
+				}
+				$all_content = str_replace('。','.',$all_content);
+				$all_content = str_replace('，',',',$all_content);
+				$all_content = str_replace('；',';',$all_content);
+				$temp = preg_split("/[?!,-.;]+/",$all_content);
+				foreach($temp as $index=>$sentence)
+				{
+					$score = 0;
+					for($j=0;$j<count($search_word);$j++)
+					{
+						if(strpos($sentence, $search_word[$j]) !== false)
+						{
+							$score = $score + substr_count($sentence, $search_word[$j]);
+						}
+					}
+					array_push($temp_score, (int)$score);					
+				}	
+				$first_score = 0;
+				$sen = 0;
+				foreach($temp as $index=>$sentence)
+				{		
+					if($temp_score[$index] > $first_score)  //$first_score
+					{
+						$sen = $sentence;
+						$first_score = $temp_score[$index];
+					}					
+				}
+				$key_sentence = $sen;
+				foreach($project as $index => $content)
+				{					
+					if(strpos($content, $key_sentence) !== false)
+					{		
+						$column = $column_mapping[$index];
+						break;
+					}
+				}
+				if(strlen(($column.':'.$key_sentence)) > 65)
+				{
+					$search_result_hint = "<div id='$a' onmouseover='show_more_content(this)' onmouseout='show_more_content(this)' style='font-size:10pt;	text-overflow:ellipsis;	width:300px; overflow:hidden; white-space:nowrap;'>$column : $key_sentence</div>";
+					$a++;
+				}
+				else
+				{
+					$search_result_hint = "<div style='font-size:10pt'>$column : $key_sentence</div>";
+				}				
+			}			  
             $row = array();
             $i=0;
             foreach($columns as $col)
@@ -1382,38 +1442,23 @@ class Project_model extends CI_Model{
 				}
 				else
 				{
-					if($col == 'id')
+					switch($col)
 					{
-						$row[$i] = "<input id=\"row_img_$i\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/edit3.png\" alt=\"edit\" onclick=\"edit_project($aRow[$col])\"/>";
-						//$row[$i] = "<img src=\"./application/assets/img/edit3.png\">";
-					}
-					else
-					{
-						$row[$i] = $aRow[$col];
+						case 'id':
+							$row[$i] = "<input id=\"row_img_$i\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/edit3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/>";
+							break;
+						case 'idea_name':						
+							$row[$i] = '<div style="color:#23459F">'.$project[$col].'</div>'.$search_result_hint;							
+							break;
+						default:
+							$row[$i] = $project[$col];
 					}
 				}
 				$i++;
-                //$row[$col] = $aRow[$col];  //json格式：欄位名稱與欄位值一對　例如:'idea_id':'14223'
             }
-    
             $output['data'][] = $row;
         }
-        
-        /*foreach($rResult->result_array() as $aRow)
-        {
-            $row = array();
-            $i=0;
-            foreach($columns as $col)
-            {					
-				$row[$i] = $aRow[$col];
-				$i++;
-                //$row[$col] = $aRow[$col];  //json格式：欄位名稱與欄位值一對　例如:'idea_id':'14223'
-            }
-    
-            $output['data'][] = $row;
-        }*/	
-		
         return json_encode($output);
 	}
 }
-//===============================================
+

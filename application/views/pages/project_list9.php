@@ -22,7 +22,7 @@
 					<thead>
 						<tr>
 							<th id="project_list_head" style="text-align:center;font-weight:normal"></th>
-							<th id="project_list_head0" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
+							<th id="project_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
 							<th id="project_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></th>
 							<th id="project_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></th>
 							<th id="project_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></th>
@@ -69,7 +69,7 @@
 					<thead>
 						<tr>
 							<th id="news_list_head" style="text-align:center;font-weight:normal"></th>
-							<th id="news_list_head0" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
+							<th id="news_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
 							<th id="news_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></th>
 							<th id="news_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></th>
 							<th id="news_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></th>
@@ -116,7 +116,7 @@
 					<thead>
 						<tr>
 							<th id="external_tech_list_head" style="text-align:center;font-weight:normal"></th>
-							<th id="external_tech_list_head0" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
+							<th id="external_tech_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
 							<th id="external_tech_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></th>
 							<th id="external_tech_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></th>
 							<th id="external_tech_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></th>
@@ -163,7 +163,7 @@
 					<thead>
 						<tr>
 							<th id="manager_opinion_list_head" style="text-align:center;font-weight:normal"></th>
-							<th id="manager_opinion_list_head0" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
+							<th id="manager_opinion_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
 							<th id="manager_opinion_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></th>
 							<th id="manager_opinion_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></th>
 							<th id="manager_opinion_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></th>

@@ -196,7 +196,7 @@ class Project extends CI_Controller{
 		$project_list = $this->project_model->get_specific_projects_data($search_bar);  //取得搜尋條件設定的專案資料
 		$data['project_list'] = $project_list;
 		//相關句子搜尋		
-		if($search_bar != null)
+		/*if($search_bar != null)
 		{
 			$search_word = explode(' ', $search_bar);
 			$key_sentence = array();  //存放關鍵句子
@@ -253,7 +253,7 @@ class Project extends CI_Controller{
 				$k++;
 			}
 			$data['column'] = $column;
-		}
+		}*/
 		//$data['number_file'] = $this->project_model->get_number_file();
 		$this->load->view('templates/header1', $data);
 		$this->load->view('templates/navbar', $data);
@@ -478,7 +478,7 @@ class Project extends CI_Controller{
 		$data['project_basic_info'] = $this->project_model->get_specific_project_info($project_id);  //取得專案基本資料
 		$data['project_attachfile'] = $this->project_model->get_specific_project_attachfile($project_id);  //取得專案夾帶檔案
 		$data['project_img']        = $this->project_model->get_img_name($data['project_basic_info']['km_id']);
-		$data['preview_img']        = $this->project_model->get_preview_img($project_id);
+		//$data['preview_img']        = $this->project_model->get_preview_img($project_id);
 		$this->form_validation->set_error_delimiters('<label style="margin-left:5px;color:red;font-weight:100">','</label>');  //錯誤訊息顯示的樣式
 		//設定表單欄位資料的驗證規則
 		/*$this->form_validation->set_rules('project_name', '專案名稱', 'trim|max_length[100]|required|xss_clean');
