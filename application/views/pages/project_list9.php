@@ -22,13 +22,13 @@
 					<thead>
 						<tr>
 							<th id="project_list_head" style="text-align:center;font-weight:normal"></th>
-							<th id="project_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
-							<th id="project_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></th>
-							<th id="project_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></th>
-							<th id="project_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></th>
-							<th id="project_list_head4" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fifth_item') != "null"){echo $column_mapping[$this->session->userdata('fifth_item')];}?></th>
-							<th id="project_list_head5" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('sixth_item') != "null"){echo $column_mapping[$this->session->userdata('sixth_item')];}?></th>
-							<th id="project_list_head6" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('seventh_item') != "null"){echo $column_mapping[$this->session->userdata('seventh_item')];}?></th>
+							<th id="project_list_head0" style="text-align:center;font-weight:normal" width="17%" onmouseover="show_select_box(1)"><span id="pro_col_plain_text_1"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></span><select id="pro_col_select_box_1"><option><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></option></select><div class="sortMask"></div></th>
+							<th id="project_list_head1" style="text-align:center;font-weight:normal"><select><option><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></option></select><div class="sortMask"></div></th>
+							<th id="project_list_head2" style="text-align:center;font-weight:normal"><select><option><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></option></select><div class="sortMask"></div></th>
+							<th id="project_list_head3" style="text-align:center;font-weight:normal"><select><option><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></option></select><div class="sortMask"></div></th>
+							<th id="project_list_head4" style="text-align:center;font-weight:normal"><select><option><?php if($this->session->userdata('fifth_item') != "null"){echo $column_mapping[$this->session->userdata('fifth_item')];}?></option></select><div class="sortMask"></div></th>
+							<th id="project_list_head5" style="text-align:center;font-weight:normal"><select><option><?php if($this->session->userdata('sixth_item') != "null"){echo $column_mapping[$this->session->userdata('sixth_item')];}?></option></select><div class="sortMask"></div></th>
+							<th id="project_list_head6" style="text-align:center;font-weight:normal"><select><option><?php if($this->session->userdata('seventh_item') != "null"){echo $column_mapping[$this->session->userdata('seventh_item')];}?></option></select><div class="sortMask"></div></th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -47,6 +47,13 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	function show_select_box(value)
+	{
+		document.getElementById("pro_col_select_box_1").style.;
+		pro_col_plain_text_1
+	}
+	</script>
 	<div id="news" class="row">
 		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
 			<div class="box-header" style="margin-left:-15px;margin-right:-15px;padding-top:7px;height:40px;font-size:14pt">
@@ -69,13 +76,13 @@
 					<thead>
 						<tr>
 							<th id="news_list_head" style="text-align:center;font-weight:normal"></th>
-							<th id="news_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
-							<th id="news_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></th>
-							<th id="news_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></th>
-							<th id="news_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></th>
-							<th id="news_list_head4" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fifth_item') != "null"){echo $column_mapping[$this->session->userdata('fifth_item')];}?></th>
-							<th id="news_list_head5" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('sixth_item') != "null"){echo $column_mapping[$this->session->userdata('sixth_item')];}?></th>
-							<th id="news_list_head6" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('seventh_item') != "null"){echo $column_mapping[$this->session->userdata('seventh_item')];}?></th>
+							<th id="news_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?><div class="sortMask"></div></th>
+							<th id="news_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?><div class="sortMask"></div></th>
+							<th id="news_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?><div class="sortMask"></div></th>
+							<th id="news_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?><div class="sortMask"></div></th>
+							<th id="news_list_head4" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fifth_item') != "null"){echo $column_mapping[$this->session->userdata('fifth_item')];}?><div class="sortMask"></div></th>
+							<th id="news_list_head5" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('sixth_item') != "null"){echo $column_mapping[$this->session->userdata('sixth_item')];}?><div class="sortMask"></div></th>
+							<th id="news_list_head6" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('seventh_item') != "null"){echo $column_mapping[$this->session->userdata('seventh_item')];}?><div class="sortMask"></div></th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -116,15 +123,15 @@
 					<thead>
 						<tr>
 							<th id="external_tech_list_head" style="text-align:center;font-weight:normal"></th>
-							<th id="external_tech_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
-							<th id="external_tech_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></th>
-							<th id="external_tech_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></th>
-							<th id="external_tech_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></th>
-							<th id="external_tech_list_head4" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fifth_item') != "null"){echo $column_mapping[$this->session->userdata('fifth_item')];}?></th>
-							<th id="external_tech_list_head5" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('sixth_item') != "null"){echo $column_mapping[$this->session->userdata('sixth_item')];}?></th>
-							<th id="external_tech_list_head6" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('seventh_item') != "null"){echo $column_mapping[$this->session->userdata('seventh_item')];}?></th>
+							<th id="external_tech_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?><div class="sortMask"></div></th>
+							<th id="external_tech_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?><div class="sortMask"></div></th>
+							<th id="external_tech_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?><div class="sortMask"></div></th>
+							<th id="external_tech_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?><div class="sortMask"></div></th>
+							<th id="external_tech_list_head4" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fifth_item') != "null"){echo $column_mapping[$this->session->userdata('fifth_item')];}?><div class="sortMask"></div></th>
+							<th id="external_tech_list_head5" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('sixth_item') != "null"){echo $column_mapping[$this->session->userdata('sixth_item')];}?><div class="sortMask"></div></th>
+							<th id="external_tech_list_head6" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('seventh_item') != "null"){echo $column_mapping[$this->session->userdata('seventh_item')];}?><div class="sortMask"></div></th>
 						</tr>
-					</thead>
+					</thead>					
 					<tfoot>
 						<tr>
 							<th id="external_tech_list_foot" style="text-align:center;font-weight:normal"></th>
@@ -163,13 +170,13 @@
 					<thead>
 						<tr>
 							<th id="manager_opinion_list_head" style="text-align:center;font-weight:normal"></th>
-							<th id="manager_opinion_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?></th>
-							<th id="manager_opinion_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?></th>
-							<th id="manager_opinion_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?></th>
-							<th id="manager_opinion_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?></th>
-							<th id="manager_opinion_list_head4" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fifth_item') != "null"){echo $column_mapping[$this->session->userdata('fifth_item')];}?></th>
-							<th id="manager_opinion_list_head5" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('sixth_item') != "null"){echo $column_mapping[$this->session->userdata('sixth_item')];}?></th>
-							<th id="manager_opinion_list_head6" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('seventh_item') != "null"){echo $column_mapping[$this->session->userdata('seventh_item')];}?></th>
+							<th id="manager_opinion_list_head0" style="text-align:center;font-weight:normal" width="17%"><?php if($this->session->userdata('first_item') != "null"){echo $column_mapping[$this->session->userdata('first_item')];}?><div class="sortMask"></div></th>
+							<th id="manager_opinion_list_head1" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('second_item') != "null"){echo $column_mapping[$this->session->userdata('second_item')];}?><div class="sortMask"></div></th>
+							<th id="manager_opinion_list_head2" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('third_item') != "null"){echo $column_mapping[$this->session->userdata('third_item')];}?><div class="sortMask"></div></th>
+							<th id="manager_opinion_list_head3" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fourth_item') != "null"){echo $column_mapping[$this->session->userdata('fourth_item')];}?><div class="sortMask"></div></th>
+							<th id="manager_opinion_list_head4" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('fifth_item') != "null"){echo $column_mapping[$this->session->userdata('fifth_item')];}?><div class="sortMask"></div></th>
+							<th id="manager_opinion_list_head5" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('sixth_item') != "null"){echo $column_mapping[$this->session->userdata('sixth_item')];}?><div class="sortMask"></div></th>
+							<th id="manager_opinion_list_head6" style="text-align:center;font-weight:normal"><?php if($this->session->userdata('seventh_item') != "null"){echo $column_mapping[$this->session->userdata('seventh_item')];}?><div class="sortMask"></div></th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -467,7 +474,7 @@
 	<!--</form>-->
 </div>
 <script>
-$(document).ready(function() {
+$(document).ready(function() {		
 	var start_record = 0;
 	var order_column = 1;
 	var order_method = "asc";
@@ -484,6 +491,19 @@ $(document).ready(function() {
 	load_project_list(start_record, order_column, order_method, search_str, display_columns);
 } );
 
+/*datatables header點擊div class為sort的區域才排序*/
+$('th').on("click.DT", function (e) {
+    if (!$(e.target).hasClass('sortMask')) {
+        e.stopImmediatePropagation();
+    }
+});
+$('th').on("click", function (e) {
+    if (!$(e.target).hasClass('sortMask')) {
+        e.stopImmediatePropagation();
+    }
+});		
+
+	
 /**
 調整瀏覽項目dialog
 */			

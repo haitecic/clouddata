@@ -20,6 +20,12 @@ function load_project_list(start_record, order_column, order_method, search_str,
 			"type":"GET",
 			"complete": function(){
 				$("body").scrollTop(0);  //由該分頁的第一筆紀錄開始瀏覽
+				/*$('th').on("click.DT", function (e) {
+					if (!$(e.target).hasClass('sortMask')) {
+						
+						e.stopImmediatePropagation();
+					}
+				});	*/
 			}
 		}, 
 		"columns": [
@@ -205,22 +211,22 @@ function adjust_project_display_column()
 	}
 	project_list_tbl.fnDestroy();
 	load_project_list(start_record, order_column, order_method, search_str, display_columns);
-	var j;	
+	var j;
 	for(j=0;j<7;j++)  //設定表格head名稱
 	{
 		if(document.getElementById('project_list_head' + j) != null)
 		{
-			document.getElementById('project_list_head' + j).innerHTML = column_mapping[document.getElementById('col_' + j).value];
+			document.getElementById('project_list_head' + j).innerHTML = column_mapping[document.getElementById('col_' + j).value] + '<div class="sortMask"></div>';
 			document.getElementById('project_list_foot' + j).innerHTML = column_mapping[document.getElementById('col_' + j).value];
 		}
 	}
-	$("#project_column_choose_menu").dialog("close");
+	$("#project_column_choose_menu").dialog("close");	
 }
 
 function adjust_news_display_column()
 {
 	var start_record = news_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 0;
+	var order_column = 1;
 	var order_method = "asc";
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
@@ -236,7 +242,7 @@ function adjust_news_display_column()
 	{
 		if(document.getElementById('news_list_head' + j) != null)
 		{
-			document.getElementById('news_list_head' + j).innerHTML = column_mapping[document.getElementById('news_col_' + j).value];
+			document.getElementById('news_list_head' + j).innerHTML = column_mapping[document.getElementById('news_col_' + j).value] + '<div class="sortMask"></div>';
 			document.getElementById('news_list_foot' + j).innerHTML = column_mapping[document.getElementById('news_col_' + j).value];
 		}
 	}
@@ -246,7 +252,7 @@ function adjust_news_display_column()
 function adjust_external_tech_display_column()
 {
 	var start_record = external_tech_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 0;
+	var order_column = 1;
 	var order_method = "asc";
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
@@ -262,7 +268,7 @@ function adjust_external_tech_display_column()
 	{
 		if(document.getElementById('external_tech_list_head' + j) != null)
 		{
-			document.getElementById('external_tech_list_head' + j).innerHTML = column_mapping[document.getElementById('external_tech_col_' + j).value];
+			document.getElementById('external_tech_list_head' + j).innerHTML = column_mapping[document.getElementById('external_tech_col_' + j).value] + '<div class="sortMask"></div>';
 			document.getElementById('external_tech_list_foot' + j).innerHTML = column_mapping[document.getElementById('external_tech_col_' + j).value];
 		}
 	}
@@ -272,7 +278,7 @@ function adjust_external_tech_display_column()
 function adjust_manager_opinion_display_column()
 {
 	var start_record = manager_opinion_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 0;
+	var order_column = 1;
 	var order_method = "asc";
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
@@ -288,7 +294,7 @@ function adjust_manager_opinion_display_column()
 	{
 		if(document.getElementById('manager_opinion_list_head' + j) != null)
 		{
-			document.getElementById('manager_opinion_list_head' + j).innerHTML = column_mapping[document.getElementById('manager_opinion_col_' + j).value];
+			document.getElementById('manager_opinion_list_head' + j).innerHTML = column_mapping[document.getElementById('manager_opinion_col_' + j).value] + '<div class="sortMask"></div>';
 			document.getElementById('manager_opinion_list_foot' + j).innerHTML = column_mapping[document.getElementById('manager_opinion_col_' + j).value];
 		}
 	}

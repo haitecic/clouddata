@@ -2421,10 +2421,16 @@ td{
 
 .search_result_hint
 {
-	font-size:10pt;
-	text-overflow:ellipsis;
-	width:300px;
-	overflow:hidden;
-	white-space:nowrap;
+	font-size:10pt;	text-overflow:ellipsis;	width:300px; overflow:hidden; white-space:nowrap;
+}
+
+.sortMask {
+    width:20px;
+    height:25px;
+    float:right;
+    display:inline-block;
+    z-index:0;
+    margin-right: -15px;
+	/*background-color:red;*/
 }
 
