@@ -193,7 +193,7 @@ class Account_management extends CI_Controller{
 				$this->session->set_userdata('second_item', 'year');
 				$this->session->set_userdata('third_item', 'proposed_unit');
 				$this->session->set_userdata('fourth_item', 'proposer');
-				$this->session->set_userdata('fifth_item', 'proposed_date');
+				$this->session->set_userdata('fifth_item', 'established_date');
 				$this->session->set_userdata('sixth_item', 'PM_in_charge');
 				$this->session->set_userdata('seventh_item', 'closed_case');
 				header('Location:project_list');

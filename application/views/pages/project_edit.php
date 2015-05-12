@@ -171,7 +171,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">具備敗復活申請資格</label>
+				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">具備敗部復活申請資格</label>
 				<div class="col-sm-10">
 					<p class="form-control-static"><?php echo $project_basic_info['resurrection_applied'];?></p>
 				</div>

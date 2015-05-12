@@ -1,4 +1,4 @@
-var column_mapping = {idea_id:"創意提案編號", year:"年分", km_id:"KM文件編號", idea_name:"創意提案名稱", idea_source:"創意提案來源", scenario_d:"情境說明", function_d:"功能構想", distinction_d:"差異化", value_d:"價值性", feasibility_d:"可行性", market_survey:"市場搜尋", km_survey:"KM平台搜尋", dep_item:"研發項目確認", idea_description:"提案說明", inner_or_outer:"提案類別", stage:"階段狀態", stage_detail:"階段細項狀態", progress_description:"進度說明", proposed_unit:"提案單位", proposer:"提案人", proposed_date:"提案日期", valid_project:"有效提案", established_date:"立案日期", joint_unit:"協辦單位", joint_person:"協辦窗口", co_worker:"承作廠商", idea_examination:"提案審核進度", Idea:"Idea", Requirement:"Requirement", Feasibility:"Feasibility", Prototype:"Prototype", note:"備註", adoption:"導入車型", applied_patent:"專利申請", resurrection_application_qualified:"具敗部復活申請資格", resurrection_applied:"申請敗部復活", PM_in_charge:"創意中心窗口", closed_case:"結案"};
+var column_mapping = {idea_id:"提案編號", year:"年度", idea_name:"提案名稱", idea_source:"提案來源", scenario_d:"情境說明", function_d:"功能構想", distinction_d:"差異化", value_d:"價值性", feasibility_d:"可行性", stage:"階段狀態", progress_description:"進度說明", proposed_unit:"提案單位", proposer:"提案人", established_date:"立案日期", idea_examination:"提案審核履歷", Idea:"I階段文件檢核", Requirement:"R階段文件檢核", Feasibility:"F階段文件檢核", Prototype:"P階段文件檢核", note:"備註", adoption:"導入車型/先期式樣", applied_patent:"專利申請/取得", resurrection_application_qualified:"具備敗部復活申請資格", resurrection_applied:"敗部復活申請", PM_in_charge:"創意中心窗口", closed_case:"結案"};
 var project_list_tbl;
 function load_project_list(start_record, order_column, order_method, search_str, display_columns)
 {	
@@ -20,12 +20,6 @@ function load_project_list(start_record, order_column, order_method, search_str,
 			"type":"GET",
 			"complete": function(){
 				$("body").scrollTop(0);  //由該分頁的第一筆紀錄開始瀏覽
-				/*$('th').on("click.DT", function (e) {
-					if (!$(e.target).hasClass('sortMask')) {
-						
-						e.stopImmediatePropagation();
-					}
-				});	*/
 			}
 		}, 
 		"columns": [
@@ -42,13 +36,14 @@ function load_project_list(start_record, order_column, order_method, search_str,
 	var i;	
 	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
-		if(document.getElementById('col_' + i).value == "null")
+		//alert(document.getElementById('pro_col_select_box_' + i).value);
+		if(document.getElementById('pro_col_select_box_' + i).value == "null")
 		{
-			project_list_tbl.fnSetColumnVis( i, false, false );  //設定欄位的 visibility
+			project_list_tbl.fnSetColumnVis( i+1, false, false );  //設定欄位的 visibility
 		}
-		else if(document.getElementById('col_' + i).value != "null")
+		else if(document.getElementById('pro_col_select_box_' + i).value != "null")
 		{
-			project_list_tbl.fnSetColumnVis( i, true, false );  //設定欄位的 visibility
+			project_list_tbl.fnSetColumnVis( i+1, true, false );  //設定欄位的 visibility
 		}
 	}
 }
@@ -92,11 +87,11 @@ function load_news_list(start_record, order_column, order_method, search_str, di
 	{
 		if(document.getElementById('news_col_' + i).value == "null")
 		{
-			news_list_tbl.fnSetColumnVis( i, false, false );  //設定欄位的 visibility
+			news_list_tbl.fnSetColumnVis( i+1, false, false );  //設定欄位的 visibility
 		}
 		else if(document.getElementById('news_col_' + i).value != "null")
 		{
-			news_list_tbl.fnSetColumnVis( i, true, false );  //設定欄位的 visibility
+			news_list_tbl.fnSetColumnVis( i+1, true, false );  //設定欄位的 visibility
 		}
 	}
 }
@@ -140,11 +135,11 @@ function load_external_tech_list(start_record, order_column, order_method, searc
 	{
 		if(document.getElementById('external_tech_col_' + i).value == "null")
 		{
-			external_tech_list_tbl.fnSetColumnVis( i, false, false );  //設定欄位的 visibility
+			external_tech_list_tbl.fnSetColumnVis( i+1, false, false );  //設定欄位的 visibility
 		}
 		else if(document.getElementById('external_tech_col_' + i).value != "null")
 		{
-			external_tech_list_tbl.fnSetColumnVis( i, true, false );  //設定欄位的 visibility
+			external_tech_list_tbl.fnSetColumnVis( i+1, true, false );  //設定欄位的 visibility
 		}
 	}
 }
@@ -188,11 +183,11 @@ function load_manager_opinion_list(start_record, order_column, order_method, sea
 	{
 		if(document.getElementById('manager_opinion_col_' + i).value == "null")
 		{
-			manager_opinion_list_tbl.fnSetColumnVis( i, false, false );  //設定欄位的 visibility
+			manager_opinion_list_tbl.fnSetColumnVis( i+1, false, false );  //設定欄位的 visibility
 		}
 		else if(document.getElementById('manager_opinion_col_' + i).value != "null")
 		{
-			manager_opinion_list_tbl.fnSetColumnVis( i, true, false );  //設定欄位的 visibility
+			manager_opinion_list_tbl.fnSetColumnVis( i+1, true, false );  //設定欄位的 visibility
 		}
 	}
 }
@@ -205,19 +200,32 @@ function adjust_project_display_column()
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;	
-	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	/*for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
 		display_columns[display_columns.length] = document.getElementById('col_' + i).value;
+	}*/
+	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	{
+		if(document.getElementById('project_list_head' + i) != null)
+		{
+			display_columns[display_columns.length] = document.getElementById('pro_col_select_box_' + i).value;
+		}
+		else
+		{
+			display_columns[display_columns.length] = "null";
+		}
+		
 	}
 	project_list_tbl.fnDestroy();
 	load_project_list(start_record, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<7;j++)  //設定表格head名稱
-	{
+	{		
 		if(document.getElementById('project_list_head' + j) != null)
 		{
-			document.getElementById('project_list_head' + j).innerHTML = column_mapping[document.getElementById('col_' + j).value] + '<div class="sortMask"></div>';
-			document.getElementById('project_list_foot' + j).innerHTML = column_mapping[document.getElementById('col_' + j).value];
+			//alert(document.getElementById('pro_col_select_box_' + j).value);
+			document.getElementById('pro_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('pro_col_select_box_' + j).value]+ '<div class="sortMask"></div>';
+			document.getElementById('project_list_foot' + j).innerHTML = column_mapping[document.getElementById('pro_col_select_box_' + j).value];
 		}
 	}
 	$("#project_column_choose_menu").dialog("close");	

@@ -2266,7 +2266,9 @@ td{
 
 .dataTables_length{
 	position:relative;
-	left:1155px;
+	/*left:1155px;
+	top:0px;*/
+	left:1050px;
 	top:0px;
 	text-align:right;
 	padding-bottom:10px;
