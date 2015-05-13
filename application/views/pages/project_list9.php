@@ -1,4 +1,4 @@
-<?php $column_mapping = array("null"=>"無","idea_id"=>"提案編號", "year"=>"年度", "idea_name"=>"提案名稱", "idea_source"=>"提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "stage"=>"階段狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "established_date"=>"立案日期",  "idea_examination"=>"提案審核履歷", "Idea"=>"I階段文件檢核", "Requirement"=>"R階段文件檢核", "Feasibility"=>"F階段文件檢核", "Prototype"=>"P階段文件檢核", "note"=>"備註", "adoption"=>"導入車型/先期式樣", "applied_patent"=>"專利申請/取得", "resurrection_application_qualified"=>"具備敗部復活申請資格", "resurrection_applied"=>"敗部復活申請", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案");?>
+<?php $column_mapping = array("null"=>"不顯示","idea_id"=>"提案編號", "year"=>"年度", "idea_name"=>"提案名稱", "idea_source"=>"提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "stage"=>"階段狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "established_date"=>"立案日期",  "idea_examination"=>"提案審核履歷", "Idea"=>"I階段文件檢核", "Requirement"=>"R階段文件檢核", "Feasibility"=>"F階段文件檢核", "Prototype"=>"P階段文件檢核", "note"=>"備註", "adoption"=>"導入車型/先期式樣", "applied_patent"=>"專利申請/取得", "resurrection_application_qualified"=>"具備敗部復活申請資格", "resurrection_applied"=>"敗部復活申請", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案");?>
 <div id="main" class="container-fluid" style="background-color:#FBFBF0;font-color:#635F5F;font-family: Adobe 繁黑體 Std;"><!--8E8D93-->
 	<div class="row">
 		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
@@ -18,9 +18,10 @@
 				<!--<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1155px;top:-10px;z-index:50;width: auto;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
 				</div>-->
-				<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6"><!--border-color:#C3DEB7;background-color:#C3DEB7;color:#821EC7 96BBDE-->
+				<!--border-color:#C3DEB7;background-color:#C3DEB7;color:#821EC7 96BBDE-->
+				<!--<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>新增欄位</div>
-				</div>
+				</div>-->
 				<table id="project_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px">
 					<thead>
 						<tr>
@@ -49,10 +50,22 @@
 				</table>
 			</div>
 		</div>
+		<span id="width_tmp" style="display:none"></span>
 	</div>
 	<script>
+	/*$(function() {
+		$('select').change(function(){
+			alert($('select option:selected').text());
+			//$("#width_tmp").html($('select option:selected').text());
+			$(this).width($('select option:selected').text()+20); // 30 : the size of the down arrow of the select box 
+		});
+	});*/
 	function pro_show_select_box(value)
 	{
+		$('#pro_col_select_box_'+value).change(function(){
+			$("#width_tmp").html($('#pro_col_select_box_'+value+' option:selected').text());
+			$(this).width($("#width_tmp").width()+38); // 35 : the size of the down arrow of the select box 
+		});
 		document.getElementById("pro_col_select_box_"+value).style.display="block";
 		//document.getElementById("col"+value).style.display="block";
 		document.getElementById("pro_col_plain_text_"+value).style.display="none";
@@ -439,6 +452,10 @@
 </div>
 <script>
 $(document).ready(function() {		
+	$('th select').width(function(){ //設定各select box的初始寬度, 依據選擇的option
+		$("#width_tmp").html($("option:selected", this).text());
+		$(this).width($("#width_tmp").width()+38);
+	});	
 	var start_record = 0;
 	var order_column = 1;
 	var order_method = "asc";
@@ -457,11 +474,54 @@ $(document).ready(function() {
 			display_columns[display_columns.length] = "null";
 		}
 	}
-	load_news_list(start_record, order_column, order_method, search_str, display_columns);
-	load_external_tech_list(start_record, order_column, order_method, search_str, display_columns);
-	load_manager_opinion_list(start_record, order_column, order_method, search_str, display_columns);
-	load_project_list(start_record, order_column, order_method, search_str, display_columns);
-} );
+	//load_news_list(start_record, order_column, order_method, search_str, display_columns);
+	//load_external_tech_list(start_record, order_column, order_method, search_str, display_columns);
+	//load_manager_opinion_list(start_record, order_column, order_method, search_str, display_columns);
+	load_project_list(start_record, order_column, order_method, search_str, display_columns);		
+});
+
+/*$( "table > tbody > tr" ).on( "mouseover", function() {
+	//console.log( $( this ).text() );
+	alert("hello");
+});*/
+
+$('#project_list_tbl').on('mouseover', 'tbody tr', function(){
+    //alert('You clicked row '+ ($(this).index()) );
+	var row_index = $(this).index();
+	var project_id = document.getElementById("row_project_hidden_"+row_index).value;
+	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_check_is_blocked";
+	var block_status;
+	$.ajax({
+		url:request_url,  
+		data:{			 //The data to send(will be converted to a query string)
+			id:project_id
+		},
+		type:"POST",		 //Whether this is a POST or GET request
+		dataType:"text", //回傳的資料型態
+		//Code to run if the request succeeds. The response is passed to the function
+		success:function(str){
+			block_status = $.trim(str);
+			if(block_status == "block")
+			{	
+				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/read6.png";
+			}
+			else if(block_status == "unblock")
+			{
+				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/edit3.png";
+			}
+		},
+		async:true,
+		//Code to run if the request fails; the raw request and status codes are passed to the function
+		error:function(xhr, status, errorThrown){
+			alert("Sorry, there was a problem!");
+			console.log("Error: " + errorThrown);
+			console.log("Status: " + status);
+			console.dir( xhr );
+		},
+		complete:function( xhr, status ){
+		}
+	});
+});
 
 /*datatables header點擊div class為sort的區域才排序*/
 $('th').on("click.DT", function (e) {
@@ -473,8 +533,7 @@ $('th').on("click", function (e) {
     if (!$(e.target).hasClass('sortMask')) {
         e.stopImmediatePropagation();
     }
-});		
-
+});	
 	
 /**
 調整瀏覽項目dialog
