@@ -2468,3 +2468,9 @@ select
 	min-width:50px;
 }
 
+.dataTables_processing
+{
+	background:url(../img/ajax-loader.gif);
+	/*background-color:red;*/
+}
+

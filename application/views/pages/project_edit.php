@@ -10,9 +10,10 @@
 			<!--<div id="list_project_button" onclick="list_project()" style="font-family: Adobe 繁黑體 Std; font-size:16px;"><i></i>專案列表</div>-->
 		<!--</div>-->		
 		<?php
+		/*當專案被鎖住，顯示提示訊息*/
 		if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username)
 		{
-			echo "<div style='text-align:center;font-size:14pt;color:blue'>使用者 ".$project_basic_info['current_user']." 正在編輯此專案，故您目前只能查看此專案資料。</div><br/>";
+			echo "<div style='text-align:center;font-size:12pt;color:blue;font-weight:normal;font-family: 新細明體'>使用者 ".$project_basic_info['current_user']." 正在編輯此專案</div><br/>";
 		}		
 		echo validation_errors();
 		$attributes = array('class' => 'form-horizontal', 'role'=>'form', 'id' => 'project_create_form', 'name'=>'project_create_form');
@@ -26,7 +27,7 @@
 			?>
 			<div class="col-sm-3 col-sm-offset-1">
 				<img class="thumbnail" src="<?php echo site_url()."application/assets/data_img/".$project_img[$i]['name'];?>" alt="示意圖1">
-			</div>	
+			</div>
 			<?php
 			//echo "<label class='col-sm-1 col-sm-offset-1 control-label'><img src='" . site_url() . "application/assets/data_img/" . $project_img[$i]['name'] . "' ></label>";
 			//echo "<div class='col-xs-12 col-sm-12' style='height:5px; '></div>";
@@ -373,13 +374,18 @@
 			-->		
 			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
 			<div style="margin-left:15px;font-family:微軟正黑體;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">請拖曳檔案到此(<a href="#" id="browse_file" onclick="browse_file()">瀏覽</a>檔案)</div>
-			<div id="file_list" class="statusbar" style="width:1300px;margin-left:15px;padding-bottom:10px">
-				<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
-				<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
-				<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
-				<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
-			</div>
-			<?php	
+			<?php
+			if(count($project_attachfile) != 0)  //當有附加檔案才呈現 
+			{
+			?>
+				<div id="file_list" class="statusbar" style="width:1300px;margin-left:15px;padding-bottom:10px">
+					<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
+					<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
+					<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
+					<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
+				</div>
+			<?php
+			}
 			$i=0;			
 			foreach($project_attachfile as $file)
 			{

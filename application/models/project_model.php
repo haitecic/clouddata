@@ -1292,10 +1292,8 @@ class Project_model extends CI_Model{
 				LOWER(`resurrection_application_qualified`) LIKE LOWER('%".$search_word[$i]."%') OR
 				LOWER(`resurrection_applied`) LIKE LOWER('%".$search_word[$i]."%') OR
 				LOWER(`PM_in_charge`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`closed_case`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`convert_to_pdf`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`file_name`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`instance_file_name`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`closed_case`) LIKE LOWER('%".$search_word[$i]."%') OR				
+				LOWER(`file_name`) LIKE LOWER('%".$search_word[$i]."%') OR				
 				LOWER(`file_content`) LIKE LOWER('%".$search_word[$i]."%'))";
 				if(($i+1) != count($search_word))
 				{
@@ -1323,7 +1321,7 @@ class Project_model extends CI_Model{
 		$order_column = $columns[intval($this->db->escape_str($parameter['order_column']))];
 		$order_method = $this->db->escape_str($parameter['order_method']);
 		//$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM (SELECT `project_all`.`id`, `year`, `km_id`, `idea_id`, `idea_name`, `idea_source`, `idea_description`, `scenario_d`, `function_d`,`distinction_d`,`value_d`,`feasibility_d`,`market_survey`,`km_survey`,`dep_item`,`inner_or_outer`,`stage`,`stage_detail`,`progress_description`,`proposed_unit`,`proposer`,`proposed_date`,`valid_project`,`established_date`,`joint_unit`,`joint_person`,`co_worker`,`idea_examination`,`Idea`,`Requirement`,`Feasibility`,`Prototype`,`note`,`adoption`,`applied_patent`,`resurrection_application_qualified`,`resurrection_applied`,`PM_in_charge`,`closed_case`, `is_blocked` FROM `project_all` LEFT JOIN `project_attachment` ON `project_all`.`id` = `project_attachment`.`project_id` WHERE '.$rule.' GROUP BY `project_all`.`id`) AS T ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];  //撈出資料庫完整欄位資料
-		$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM (SELECT `project_all`.`id`, `year`, `idea_id`, `idea_name`, `idea_source`, `scenario_d`, `function_d`,`distinction_d`,`value_d`,`feasibility_d`, `stage`, `progress_description`,`proposed_unit`,`proposer`, `Idea`, `Requirement`, `Feasibility`, `Prototype`, `note`, `applied_patent`,`resurrection_application_qualified`,`resurrection_applied`,`PM_in_charge`, `idea_examination`,`closed_case`, established_date, adoption, `is_blocked` FROM `project_all` LEFT JOIN `project_attachment` ON `project_all`.`id` = `project_attachment`.`project_id` WHERE '.$rule.' GROUP BY `project_all`.`id`) AS T ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];  //只撈出project_list需呈現之資料
+		$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM (SELECT `project_all`.`id`, `year`, `idea_id`, `idea_name`, `idea_source`, `scenario_d`, `function_d`,`distinction_d`,`value_d`,`feasibility_d`, `stage`, `progress_description`,`proposed_unit`,`proposer`, `Idea`, `Requirement`, `Feasibility`, `Prototype`, `note`, `applied_patent`,`resurrection_application_qualified`,`resurrection_applied`,`PM_in_charge`, `idea_examination`,`closed_case`, established_date, adoption, `is_blocked`, `file_name`, `file_content` FROM `project_all` LEFT JOIN `project_attachment` ON `project_all`.`id` = `project_attachment`.`project_id` WHERE '.$rule.' GROUP BY `project_all`.`id`) AS T ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];  //只撈出project_list需呈現之資料
 		$rResult = $this->db->query($query_string);
 		/*
         if(isset($parameter['search']) && !empty($parameter['search']))
@@ -1375,7 +1373,7 @@ class Project_model extends CI_Model{
 		$a = 0;
 		$row_index = 0;  //表格row的id編號
 		//$column_mapping = array("idea_id"=>"創意提案編號", "year"=>"年分", "km_id"=>"KM文件編號", "idea_name"=>"創意提案名稱", "idea_source"=>"創意提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "market_survey"=>"市場搜尋", "km_survey"=>"KM平台搜尋", "dep_item"=>"研發項目確認", "idea_description"=>"提案說明", "inner_or_outer"=>"提案類別", "stage"=>"階段狀態", "stage_detail"=>"階段細項狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "proposed_date"=>"提案日期", "valid_project"=>"有效提案", "established_date"=>"立案日期", "joint_unit"=>"協辦單位", "joint_person"=>"協辦窗口", "co_worker"=>"承作廠商", "idea_examination"=>"提案審核進度", "Idea"=>"Idea", "Requirement"=>"Requirement", "Feasibility"=>"Feasibility", "Prototype"=>"Prototype", "note"=>"備註", "adoption"=>"導入車型", "applied_patent"=>"專利申請", "resurrection_application_qualified"=>"具敗部復活申請資格", "resurrection_applied"=>"申請敗部復活", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案");
-		$column_mapping = array("idea_id"=>"提案編號", "year"=>"年度", "idea_name"=>"提案名稱", "idea_source"=>"提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "stage"=>"階段狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "established_date"=>"立案日期",  "idea_examination"=>"提案審核履歷", "Idea"=>"I階段文件檢核", "Requirement"=>"R階段文件檢核", "Feasibility"=>"F階段文件檢核", "Prototype"=>"P階段文件檢核", "note"=>"備註", "adoption"=>"導入車型/先期式樣", "applied_patent"=>"專利申請/取得", "resurrection_application_qualified"=>"具備敗部復活申請資格", "resurrection_applied"=>"敗部復活申請", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案");
+		$column_mapping = array("idea_id"=>"提案編號", "year"=>"年度", "idea_name"=>"提案名稱", "idea_source"=>"提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "stage"=>"階段狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "established_date"=>"立案日期",  "idea_examination"=>"提案審核履歷", "Idea"=>"I階段文件檢核", "Requirement"=>"R階段文件檢核", "Feasibility"=>"F階段文件檢核", "Prototype"=>"P階段文件檢核", "note"=>"備註", "adoption"=>"導入車型/先期式樣", "applied_patent"=>"專利申請/取得", "resurrection_application_qualified"=>"具備敗部復活申請資格", "resurrection_applied"=>"敗部復活申請", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案", "file_name"=>"於附加檔案中", "file_content"=>"於附加檔案中");
 		foreach($rResult->result_array() as $project)
         {
 			$key_sentence = "";  //存放關鍵句子
@@ -1423,7 +1421,14 @@ class Project_model extends CI_Model{
 				{					
 					if(stripos($content, $key_sentence) !== false)
 					{		
-						$column = $column_mapping[$index];
+						if($index == "file_content")  //假如關鍵句在附加檔案中
+						{
+							$column = '(附加檔案)'.$project['file_name'];
+						}
+						else
+						{
+							$column = $column_mapping[$index];
+						}
 						break;
 					}
 				}
@@ -1453,7 +1458,7 @@ class Project_model extends CI_Model{
 						case 'id':	
 							if($project['is_blocked'] == 1)	
 							{							
-								$row[$i] = "<input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/read6.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/>";
+								$row[$i] = "<input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/lock3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/>";
 							}
 							else if($project['is_blocked'] == 2)
 							{

@@ -50,25 +50,8 @@ $column_mapping = array("null"=>"不顯示","idea_id"=>"提案編號", "year"=>"
 					</tfoot>
 				</table>
 			</div>
-		</div>
-		<span id="width_tmp" style="display:none"></span>
-	</div>
-	<script>	
-	function pro_show_select_box(value)
-	{
-		$('#pro_col_select_box_'+value).mouseover(function(){  //change
-			$("#width_tmp").html($('#pro_col_select_box_'+value+' option:selected').text());
-			$(this).width($("#width_tmp").width()+38); // 35 : the size of the down arrow of the select box 
-		});
-		document.getElementById("pro_col_select_box_"+value).style.display="block";		
-		document.getElementById("pro_col_plain_text_"+value).style.display="none";
-	}
-	function pro_hide_select_box(value)
-	{
-		document.getElementById("pro_col_select_box_"+value).style.display="none";
-		document.getElementById("pro_col_plain_text_"+value).style.display="block";
-	}
-	</script>
+		</div>		
+	</div>	
 	<div id="news" class="row">
 		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
 			<div class="box-header" style="margin-left:-15px;margin-right:-15px;padding-top:7px;height:40px;font-size:14pt">
@@ -440,6 +423,7 @@ $column_mapping = array("null"=>"不顯示","idea_id"=>"提案編號", "year"=>"
 	</div>
 	<!--</form>-->
 </div>
+<span id="width_tmp" style="display:none"></span>
 <script>
 $(document).ready(function() {		
 	$('th select').width(function(){ //設定各select box的初始寬度, 依據選擇的option
@@ -470,6 +454,21 @@ $(document).ready(function() {
 	load_manager_opinion_list(start_record, order_column, order_method, search_str, display_columns);
 	load_project_list(is_load, start_record, order_column, order_method, search_str, display_columns);	
 });
+	
+function pro_show_select_box(value)
+{
+	$('#pro_col_select_box_'+value).mouseover(function(){  //change
+		$("#width_tmp").html($('#pro_col_select_box_'+value+' option:selected').text());
+		$(this).width($("#width_tmp").width()+38); // 35 : the size of the down arrow of the select box 
+	});
+	document.getElementById("pro_col_select_box_"+value).style.display="block";		
+	document.getElementById("pro_col_plain_text_"+value).style.display="none";
+}
+function pro_hide_select_box(value)
+{
+	document.getElementById("pro_col_select_box_"+value).style.display="none";
+	document.getElementById("pro_col_plain_text_"+value).style.display="block";
+}
 
 $('#project_list_tbl').on('mouseover', 'tbody tr', function(){
     //alert('You clicked row '+ ($(this).index()) );
@@ -489,7 +488,7 @@ $('#project_list_tbl').on('mouseover', 'tbody tr', function(){
 			block_status = $.trim(str);
 			if(block_status == "block")
 			{	
-				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/read6.png";
+				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/lock3.png";
 			}
 			else if(block_status == "unblock")
 			{
