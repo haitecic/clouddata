@@ -1251,50 +1251,52 @@ class Project_model extends CI_Model{
 			//分析搜尋框輸入的內容
 			$rule = "";	
 			$search_word = explode(' ', $search_content);
+			/*
+			`idea_description` LIKE '%".$search_word[$i]."%' OR 
+			`km_id` LIKE '%".$search_word[$i]."%' OR
+			`market_survey` LIKE '%".$search_word[$i]."%' OR
+			`km_survey` LIKE '%".$search_word[$i]."%' OR
+			`dep_item` LIKE '%".$search_word[$i]."%' OR
+			`inner_or_outer` LIKE '%".$search_word[$i]."%' OR
+			`proposed_date` LIKE BINARY'%".$search_word[$i]."%' OR
+			`joint_unit` LIKE '%".$search_word[$i]."%' OR
+			`joint_person` LIKE '%".$search_word[$i]."%' OR
+			`co_worker` LIKE '%".$search_word[$i]."%' OR
+			`valid_project` LIKE '%".$search_word[$i]."%' OR
+			*/
 			for($i=0;$i<count($search_word);$i++)
 			{
-				$rule = $rule."(`year` LIKE '%".$search_word[$i]."%' OR 
-				`km_id` LIKE '%".$search_word[$i]."%' OR
-				`idea_id` LIKE '%".$search_word[$i]."%' OR 
-				`idea_name` LIKE '%".$search_word[$i]."%' OR 
-				`idea_source` LIKE '%".$search_word[$i]."%' OR 
-				`idea_description` LIKE '%".$search_word[$i]."%' OR
-				`scenario_d` LIKE '%".$search_word[$i]."%' OR
-				`function_d` LIKE '%".$search_word[$i]."%' OR
-				`distinction_d` LIKE '%".$search_word[$i]."%' OR
-				`value_d` LIKE '%".$search_word[$i]."%' OR
-				`feasibility_d` LIKE '%".$search_word[$i]."%' OR
-				`market_survey` LIKE '%".$search_word[$i]."%' OR
-				`km_survey` LIKE '%".$search_word[$i]."%' OR
-				`dep_item` LIKE '%".$search_word[$i]."%' OR
-				`inner_or_outer` LIKE '%".$search_word[$i]."%' OR
-				`stage` LIKE '%".$search_word[$i]."%' OR
-				`stage_detail` LIKE '%".$search_word[$i]."%' OR
-				`progress_description` LIKE '%".$search_word[$i]."%' OR
-				`proposed_unit` LIKE '%".$search_word[$i]."%' OR
-				`proposer` LIKE '%".$search_word[$i]."%' OR
-				`proposed_date` LIKE BINARY'%".$search_word[$i]."%' OR
-				`valid_project` LIKE '%".$search_word[$i]."%' OR
-				`established_date` LIKE BINARY'%".$search_word[$i]."%' OR
-				`joint_unit` LIKE '%".$search_word[$i]."%' OR
-				`joint_person` LIKE '%".$search_word[$i]."%' OR
-				`co_worker` LIKE '%".$search_word[$i]."%' OR
-				`idea_examination` LIKE '%".$search_word[$i]."%' OR
-				`Idea` LIKE '%".$search_word[$i]."%' OR
-				`Requirement` LIKE '%".$search_word[$i]."%' OR
-				`Feasibility` LIKE '%".$search_word[$i]."%' OR
-				`Prototype` LIKE '%".$search_word[$i]."%' OR
-				`note` LIKE '%".$search_word[$i]."%' OR
-				`adoption` LIKE '%".$search_word[$i]."%' OR
-				`applied_patent` LIKE '%".$search_word[$i]."%' OR
-				`resurrection_application_qualified` LIKE '%".$search_word[$i]."%' OR
-				`resurrection_applied` LIKE '%".$search_word[$i]."%' OR
-				`PM_in_charge` LIKE '%".$search_word[$i]."%' OR
-				`closed_case` LIKE '%".$search_word[$i]."%' OR
-				`convert_to_pdf` LIKE '%".$search_word[$i]."%' OR
-				`file_name` LIKE '%".$search_word[$i]."%' OR
-				`instance_file_name` LIKE '%".$search_word[$i]."%' OR
-				`file_content` LIKE '%".$search_word[$i]."%')";
+				$rule = $rule."(LOWER(`year`) LIKE LOWER('%".$search_word[$i]."%') OR 				
+				LOWER(`idea_id`) LIKE LOWER('%".$search_word[$i]."%') OR 
+				LOWER(`idea_name`) LIKE LOWER('%".$search_word[$i]."%') OR 
+				LOWER(`idea_source`) LIKE LOWER('%".$search_word[$i]."%') OR 
+				LOWER(`scenario_d`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`function_d`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`distinction_d`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`value_d`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`feasibility_d`) LIKE LOWER('%".$search_word[$i]."%') OR				
+				LOWER(`stage`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`stage_detail`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`progress_description`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`proposed_unit`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`proposer`) LIKE LOWER('%".$search_word[$i]."%') OR				
+				LOWER(`established_date`) LIKE BINARY LOWER('%".$search_word[$i]."%') OR				
+				LOWER(`idea_examination`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`Idea`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`Requirement`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`Feasibility`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`Prototype`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`note`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`adoption`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`applied_patent`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`resurrection_application_qualified`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`resurrection_applied`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`PM_in_charge`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`closed_case`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`convert_to_pdf`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`file_name`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`instance_file_name`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`file_content`) LIKE LOWER('%".$search_word[$i]."%'))";
 				if(($i+1) != count($search_word))
 				{
 					$rule = $rule." AND ";
@@ -1399,9 +1401,9 @@ class Project_model extends CI_Model{
 					$score = 0;
 					for($j=0;$j<count($search_word);$j++)
 					{
-						if(strpos($sentence, $search_word[$j]) !== false)
+						if(stripos($sentence, $search_word[$j]) !== false)
 						{
-							$score = $score + substr_count($sentence, $search_word[$j]);
+							$score = $score + substr_count(strtoupper($sentence), strtoupper($search_word[$j]));
 						}
 					}
 					array_push($temp_score, (int)$score);					
@@ -1419,15 +1421,15 @@ class Project_model extends CI_Model{
 				$key_sentence = $sen;
 				foreach($project as $index => $content)
 				{					
-					if(strpos($content, $key_sentence) !== false)
+					if(stripos($content, $key_sentence) !== false)
 					{		
 						$column = $column_mapping[$index];
 						break;
 					}
 				}
-				if(strlen(($column.':'.$key_sentence)) > 65)
+				if(strlen(($column.':'.$key_sentence)) > 30) //65
 				{
-					$search_result_hint = "<div id='$a' onmouseover='show_more_content(this)' onmouseout='show_more_content(this)' style='font-size:10pt;	text-overflow:ellipsis;	width:300px; overflow:hidden; white-space:nowrap;'>$column : $key_sentence</div>";
+					$search_result_hint = "<div id='$a' onmouseover='show_more_content(this)' onmouseout='show_more_content(this)' style='font-size:10pt;	text-overflow:ellipsis;	width:100%; overflow:hidden; white-space:nowrap;'>$column : $key_sentence</div>";
 					$a++;
 				}
 				else

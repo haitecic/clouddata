@@ -1,6 +1,6 @@
 var column_mapping = {idea_id:"提案編號", year:"年度", idea_name:"提案名稱", idea_source:"提案來源", scenario_d:"情境說明", function_d:"功能構想", distinction_d:"差異化", value_d:"價值性", feasibility_d:"可行性", stage:"階段狀態", progress_description:"進度說明", proposed_unit:"提案單位", proposer:"提案人", established_date:"立案日期", idea_examination:"提案審核履歷", Idea:"I階段文件檢核", Requirement:"R階段文件檢核", Feasibility:"F階段文件檢核", Prototype:"P階段文件檢核", note:"備註", adoption:"導入車型/先期式樣", applied_patent:"專利申請/取得", resurrection_application_qualified:"具備敗部復活申請資格", resurrection_applied:"敗部復活申請", PM_in_charge:"創意中心窗口", closed_case:"結案"};
 var project_list_tbl;
-function load_project_list(start_record, order_column, order_method, search_str, display_columns)
+function load_project_list(is_load, start_record, order_column, order_method, search_str, display_columns)
 {	
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
@@ -31,19 +31,35 @@ function load_project_list(start_record, order_column, order_method, search_str,
             { "name": 5 },
             { "name": 6 },
 			{ "name": 7 }
-        ]
+        ],
+		"oLanguage":{
+			"sProcessing":"資料載入中...",
+            "sLengthMenu":"顯示筆數: _MENU_ ",
+            "sZeroRecords":"找不到符合的結果",
+            "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "sInfoEmpty":"顯示第 0 至 0 項結果，共 0 項",
+            "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+            "sSearch":"查詢:",
+            "oPaginate":{
+				"sFirst":"第一頁",
+                "sPrevious":"上一頁",
+                "sNext":"下一頁",
+                "sLast":"最後一頁"}
+        }
     } );
-	var i;	
-	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	if(is_load == true)	
 	{
-		//alert(document.getElementById('pro_col_select_box_' + i).value);
-		if(document.getElementById('pro_col_select_box_' + i).value == "null")
+		var j;
+		for(j=0;j<7;j++)
 		{
-			project_list_tbl.fnSetColumnVis( i+1, false, false );  //設定欄位的 visibility
-		}
-		else if(document.getElementById('pro_col_select_box_' + i).value != "null")
-		{
-			project_list_tbl.fnSetColumnVis( i+1, true, false );  //設定欄位的 visibility
+			if(document.getElementById('col_' + j).value == "null")
+			{
+				project_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+			}
+			else if(document.getElementById('col_' + j).value != "null")
+			{
+				project_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility			
+			}
 		}
 	}
 }
@@ -192,43 +208,83 @@ function load_manager_opinion_list(start_record, order_column, order_method, sea
 	}
 }
 
-function adjust_project_display_column()
+function adjust_project_display_column_by_menu()
 {
+	var is_load = false;
 	var start_record = project_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
 	var order_column = 1;
 	var order_method = "asc";
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;	
-	/*for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
 		display_columns[display_columns.length] = document.getElementById('col_' + i).value;
-	}*/
+	}	
+	project_list_tbl.fnDestroy();
+	load_project_list(is_load, start_record, order_column, order_method, search_str, display_columns);
+	var j;
+	for(j=0;j<7;j++)  //設定表格head名稱
+	{	
+		if(document.getElementById('col_' + j).value != "null")
+		{  			
+			project_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
+			document.getElementById('pro_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('col_' + j).value];
+			document.getElementById('pro_col_select_box_' + j).value = document.getElementById('col_' + j).value;
+			document.getElementById('project_list_foot' + j).innerHTML = column_mapping[document.getElementById('col_' + j).value];
+			document.getElementById("pro_col_select_box_" + j).style.display="none";		
+			document.getElementById("pro_col_plain_text_" + j).style.display="block";
+		}
+		else if(document.getElementById('col_' + j).value == "null")
+		{			
+			document.getElementById('pro_col_plain_text_' + j).innerHTML = "不顯示";
+			document.getElementById('pro_col_select_box_' + j).value = "null";
+			document.getElementById('project_list_foot' + j).innerHTML = "不顯示";
+			project_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+		}
+	}
+	$("#project_column_choose_menu").dialog("close");	
+}
+
+function adjust_project_display_column_by_column()
+{
+	var first_load =false;
+	var start_record = project_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
+	var order_column = 1;
+	var order_method = "asc";
+	var display_columns = [];
+	var search_str = document.getElementById("search_bar").value;
+	var i;
 	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
 		if(document.getElementById('project_list_head' + i) != null)
-		{
-			display_columns[display_columns.length] = document.getElementById('pro_col_select_box_' + i).value;
+		{	
+			display_columns[display_columns.length] = document.getElementById('pro_col_select_box_' + i).value;	
 		}
 		else
 		{
 			display_columns[display_columns.length] = "null";
 		}
-		
-	}
+	}	
+	
 	project_list_tbl.fnDestroy();
-	load_project_list(start_record, order_column, order_method, search_str, display_columns);
+	load_project_list(first_load, start_record, order_column, order_method, search_str, display_columns);
 	var j;
-	for(j=0;j<7;j++)  //設定表格head名稱
-	{		
-		if(document.getElementById('project_list_head' + j) != null)
+	for(j=0;j<7;j++)
+	{
+		if(document.getElementById('pro_col_select_box_' + j).value == "null")
 		{
-			//alert(document.getElementById('pro_col_select_box_' + j).value);
-			document.getElementById('pro_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('pro_col_select_box_' + j).value]+ '<div class="sortMask"></div>';
+			document.getElementById('col_' + j).value = "null";
+			project_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+		}
+		else if(document.getElementById('pro_col_select_box_' + j).value != "null")
+		{
+			document.getElementById('pro_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('pro_col_select_box_' + j).value];//+ '<div class="sortMask"></div>';
 			document.getElementById('project_list_foot' + j).innerHTML = column_mapping[document.getElementById('pro_col_select_box_' + j).value];
+			document.getElementById('col_' + j).value = document.getElementById('pro_col_select_box_' + j).value;
+			project_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility			
 		}
 	}
-	$("#project_column_choose_menu").dialog("close");	
 }
 
 function adjust_news_display_column()
