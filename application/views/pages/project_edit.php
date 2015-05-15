@@ -587,12 +587,12 @@ $(document).ready(function()
 			dataType:"text", //回傳的資料型態
 			//Code to run if the request succeeds. The response is passed to the function
 			success:function(str){
-				//alert(str);
+				//alert(str);				
 			},
 			async:false,
 			//Code to run if the request fails; the raw request and status codes are passed to the function
 			error:function(xhr, status, errorThrown){
-				alert("Sorry, there was a problem!");
+				//alert("Sorry, there was a problem!");
 				console.log("Error: " + errorThrown);
 				console.log("Status: " + status);
 				console.dir( xhr );

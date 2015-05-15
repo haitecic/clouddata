@@ -13,7 +13,7 @@ function load_project_list(is_load, start_record, order_column, order_method, se
         "processing": true,
         "serverSide": true,
 		"ajax": {
-			"url": "data/getTable4",
+			"url": "data/project_table",
 			"data":{			 	
 				"Data":sendData
 			},
@@ -52,7 +52,7 @@ function load_project_list(is_load, start_record, order_column, order_method, se
 		var j;
 		for(j=0;j<7;j++)
 		{
-			if(document.getElementById('col_' + j).value == "null")
+			if((document.getElementById('col_' + j) == null) || (document.getElementById('col_' + j).value == "null"))
 			{
 				project_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
 			}
@@ -65,7 +65,7 @@ function load_project_list(is_load, start_record, order_column, order_method, se
 }
 
 var news_list_tbl;
-function load_news_list(start_record, order_column, order_method, search_str, display_columns)
+function load_news_list(is_load, start_record, order_column, order_method, search_str, display_columns)
 {	
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
@@ -78,7 +78,7 @@ function load_news_list(start_record, order_column, order_method, search_str, di
         "processing": true,
         "serverSide": true,
 		"ajax": {
-			"url": "data/getTable4",
+			"url": "data/news_table",
 			"data":{			 	
 				"Data":sendData
 			},
@@ -96,24 +96,41 @@ function load_news_list(start_record, order_column, order_method, search_str, di
             { "data": 5 },
 			{ "data": 6 },
 			{ "data": 7 }
-        ]
+        ],
+		"oLanguage":{
+			"sProcessing":"資料載入中...",
+            "sLengthMenu":"顯示筆數: _MENU_ ",
+            "sZeroRecords":"找不到符合的結果",
+            "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "sInfoEmpty":"顯示第 0 至 0 項結果，共 0 項",
+            "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+            "sSearch":"查詢:",
+            "oPaginate":{
+				"sFirst":"第一頁",
+                "sPrevious":"上一頁",
+                "sNext":"下一頁",
+                "sLast":"最後一頁"}
+        }
     } );
-	var i;	
-	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	if(is_load == true)	
 	{
-		if(document.getElementById('news_col_' + i).value == "null")
+		var j;
+		for(j=0;j<7;j++)
 		{
-			news_list_tbl.fnSetColumnVis( i+1, false, false );  //設定欄位的 visibility
-		}
-		else if(document.getElementById('news_col_' + i).value != "null")
-		{
-			news_list_tbl.fnSetColumnVis( i+1, true, false );  //設定欄位的 visibility
+			if((document.getElementById('news_col_' + j) == null) || (document.getElementById('news_col_' + j).value == "null"))
+			{
+				news_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+			}
+			else if(document.getElementById('news_col_' + j).value != "null")
+			{				
+				news_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility			
+			}			
 		}
 	}
 }
 
 var external_tech_list_tbl;
-function load_external_tech_list(start_record, order_column, order_method, search_str, display_columns)
+function load_external_tech_list(is_load, start_record, order_column, order_method, search_str, display_columns)
 {	
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
@@ -126,7 +143,7 @@ function load_external_tech_list(start_record, order_column, order_method, searc
         "processing": true,
         "serverSide": true,
 		"ajax": {
-			"url": "data/getTable4",
+			"url": "data/external_tech_table",
 			"data":{			 	
 				"Data":sendData
 			},
@@ -144,25 +161,42 @@ function load_external_tech_list(start_record, order_column, order_method, searc
             { "data": 5 },
             { "data": 6 },
 			{ "data": 7 }
-        ]
+        ],
+		"oLanguage":{
+			"sProcessing":"資料載入中...",
+            "sLengthMenu":"顯示筆數: _MENU_ ",
+            "sZeroRecords":"找不到符合的結果",
+            "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "sInfoEmpty":"顯示第 0 至 0 項結果，共 0 項",
+            "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+            "sSearch":"查詢:",
+            "oPaginate":{
+				"sFirst":"第一頁",
+                "sPrevious":"上一頁",
+                "sNext":"下一頁",
+                "sLast":"最後一頁"}
+        }
     } );
-	var i;	
-	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	if(is_load == true)	
 	{
-		if(document.getElementById('external_tech_col_' + i).value == "null")
+		var j;
+		for(j=0;j<7;j++)
 		{
-			external_tech_list_tbl.fnSetColumnVis( i+1, false, false );  //設定欄位的 visibility
-		}
-		else if(document.getElementById('external_tech_col_' + i).value != "null")
-		{
-			external_tech_list_tbl.fnSetColumnVis( i+1, true, false );  //設定欄位的 visibility
+			if((document.getElementById('external_tech_col_' + j) == null) || (document.getElementById('external_tech_col_' + j).value == "null"))
+			{
+				external_tech_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+			}
+			else if(document.getElementById('external_tech_col_' + j).value != "null")
+			{
+				external_tech_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility			
+			}
 		}
 	}
 }
 
 var manager_opinion_list_tbl;
-function load_manager_opinion_list(start_record, order_column, order_method, search_str, display_columns)
-{	
+function load_manager_opinion_list(is_load, start_record, order_column, order_method, search_str, display_columns)
+{		
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
     manager_opinion_list_tbl = $('#manager_opinion_list_tbl').dataTable( {	
@@ -174,7 +208,7 @@ function load_manager_opinion_list(start_record, order_column, order_method, sea
         "processing": true,
         "serverSide": true,
 		"ajax": {
-			"url": "data/getTable4",
+			"url": "data/manager_opinion_table",
 			"data":{			 	
 				"Data":sendData
 			},
@@ -192,18 +226,36 @@ function load_manager_opinion_list(start_record, order_column, order_method, sea
             { "data": 5 },
             { "data": 6 },
 			{ "data": 7 }
-        ]
+        ],
+		"oLanguage":{
+			"sProcessing":"資料載入中...",
+            "sLengthMenu":"顯示筆數: _MENU_ ",
+            "sZeroRecords":"找不到符合的結果",
+            "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "sInfoEmpty":"顯示第 0 至 0 項結果，共 0 項",
+            "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+            "sSearch":"查詢:",
+            "oPaginate":{
+				"sFirst":"第一頁",
+                "sPrevious":"上一頁",
+                "sNext":"下一頁",
+                "sLast":"最後一頁"}
+        }
     } );
-	var i;	
-	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	
+	if(is_load == true)	
 	{
-		if(document.getElementById('manager_opinion_col_' + i).value == "null")
+		var j;
+		for(j=0;j<7;j++)
 		{
-			manager_opinion_list_tbl.fnSetColumnVis( i+1, false, false );  //設定欄位的 visibility
-		}
-		else if(document.getElementById('manager_opinion_col_' + i).value != "null")
-		{
-			manager_opinion_list_tbl.fnSetColumnVis( i+1, true, false );  //設定欄位的 visibility
+			if((document.getElementById('manager_opinion_col_' + j) == null) || (document.getElementById('manager_opinion_col_' + j).value == "null"))
+			{
+				manager_opinion_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+			}
+			else if(document.getElementById('manager_opinion_col_' + j).value != "null")
+			{
+				manager_opinion_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility			
+			}
 		}
 	}
 }
@@ -236,7 +288,7 @@ function adjust_project_display_column_by_menu()
 			document.getElementById("pro_col_plain_text_" + j).style.display="block";
 		}
 		else if(document.getElementById('col_' + j).value == "null")
-		{			
+		{								
 			document.getElementById('pro_col_plain_text_' + j).innerHTML = "不顯示";
 			document.getElementById('pro_col_select_box_' + j).value = "null";
 			document.getElementById('project_list_foot' + j).innerHTML = "不顯示";
@@ -244,6 +296,120 @@ function adjust_project_display_column_by_menu()
 		}
 	}
 	$("#project_column_choose_menu").dialog("close");	
+}
+
+function adjust_news_display_column_by_menu()
+{
+	var is_load = false;
+	var start_record = news_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
+	var order_column = 1;
+	var order_method = "asc";
+	var display_columns = [];
+	var search_str = document.getElementById("search_bar").value;
+	var i;	
+	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	{
+		display_columns[display_columns.length] = document.getElementById('news_col_' + i).value;
+	}	
+	news_list_tbl.fnDestroy();
+	load_news_list(is_load, start_record, order_column, order_method, search_str, display_columns);
+	var j;
+	for(j=0;j<7;j++)  //設定表格head名稱
+	{	
+		if(document.getElementById('news_col_' + j).value != "null")
+		{  			
+			news_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
+			document.getElementById('news_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('news_col_' + j).value];
+			document.getElementById('news_col_select_box_' + j).value = document.getElementById('news_col_' + j).value;
+			document.getElementById('news_list_foot' + j).innerHTML = column_mapping[document.getElementById('news_col_' + j).value];
+			document.getElementById("news_col_select_box_" + j).style.display="none";		
+			document.getElementById("news_col_plain_text_" + j).style.display="block";
+		}
+		else if(document.getElementById('news_col_' + j).value == "null")
+		{						
+			document.getElementById('news_col_plain_text_' + j).innerHTML = "不顯示";
+			document.getElementById('news_col_select_box_' + j).value = "null";
+			document.getElementById('news_list_foot' + j).innerHTML = "不顯示";
+			news_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+		}
+	}
+	$("#news_column_choose_menu").dialog("close");	
+}
+
+function adjust_external_tech_display_column_by_menu()
+{
+	var is_load = false;
+	var start_record = external_tech_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
+	var order_column = 1;
+	var order_method = "asc";
+	var display_columns = [];
+	var search_str = document.getElementById("search_bar").value;
+	var i;	
+	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	{
+		display_columns[display_columns.length] = document.getElementById('external_tech_col_' + i).value;
+	}	
+	external_tech_list_tbl.fnDestroy();
+	load_external_tech_list(is_load, start_record, order_column, order_method, search_str, display_columns);
+	var j;
+	for(j=0;j<7;j++)  //設定表格head名稱
+	{	
+		if(document.getElementById('external_tech_col_' + j).value != "null")
+		{  			
+			external_tech_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
+			document.getElementById('external_tech_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('external_tech_col_' + j).value];
+			document.getElementById('external_tech_col_select_box_' + j).value = document.getElementById('external_tech_col_' + j).value;
+			document.getElementById('external_tech_list_foot' + j).innerHTML = column_mapping[document.getElementById('external_tech_col_' + j).value];
+			document.getElementById("external_tech_col_select_box_" + j).style.display="none";		
+			document.getElementById("external_tech_col_plain_text_" + j).style.display="block";
+		}
+		else if(document.getElementById('external_tech_col_' + j).value == "null")
+		{			
+			document.getElementById('external_tech_col_plain_text_' + j).innerHTML = "不顯示";
+			document.getElementById('external_tech_col_select_box_' + j).value = "null";
+			document.getElementById('external_tech_list_foot' + j).innerHTML = "不顯示";
+			external_tech_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+		}
+	}
+	$("#external_tech_column_choose_menu").dialog("close");	
+}
+
+function adjust_manager_opinion_display_column_by_menu()
+{
+	var is_load = false;
+	var start_record = manager_opinion_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
+	var order_column = 1;
+	var order_method = "asc";
+	var display_columns = [];
+	var search_str = document.getElementById("search_bar").value;
+	var i;	
+	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	{
+		display_columns[display_columns.length] = document.getElementById('manager_opinion_col_' + i).value;
+	}	
+	manager_opinion_list_tbl.fnDestroy();
+	load_manager_opinion_list(is_load, start_record, order_column, order_method, search_str, display_columns);
+	var j;
+	for(j=0;j<7;j++)  //設定表格head名稱
+	{	
+		if(document.getElementById('manager_opinion_col_' + j).value != "null")
+		{  			
+			manager_opinion_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
+			document.getElementById('manager_opinion_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('manager_opinion_col_' + j).value];
+			document.getElementById('manager_opinion_col_select_box_' + j).value = document.getElementById('manager_opinion_col_' + j).value;
+			document.getElementById('manager_opinion_list_foot' + j).innerHTML = column_mapping[document.getElementById('manager_opinion_col_' + j).value];
+			document.getElementById("manager_opinion_col_select_box_" + j).style.display="none";		
+			document.getElementById("manager_opinion_col_plain_text_" + j).style.display="block";
+		}
+		else if(document.getElementById('manager_opinion_col_' + j).value == "null")
+		{					
+			document.getElementById('manager_opinion_col_plain_text_' + j).innerHTML = "不顯示";
+			document.getElementById('manager_opinion_col_select_box_' + j).value = "null";
+			document.getElementById('manager_opinion_list_foot' + j).innerHTML = "不顯示";
+			manager_opinion_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+		}
+	}
+	$("#manager_opinion_column_choose_menu").dialog("close");	
 }
 
 function adjust_project_display_column_by_column()
@@ -274,95 +440,137 @@ function adjust_project_display_column_by_column()
 	{
 		if(document.getElementById('pro_col_select_box_' + j).value == "null")
 		{
-			document.getElementById('col_' + j).value = "null";
 			project_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+			document.getElementById('col_' + j).value = "null";
 		}
 		else if(document.getElementById('pro_col_select_box_' + j).value != "null")
-		{
+		{				
 			document.getElementById('pro_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('pro_col_select_box_' + j).value];//+ '<div class="sortMask"></div>';
 			document.getElementById('project_list_foot' + j).innerHTML = column_mapping[document.getElementById('pro_col_select_box_' + j).value];
 			document.getElementById('col_' + j).value = document.getElementById('pro_col_select_box_' + j).value;
-			project_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility			
+			project_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
 		}
 	}
 }
 
-function adjust_news_display_column()
+function adjust_news_display_column_by_column()
 {
+	var first_load =false;
 	var start_record = news_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
 	var order_column = 1;
 	var order_method = "asc";
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
-	var i;	
+	var i;
 	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
-		display_columns[display_columns.length] = document.getElementById('news_col_' + i).value;
-	}
-	news_list_tbl.fnDestroy();
-	load_news_list(start_record, order_column, order_method, search_str, display_columns);
-	var j;	
-	for(j=0;j<7;j++)  //設定表格head名稱
-	{
-		if(document.getElementById('news_list_head' + j) != null)
+		if(document.getElementById('news_list_head' + i) != null)
+		{	
+			display_columns[display_columns.length] = document.getElementById('news_col_select_box_' + i).value;	
+		}
+		else
 		{
-			document.getElementById('news_list_head' + j).innerHTML = column_mapping[document.getElementById('news_col_' + j).value] + '<div class="sortMask"></div>';
-			document.getElementById('news_list_foot' + j).innerHTML = column_mapping[document.getElementById('news_col_' + j).value];
+			display_columns[display_columns.length] = "null";
+		}
+	}	
+	news_list_tbl.fnDestroy();
+	load_news_list(first_load, start_record, order_column, order_method, search_str, display_columns);
+	var j;
+	for(j=0;j<7;j++)
+	{
+		if(document.getElementById('news_col_select_box_' + j).value == "null")
+		{
+			news_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+			document.getElementById('news_col_' + j).value = "null";
+		}
+		else if(document.getElementById('news_col_select_box_' + j).value != "null")
+		{				
+			document.getElementById('news_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('news_col_select_box_' + j).value];
+			document.getElementById('news_list_foot' + j).innerHTML = column_mapping[document.getElementById('news_col_select_box_' + j).value];
+			document.getElementById('news_col_' + j).value = document.getElementById('news_col_select_box_' + j).value;
+			news_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
 		}
 	}
-	$("#news_column_choose_menu").dialog("close");
 }
 
-function adjust_external_tech_display_column()
+function adjust_external_tech_display_column_by_column()
 {
+	var first_load =false;
 	var start_record = external_tech_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
 	var order_column = 1;
 	var order_method = "asc";
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
-	var i;	
+	var i;
 	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
-		display_columns[display_columns.length] = document.getElementById('external_tech_col_' + i).value;
-	}
-	external_tech_list_tbl.fnDestroy();
-	load_external_tech_list(start_record, order_column, order_method, search_str, display_columns);
-	var j;	
-	for(j=0;j<7;j++)  //設定表格head名稱
-	{
-		if(document.getElementById('external_tech_list_head' + j) != null)
+		if(document.getElementById('external_tech_list_head' + i) != null)
+		{	
+			display_columns[display_columns.length] = document.getElementById('external_tech_col_select_box_' + i).value;	
+		}
+		else
 		{
-			document.getElementById('external_tech_list_head' + j).innerHTML = column_mapping[document.getElementById('external_tech_col_' + j).value] + '<div class="sortMask"></div>';
-			document.getElementById('external_tech_list_foot' + j).innerHTML = column_mapping[document.getElementById('external_tech_col_' + j).value];
+			display_columns[display_columns.length] = "null";
+		}
+	}	
+	external_tech_list_tbl.fnDestroy();
+	load_external_tech_list(first_load, start_record, order_column, order_method, search_str, display_columns);
+	var j;
+	for(j=0;j<7;j++)
+	{
+		if(document.getElementById('external_tech_col_select_box_' + j).value == "null")
+		{
+			external_tech_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+			document.getElementById('external_tech_col_' + j).value = "null";
+		}
+		else if(document.getElementById('external_tech_col_select_box_' + j).value != "null")
+		{			
+			document.getElementById('external_tech_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('external_tech_col_select_box_' + j).value];
+			document.getElementById('external_tech_list_foot' + j).innerHTML = column_mapping[document.getElementById('external_tech_col_select_box_' + j).value];
+			document.getElementById('external_tech_col_' + j).value = document.getElementById('external_tech_col_select_box_' + j).value;
+			external_tech_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
 		}
 	}
-	$("#external_tech_column_choose_menu").dialog("close");
 }
 
-function adjust_manager_opinion_display_column()
+function adjust_manager_opinion_display_column_by_column()
 {
+	var first_load =false;
 	var start_record = manager_opinion_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
 	var order_column = 1;
 	var order_method = "asc";
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
-	var i;	
+	var i;
 	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
-		display_columns[display_columns.length] = document.getElementById('manager_opinion_col_' + i).value;
-	}
-	manager_opinion_list_tbl.fnDestroy();
-	load_manager_opinion_list(start_record, order_column, order_method, search_str, display_columns);
-	var j;	
-	for(j=0;j<7;j++)  //設定表格head名稱
-	{
-		if(document.getElementById('manager_opinion_list_head' + j) != null)
+		if(document.getElementById('manager_opinion_list_head' + i) != null)
+		{	
+			display_columns[display_columns.length] = document.getElementById('manager_opinion_col_select_box_' + i).value;	
+		}
+		else
 		{
-			document.getElementById('manager_opinion_list_head' + j).innerHTML = column_mapping[document.getElementById('manager_opinion_col_' + j).value] + '<div class="sortMask"></div>';
-			document.getElementById('manager_opinion_list_foot' + j).innerHTML = column_mapping[document.getElementById('manager_opinion_col_' + j).value];
+			display_columns[display_columns.length] = "null";
+		}
+	}	
+	manager_opinion_list_tbl.fnDestroy();
+	load_manager_opinion_list(first_load, start_record, order_column, order_method, search_str, display_columns);
+	var j;
+	for(j=0;j<7;j++)
+	{
+		if(document.getElementById('manager_opinion_col_select_box_' + j).value == "null")
+		{
+			manager_opinion_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
+			document.getElementById('manager_opinion_col_' + j).value = "null";
+		}
+		else if(document.getElementById('manager_opinion_col_select_box_' + j).value != "null")
+		{						
+			document.getElementById('manager_opinion_col_plain_text_' + j).innerHTML = column_mapping[document.getElementById('manager_opinion_col_select_box_' + j).value];
+			document.getElementById('manager_opinion_list_foot' + j).innerHTML = column_mapping[document.getElementById('manager_opinion_col_select_box_' + j).value];
+			document.getElementById('manager_opinion_col_' + j).value = document.getElementById('manager_opinion_col_select_box_' + j).value;
+			manager_opinion_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
 		}
 	}
-	$("#manager_opinion_column_choose_menu").dialog("close");
 }
 
 function project_collapse()

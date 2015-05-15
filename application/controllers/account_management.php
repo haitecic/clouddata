@@ -189,13 +189,38 @@ class Account_management extends CI_Controller{
 				//儲存至Session中
 				$username = $result['surname'].$result['given_names'];
 				$this->session->set_userdata('username', $username);
-				$this->session->set_userdata('first_item', 'idea_name');
-				$this->session->set_userdata('second_item', 'year');
-				$this->session->set_userdata('third_item', 'proposed_unit');
-				$this->session->set_userdata('fourth_item', 'proposer');
-				$this->session->set_userdata('fifth_item', 'established_date');
-				$this->session->set_userdata('sixth_item', 'PM_in_charge');
-				$this->session->set_userdata('seventh_item', 'closed_case');
+				//專案資料顯示欄位
+				$this->session->set_userdata('project_first_item', 'idea_name');
+				$this->session->set_userdata('project_second_item', 'year');
+				$this->session->set_userdata('project_third_item', 'proposed_unit');
+				$this->session->set_userdata('project_fourth_item', 'proposer');
+				$this->session->set_userdata('project_fifth_item', 'established_date');
+				$this->session->set_userdata('project_sixth_item', 'PM_in_charge');
+				$this->session->set_userdata('project_seventh_item', 'closed_case');				
+				//news顯示欄位
+				$this->session->set_userdata('news_first_item', 'idea_name');
+				$this->session->set_userdata('news_second_item', 'year');
+				$this->session->set_userdata('news_third_item', 'proposed_unit');
+				$this->session->set_userdata('news_fourth_item', 'proposer');
+				$this->session->set_userdata('news_fifth_item', 'established_date');
+				$this->session->set_userdata('news_sixth_item', 'PM_in_charge');
+				$this->session->set_userdata('news_seventh_item', 'closed_case');				
+				//產學研技術顯示欄位
+				$this->session->set_userdata('external_tech_first_item', 'idea_name');
+				$this->session->set_userdata('external_tech_second_item', 'year');
+				$this->session->set_userdata('external_tech_third_item', 'proposed_unit');
+				$this->session->set_userdata('external_tech_fourth_item', 'proposer');
+				$this->session->set_userdata('external_tech_fifth_item', 'established_date');
+				$this->session->set_userdata('external_tech_sixth_item', 'PM_in_charge');
+				$this->session->set_userdata('external_tech_seventh_item', 'closed_case');				
+				//高階意見顯示欄位
+				$this->session->set_userdata('manager_opinion_first_item', 'idea_name');
+				$this->session->set_userdata('manager_opinion_second_item', 'year');
+				$this->session->set_userdata('manager_opinion_third_item', 'proposed_unit');
+				$this->session->set_userdata('manager_opinion_fourth_item', 'proposer');
+				$this->session->set_userdata('manager_opinion_fifth_item', 'established_date');
+				$this->session->set_userdata('manager_opinion_sixth_item', 'PM_in_charge');
+				$this->session->set_userdata('manager_opinion_seventh_item', 'closed_case');
 				header('Location:project_list');
 				//$this->project->list_all_projects();				
 				/*
