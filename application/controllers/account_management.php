@@ -214,13 +214,11 @@ class Account_management extends CI_Controller{
 				$this->session->set_userdata('external_tech_sixth_item', 'PM_in_charge');
 				$this->session->set_userdata('external_tech_seventh_item', 'closed_case');				
 				//高階意見顯示欄位
-				$this->session->set_userdata('manager_opinion_first_item', 'idea_name');
-				$this->session->set_userdata('manager_opinion_second_item', 'year');
-				$this->session->set_userdata('manager_opinion_third_item', 'proposed_unit');
-				$this->session->set_userdata('manager_opinion_fourth_item', 'proposer');
-				$this->session->set_userdata('manager_opinion_fifth_item', 'established_date');
-				$this->session->set_userdata('manager_opinion_sixth_item', 'PM_in_charge');
-				$this->session->set_userdata('manager_opinion_seventh_item', 'closed_case');
+				$this->session->set_userdata('manager_opinion_first_item', 'topic');
+				$this->session->set_userdata('manager_opinion_second_item', 'content');
+				$this->session->set_userdata('manager_opinion_third_item', 'in_charge');
+				$this->session->set_userdata('manager_opinion_fourth_item', 'time');
+				$this->session->set_userdata('manager_opinion_fifth_item', 'people');
 				header('Location:project_list');
 				//$this->project->list_all_projects();				
 				/*

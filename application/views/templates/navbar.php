@@ -1,4 +1,4 @@
-<body>
+<body onmouseover="user_behavior_log('a')">
 <!--Start Header-->
 <div id="screensaver">
 	<canvas id="canvas"></canvas>
@@ -64,5 +64,27 @@ $("#search_bar").keypress(function(event){
     if (event.keyCode == 13) 
 		$("#project_search_form").submit();
 });
+/**
+使用者行為紀錄-滑鼠游標取得
+*/
+function user_behavior_log(id)
+{	
+	alert(id);
+	var clientX = event.clientX;
+	var clientY = event.clientY;	
+	if(event.pageX)
+	{
+		var pageX = event.pageX;
+		var pageY = event.pageY;
+	}
+	else
+	{
+		pageX = event.clientX + document.body.scrollLeft;
+		pageY = event.clientY + document.body.scrollTop;
+	}
+	var coordinates = "screenX = " + screenX + "..screenY = " + screenY + "..clientX = " + clientX + "..clientY = " + clientY + "..pageX = "+ pageX + "..pageY = " + pageY + location.pathname;
+	var coor = document.getElementById("coor");
+	coor.value=coordinates;
+}
 </script>
 <!--End Header-->

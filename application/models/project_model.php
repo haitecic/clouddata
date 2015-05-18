@@ -1834,35 +1834,12 @@ class Project_model extends CI_Model{
 			$search_word = explode(' ', $search_content);
 			for($i=0;$i<count($search_word);$i++)
 			{
-				$rule = $rule."(LOWER(`year`) LIKE LOWER('%".$search_word[$i]."%') OR 				
-				LOWER(`idea_id`) LIKE LOWER('%".$search_word[$i]."%') OR 
-				LOWER(`idea_name`) LIKE LOWER('%".$search_word[$i]."%') OR 
-				LOWER(`idea_source`) LIKE LOWER('%".$search_word[$i]."%') OR 
-				LOWER(`scenario_d`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`function_d`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`distinction_d`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`value_d`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`feasibility_d`) LIKE LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`stage`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`stage_detail`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`progress_description`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`proposed_unit`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`proposer`) LIKE LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`established_date`) LIKE BINARY LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`idea_examination`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`Idea`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`Requirement`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`Feasibility`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`Prototype`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`note`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`adoption`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`applied_patent`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`resurrection_application_qualified`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`resurrection_applied`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`PM_in_charge`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`closed_case`) LIKE LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`file_name`) LIKE LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`file_content`) LIKE LOWER('%".$search_word[$i]."%'))";
+				$rule = $rule."(LOWER(`topic`) LIKE LOWER('%".$search_word[$i]."%') OR 				
+				LOWER(`content`) LIKE LOWER('%".$search_word[$i]."%') OR 
+				LOWER(`in_charge`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`file_name`) LIKE LOWER('%".$search_word[$i]."%') OR					
+				LOWER(`time`) LIKE BINARY LOWER('%".$search_word[$i]."%') OR				
+				LOWER(`people`) LIKE LOWER('%".$search_word[$i]."%'))";
 				if(($i+1) != count($search_word))
 				{
 					$rule = $rule." AND ";
@@ -1871,11 +1848,11 @@ class Project_model extends CI_Model{
 		}
 		else
 		{
-			$rule = "`year` LIKE '%%' ";
+			$rule = "`time` LIKE '%%' ";
 		}
 		$order_column = $columns[intval($this->db->escape_str($parameter['order_column']))];
 		$order_method = $this->db->escape_str($parameter['order_method']);
-		$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM (SELECT `project_all`.`id`, `year`, `idea_id`, `idea_name`, `idea_source`, `scenario_d`, `function_d`,`distinction_d`,`value_d`,`feasibility_d`, `stage`, `progress_description`,`proposed_unit`,`proposer`, `Idea`, `Requirement`, `Feasibility`, `Prototype`, `note`, `applied_patent`,`resurrection_application_qualified`,`resurrection_applied`,`PM_in_charge`, `idea_examination`,`closed_case`, established_date, adoption, `is_blocked`, `file_name`, `file_content` FROM `project_all` LEFT JOIN `project_attachment` ON `project_all`.`id` = `project_attachment`.`project_id` WHERE '.$rule.' GROUP BY `project_all`.`id`) AS T ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];  //只撈出project_list需呈現之資料
+		$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM `vp_meeting` WHERE '.$rule.' ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];  //撈出會議紀錄資料
 		$rResult = $this->db->query($query_string);		
         // Data set length after filtering
 		$query = $this->db->query('SELECT FOUND_ROWS() AS `found_rows`');
@@ -1889,7 +1866,7 @@ class Project_model extends CI_Model{
         );
 		$a = 0;
 		$row_index = 0;  //表格row的id編號
-		$column_mapping = array("idea_id"=>"提案編號", "year"=>"年度", "idea_name"=>"提案名稱", "idea_source"=>"提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "stage"=>"階段狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "established_date"=>"立案日期",  "idea_examination"=>"提案審核履歷", "Idea"=>"I階段文件檢核", "Requirement"=>"R階段文件檢核", "Feasibility"=>"F階段文件檢核", "Prototype"=>"P階段文件檢核", "note"=>"備註", "adoption"=>"導入車型/先期式樣", "applied_patent"=>"專利申請/取得", "resurrection_application_qualified"=>"具備敗部復活申請資格", "resurrection_applied"=>"敗部復活申請", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案", "file_name"=>"於附加檔案中", "file_content"=>"於附加檔案中");
+		$manager_opinion_column_mapping = array("topic"=>"討論議題", "content"=>"內容", "in_charge"=>"主辦(承辦)", "file_name"=>"附加檔案", "time"=>"時間", "people"=>"與會人員");
 		foreach($rResult->result_array() as $project)
         {
 			$key_sentence = "";  //存放關鍵句子
@@ -1937,14 +1914,14 @@ class Project_model extends CI_Model{
 				{					
 					if(stripos($content, $key_sentence) !== false)
 					{		
-						if($index == "file_content")  //假如關鍵句在附加檔案中
+						/*if($index == "file_content")  //假如關鍵句在附加檔案中
 						{
 							$column = '(附加檔案)'.$project['file_name'];
 						}
 						else
-						{
-							$column = $column_mapping[$index];
-						}
+						{*/
+							$column = $manager_opinion_column_mapping[$index];
+						//}
 						break;
 					}
 				}
@@ -1968,20 +1945,13 @@ class Project_model extends CI_Model{
 					$row[$i] = "";
 				}
 				else
-				{
+				{		
 					switch($col)
 					{
 						case 'id':	
-							if($project['is_blocked'] == 1)	
-							{							
-								$row[$i] = "<input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/lock3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/>";
-							}
-							else if($project['is_blocked'] == 2)
-							{
-								$row[$i] = "<input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/edit3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/>";
-							}
+							$row[$i] = "<input id=\"row_manager_opinion_img_$row_index\" style=\"width:27px;height:24px\" type=\"image\" src=\"./application/assets/img/preview.png\" alt=\"edit\" onclick=\"view_file($project[$col])\"/><input type=\"hidden\" id=\"row_manager_opinion_hidden_$row_index\" value=\"$project[$col]\"/>";
 							break;
-						case 'idea_name':						
+						case 'topic':						
 							$row[$i] = '<div style="color:#23459F">'.$project[$col].'</div>'.$search_result_hint;							
 							break;
 						default:

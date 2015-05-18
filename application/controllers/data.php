@@ -211,14 +211,14 @@ class Data extends CI_Controller
 		$this->session->set_userdata('manager_opinion_third_item', $obj['column2']);
 		$this->session->set_userdata('manager_opinion_fourth_item', $obj['column3']);
 		$this->session->set_userdata('manager_opinion_fifth_item', $obj['column4']);
-		$this->session->set_userdata('manager_opinion_sixth_item', $obj['column5']);
-		$this->session->set_userdata('manager_opinion_seventh_item', $obj['column6']);
+		//$this->session->set_userdata('manager_opinion_sixth_item', $obj['column5']);
+		//$this->session->set_userdata('manager_opinion_seventh_item', $obj['column6']);
 		array_push($columns, 'id');
-		for($i=0; $i<7;$i++)
+		for($i=0; $i<5;$i++)
 		{
 			array_push($columns, $obj['column'.$i]);
 		}
-        $DB_table = 'project_all'; 
+        $DB_table = 'vp_meeting'; 
 		$start_record = $this->input->get_post('start', true);
         $display_length = $this->input->get_post('length', true);  //get the data table show length
         $order = $this->input->get_post('order', true);  //取得排序的欄位編號,編號由0開始,欄位由左至右算
