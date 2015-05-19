@@ -180,6 +180,7 @@ class Project extends CI_Controller{
 			redirect('login');
 		}		
 		$data['title'] = '專案管理';
+		$data['user_id'] = $this->session->userdata('user_id');
 		$data['username'] = $this->session->userdata('username');
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
 		$data['js_location'] = site_url("/application/assets/js");  
@@ -467,6 +468,7 @@ class Project extends CI_Controller{
 			redirect('login');
 		}
 		$data['title'] = '專案管理';
+		$data['user_id'] = $this->session->userdata('user_id');
 		$username = $this->session->userdata('username');
 		$data['username'] = $username;
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面

@@ -486,6 +486,7 @@ function close_file_preview(j)
 
 function show_project_detail()
 {
+	user_behavior_log('project_detail_icon');
 	var project_detail = document.getElementById("project_detail");
 	if(project_detail.style.display == "block")
 	{

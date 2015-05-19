@@ -629,6 +629,7 @@ function manager_opinion_collapse()
 
 function edit_project(project_id)
 {
+	user_behavior_log('row_project_img_'+project_id);	
 	location.href="project_edit/"+project_id;
 }
 
@@ -651,11 +652,71 @@ function view_file(preview_file)
 	document.getElementById("pdf_obj").data = 'http://127.0.0.1/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
 	document.getElementById("preview_pdf").style.display="block";
 	document.getElementById("background_mask").style.display="block";
+	//var url = 'http://127.0.0.1/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
+	user_behavior_log('row_manager_opinion_img_'+preview_file);	
 }
 function close_view_file()
 {
 	document.getElementById("preview_pdf").style.display="none";
 	document.getElementById("background_mask").style.display="none";
+	user_behavior_log("background_mask");
+}
+
+/**
+使用者行為紀錄-滑鼠游標取得
+*/
+var global_element;
+function user_behavior_log(element_id)
+{		
+	var clientX = event.clientX;
+	var clientY = event.clientY;	
+	if(event.pageX)
+	{
+		var pageX = event.pageX;
+		var pageY = event.pageY;
+	}
+	else
+	{
+		pageX = event.clientX + document.body.scrollLeft;
+		pageY = event.clientY + document.body.scrollTop;
+	}	
+	var request_url = "http://127.0.0.1/project_management/user_behavior_log";
+	if(element_id == "body")
+	{
+		global_element = null;
+	}
+	else
+	{
+		global_element = element_id;
+	}	
+	var id = document.getElementById("user_id").value;	
+	var search_bar = document.getElementById("search_bar_hidden").value;
+	/*$.ajax({
+		url:request_url,  
+		data:{			 //The data to send(will be converted to a query string)
+			user_id: id,
+			page: location.pathname,
+			cursorX: pageX,
+			cursorY: pageY,
+			clicked_element_id: global_element,
+			search_keyword: search_bar
+		},
+		type:"POST",		 //Whether this is a POST or GET request
+		dataType:"text", //回傳的資料型態
+		//Code to run if the request succeeds. The response is passed to the function
+		success:function(str){
+		},
+		async:true,
+		//Code to run if the request fails; the raw request and status codes are passed to the function
+		error:function(xhr, status, errorThrown){
+			//alert("Sorry, there was a problem!");
+			console.log("Error: " + errorThrown);
+			console.log("Status: " + status);
+			console.dir( xhr );
+		},
+		complete:function( xhr, status ){
+		}
+	});*/
 }
 
 

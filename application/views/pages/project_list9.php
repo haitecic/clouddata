@@ -411,7 +411,6 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 	</object>
 </div>
 <div id="background_mask" class="background_mask" onclick="close_view_file()"></div>
-<textarea id="coor" rows="5" cols="80"></textarea>
 <script>
 $(document).ready(function() {		
 	$('th select').width(function(){ //設定各select box的初始寬度, 依據選擇的option

@@ -15,107 +15,7 @@ class Account_management extends CI_Controller{
 	public function index()
     {
 		$this->load->view('index');
-    }
-	
-	public function getTable()
-    {
-        /* Array of database columns which should be read and sent back to DataTables. Use a space where
-         * you want to insert a non-database field (for example a counter or static image)
-         */
-        //$aColumns = array('id', 'first_name', 'last_name');
-        $aColumns = array('id', 'idea_name', 'km_id', 'idea_source', 'idea_description', 'scenario_d', 'function_d', 'value_d');
-
-        // DB table to use
-        $sTable = 'project_all';
-        //
-    
-        $iDisplayStart = $this->input->get_post('iDisplayStart', true);
-        $iDisplayLength = $this->input->get_post('iDisplayLength', true);
-        $iSortCol_0 = $this->input->get_post('iSortCol_0', true);
-        $iSortingCols = $this->input->get_post('iSortingCols', true);
-        $sSearch = $this->input->get_post('sSearch', true);
-        $sEcho = $this->input->get_post('sEcho', true);
-    
-        // Paging
-        if(isset($iDisplayStart) && $iDisplayLength != '-1')
-        {
-            $this->db->limit($this->db->escape_str($iDisplayLength), $this->db->escape_str($iDisplayStart));
-        }
-        
-        // Ordering
-        if(isset($iSortCol_0))
-        {
-            for($i=0; $i<intval($iSortingCols); $i++)
-            {
-                $iSortCol = $this->input->get_post('iSortCol_'.$i, true);
-                $bSortable = $this->input->get_post('bSortable_'.intval($iSortCol), true);
-                $sSortDir = $this->input->get_post('sSortDir_'.$i, true);
-    
-                if($bSortable == 'true')
-                {
-                    $this->db->order_by($aColumns[intval($this->db->escape_str($iSortCol))], $this->db->escape_str($sSortDir));
-                }
-            }
-        }
-        
-        /* 
-         * Filtering
-         * NOTE this does not match the built-in DataTables filtering which does it
-         * word by word on any field. It's possible to do here, but concerned about efficiency
-         * on very large tables, and MySQL's regex functionality is very limited
-         */
-        if(isset($sSearch) && !empty($sSearch))
-        {
-            for($i=0; $i<count($aColumns); $i++)
-            {
-                $bSearchable = $this->input->get_post('bSearchable_'.$i, true);
-                
-                // Individual column filtering
-                if(isset($bSearchable) && $bSearchable == 'true')
-                {
-                    $this->db->or_like($aColumns[$i], $this->db->escape_like_str($sSearch));
-                }
-            }
-        }
-        
-        // Select Data
-        $this->db->select('SQL_CALC_FOUND_ROWS '.str_replace(' , ', ' ', implode(', ', $aColumns)), false);
-        $rResult = $this->db->get($sTable);
-    
-        // Data set length after filtering
-        $this->db->select('FOUND_ROWS() AS found_rows');
-        $iFilteredTotal = $this->db->get()->row()->found_rows;
-    
-        // Total data set length
-        $iTotal = $this->db->count_all($sTable);
-    
-        // Output
-        $output = array(
-            'sEcho' => intval($sEcho),
-            'iTotalRecords' => $iTotal,
-            'iTotalDisplayRecords' => $iFilteredTotal,
-            'aaData' => array()
-        );
-        
-        foreach($rResult->result_array() as $aRow)
-        {
-            $row = array();
-            
-            foreach($aColumns as $col)
-            {
-                $row[] = $aRow[$col];
-            }
-    
-            $output['aaData'][] = $row;
-        }
-    
-        echo json_encode($output);
-    }
-	
-	public function getTable3()
-    {
-		echo '{ "draw": 1, "recordsTotal": 57, "recordsFiltered": 57, "data": [ { "name": "Tiger Nixon", "position": "System Architect", "salary": "$320,800", "start_date": "2011/04/25", "office": "Edinburgh", "extn": "5421" }, { "name": "Garrett Winters", "position": "Accountant", "salary": "$170,750", "start_date": "2011/07/25", "office": "Tokyo", "extn": "8422" }, { "name": "Ashton Cox", "position": "Junior Technical Author", "salary": "$86,000", "start_date": "2009/01/12", "office": "San Francisco", "extn": "1562" }, { "name": "Cedric Kelly", "position": "Senior Javascript Developer", "salary": "$433,060", "start_date": "2012/03/29", "office": "Edinburgh", "extn": "6224" }, { "name": "Airi Satou", "position": "Accountant", "salary": "$162,700", "start_date": "2008/11/28", "office": "Tokyo", "extn": "5407" }, { "name": "Brielle Williamson", "position": "Integration Specialist", "salary": "$372,000", "start_date": "2012/12/02", "office": "New York", "extn": "4804" }, { "name": "Herrod Chandler", "position": "Sales Assistant", "salary": "$137,500", "start_date": "2012/08/06", "office": "San Francisco", "extn": "9608" }, { "name": "Rhona Davidson", "position": "Integration Specialist", "salary": "$327,900", "start_date": "2010/10/14", "office": "Tokyo", "extn": "6200" }, { "name": "Colleen Hurst", "position": "Javascript Developer", "salary": "$205,500", "start_date": "2009/09/15", "office": "San Francisco", "extn": "2360" }, { "name": "Sonya Frost", "position": "Software Engineer", "salary": "$103,600", "start_date": "2008/12/13", "office": "Edinburgh", "extn": "1667" } ] }';
-	}
+    }	
 	
 	/**
 	register method：This method is used to check if the user account data is valid and then write into database.
@@ -187,7 +87,9 @@ class Account_management extends CI_Controller{
 			else   //帳號密碼輸入正確
 			{
 				//儲存至Session中
+				$user_id = $result['id'];
 				$username = $result['surname'].$result['given_names'];
+				$this->session->set_userdata('user_id', $user_id);
 				$this->session->set_userdata('username', $username);
 				//專案資料顯示欄位
 				$this->session->set_userdata('project_first_item', 'idea_name');
@@ -281,4 +183,17 @@ class Account_management extends CI_Controller{
 		}
 	}*/
 	
+	/**
+	user_behavior_log():使用者行為紀錄
+	*/
+	public function user_behavior_log()
+	{	
+		$user_id = $this->input->post('user_id');
+		$page = $this->input->post('page');
+		$cursorX = $this->input->post('cursorX');
+		$cursorY = $this->input->post('cursorY');
+		$clicked_element_id = $this->input->post('clicked_element_id');
+		$search_keyword = $this->input->post('search_keyword');
+		$is_blocked = $this->account_management_model->set_user_behavior($user_id, $page, $cursorX, $cursorY, $clicked_element_id, $search_keyword);
+	}
 }

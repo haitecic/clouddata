@@ -23,7 +23,7 @@ header('Content-Type: text/html; charset=utf-8');
 	<link href="<?php echo $css_location;?>/style_v2.css" rel="stylesheet">
 	<link href="<?php echo $css_location;?>/jqueryDatatable.css" rel="stylesheet">
 	<link href="<?php echo $plugins_location;?>/chartist/chartist.min.css" rel="stylesheet">
-
+	<script type="text/javascript" src="<?php echo $js_location?>/project_list9.js"></script>
 	
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>-->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
