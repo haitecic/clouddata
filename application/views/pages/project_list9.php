@@ -410,7 +410,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		<p>Alternative text - include a link <a href="http://127.0.0.1/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/<?php echo $file['instance_file_name']?>">to the PDF!</a></p>
 	</object>
 </div>
-<div id="background_mask" class="background_mask" onclick="close_view_file()"></div>
+<div id="background_mask" class="background_mask" onclick="close_view_file(this.id)"></div>
 <script>
 $(document).ready(function() {		
 	$('th select').width(function(){ //設定各select box的初始寬度, 依據選擇的option
@@ -429,7 +429,6 @@ $(document).ready(function() {
 	var i;	
 	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
-		//alert(document.getElementById('pro_col_select_box_' + i).value);
 		if(document.getElementById('pro_col_select_box_' + i) == null || document.getElementById('pro_col_select_box_' + i).value == "null")
 		{
 			project_display_columns[project_display_columns.length] = "null";
@@ -537,7 +536,6 @@ function manager_opinion_hide_select_box(value)
 }
 
 $('#project_list_tbl').on('mouseover', 'tbody tr', function(){
-    //alert('You clicked row '+ ($(this).index()) );
 	var row_index = $(this).index();
 	var project_id = document.getElementById("row_project_hidden_"+row_index).value;
 	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_check_is_blocked";

@@ -22,14 +22,15 @@ class Account_management_model extends CI_Model{
 	/**
 	set_user_behavior()：紀錄使用者行為
 	*/
-	public function set_user_behavior($user_id, $page, $cursorX, $cursorY, $clicked_element_id, $search_keyword)
+	public function set_user_behavior($user_id, $page, $cursorX, $cursorY, $trigger_element_id, $search_keyword, $file)
 	{
 		$new_record = array('user_id'=>$user_id,
 			'page'=>$page,
 			'pageX'=>$cursorX,
 			'pageY'=>$cursorY,
-			'clicked_element_id'=>$clicked_element_id,
-			'search_keyword'=>$search_keyword);
+			'trigger_element_id'=>$trigger_element_id,
+			'search_keyword'=>$search_keyword,
+			'file' => $file);
 		$this->db->insert('user_behavior_log', $new_record);
 		return ;
 	}

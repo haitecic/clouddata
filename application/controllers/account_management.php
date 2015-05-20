@@ -192,8 +192,9 @@ class Account_management extends CI_Controller{
 		$page = $this->input->post('page');
 		$cursorX = $this->input->post('cursorX');
 		$cursorY = $this->input->post('cursorY');
-		$clicked_element_id = $this->input->post('clicked_element_id');
+		$trigger_element_id = $this->input->post('trigger_element_id');
 		$search_keyword = $this->input->post('search_keyword');
-		$is_blocked = $this->account_management_model->set_user_behavior($user_id, $page, $cursorX, $cursorY, $clicked_element_id, $search_keyword);
+		$file = $this->input->post('file');
+		$is_blocked = $this->account_management_model->set_user_behavior($user_id, $page, $cursorX, $cursorY, $trigger_element_id, $search_keyword, $file);
 	}
 }

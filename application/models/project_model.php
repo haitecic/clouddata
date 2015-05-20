@@ -1949,7 +1949,7 @@ class Project_model extends CI_Model{
 					switch($col)
 					{
 						case 'id':	
-							$row[$i] = "<input id=\"row_manager_opinion_img_$row_index\" style=\"width:27px;height:24px\" type=\"image\" src=\"./application/assets/img/preview.png\" alt=\"edit\" onclick=\"view_file($project[$col])\"/><input type=\"hidden\" id=\"row_manager_opinion_hidden_$row_index\" value=\"$project[$col]\"/>";
+							$row[$i] = "<input id=\"row_manager_opinion_img_$row_index\" style=\"width:27px;height:24px\" type=\"image\" src=\"./application/assets/img/preview.png\" alt=\"edit\" onclick=\"view_file('$project[$col]', 'row_manager_opinion_img_".$row_index."')\"/><input type=\"hidden\" id=\"row_manager_opinion_hidden_$row_index\" value=\"$project[$col]\"/>";
 							break;
 						case 'topic':						
 							$row[$i] = '<div style="color:#23459F">'.$project[$col].'</div>'.$search_result_hint;							

@@ -647,26 +647,26 @@ function show_more_content(row)
 /**
 開啟pdf檔案預覽功能
 */
-function view_file(preview_file)
+function view_file(preview_file, trigger_element_id)
 {
-	document.getElementById("pdf_obj").data = 'http://127.0.0.1/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
+	var file_path = 'http://127.0.0.1/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
+	document.getElementById("pdf_obj").data = file_path;
 	document.getElementById("preview_pdf").style.display="block";
 	document.getElementById("background_mask").style.display="block";
-	//var url = 'http://127.0.0.1/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
-	user_behavior_log('row_manager_opinion_img_'+preview_file);	
+	user_behavior_log(trigger_element_id, file_path);	
 }
-function close_view_file()
+function close_view_file(trigger_element_id)
 {
 	document.getElementById("preview_pdf").style.display="none";
 	document.getElementById("background_mask").style.display="none";
-	user_behavior_log("background_mask");
+	user_behavior_log(trigger_element_id, null);
 }
 
 /**
 使用者行為紀錄-滑鼠游標取得
 */
 var global_element;
-function user_behavior_log(element_id)
+function user_behavior_log(element_id, browse_file)
 {		
 	var clientX = event.clientX;
 	var clientY = event.clientY;	
@@ -687,19 +687,20 @@ function user_behavior_log(element_id)
 	}
 	else
 	{
-		global_element = element_id;
+		global_element = element_id;		
 	}	
 	var id = document.getElementById("user_id").value;	
-	var search_bar = document.getElementById("search_bar_hidden").value;
+	var search_bar = document.getElementById("search_bar_hidden").value;	
 	/*$.ajax({
 		url:request_url,  
 		data:{			 //The data to send(will be converted to a query string)
 			user_id: id,
-			page: location.pathname,
+			page: location.pathname.replace('/project_management/',''),
 			cursorX: pageX,
 			cursorY: pageY,
-			clicked_element_id: global_element,
-			search_keyword: search_bar
+			trigger_element_id: global_element,
+			search_keyword: search_bar,
+			file: browse_file
 		},
 		type:"POST",		 //Whether this is a POST or GET request
 		dataType:"text", //回傳的資料型態

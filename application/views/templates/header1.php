@@ -36,5 +36,4 @@ header('Content-Type: text/html; charset=utf-8');
 	<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.js"></script>
 	<script type="text/javascript" src="<?php echo $js_location?>/pdfobject.js"></script>
-	<!--<script src="<?php echo $js_location;?>/devoops.js"></script>-->
 </head>

@@ -1,4 +1,4 @@
-<body onmouseover="user_behavior_log('body')">
+<body onmouseover="user_behavior_log('body', null)">
 <!--Start Header-->
 <div id="screensaver">
 	<canvas id="canvas"></canvas>
@@ -26,7 +26,7 @@
 	<div class="container-fluid expanded-panel">
 		<div class="row">
 			<div id="logo" class="col-xs-12 col-sm-2 ">
-				<a href="<?php echo site_url().'project_list'?>" style="font-family: Adobe 繁黑體 Std;" onclick="user_behavior_log('logo')">專案管理系統</a>
+				<a id="logo_icon" href="<?php echo site_url().'project_list'?>" style="font-family: Adobe 繁黑體 Std;" onclick="user_behavior_log(this.id, null)">專案管理系統</a>
 			</div>
 			<?php
 			$attributes = array('id' => 'project_search_form', 'name'=>'project_search_form');
@@ -51,7 +51,7 @@
 							<i class="fa fa-search" onclick="start_search()"></i>
 						</div>
 					</div>
-					<div style="text-align:right;margin-right:23px;" ><span style="color:#ffffff">使用者：<?php echo $username;?></span><span id="logout" onclick="user_behavior_log('logout')"><?php echo anchor("login", "登出",'style="margin-left:15px;color:#ffffff;"');?></span></div>
+					<div style="text-align:right;margin-right:23px;" ><span style="color:#ffffff">使用者：<?php echo $username;?></span><span id="logout" onclick="user_behavior_log(this.id, null)"><?php echo anchor("login", "登出",'style="margin-left:15px;color:#ffffff;"');?></span></div>
 					<input id="user_id" type="hidden" value="<?php echo $user_id?>"/>
 				</div>				
 			</div>
@@ -65,15 +65,17 @@
 function start_search()
 {
 	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value;
-	user_behavior_log('search_bar');
+	user_behavior_log('search_bar', null);
 	document.project_search_form.submit();	
 }
 
 $("#search_bar").keypress(function(event){   
-	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value; 
-	user_behavior_log('search_bar');	
+	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value; 	
     if (event.keyCode == 13) 
+	{
+		user_behavior_log('search_bar', null);	
 		$("#project_search_form").submit();
+	}
 });
 </script>
 <!--End Header-->
