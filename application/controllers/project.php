@@ -12,8 +12,7 @@ class Project extends CI_Controller{
 		$this->load->library('form_validation');  //載入表單驗證程式庫
 		$this->load->library('typography');	
 		$this->load->library('file_conversion');  //載入擷取檔案純文字內容的程式庫
-		$this->load->library('ssp');
-		//$this->load->library('file_conversion');  //載入擷取檔案純文字內容的程式庫
+		//$this->load->library('ssp');		
 		$this->load->helper('html');  		
 		$this->load->model('project_model');  //載入已定義的模型與資料庫做連接		
 		$this->load->database();

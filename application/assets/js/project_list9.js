@@ -691,7 +691,7 @@ function user_behavior_log(element_id, browse_file)
 	}	
 	var id = document.getElementById("user_id").value;	
 	var search_bar = document.getElementById("search_bar_hidden").value;	
-	/*$.ajax({
+	$.ajax({
 		url:request_url,  
 		data:{			 //The data to send(will be converted to a query string)
 			user_id: id,
@@ -717,7 +717,7 @@ function user_behavior_log(element_id, browse_file)
 		},
 		complete:function( xhr, status ){
 		}
-	});*/
+	});
 }
 
 

@@ -1,4 +1,4 @@
-<body onmouseover="user_behavior_log('body', null)">
+<body><!-- onmouseover="user_behavior_log('body', null)"-->
 <!--Start Header-->
 <div id="screensaver">
 	<canvas id="canvas"></canvas>

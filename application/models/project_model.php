@@ -1393,7 +1393,8 @@ class Project_model extends CI_Model{
 				$all_content = str_replace('。','.',$all_content);
 				$all_content = str_replace('，',',',$all_content);
 				$all_content = str_replace('；',';',$all_content);
-				$temp = preg_split("/[?!,-.;]+/",$all_content);
+				//$temp = preg_split("/[?!,-.;]+/",$all_content);
+				$temp = preg_split("/[?!,.;]+/",$all_content);
 				foreach($temp as $index=>$sentence)
 				{
 					$score = 0;
