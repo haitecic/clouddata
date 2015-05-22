@@ -9,7 +9,7 @@ class Account_management extends CI_Controller{
 		$this->load->library('form_validation');  //載入表單驗證程式庫		
 		$this->load->model('account_management_model');  //載入已定義的模型與資料庫做連接		
 		$this->load->library('../controllers/project');  //載入另一個Controller
-		$this->load->database();
+		$this->load->database();		
 	}
 	
 	public function index()

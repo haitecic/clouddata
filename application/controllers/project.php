@@ -11,8 +11,7 @@ class Project extends CI_Controller{
 		$this->load->library('parser');  //在view中使用樣板引擎
 		$this->load->library('form_validation');  //載入表單驗證程式庫
 		$this->load->library('typography');	
-		$this->load->library('file_conversion');  //載入擷取檔案純文字內容的程式庫
-		//$this->load->library('ssp');		
+		//$this->load->library('file_conversion');  //載入擷取檔案純文字內容的程式庫				
 		$this->load->helper('html');  		
 		$this->load->model('project_model');  //載入已定義的模型與資料庫做連接		
 		$this->load->database();
@@ -21,7 +20,7 @@ class Project extends CI_Controller{
 		$this->output->set_header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');  
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
-		$this->output->set_header('Pragma: no-cache');
+		$this->output->set_header('Pragma: no-cache');		
 	}
 	
 	/**
@@ -191,70 +190,11 @@ class Project extends CI_Controller{
         $data['project_location'] = site_url("/application/assets/project");
 		$data['plugins_location'] = site_url("/application/assets/plugins");
 		$data['message'] = $message;
-		if($search_bar==null) $search_bar = $this->input->post('search_bar');
+		//if($search_bar==null) $search_bar = $this->input->post('search_bar');
+		$search_bar = $this->input->post('search_bar');
 		$data['search'] = $search_bar;
 		$project_list = $this->project_model->get_specific_projects_data($search_bar);  //取得搜尋條件設定的專案資料
-		$data['project_list'] = $project_list;
-		//相關句子搜尋		
-		/*if($search_bar != null)
-		{
-			$search_word = explode(' ', $search_bar);
-			$key_sentence = array();  //存放關鍵句子
-			foreach($project_list as $project)
-			{
-				$temp = array();
-				$temp_score = array();
-				$all_content = "";
-				foreach($project as $index => $content)
-				{
-					$all_content = $all_content.$content.',';					
-				}
-				$all_content = str_replace('。','.',$all_content);
-				$all_content = str_replace('，',',',$all_content);
-				$all_content = str_replace('；',';',$all_content);
-				$temp = preg_split("/[?!,-.;]+/",$all_content);
-				foreach($temp as $index=>$sentence)
-				{
-					$score = 0;
-					for($j=0;$j<count($search_word);$j++)
-					{
-						if(strpos($sentence, $search_word[$j]) !== false)
-						{
-							$score = $score + substr_count($sentence, $search_word[$j]);
-						}
-					}
-					array_push($temp_score, (int)$score);					
-				}	
-				$first_score = 0;
-				$sen = 0;
-				foreach($temp as $index=>$sentence)
-				{		
-					if($temp_score[$index] > $first_score)  //$first_score
-					{
-						$sen = $sentence;
-						$first_score = $temp_score[$index];
-					}					
-				}	
-				array_push($key_sentence, $sen);
-			}
-			$data['key_sentence'] = $key_sentence;				
-			$column = array();
-			$k=0;
-			foreach($project_list as $project)
-			{			
-				foreach($project as $index => $content)
-				{					
-					if(strpos($content, $key_sentence[$k]) !== false)
-					{											
-						array_push($column, $index);
-						break;
-					}
-				}
-				$k++;
-			}
-			$data['column'] = $column;
-		}*/
-		//$data['number_file'] = $this->project_model->get_number_file();
+		$data['project_list'] = $project_list;		
 		$this->load->view('templates/header1', $data);
 		$this->load->view('templates/navbar', $data);
 		$this->load->view('pages/project_list9', $data);

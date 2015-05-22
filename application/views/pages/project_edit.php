@@ -203,8 +203,8 @@
 			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
 			<div style="margin-left:15px;font-family:微軟正黑體;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">請拖曳檔案到此(<a href="#" id="browse_file" onclick="browse_file()">瀏覽</a>檔案)</div>
 			<?php
-			if(count($project_attachfile) != 0)  //當有附加檔案才呈現 
-			{
+			//if(count($project_attachfile) != 0)  //當有附加檔案才呈現 
+			//{
 			?>
 				<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
 					<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
@@ -213,17 +213,17 @@
 					<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
 				</div>
 			<?php
-			}
+			//}
 			$i=0;			
 			foreach($project_attachfile as $file)
 			{
 			?>
 				<div id="origin_file_<?php echo $i;?>" class="statusbar" style="width:98%;margin-left:15px;">
-					<?php $preview_file_path = 'http://127.0.0.1/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['convert_to_pdf'];
-					$download_file_path = 'http://127.0.0.1/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['instance_file_name'];
+					<?php $preview_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['convert_to_pdf'];
+					$download_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['instance_file_name'];
 					?>
 					<div class="file_preview"><img id="preview_file_icon_<?php echo $file['id'];?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/preview.png" alt="preview" onclick="preview_file('<?php echo $preview_file_path;?>', this.id)"></img></div>
-					<div class="file_download"><a href="http://127.0.0.1/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/<?php echo $file['instance_file_name']?>" download="<?php echo $file['file_name']?>"><img id="download_file_icon_<?php echo $file['id']?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/download.png" alt="download" onclick="user_behavior_log(this.id, '<?php echo $download_file_path;?>')"></img></a></div>
+					<div class="file_download"><a href="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/<?php echo $file['instance_file_name']?>" download="<?php echo $file['file_name']?>"><img id="download_file_icon_<?php echo $file['id']?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/download.png" alt="download" onclick="user_behavior_log(this.id, '<?php echo $download_file_path;?>')"></img></a></div>
 					<div class="filename"><?php echo $file['file_name'];?></div>
 					<div class="filesize" style="padding-left:30px;width:150px"><?php
 						$size = filesize('application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['instance_file_name']);
@@ -300,13 +300,13 @@ function show_project_detail()
 	if(project_detail.style.display == "block")
 	{
 		$("#project_detail").slideUp(500);	
-		document.getElementById("project_detail_icon").src="http://127.0.0.1/project_management/application/assets/img/sort-asc.png";
+		document.getElementById("project_detail_icon").src="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/img/sort-asc.png";
 	}
 	else if(project_detail.style.display == "none")
 	{		
 		$("#project_detail").slideDown(500);
 		project_detail.style.display = "block";
-		document.getElementById("project_detail_icon").src="http://127.0.0.1/project_management/application/assets/img/sort-desc.png";
+		document.getElementById("project_detail_icon").src="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/img/sort-desc.png";
 	}
 	
 }
@@ -543,7 +543,7 @@ $(document).ready(function()
 		}		
 		else if(pass_validation == true)
 		{	*/	
-		user_behavior_log(this.id, null)		
+		user_behavior_log(this.id, null)	  //temp commemt	
 		document.getElementById("project_create_form").submit();			
 		/*}*/
     });
@@ -556,7 +556,7 @@ $(document).ready(function()
 	{
 		e.stopPropagation();
 		e.preventDefault();		
-		user_behavior_log(this.id, null);
+		user_behavior_log(this.id, null);  //temp comment
 		$("#file_input").trigger('click');
 	}); 
 	
@@ -587,7 +587,7 @@ $(document).ready(function()
 		$(this).css('border', '2px dotted #0B85A1');
 		e.preventDefault();
 		var files = e.originalEvent.dataTransfer.files;  //取得drop的檔案
-		user_behavior_log(this.id, null);		
+		user_behavior_log(this.id, null);	  //temp_comment	
 		handleFileUpload(files, file_list, upload_file_dir);
 	});
 	$(document).on('dragenter', function (e) 
@@ -650,7 +650,7 @@ function handleFileUpload(files, obj, upload_file_dir)  //第一個參數為拖�
 //2.Using this we can set progress.
 var rowCount=0;
 function createStatusbar(obj)
-{
+{	
 	var file_count = document.getElementById("file_count").value;
 	document.getElementById("file_count").value = parseInt(file_count)+1;
 	var file_number = document.getElementById("file_number").value;
@@ -690,7 +690,7 @@ function createStatusbar(obj)
 					<span style="margin-left:75px;width:100px"><?php echo $file['create_time'];?></span>
 					<div id="file_<?php echo $i;?>" class="abort" onclick="delete_file(<?php echo $i;?>)" style="<?php echo "display:none";//if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username) { echo "display:none";}?>">Delete</div>
 	*/
-	//在status區塊中顯示上傳檔案的檔名和大小
+	//在status區塊中顯示上傳檔案的檔名和大小	
     this.setFileInfo = function(name, size, type)
     {
         var sizeStr = "";
@@ -709,7 +709,7 @@ function createStatusbar(obj)
         this.size.html(sizeStr);  //指定size區塊的呈現內容
     }
     this.setProgress = function(progress)
-    {       
+    {       		
         var progressBarWidth = progress * this.progressBar.width() / 100;  
         this.progressBar.find('div').animate({ width: progressBarWidth }, 10).html(progress + "% ");
         /*if(parseInt(progress) >= 100)  //After the file uploaded successfully, the abort button would be disappeared 
@@ -782,7 +782,7 @@ function sendFileToServer(formData, status)
         cache: false,
         data: formData,  //Data to be sent to the server.
         success: function(data){  //A function to be called if the request succeeds.
-			
+			//alert("hello");
 		   //status.setProgress(100);
             //$("#status1").append("File upload Done<br>"); 						
         }
