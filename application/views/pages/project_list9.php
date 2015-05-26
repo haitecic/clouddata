@@ -190,7 +190,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 	</div>
 	<br/>	
 </div>
-<div id="project_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100">
+<div id="project_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100;display:none">
 	<div style="text-align:center">
 		<?php 		
 		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六'); //$title存放select選單的名稱
@@ -242,7 +242,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		<input type="button" value="確定" onclick="adjust_project_display_column_by_menu()">
 	</div>	
 </div>
-<div id="news_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
+<div id="news_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100;display:none"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
 	<div style="text-align:center">
 		<?php 		
 		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六'); //$title存放select選單的名稱
@@ -294,7 +294,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		<input type="button" value="確定" onclick="adjust_news_display_column_by_menu()">
 	</div>
 </div>
-<div id="external_tech_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
+<div id="external_tech_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100;display:none"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
 	<div style="text-align:center">
 		<?php 		
 		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六'); //$title存放select選單的名稱
@@ -346,7 +346,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		<input type="button" value="確定" onclick="adjust_external_tech_display_column_by_menu()">
 	</div>
 </div>
-<div id="manager_opinion_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
+<div id="manager_opinion_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100;display:none"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
 	<div style="text-align:center">
 		<?php 		
 		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四'); //$title存放select選單的名稱
@@ -391,9 +391,23 @@ $(document).ready(function() {
 		$(this).width($("#width_tmp").width()+38);
 	});	
 	var is_load = true;
-	var start_record = 0;
-	var order_column = 1;
-	var order_method = "asc";
+	//var start_record = 0;var order_column = 1;var order_method = "asc";
+	var project_start_record = "<?php echo $project_start_record;?>";
+	var project_display_length = "<?php echo $project_display_length;?>";
+	var project_order_column = "<?php echo $project_order_column;?>";
+	var project_order_method = "<?php echo $project_order_method;?>";	
+	var news_start_record = "<?php echo $news_start_record;?>";
+	var news_display_length = "<?php echo $news_display_length;?>";
+	var news_order_column = "<?php echo $news_order_column;?>";
+	var news_order_method = "<?php echo $news_order_method;?>";	
+	var external_tech_start_record = "<?php echo $external_tech_start_record;?>";
+	var external_tech_display_length = "<?php echo $external_tech_display_length;?>";
+	var external_tech_order_column = "<?php echo $external_tech_order_column;?>";
+	var external_tech_order_method = "<?php echo $external_tech_order_method;?>";	
+	var manager_opinion_start_record = "<?php echo $manager_opinion_start_record;?>";
+	var manager_opinion_display_length = "<?php echo $manager_opinion_display_length;?>";
+	var manager_opinion_order_column = "<?php echo $manager_opinion_order_column;?>";
+	var manager_opinion_order_method = "<?php echo $manager_opinion_order_method;?>";	
 	var project_display_columns = [];
 	var news_display_columns = [];
 	var external_tech_display_columns = [];
@@ -404,8 +418,7 @@ $(document).ready(function() {
 	$.ajax({
 		url: request_url,  //The URL for the request
 		data:{			 //The data to send(will be converted to a query string)
-			"user_id": user_id,
-			"class": 1
+			"user_id": user_id
 		},
 		type:"POST",		 //Whether this is a POST or GET request(以POST或GET型態送出data屬性設定的資料)
 		dataType:"json", //The type of data we expect back 回傳的資料型態
@@ -415,7 +428,6 @@ $(document).ready(function() {
 			var i;
 			for(i=0;i<4;i++)
 			{
-				//alert();
 				switch(json.data[i].table_class)
 				{
 					case "1":
@@ -463,20 +475,14 @@ $(document).ready(function() {
 			//$("<h1>").text(json.title).appendTo("body");
 			//$("<div class=\"content\">").html(json.html).appendTo("body");
 		},
-		//Code to run if the request fails; the raw request and status codes are passed to the function
 		error:function(xhr, status, errorThrown){
-			alert("Sorry, there was a problem!");
+			//alert("Sorry, there was a problem!");
 			console.log("Error: " + errorThrown);
 			console.log("Status: " + status);
 			console.dir( xhr );
-		},
-		//Code to run regardless of success or failure
-		complete:function( xhr, status ){
-			//alert("The request is complete!");
 		}
 	});
-	/*alert(project_display_columns[1]);
-	var i=0;
+	/*var i=0;
 	for(i=0;i<project_display_columns.length;i++)
 	{
 		alert(project_display_columns[i]);
@@ -519,10 +525,10 @@ $(document).ready(function() {
 			manager_opinion_display_columns[manager_opinion_display_columns.length] = document.getElementById('manager_opinion_col_select_box_' + i).value;
 		}
 	}*/
-	load_news_list(is_load, start_record, order_column, order_method, search_str, news_display_columns);
-	load_external_tech_list(is_load, start_record, order_column, order_method, search_str, external_tech_display_columns);
-	load_manager_opinion_list(is_load, start_record, order_column, order_method, search_str, manager_opinion_display_columns);
-	load_project_list(is_load, start_record, order_column, order_method, search_str, project_display_columns);	
+	load_news_list(is_load, news_start_record, news_display_length, news_order_column, news_order_method, search_str, news_display_columns);
+	load_external_tech_list(is_load, external_tech_start_record, external_tech_display_length, external_tech_order_column, external_tech_order_method, search_str, external_tech_display_columns);
+	load_manager_opinion_list(is_load, manager_opinion_start_record, manager_opinion_display_length, manager_opinion_order_column, manager_opinion_order_method, search_str, manager_opinion_display_columns);
+	load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);	
 });
 	
 

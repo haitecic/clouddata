@@ -1,15 +1,17 @@
 var column_mapping = {idea_id:"提案編號", year:"年度", idea_name:"提案名稱", idea_source:"提案來源", scenario_d:"情境說明", function_d:"功能構想", distinction_d:"差異化", value_d:"價值性", feasibility_d:"可行性", stage:"階段狀態", progress_description:"進度說明", proposed_unit:"提案單位", proposer:"提案人", established_date:"立案日期", idea_examination:"提案審核履歷", Idea:"I階段文件檢核", Requirement:"R階段文件檢核", Feasibility:"F階段文件檢核", Prototype:"P階段文件檢核", note:"備註", adoption:"導入車型/先期式樣", applied_patent:"專利申請/取得", resurrection_application_qualified:"具備敗部復活申請資格", resurrection_applied:"敗部復活申請", PM_in_charge:"創意中心窗口", closed_case:"結案"};
 var manager_opinion_column_mapping = {topic:"討論議題", content:"內容", content:"內容", in_charge:"主辦(承辦)", time:"時間", people:"與會人員"};
 var project_list_tbl;
-function load_project_list(is_load, start_record, order_column, order_method, search_str, display_columns)
+function load_project_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns)
 {	
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
 	project_list_tbl = $('#project_list_tbl').dataTable( {	
 		"displayStart": start_record,
+		"pageLength": page_length,
 		"searching": false,	  //global search bar
 		"sorting": false,
 		"order": [ order_column, order_method ],  //ordered column and method
+		//"aaSorting": [ order_column, order_method ],
 		"oSearch":{"sSearch":search_str},  //initial search string value
         "processing": true,
         "serverSide": true,
@@ -18,6 +20,7 @@ function load_project_list(is_load, start_record, order_column, order_method, se
 			"data":{			 	
 				"Data":sendData
 			},
+			"async":false,
 			"type":"GET",
 			"complete": function(){
 				$("body").scrollTop(0);  //由該分頁的第一筆紀錄開始瀏覽
@@ -66,12 +69,13 @@ function load_project_list(is_load, start_record, order_column, order_method, se
 }
 
 var news_list_tbl;
-function load_news_list(is_load, start_record, order_column, order_method, search_str, display_columns)
-{	
+function load_news_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns)
+{		
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
     news_list_tbl = $('#news_list_tbl').dataTable( {	
 		"displayStart": start_record,
+		"pageLength": page_length,
 		"searching": false,	  //global search bar
 		"sorting": false,
 		"order": [ order_column, order_method ],  //ordered column and method
@@ -83,6 +87,7 @@ function load_news_list(is_load, start_record, order_column, order_method, searc
 			"data":{			 	
 				"Data":sendData
 			},
+			"async":false,
 			"type":"GET",
 			"complete": function(){
 				$("body").scrollTop(($("#news").offset().top)-50);  //由該分頁的第一筆紀錄開始瀏覽
@@ -131,12 +136,13 @@ function load_news_list(is_load, start_record, order_column, order_method, searc
 }
 
 var external_tech_list_tbl;
-function load_external_tech_list(is_load, start_record, order_column, order_method, search_str, display_columns)
+function load_external_tech_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns)
 {	
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
     external_tech_list_tbl = $('#external_tech_list_tbl').dataTable( {	
 		"displayStart": start_record,
+		"pageLength": page_length,
 		"searching": false,	  //global search bar
 		"sorting": false,
 		"order": [ order_column, order_method ],  //ordered column and method
@@ -148,6 +154,7 @@ function load_external_tech_list(is_load, start_record, order_column, order_meth
 			"data":{			 	
 				"Data":sendData
 			},
+			"async":false,
 			"type":"GET",
 			"complete": function(){
 				$("body").scrollTop(($("#external_tech").offset().top)-50);  //由該分頁的第一筆紀錄開始瀏覽
@@ -196,12 +203,13 @@ function load_external_tech_list(is_load, start_record, order_column, order_meth
 }
 
 var manager_opinion_list_tbl;
-function load_manager_opinion_list(is_load, start_record, order_column, order_method, search_str, display_columns)
+function load_manager_opinion_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns)
 {		
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4]};
     manager_opinion_list_tbl = $('#manager_opinion_list_tbl').dataTable( {	
 		"displayStart": start_record,
+		"pageLength": page_length,
 		"searching": false,	  //global search bar
 		"sorting": false,
 		"order": [ order_column, order_method ],  //ordered column and method
@@ -213,6 +221,7 @@ function load_manager_opinion_list(is_load, start_record, order_column, order_me
 			"data":{			 	
 				"Data":sendData
 			},
+			"async":false,
 			"type":"GET",
 			"complete": function(){
 				$("body").scrollTop(($("#manager_opinion").offset().top)-50);  //由該分頁的第一筆紀錄開始瀏覽
@@ -262,8 +271,24 @@ function adjust_project_display_column_by_menu()
 {
 	var is_load = false;
 	var start_record = project_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 1;
-	var order_method = "asc";
+	var page_length = project_list_tbl.fnPagingInfo().iLength;
+	var order = project_list_tbl.fnSettings().aaSorting;
+	if(typeof(order[0][0]) == "undefined")
+	{
+		order_column = order[0];
+	}
+	else
+	{
+		order_column = order[0][0];
+	}
+	if(typeof(order[0][1]) == "undefined")
+	{
+		order_method = order[1];
+	}
+	else
+	{
+		order_method = order[0][1];
+	}
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;	
@@ -272,10 +297,10 @@ function adjust_project_display_column_by_menu()
 		display_columns[display_columns.length] = document.getElementById('col_' + i).value;
 	}	
 	project_list_tbl.fnDestroy();
-	load_project_list(is_load, start_record, order_column, order_method, search_str, display_columns);
+	load_project_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<7;j++)  //設定表格head名稱
-	{	
+	{			
 		if(document.getElementById('col_' + j).value != "null")
 		{  			
 			project_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
@@ -300,8 +325,24 @@ function adjust_news_display_column_by_menu()
 {
 	var is_load = false;
 	var start_record = news_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 1;
-	var order_method = "asc";
+	var page_length = news_list_tbl.fnPagingInfo().iLength;
+	var order = news_list_tbl.fnSettings().aaSorting;
+	if(typeof(order[0][0]) == "undefined")
+	{
+		order_column = order[0];
+	}
+	else
+	{
+		order_column = order[0][0];
+	}
+	if(typeof(order[0][1]) == "undefined")
+	{
+		order_method = order[1];
+	}
+	else
+	{
+		order_method = order[0][1];
+	}	
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;	
@@ -310,7 +351,7 @@ function adjust_news_display_column_by_menu()
 		display_columns[display_columns.length] = document.getElementById('news_col_' + i).value;
 	}	
 	news_list_tbl.fnDestroy();
-	load_news_list(is_load, start_record, order_column, order_method, search_str, display_columns);
+	load_news_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<7;j++)  //設定表格head名稱
 	{	
@@ -338,8 +379,24 @@ function adjust_external_tech_display_column_by_menu()
 {
 	var is_load = false;
 	var start_record = external_tech_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 1;
-	var order_method = "asc";
+	var page_length = external_tech_list_tbl.fnPagingInfo().iLength;
+	var order = external_tech_list_tbl.fnSettings().aaSorting;
+	if(typeof(order[0][0]) == "undefined")
+	{
+		order_column = order[0];
+	}
+	else
+	{
+		order_column = order[0][0];
+	}
+	if(typeof(order[0][1]) == "undefined")
+	{
+		order_method = order[1];
+	}
+	else
+	{
+		order_method = order[0][1];
+	}
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;	
@@ -348,7 +405,7 @@ function adjust_external_tech_display_column_by_menu()
 		display_columns[display_columns.length] = document.getElementById('external_tech_col_' + i).value;
 	}	
 	external_tech_list_tbl.fnDestroy();
-	load_external_tech_list(is_load, start_record, order_column, order_method, search_str, display_columns);
+	load_external_tech_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<7;j++)  //設定表格head名稱
 	{	
@@ -376,8 +433,24 @@ function adjust_manager_opinion_display_column_by_menu()
 {
 	var is_load = false;
 	var start_record = manager_opinion_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 1;
-	var order_method = "asc";
+	var page_length = manager_opinion_list_tbl.fnPagingInfo().iLength;
+	var order = manager_opinion_list_tbl.fnSettings().aaSorting;
+	if(typeof(order[0][0]) == "undefined")
+	{
+		order_column = order[0];
+	}
+	else
+	{
+		order_column = order[0][0];
+	}
+	if(typeof(order[0][1]) == "undefined")
+	{
+		order_method = order[1];
+	}
+	else
+	{
+		order_method = order[0][1];
+	}
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;	
@@ -386,7 +459,7 @@ function adjust_manager_opinion_display_column_by_menu()
 		display_columns[display_columns.length] = document.getElementById('manager_opinion_col_' + i).value;
 	}	
 	manager_opinion_list_tbl.fnDestroy();
-	load_manager_opinion_list(is_load, start_record, order_column, order_method, search_str, display_columns);
+	load_manager_opinion_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<5;j++)  //設定表格head名稱
 	{	
@@ -414,8 +487,24 @@ function adjust_project_display_column_by_column()
 {
 	var first_load =false;
 	var start_record = project_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 1;
-	var order_method = "asc";
+	var page_length = project_list_tbl.fnPagingInfo().iLength;
+	var order = project_list_tbl.fnSettings().aaSorting;
+	if(typeof(order[0][0]) == "undefined")
+	{
+		order_column = order[0];
+	}
+	else
+	{
+		order_column = order[0][0];
+	}
+	if(typeof(order[0][1]) == "undefined")
+	{
+		order_method = order[1];
+	}
+	else
+	{
+		order_method = order[0][1];
+	}	
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;
@@ -431,7 +520,7 @@ function adjust_project_display_column_by_column()
 		}			
 	}		
 	project_list_tbl.fnDestroy();	
-	load_project_list(first_load, start_record, order_column, order_method, search_str, display_columns);
+	load_project_list(first_load, start_record, page_length, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<7;j++)
 	{	
@@ -454,8 +543,24 @@ function adjust_news_display_column_by_column()
 {
 	var first_load =false;
 	var start_record = news_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 1;
-	var order_method = "asc";
+	var page_length = news_list_tbl.fnPagingInfo().iLength;
+	var order = news_list_tbl.fnSettings().aaSorting;
+	if(typeof(order[0][0]) == "undefined")
+	{
+		order_column = order[0];
+	}
+	else
+	{
+		order_column = order[0][0];
+	}
+	if(typeof(order[0][1]) == "undefined")
+	{
+		order_method = order[1];
+	}
+	else
+	{
+		order_method = order[0][1];
+	}
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;
@@ -471,7 +576,7 @@ function adjust_news_display_column_by_column()
 		}
 	}	
 	news_list_tbl.fnDestroy();
-	load_news_list(first_load, start_record, order_column, order_method, search_str, display_columns);
+	load_news_list(first_load, start_record, page_length, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<7;j++)
 	{
@@ -494,8 +599,24 @@ function adjust_external_tech_display_column_by_column()
 {
 	var first_load =false;
 	var start_record = external_tech_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 1;
-	var order_method = "asc";
+	var page_length = external_tech_list_tbl.fnPagingInfo().iLength;
+	var order = external_tech_list_tbl.fnSettings().aaSorting;
+	if(typeof(order[0][0]) == "undefined")
+	{
+		order_column = order[0];
+	}
+	else
+	{
+		order_column = order[0][0];
+	}
+	if(typeof(order[0][1]) == "undefined")
+	{
+		order_method = order[1];
+	}
+	else
+	{
+		order_method = order[0][1];
+	}
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;
@@ -511,7 +632,7 @@ function adjust_external_tech_display_column_by_column()
 		}
 	}	
 	external_tech_list_tbl.fnDestroy();
-	load_external_tech_list(first_load, start_record, order_column, order_method, search_str, display_columns);
+	load_external_tech_list(first_load, start_record, page_length, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<7;j++)
 	{
@@ -534,8 +655,24 @@ function adjust_manager_opinion_display_column_by_column()
 {
 	var first_load =false;
 	var start_record = manager_opinion_list_tbl.fnPagingInfo().iStart;  //取得目前分頁開始之第一筆紀錄
-	var order_column = 1;
-	var order_method = "asc";
+	var page_length = manager_opinion_list_tbl.fnPagingInfo().iLength;
+	var order = manager_opinion_list_tbl.fnSettings().aaSorting;
+	if(typeof(order[0][0]) == "undefined")
+	{
+		order_column = order[0];
+	}
+	else
+	{
+		order_column = order[0][0];
+	}
+	if(typeof(order[0][1]) == "undefined")
+	{
+		order_method = order[1];
+	}
+	else
+	{
+		order_method = order[0][1];
+	}
 	var display_columns = [];
 	var search_str = document.getElementById("search_bar").value;
 	var i;
@@ -551,7 +688,7 @@ function adjust_manager_opinion_display_column_by_column()
 		}
 	}	
 	manager_opinion_list_tbl.fnDestroy();
-	load_manager_opinion_list(first_load, start_record, order_column, order_method, search_str, display_columns);
+	load_manager_opinion_list(first_load, start_record, page_length, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<5;j++)
 	{
@@ -648,8 +785,8 @@ function show_more_content(row)
 */
 function view_file(preview_file, trigger_element_id)
 {
-	//var file_path = 'http://127.0.0.1/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
-	var file_path = 'http://10.202.121.39/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
+	var file_path = 'http://127.0.0.1/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
+	//var file_path = 'http://10.202.121.39/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
 	document.getElementById("pdf_obj").data = file_path;
 	document.getElementById("preview_pdf").style.display="block";
 	document.getElementById("background_mask").style.display="block";
@@ -680,8 +817,8 @@ function user_behavior_log(element_id, browse_file)
 		pageX = event.clientX + document.body.scrollLeft;
 		pageY = event.clientY + document.body.scrollTop;
 	}	
-	//var request_url = "http://127.0.0.1/project_management/user_behavior_log";
-	var request_url = "http://10.202.121.39/project_management/user_behavior_log";
+	var request_url = "http://127.0.0.1/project_management/user_behavior_log";
+	//var request_url = "http://10.202.121.39/project_management/user_behavior_log";
 	if(element_id == "body")
 	{
 		global_element = null;
@@ -691,7 +828,7 @@ function user_behavior_log(element_id, browse_file)
 		global_element = element_id;		
 	}	
 	var id = document.getElementById("user_id").value;	
-	var search_bar = document.getElementById("search_bar_hidden").value;	
+	var search_bar = document.getElementById("search_bar_hidden").value;
 	$.ajax({
 		url:request_url,  
 		data:{			 //The data to send(will be converted to a query string)
@@ -708,7 +845,7 @@ function user_behavior_log(element_id, browse_file)
 		//Code to run if the request succeeds. The response is passed to the function
 		success:function(str){
 		},
-		async:true,
+		async:false,
 		//Code to run if the request fails; the raw request and status codes are passed to the function
 		error:function(xhr, status, errorThrown){
 			//alert("Sorry, there was a problem!");

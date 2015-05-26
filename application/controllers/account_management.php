@@ -91,50 +91,25 @@ class Account_management extends CI_Controller{
 				$username = $result['surname'].$result['given_names'];
 				$this->session->set_userdata('user_id', $user_id);
 				$this->session->set_userdata('username', $username);
+				//project_list初始設定
 				$this->session->set_userdata('search_bar', "");  //紀錄使用者搜尋內容
-				//專案資料顯示欄位
-				//$this->session->set_userdata('project_first_item', 'idea_name');
-				//$this->session->set_userdata('project_second_item', 'year');
-				//$this->session->set_userdata('project_third_item', 'proposed_unit');
-				//$this->session->set_userdata('project_fourth_item', 'proposer');
-				//$this->session->set_userdata('project_fifth_item', 'established_date');
-				//$this->session->set_userdata('project_sixth_item', 'PM_in_charge');
-				//$this->session->set_userdata('project_seventh_item', 'closed_case');				
-				//news顯示欄位
-				//$this->session->set_userdata('news_first_item', 'idea_name');
-				//$this->session->set_userdata('news_second_item', 'year');
-				//$this->session->set_userdata('news_third_item', 'proposed_unit');
-				//$this->session->set_userdata('news_fourth_item', 'proposer');
-				//$this->session->set_userdata('news_fifth_item', 'established_date');
-				//$this->session->set_userdata('news_sixth_item', 'PM_in_charge');
-				//$this->session->set_userdata('news_seventh_item', 'closed_case');				
-				//產學研技術顯示欄位
-				//$this->session->set_userdata('external_tech_first_item', 'idea_name');
-				//$this->session->set_userdata('external_tech_second_item', 'year');
-				//$this->session->set_userdata('external_tech_third_item', 'proposed_unit');
-				//$this->session->set_userdata('external_tech_fourth_item', 'proposer');
-				//$this->session->set_userdata('external_tech_fifth_item', 'established_date');
-				//$this->session->set_userdata('external_tech_sixth_item', 'PM_in_charge');
-				//$this->session->set_userdata('external_tech_seventh_item', 'closed_case');				
-				//高階意見顯示欄位
-				//$this->session->set_userdata('manager_opinion_first_item', 'topic');
-				//$this->session->set_userdata('manager_opinion_second_item', 'content');
-				//$this->session->set_userdata('manager_opinion_third_item', 'in_charge');
-				//$this->session->set_userdata('manager_opinion_fourth_item', 'time');
-				//$this->session->set_userdata('manager_opinion_fifth_item', 'people');
-				header('Location:project_list');
-				/*
-				$this->load->view('templates/header', $data);
-				$this->load->view('templates/navbar', $data);
-				$this->load->view('pages/project_list', $data);
-				$this->load->view('templates/footer');*/
-				//儲存使用者帳號至Session中
-				//登入基本資料輸入頁面
-				//$this->load->view('pages/formsuccess',$data);
-				//$this->load->view('templates/header', $data);
-				//$this->load->view('pages/register', $data);
-				//$this->load->view('pages/login', $data);
-				//$this->load->view('templates/footer');
+				$this->session->set_userdata('project_start_record', 0);  //從第幾筆資料開始呈現(瀏覽的分頁)
+				$this->session->set_userdata('project_display_length', 10);  //一頁顯示筆數
+				$this->session->set_userdata('project_order_column', 1);  //排序欄位
+				$this->session->set_userdata('project_order_method', "asc");  //排序方式
+				$this->session->set_userdata('news_start_record', 0);
+				$this->session->set_userdata('news_display_length', 10);
+				$this->session->set_userdata('news_order_column', 1);
+				$this->session->set_userdata('news_order_method', "asc");
+				$this->session->set_userdata('external_tech_start_record', 0);
+				$this->session->set_userdata('external_tech_display_length', 10);
+				$this->session->set_userdata('external_tech_order_column', 1);
+				$this->session->set_userdata('external_tech_order_method', "asc");
+				$this->session->set_userdata('manager_opinion_start_record', 0);
+				$this->session->set_userdata('manager_opinion_display_length', 10);
+				$this->session->set_userdata('manager_opinion_order_column', 1);
+				$this->session->set_userdata('manager_opinion_order_method', "asc");
+				header('Location:project_list');				
 			}
 		}
 	}
@@ -194,10 +169,18 @@ class Account_management extends CI_Controller{
 		$cursorY = $this->input->post('cursorY');
 		$trigger_element_id = $this->input->post('trigger_element_id');
 		$search_keyword = $this->input->post('search_keyword');
-		$this->session->set_userdata('search_bar', $search_keyword);  //紀錄使用者搜尋內容
-		$file = $this->input->post('file');
-		//$is_blocked = $this->account_management_model->set_user_behavior($user_id, $page, $cursorX, $cursorY, $trigger_element_id, $search_keyword, $file);
+		$this->session->set_userdata('search_bar', $search_keyword);  //紀錄使用者搜尋內容		
+		$file = $this->input->post('file');		
 		$this->account_management_model->set_user_behavior($user_id, $page, $cursorX, $cursorY, $trigger_element_id, $search_keyword, $file);
+	}
+	
+	public function set_start_record()
+	{		
+		$start_record = $this->input->post('start_record');
+		$this->session->set_userdata('project_start_record', $start_record);
+		$this->session->set_userdata('news_start_record', $start_record);
+		$this->session->set_userdata('external_tech_start_record', $start_record);
+		$this->session->set_userdata('manager_opinion_start_record', $start_record);
 	}
 	
 	/**
@@ -206,8 +189,7 @@ class Account_management extends CI_Controller{
 	public function user_column_setting()
 	{
 		$user_id = $this->input->post('user_id');
-		$class = $this->input->post('class');
-		$json_data = $this->account_management_model->get_column_setting_ajax($user_id, $class);
+		$json_data = $this->account_management_model->get_column_setting_ajax($user_id);
 		echo $json_data;
 	}
 }

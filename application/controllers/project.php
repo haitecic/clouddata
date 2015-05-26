@@ -184,6 +184,23 @@ class Project extends CI_Controller{
 		$data['username'] = $this->session->userdata('username');
 		$search = $this->session->userdata('search_bar');
 		$data['search'] = $search;
+		$data['project_start_record'] = $this->session->userdata('project_start_record');  //從第幾筆資料開始呈現(瀏覽的分頁)
+		$data['project_display_length'] = $this->session->userdata('project_display_length');  //一頁顯示筆數
+		$data['project_order_column'] = $this->session->userdata('project_order_column');  //排序欄位
+		$data['project_order_method'] = $this->session->userdata('project_order_method');  //排序方式
+		$data['news_start_record'] = $this->session->userdata('news_start_record');
+		$data['news_display_length'] = $this->session->userdata('news_display_length');
+		$data['news_order_column'] = $this->session->userdata('news_order_column');
+		$data['news_order_method'] = $this->session->userdata('news_order_method');
+		$data['external_tech_start_record'] = $this->session->userdata('external_tech_start_record');
+		$data['external_tech_display_length'] = $this->session->userdata('external_tech_display_length');
+		$data['external_tech_order_column'] = $this->session->userdata('external_tech_order_column');
+		$data['external_tech_order_method'] = $this->session->userdata('external_tech_order_method');
+		$data['manager_opinion_start_record'] = $this->session->userdata('manager_opinion_start_record');
+		$data['manager_opinion_display_length'] = $this->session->userdata('manager_opinion_display_length');
+		$data['manager_opinion_order_column'] = $this->session->userdata('manager_opinion_order_column');
+		$data['manager_opinion_order_method'] = $this->session->userdata('manager_opinion_order_method');
+		
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
 		$data['js_location'] = site_url("/application/assets/js");  
 		$data['js_path'] = site_url("/application/js");  
@@ -207,7 +224,7 @@ class Project extends CI_Controller{
 		$manager_opinion_column_setting = $this->account_management_model->get_column_setting($user_id, 4);
 		$data['manager_opinion_column_setting'] = $manager_opinion_column_setting;
 		$project_list = $this->project_model->get_specific_projects_data($search_bar);  //取得搜尋條件設定的專案資料
-		$data['project_list'] = $project_list;		
+		$data['project_list'] = $project_list;
 		$this->load->view('templates/header1', $data);
 		$this->load->view('templates/navbar', $data);
 		$this->load->view('pages/project_list9', $data);

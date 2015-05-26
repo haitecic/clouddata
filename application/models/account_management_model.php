@@ -32,23 +32,11 @@ class Account_management_model extends CI_Model{
 	/**
 	get_column_setting_ajax()：取得使用者欄位設定
 	*/
-	public function get_column_setting_ajax($user_id, $class)
+	public function get_column_setting_ajax($user_id)
 	{
 		$where_clause = array('user_id' => $user_id);
 		$query = $this->db->select('*')->from('user_column_setting')->where($where_clause)->get();
-		$result = $query->result_array();		
-		/*"contacts": [ 
-        {
-          "name": "Andy",
-          "sex": "male",
-          "mail": "andy@example.com"
-        },
-        {
-          "name": "May",
-          "sex": "female",
-          "mail": "may@example.com"
-        }
-    ], */
+		$result = $query->result_array();
 		$json_data = '{"data":[';
 		$j=0;
 		foreach($result as $index=>$value)
@@ -163,7 +151,7 @@ class Account_management_model extends CI_Model{
 			'pageY'=>$cursorY,
 			'trigger_element_id'=>$trigger_element_id,
 			'search_keyword'=>$search_keyword,
-			'file' => $file);
+			'file' => $file);			
 		$this->db->insert('user_behavior_log', $new_record);
 		return ;
 	}
