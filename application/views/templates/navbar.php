@@ -1,4 +1,4 @@
-<body><!-- onmouseover="user_behavior_log('body', null)"-->
+﻿<body><!-- onmouseover="user_behavior_log('body', null)"-->
 <!--Start Header-->
 <div id="screensaver">
 	<canvas id="canvas"></canvas>
@@ -26,11 +26,11 @@
 	<div class="container-fluid expanded-panel">
 		<div class="row">
 			<div id="logo" class="col-xs-12 col-sm-2 ">
-				<a id="logo_icon" href="<?php echo site_url().'project_list'?>" style="font-family: Adobe 繁黑體 Std;" onclick="user_behavior_log(this.id, null)">專案管理系統</a>
+				<a id="logo_icon" href="<?php echo site_url().'project_list'?>" style="font-family: Adobe 繁黑體 Std;" onclick="user_behavior_log(this.id, null)">專案管理系統</a><!--font-family: Adobe 繁黑體 Std;微軟正黑體;font-size:18pt;font-weight:300-->
 			</div>
 			<?php
 			$attributes = array('id' => 'project_search_form', 'name'=>'project_search_form');
-			echo form_open('project_list', $attributes);
+			//echo form_open('project_list', $attributes);
 			?>
 			<div id="top-panel" class="col-xs-12 col-sm-10">
 				<div class="row">
@@ -55,7 +55,7 @@
 					<input id="user_id" type="hidden" value="<?php echo $user_id?>"/>
 				</div>				
 			</div>
-			</form>
+			<!--</form>-->
 		</div>
 		<!--<div style="text-align:right;color:#ffffff;float:left;magin-left:100px" >使用者：<?php echo $username;?></div>-->
 		<!--<div style="text-align:right;margin-right:10px" ><span style="color:#ffffff">使用者：<?php echo $username;?></span><span><?php echo anchor("login", "登出",'style="margin-left:15px;color:#ffffff;"');?></span></div>-->
@@ -66,7 +66,11 @@ function start_search()
 {
 	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value;
 	user_behavior_log('search_bar', null);
-	document.project_search_form.submit();	
+	adjust_project_display_column_by_column();
+	adjust_news_display_column_by_column();
+	adjust_external_tech_display_column_by_column();
+	adjust_manager_opinion_tech_display_column_by_column();
+	//document.project_search_form.submit();	
 }
 
 $("#search_bar").keypress(function(event){   
@@ -74,7 +78,11 @@ $("#search_bar").keypress(function(event){
     if (event.keyCode == 13) 
 	{
 		user_behavior_log('search_bar', null);	
-		$("#project_search_form").submit();
+		//$("#project_search_form").submit();
+		adjust_project_display_column_by_column();
+		adjust_news_display_column_by_column();
+		adjust_external_tech_display_column_by_column();
+		adjust_manager_opinion_display_column_by_column();
 	}
 });
 </script>

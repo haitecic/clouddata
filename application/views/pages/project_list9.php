@@ -29,25 +29,25 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 					<thead>
 						<tr>
 							<th id="project_list_head" style="text-align:center;font-weight:normal;width:4%;word-wrap:break-word"></th>
-							<th id="project_list_head0" style="text-align:center;font-weight:normal;width:18%;word-wrap:break-word"><span id="pro_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('project_first_item')];?></span><select id="pro_col_select_box_0" style="display:none"><option value="idea_name" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
-							<th id="project_list_head1" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="pro_show_select_box(1)" onmouseout="pro_hide_select_box(1)"><?php //if($this->session->userdata('second_item') != "null"){?><span id="pro_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('project_second_item')];?></span><span><select id="pro_col_select_box_1" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('project_second_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><?php// }?><span class="sortMask"></span><!--<span id="hide_column_icon_1" onclick="insert_column(1)" class="insert_column"></span>--></th>
-							<th id="project_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="pro_show_select_box(2)" onmouseout="pro_hide_select_box(2)"><?php //if($this->session->userdata('third_item') != "null"){?><span id="pro_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('project_third_item')];?></span><span><select id="pro_col_select_box_2" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('project_third_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><?php //}?><span class="sortMask"></span><!--<span id="hide_column_icon_2" class="insert_column"></span>--></th>
-							<th id="project_list_head3" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="pro_show_select_box(3)" onmouseout="pro_hide_select_box(3)"><?php //if($this->session->userdata('forth_item') != "null"){?><span id="pro_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('project_fourth_item')];?></span><span><select id="pro_col_select_box_3" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('project_fourth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><?php// }?><span class="sortMask"></span><!--<span id="hide_column_icon_3" style="display:none" class="insert_column"></span>--></th>
-							<th id="project_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="pro_show_select_box(4)" onmouseout="pro_hide_select_box(4)"><?php //if($this->session->userdata('fifth_item') != "null"){?><span id="pro_col_plain_text_4" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('project_fifth_item')];?></span><span><select id="pro_col_select_box_4" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('project_fifth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><?php //}?><span class="sortMask"></span><!--<span id="hide_column_icon_4" style="display:none" class="insert_column"></span>--></th>
-							<th id="project_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="pro_show_select_box(5)" onmouseout="pro_hide_select_box(5)"><?php //if($this->session->userdata('sixth_item') != "null"){?><span id="pro_col_plain_text_5" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('project_sixth_item')];?></span><span><select id="pro_col_select_box_5" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('project_sixth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><?php //}?><span class="sortMask"></span><!--<span id="hide_column_icon_5" style="display:none" class="insert_column"></span>--></th>
-							<th id="project_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="pro_show_select_box(6)" onmouseout="pro_hide_select_box(6)"><?php //if($this->session->userdata('seventh_item') != "null"){?><span id="pro_col_plain_text_6" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('project_seventh_item')];?></span><span><select id="pro_col_select_box_6" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('project_seventh_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><?php //}?><span class="sortMask"></span><!--<span id="hide_column_icon_6" style="display:none" class="insert_column"></span>--></th>
+							<th id="project_list_head0" style="text-align:center;font-weight:normal;width:18%;word-wrap:break-word"><span id="pro_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $column_mapping[$project_column_setting['column1']];?></span><select id="pro_col_select_box_0" style="display:none"><option value="idea_name" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
+							<th id="project_list_head1" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="pro_show_select_box(1)" onmouseout="pro_hide_select_box(1)"><span id="pro_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $column_mapping[$project_column_setting['column2']];?></span><span><select id="pro_col_select_box_1" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($project_column_setting['column2'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="project_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="pro_show_select_box(2)" onmouseout="pro_hide_select_box(2)"><span id="pro_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $column_mapping[$project_column_setting['column3']];?></span><span><select id="pro_col_select_box_2" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($project_column_setting['column3'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="project_list_head3" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="pro_show_select_box(3)" onmouseout="pro_hide_select_box(3)"><span id="pro_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $column_mapping[$project_column_setting['column4']];?></span><span><select id="pro_col_select_box_3" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($project_column_setting['column4'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="project_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="pro_show_select_box(4)" onmouseout="pro_hide_select_box(4)"><span id="pro_col_plain_text_4" style="margin:0px auto -21px;"><?php echo $column_mapping[$project_column_setting['column5']];?></span><span><select id="pro_col_select_box_4" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($project_column_setting['column5'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="project_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="pro_show_select_box(5)" onmouseout="pro_hide_select_box(5)"><span id="pro_col_plain_text_5" style="margin:0px auto -21px;"><?php echo $column_mapping[$project_column_setting['column6']];?></span><span><select id="pro_col_select_box_5" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($project_column_setting['column6'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="project_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="pro_show_select_box(6)" onmouseout="pro_hide_select_box(6)"><span id="pro_col_plain_text_6" style="margin:0px auto -21px;"><?php echo $column_mapping[$project_column_setting['column7']];?></span><span><select id="pro_col_select_box_6" onchange="adjust_project_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($project_column_setting['column7'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
 							<th id="project_list_foot" style="text-align:center;font-weight:normal"></th>
-							<th id="project_list_foot0" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('project_first_item')];?></th>
-							<th id="project_list_foot1" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('project_second_item')];?></th>
-							<th id="project_list_foot2" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('project_third_item')];?></th>
-							<th id="project_list_foot3" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('project_fourth_item')];?></th>
-							<th id="project_list_foot4" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('project_fifth_item')];?></th>
-							<th id="project_list_foot5" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('project_sixth_item')];?></th>
-							<th id="project_list_foot6" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('project_seventh_item')];?></th>
+							<th id="project_list_foot0" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$project_column_setting['column1']];?></th>
+							<th id="project_list_foot1" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$project_column_setting['column2']];?></th>
+							<th id="project_list_foot2" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$project_column_setting['column3']];?></th>
+							<th id="project_list_foot3" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$project_column_setting['column4']];?></th>
+							<th id="project_list_foot4" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$project_column_setting['column5']];?></th>
+							<th id="project_list_foot5" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$project_column_setting['column6']];?></th>
+							<th id="project_list_foot6" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$project_column_setting['column7']];?></th>
 						</tr>
 					</tfoot>
 				</table>
@@ -58,7 +58,6 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
 			<div class="box-header" style="margin-left:-15px;margin-right:-15px;padding-top:7px;height:40px;font-size:14pt">
 				<div class="box-name" style="color:#3A5D91">
-					<!--<i class="fa fa-linux"></i>-->
 					<span>News</span>
 				</div>
 				<div class="box-icons">
@@ -76,25 +75,25 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 					<thead>
 						<tr>
 							<th id="news_list_head" style="text-align:center;font-weight:normal;width:4%;word-wrap:break-word"></th>
-							<th id="news_list_head0" style="text-align:center;font-weight:normal;width:18%;word-wrap:break-word"><span id="news_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('news_first_item')];?></span><select id="news_col_select_box_0" style="display:none"><option value="idea_name" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
-							<th id="news_list_head1" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(1)" onmouseout="news_hide_select_box(1)"><span id="news_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('news_second_item')];?></span><span><select id="news_col_select_box_1" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('news_second_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(2)" onmouseout="news_hide_select_box(2)"><span id="news_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('news_third_item')];?></span><span><select id="news_col_select_box_2" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('news_third_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head3" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(3)" onmouseout="news_hide_select_box(3)"><span id="news_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('news_fourth_item')];?></span><span><select id="news_col_select_box_3" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('news_fourth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(4)" onmouseout="news_hide_select_box(4)"><span id="news_col_plain_text_4" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('news_fifth_item')];?></span><span><select id="news_col_select_box_4" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('news_fifth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(5)" onmouseout="news_hide_select_box(5)"><span id="news_col_plain_text_5" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('news_sixth_item')];?></span><span><select id="news_col_select_box_5" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('news_sixth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(6)" onmouseout="news_hide_select_box(6)"><span id="news_col_plain_text_6" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('news_seventh_item')];?></span><span><select id="news_col_select_box_6" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('news_seventh_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head0" style="text-align:center;font-weight:normal;width:18%;word-wrap:break-word"><span id="news_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column1']];?></span><select id="news_col_select_box_0" style="display:none"><option value="idea_name" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
+							<th id="news_list_head1" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(1)" onmouseout="news_hide_select_box(1)"><span id="news_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column2']];?></span><span><select id="news_col_select_box_1" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column2'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(2)" onmouseout="news_hide_select_box(2)"><span id="news_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column3']];?></span><span><select id="news_col_select_box_2" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column3'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head3" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(3)" onmouseout="news_hide_select_box(3)"><span id="news_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column4']];?></span><span><select id="news_col_select_box_3" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column4'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(4)" onmouseout="news_hide_select_box(4)"><span id="news_col_plain_text_4" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column5']];?></span><span><select id="news_col_select_box_4" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column5'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(5)" onmouseout="news_hide_select_box(5)"><span id="news_col_plain_text_5" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column6']];?></span><span><select id="news_col_select_box_5" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column6'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(6)" onmouseout="news_hide_select_box(6)"><span id="news_col_plain_text_6" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column7']];?></span><span><select id="news_col_select_box_6" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column7'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
 							<th id="news_list_foot" style="text-align:center;font-weight:normal"></th>
-							<th id="news_list_foot0" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('news_first_item')];?></th>
-							<th id="news_list_foot1" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('news_second_item')];?></th>
-							<th id="news_list_foot2" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('news_third_item')];?></th>
-							<th id="news_list_foot3" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('news_fourth_item')];?></th>
-							<th id="news_list_foot4" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('news_fifth_item')];?></th>
-							<th id="news_list_foot5" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('news_sixth_item')];?></th>
-							<th id="news_list_foot6" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('news_seventh_item')];?></th>
+							<th id="news_list_foot0" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column1']];?></th>
+							<th id="news_list_foot1" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column2']];?></th>
+							<th id="news_list_foot2" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column3']];?></th>
+							<th id="news_list_foot3" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column4']];?></th>
+							<th id="news_list_foot4" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column5']];?></th>
+							<th id="news_list_foot5" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column6']];?></th>
+							<th id="news_list_foot6" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column7']];?></th>
 						</tr>
 					</tfoot>
 				</table>
@@ -105,7 +104,6 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
 			<div class="box-header" style="margin-left:-15px;margin-right:-15px;padding-top:7px;height:40px;font-size:14pt">
 				<div class="box-name" style="color:#3A5D91">
-					<!--<i class="fa fa-linux"></i>-->
 					<span>產學研技術</span>
 				</div>
 				<div class="box-icons">
@@ -123,25 +121,25 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 					<thead>
 						<tr>
 							<th id="external_tech_list_head" style="text-align:center;font-weight:normal;width:4%;word-wrap:break-word"></th>
-							<th id="external_tech_list_head0" style="text-align:center;font-weight:normal;width:18%;word-wrap:break-word"><span id="external_tech_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('external_tech_first_item')];?></span><select id="external_tech_col_select_box_0" style="display:none"><option value="idea_name" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
-							<th id="external_tech_list_head1" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="external_tech_show_select_box(1)" onmouseout="external_tech_hide_select_box(1)"><span id="external_tech_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('external_tech_second_item')];?></span><span><select id="external_tech_col_select_box_1" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('external_tech_second_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="external_tech_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="external_tech_show_select_box(2)" onmouseout="external_tech_hide_select_box(2)"><span id="external_tech_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('external_tech_third_item')];?></span><span><select id="external_tech_col_select_box_2" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('external_tech_third_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="external_tech_list_head3" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="external_tech_show_select_box(3)" onmouseout="external_tech_hide_select_box(3)"><span id="external_tech_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('external_tech_fourth_item')];?></span><span><select id="external_tech_col_select_box_3" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('external_tech_fourth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="external_tech_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="external_tech_show_select_box(4)" onmouseout="external_tech_hide_select_box(4)"><span id="external_tech_col_plain_text_4" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('external_tech_fifth_item')];?></span><span><select id="external_tech_col_select_box_4" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('external_tech_fifth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="external_tech_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="external_tech_show_select_box(5)" onmouseout="external_tech_hide_select_box(5)"><span id="external_tech_col_plain_text_5" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('external_tech_sixth_item')];?></span><span><select id="external_tech_col_select_box_5" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('external_tech_sixth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="external_tech_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="external_tech_show_select_box(6)" onmouseout="external_tech_hide_select_box(6)"><span id="external_tech_col_plain_text_6" style="margin:0px auto -21px;"><?php echo $column_mapping[$this->session->userdata('external_tech_seventh_item')];?></span><span><select id="external_tech_col_select_box_6" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($this->session->userdata('external_tech_seventh_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="external_tech_list_head0" style="text-align:center;font-weight:normal;width:18%;word-wrap:break-word"><span id="external_tech_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $column_mapping[$external_tech_column_setting['column1']];?></span><select id="external_tech_col_select_box_0" style="display:none"><option value="idea_name" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
+							<th id="external_tech_list_head1" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="external_tech_show_select_box(1)" onmouseout="external_tech_hide_select_box(1)"><span id="external_tech_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $column_mapping[$external_tech_column_setting['column2']];?></span><span><select id="external_tech_col_select_box_1" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($external_tech_column_setting['column2'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="external_tech_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="external_tech_show_select_box(2)" onmouseout="external_tech_hide_select_box(2)"><span id="external_tech_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $column_mapping[$external_tech_column_setting['column3']];?></span><span><select id="external_tech_col_select_box_2" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($external_tech_column_setting['column3'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="external_tech_list_head3" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="external_tech_show_select_box(3)" onmouseout="external_tech_hide_select_box(3)"><span id="external_tech_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $column_mapping[$external_tech_column_setting['column4']];?></span><span><select id="external_tech_col_select_box_3" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($external_tech_column_setting['column4'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="external_tech_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="external_tech_show_select_box(4)" onmouseout="external_tech_hide_select_box(4)"><span id="external_tech_col_plain_text_4" style="margin:0px auto -21px;"><?php echo $column_mapping[$external_tech_column_setting['column5']];?></span><span><select id="external_tech_col_select_box_4" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($external_tech_column_setting['column5'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="external_tech_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="external_tech_show_select_box(5)" onmouseout="external_tech_hide_select_box(5)"><span id="external_tech_col_plain_text_5" style="margin:0px auto -21px;"><?php echo $column_mapping[$external_tech_column_setting['column6']];?></span><span><select id="external_tech_col_select_box_5" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($external_tech_column_setting['column6'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="external_tech_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="external_tech_show_select_box(6)" onmouseout="external_tech_hide_select_box(6)"><span id="external_tech_col_plain_text_6" style="margin:0px auto -21px;"><?php echo $column_mapping[$external_tech_column_setting['column7']];?></span><span><select id="external_tech_col_select_box_6" onchange="adjust_external_tech_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($external_tech_column_setting['column7'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
 						</tr>
 					</thead>									
 					<tfoot>
 						<tr>
 							<th id="external_tech_list_foot" style="text-align:center;font-weight:normal"></th>
-							<th id="external_tech_list_foot0" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('external_tech_first_item')];?></th>
-							<th id="external_tech_list_foot1" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('external_tech_second_item')];?></th>
-							<th id="external_tech_list_foot2" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('external_tech_third_item')];?></th>
-							<th id="external_tech_list_foot3" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('external_tech_fourth_item')];?></th>
-							<th id="external_tech_list_foot4" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('external_tech_fifth_item')];?></th>
-							<th id="external_tech_list_foot5" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('external_tech_sixth_item')];?></th>
-							<th id="external_tech_list_foot6" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$this->session->userdata('external_tech_seventh_item')];?></th>
+							<th id="external_tech_list_foot0" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$external_tech_column_setting['column1']];?></th>
+							<th id="external_tech_list_foot1" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$external_tech_column_setting['column2']];?></th>
+							<th id="external_tech_list_foot2" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$external_tech_column_setting['column3']];?></th>
+							<th id="external_tech_list_foot3" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$external_tech_column_setting['column4']];?></th>
+							<th id="external_tech_list_foot4" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$external_tech_column_setting['column5']];?></th>
+							<th id="external_tech_list_foot5" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$external_tech_column_setting['column6']];?></th>
+							<th id="external_tech_list_foot6" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$external_tech_column_setting['column7']];?></th>
 						</tr>
 					</tfoot>
 				</table>
@@ -152,7 +150,6 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
 			<div class="box-header" style="margin-left:-15px;margin-right:-15px;padding-top:7px;height:40px;font-size:14pt">
 				<div class="box-name" style="color:#3A5D91">
-					<!--<i class="fa fa-linux"></i>-->
 					<span>高階意見</span>
 				</div>
 				<div class="box-icons">
@@ -170,25 +167,21 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 					<thead>
 						<tr>
 							<th id="manager_opinion_list_head" style="text-align:center;font-weight:normal;width:4%;word-wrap:break-word"></th>
-							<th id="manager_opinion_list_head0" style="text-align:center;font-weight:normal;width:15%;word-wrap:break-word"><span id="manager_opinion_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_first_item')];?></span><select id="manager_opinion_col_select_box_0" style="display:none"><option value="topic" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
-							<th id="manager_opinion_list_head1" style="text-align:center;font-weight:normal;width:43%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(1)" onmouseout="manager_opinion_hide_select_box(1)"><span id="manager_opinion_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_second_item')];?></span><span><select id="manager_opinion_col_select_box_1" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($this->session->userdata('manager_opinion_second_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="manager_opinion_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(2)" onmouseout="manager_opinion_hide_select_box(2)"><span id="manager_opinion_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_third_item')];?></span><span><select id="manager_opinion_col_select_box_2" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($this->session->userdata('manager_opinion_third_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="manager_opinion_list_head3" style="text-align:center;font-weight:normal;width:10%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(3)" onmouseout="manager_opinion_hide_select_box(3)"><span id="manager_opinion_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_fourth_item')];?></span><span><select id="manager_opinion_col_select_box_3" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($this->session->userdata('manager_opinion_fourth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="manager_opinion_list_head4" style="text-align:center;font-weight:normal;width:15%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(4)" onmouseout="manager_opinion_hide_select_box(4)"><span id="manager_opinion_col_plain_text_4" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_fifth_item')];?></span><span><select id="manager_opinion_col_select_box_4" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($this->session->userdata('manager_opinion_fifth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<!--<th id="manager_opinion_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(5)" onmouseout="manager_opinion_hide_select_box(5)"><span id="manager_opinion_col_plain_text_5" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_sixth_item')];?></span><span><select id="manager_opinion_col_select_box_5" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($this->session->userdata('manager_opinion_sixth_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>-->
-							<!--<th id="manager_opinion_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(6)" onmouseout="manager_opinion_hide_select_box(6)"><span id="manager_opinion_col_plain_text_6" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_seventh_item')];?></span><span><select id="manager_opinion_col_select_box_6" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($this->session->userdata('manager_opinion_seventh_item') == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>-->
+							<th id="manager_opinion_list_head0" style="text-align:center;font-weight:normal;width:15%;word-wrap:break-word"><span id="manager_opinion_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column1']];?></span><select id="manager_opinion_col_select_box_0" style="display:none"><option value="topic" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
+							<th id="manager_opinion_list_head1" style="text-align:center;font-weight:normal;width:43%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(1)" onmouseout="manager_opinion_hide_select_box(1)"><span id="manager_opinion_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column2']];?></span><span><select id="manager_opinion_col_select_box_1" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($manager_opinion_column_setting['column1'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="manager_opinion_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(2)" onmouseout="manager_opinion_hide_select_box(2)"><span id="manager_opinion_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column3']];?></span><span><select id="manager_opinion_col_select_box_2" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($manager_opinion_column_setting['column2'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="manager_opinion_list_head3" style="text-align:center;font-weight:normal;width:10%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(3)" onmouseout="manager_opinion_hide_select_box(3)"><span id="manager_opinion_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column4']];?></span><span><select id="manager_opinion_col_select_box_3" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($manager_opinion_column_setting['column3'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="manager_opinion_list_head4" style="text-align:center;font-weight:normal;width:15%;word-wrap:break-word" onmouseover="manager_opinion_show_select_box(4)" onmouseout="manager_opinion_hide_select_box(4)"><span id="manager_opinion_col_plain_text_4" style="margin:0px auto -21px;"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column5']];?></span><span><select id="manager_opinion_col_select_box_4" onchange="adjust_manager_opinion_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($manager_opinion_column_mapping as $index=>$value){ if($manager_opinion_column_setting['column4'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
 						</tr>
 					</thead>				
 					<tfoot>
 						<tr>
 							<th id="manager_opinion_list_foot" style="text-align:center;font-weight:normal"></th>
-							<th id="manager_opinion_list_foot0" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_first_item')];?></th>
-							<th id="manager_opinion_list_foot1" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_second_item')];?></th>
-							<th id="manager_opinion_list_foot2" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_third_item')];?></th>
-							<th id="manager_opinion_list_foot3" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_fourth_item')];?></th>
-							<th id="manager_opinion_list_foot4" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_fifth_item')];?></th>
-							<!--<th id="manager_opinion_list_foot5" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_sixth_item')];?></th>-->
-							<!--<th id="manager_opinion_list_foot6" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$this->session->userdata('manager_opinion_seventh_item')];?></th>-->
+							<th id="manager_opinion_list_foot0" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column1']];?></th>
+							<th id="manager_opinion_list_foot1" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column2']];?></th>
+							<th id="manager_opinion_list_foot2" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column3']];?></th>
+							<th id="manager_opinion_list_foot3" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column4']];?></th>
+							<th id="manager_opinion_list_foot4" style="text-align:center;font-weight:normal"><?php echo $manager_opinion_column_mapping[$manager_opinion_column_setting['column5']];?></th>
 						</tr>
 					</tfoot>
 				</table>
@@ -197,111 +190,102 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 	</div>
 	<br/>	
 </div>
-<div id="project_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
-	<!--<form action="project/adjust_item" method="post" onsubmit="return validate()">-->
-		<div style="text-align:center">
-		<?php 
-		//$title_array陣列存放select調整欄位選單的名稱
-		$title_array = array('0' => '欄位', '1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六');
-		$titlename_array = array('0' => 'first', '1' => 'second', '2' => 'third', '3' => 'fourth', '4' => 'fifth', '5' => 'sixth', '6' => 'seventh');
-		//$item_array存放列表上有顯示的欄位
-		$item_array = array('0' => 'project_first_item', '1' => 'project_second_item', '2' => 'project_third_item', '3' => 'project_fourth_item', '4' => 'project_fifth_item', '5' => 'project_sixth_item', '6' => 'project_seventh_item');
-		//印出六個欄位選單
+<div id="project_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100">
+	<div style="text-align:center">
+		<?php 		
+		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六'); //$title存放select選單的名稱
 		?>
 		<select id="col_0" name="first" style="display:none">
 			<option value="idea_name" selected></option>
 		</select>
 		<?php
 		for ($i=1; $i<=6; $i++)
-		{					
-			echo $title_array[$i];
-			$all_item[$i]=$this->session->userdata($item_array[$i]);  //取得該欄位目前顯示的欄位名稱
+		{
 		?>		
-		<select id="col_<?php echo $i;?>" name="<?php echo $titlename_array[$i];?>" style="margin-bottom:10px">
-			<option value="null" <?php if($all_item[$i] == "null"){ echo " selected";} ?>>不顯示</option>
-			<option value="year" <?php if($all_item[$i] == "year"){ echo " selected";} ?>>年度</option>
-			<option value="idea_id" <?php if($all_item[$i] == "idea_id"){ echo " selected";} ?> >提案編號</option>
-			<option value="idea_name" <?php if($all_item[$i] == "idea_name"){ echo " selected";} ?> >提案名稱</option>
-			<option value="idea_source" <?php if($all_item[$i] == "idea_source"){ echo " selected";} ?> >提案來源</option>
-			<option value="scenario_d" <?php if($all_item[$i] == "scenario_d"){ echo " selected";} ?> >情境說明</option>
-			<option value="function_d" <?php if($all_item[$i] == "function_d"){ echo " selected";} ?> >功能構想</option>
-			<option value="distinction_d" <?php if($all_item[$i] == "distinction_d"){ echo " selected";} ?> >差異化</option>
-			<option value="value_d" <?php if($all_item[$i] == "value_d"){ echo " selected";} ?> >價值性</option>
-			<option value="feasibility_d" <?php if($all_item[$i] == "feasibility_d"){ echo " selected";} ?> >可行性</option>
-			<option value="stage" <?php if($all_item[$i] == "stage"){ echo " selected";} ?> >階段狀態</option>
-			<option value="progress_description" <?php if($all_item[$i] == "progress_description"){ echo " selected";} ?> >進度說明</option>
-			<option value="proposed_unit" <?php if($all_item[$i] == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
-			<option value="proposer" <?php if($all_item[$i] == "proposer"){ echo " selected";} ?> >提案人</option>
-			<option value="established_date" <?php if($all_item[$i] == "established_date"){ echo " selected";} ?> >立案日期</option>
-			<option value="idea_examination" <?php if($all_item[$i] == "idea_examination"){ echo " selected";} ?> >提案審核履歷</option>
-			<option value="Idea" <?php if($all_item[$i] == "Idea"){ echo " selected";} ?> >I階段文件檢核</option>
-			<option value="Requirement" <?php if($all_item[$i] == "Requirement"){ echo " selected";} ?> >R階段文件檢核</option>
-			<option value="Feasibility" <?php if($all_item[$i] == "Feasibility"){ echo " selected";} ?> >F階段文件檢核</option>
-			<option value="Prototype" <?php if($all_item[$i] == "Prototype"){ echo " selected";} ?> >P階段文件檢核</option>
-			<option value="note" <?php if($all_item[$i] == "note"){ echo " selected";} ?> >備註</option>
-			<option value="adoption" <?php if($all_item[$i] == "adoption"){ echo " selected";} ?> >導入車型/先期式樣</option>
-			<option value="applied_patent" <?php if($all_item[$i] == "applied_patent"){ echo " selected";} ?> >專利申請/取得</option>
-			<option value="resurrection_application_qualified" <?php if($all_item[$i] == "resurrection_application_qualified"){ echo " selected";} ?> >具備敗部復活申請資格</option>
-			<option value="resurrection_applied" <?php if($all_item[$i] == "resurrection_applied"){ echo " selected";} ?> >敗部復活申請</option>
-			<option value="PM_in_charge" <?php if($all_item[$i] == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
-			<option value="closed_case" <?php if($all_item[$i] == "closed_case"){ echo " selected";} ?> >結案</option>
+			<label for="col_<?php echo $i;?>"><?php echo $title[$i];?></label>
+		<?php	
+			$column = $project_column_setting['column'.($i+1)];  //資料庫的第一個欄位編號由1開始
+		?>		
+		<select id="col_<?php echo $i;?>" style="margin-bottom:10px">
+			<option value="null" <?php if($column == "null"){ echo " selected";} ?>>不顯示</option>
+			<option value="year" <?php if($column == "year"){ echo " selected";} ?>>年度</option>
+			<option value="idea_id" <?php if($column == "idea_id"){ echo " selected";} ?> >提案編號</option>
+			<option value="idea_name" <?php if($column == "idea_name"){ echo " selected";} ?> >提案名稱</option>
+			<option value="idea_source" <?php if($column == "idea_source"){ echo " selected";} ?> >提案來源</option>
+			<option value="scenario_d" <?php if($column == "scenario_d"){ echo " selected";} ?> >情境說明</option>
+			<option value="function_d" <?php if($column == "function_d"){ echo " selected";} ?> >功能構想</option>
+			<option value="distinction_d" <?php if($column == "distinction_d"){ echo " selected";} ?> >差異化</option>
+			<option value="value_d" <?php if($column == "value_d"){ echo " selected";} ?> >價值性</option>
+			<option value="feasibility_d" <?php if($column == "feasibility_d"){ echo " selected";} ?> >可行性</option>
+			<option value="stage" <?php if($column == "stage"){ echo " selected";} ?> >階段狀態</option>
+			<option value="progress_description" <?php if($column == "progress_description"){ echo " selected";} ?> >進度說明</option>
+			<option value="proposed_unit" <?php if($column == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
+			<option value="proposer" <?php if($column == "proposer"){ echo " selected";} ?> >提案人</option>
+			<option value="established_date" <?php if($column == "established_date"){ echo " selected";} ?> >立案日期</option>
+			<option value="idea_examination" <?php if($column == "idea_examination"){ echo " selected";} ?> >提案審核履歷</option>
+			<option value="Idea" <?php if($column == "Idea"){ echo " selected";} ?> >I階段文件檢核</option>
+			<option value="Requirement" <?php if($column == "Requirement"){ echo " selected";} ?> >R階段文件檢核</option>
+			<option value="Feasibility" <?php if($column == "Feasibility"){ echo " selected";} ?> >F階段文件檢核</option>
+			<option value="Prototype" <?php if($column == "Prototype"){ echo " selected";} ?> >P階段文件檢核</option>
+			<option value="note" <?php if($column == "note"){ echo " selected";} ?> >備註</option>
+			<option value="adoption" <?php if($column == "adoption"){ echo " selected";} ?> >導入車型/先期式樣</option>
+			<option value="applied_patent" <?php if($column == "applied_patent"){ echo " selected";} ?> >專利申請/取得</option>
+			<option value="resurrection_application_qualified" <?php if($column == "resurrection_application_qualified"){ echo " selected";} ?> >具備敗部復活申請資格</option>
+			<option value="resurrection_applied" <?php if($column == "resurrection_applied"){ echo " selected";} ?> >敗部復活申請</option>
+			<option value="PM_in_charge" <?php if($column == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
+			<option value="closed_case" <?php if($column == "closed_case"){ echo " selected";} ?> >結案</option>
 		</select>
 		<br/>
 		<?php
 		}
 		?>
 		<input type="button" value="確定" onclick="adjust_project_display_column_by_menu()">
-	</div>
-	<!--</form>-->
+	</div>	
 </div>
 <div id="news_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
-	<!--<form action="project/adjust_item" method="post" onsubmit="return validate()">-->
-		<div style="text-align:center">
-		<?php 
-		//$title_array陣列存放select調整欄位選單的名稱
-		$title_array = array('0' => '欄位', '1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六');
-		$titlename_array = array('0' => 'first', '1' => 'second', '2' => 'third', '3' => 'fourth', '4' => 'fifth', '5' => 'sixth', '6' => 'seventh');
-		//$item_array存放列表上有顯示的欄位
-		$item_array = array('0' => 'news_first_item', '1' => 'news_second_item', '2' => 'news_third_item', '3' => 'news_fourth_item', '4' => 'news_fifth_item', '5' => 'news_sixth_item', '6' => 'news_seventh_item');
-		//印出六個欄位選單
+	<div style="text-align:center">
+		<?php 		
+		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六'); //$title存放select選單的名稱
 		?>
-		<select id="news_col_0" name="first" style="display:none">
+		<select id="news_col_0" style="display:none">
 			<option value="idea_name" selected></option>
 		</select>
 		<?php
 		for ($i=1; $i<=6; $i++)
-		{					
-			echo $title_array[$i];
-			$all_item[$i]=$this->session->userdata($item_array[$i]);  //取得該欄位目前顯示的欄位名稱
-		?>
-		<select id="news_col_<?php echo $i;?>" name="<?php echo $titlename_array[$i];?>" style="margin-bottom:10px">
-			<option value="null" <?php if($all_item[$i] == "null"){ echo " selected";} ?>>不顯示</option>
-			<option value="year" <?php if($all_item[$i] == "year"){ echo " selected";} ?>>年度</option>
-			<option value="idea_id" <?php if($all_item[$i] == "idea_id"){ echo " selected";} ?> >提案編號</option>
-			<option value="idea_name" <?php if($all_item[$i] == "idea_name"){ echo " selected";} ?> >提案名稱</option>
-			<option value="idea_source" <?php if($all_item[$i] == "idea_source"){ echo " selected";} ?> >提案來源</option>
-			<option value="scenario_d" <?php if($all_item[$i] == "scenario_d"){ echo " selected";} ?> >情境說明</option>
-			<option value="function_d" <?php if($all_item[$i] == "function_d"){ echo " selected";} ?> >功能構想</option>
-			<option value="distinction_d" <?php if($all_item[$i] == "distinction_d"){ echo " selected";} ?> >差異化</option>
-			<option value="value_d" <?php if($all_item[$i] == "value_d"){ echo " selected";} ?> >價值性</option>
-			<option value="feasibility_d" <?php if($all_item[$i] == "feasibility_d"){ echo " selected";} ?> >可行性</option>
-			<option value="stage" <?php if($all_item[$i] == "stage"){ echo " selected";} ?> >階段狀態</option>
-			<option value="progress_description" <?php if($all_item[$i] == "progress_description"){ echo " selected";} ?> >進度說明</option>
-			<option value="proposed_unit" <?php if($all_item[$i] == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
-			<option value="proposer" <?php if($all_item[$i] == "proposer"){ echo " selected";} ?> >提案人</option>
-			<option value="established_date" <?php if($all_item[$i] == "established_date"){ echo " selected";} ?> >立案日期</option>
-			<option value="idea_examination" <?php if($all_item[$i] == "idea_examination"){ echo " selected";} ?> >提案審核履歷</option>
-			<option value="Idea" <?php if($all_item[$i] == "Idea"){ echo " selected";} ?> >I階段文件檢核</option>
-			<option value="Requirement" <?php if($all_item[$i] == "Requirement"){ echo " selected";} ?> >R階段文件檢核</option>
-			<option value="Feasibility" <?php if($all_item[$i] == "Feasibility"){ echo " selected";} ?> >F階段文件檢核</option>
-			<option value="Prototype" <?php if($all_item[$i] == "Prototype"){ echo " selected";} ?> >P階段文件檢核</option>
-			<option value="note" <?php if($all_item[$i] == "note"){ echo " selected";} ?> >備註</option>
-			<option value="adoption" <?php if($all_item[$i] == "adoption"){ echo " selected";} ?> >導入車型/先期式樣</option>
-			<option value="applied_patent" <?php if($all_item[$i] == "applied_patent"){ echo " selected";} ?> >專利申請/取得</option>
-			<option value="resurrection_application_qualified" <?php if($all_item[$i] == "resurrection_application_qualified"){ echo " selected";} ?> >具備敗部復活申請資格</option>
-			<option value="resurrection_applied" <?php if($all_item[$i] == "resurrection_applied"){ echo " selected";} ?> >敗部復活申請</option>
-			<option value="PM_in_charge" <?php if($all_item[$i] == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
-			<option value="closed_case" <?php if($all_item[$i] == "closed_case"){ echo " selected";} ?> >結案</option>
+		{
+		?>		
+			<label for="news_col_<?php echo $i;?>"><?php echo $title[$i];?></label>
+		<?php	
+			$column = $news_column_setting['column'.($i+1)];  //資料庫的第一個欄位編號由1開始
+		?>		
+		<select id="news_col_<?php echo $i;?>" style="margin-bottom:10px">
+			<option value="null" <?php if($column == "null"){ echo " selected";} ?>>不顯示</option>
+			<option value="year" <?php if($column == "year"){ echo " selected";} ?>>年度</option>
+			<option value="idea_id" <?php if($column == "idea_id"){ echo " selected";} ?> >提案編號</option>
+			<option value="idea_name" <?php if($column == "idea_name"){ echo " selected";} ?> >提案名稱</option>
+			<option value="idea_source" <?php if($column == "idea_source"){ echo " selected";} ?> >提案來源</option>
+			<option value="scenario_d" <?php if($column == "scenario_d"){ echo " selected";} ?> >情境說明</option>
+			<option value="function_d" <?php if($column == "function_d"){ echo " selected";} ?> >功能構想</option>
+			<option value="distinction_d" <?php if($column == "distinction_d"){ echo " selected";} ?> >差異化</option>
+			<option value="value_d" <?php if($column == "value_d"){ echo " selected";} ?> >價值性</option>
+			<option value="feasibility_d" <?php if($column == "feasibility_d"){ echo " selected";} ?> >可行性</option>
+			<option value="stage" <?php if($column == "stage"){ echo " selected";} ?> >階段狀態</option>
+			<option value="progress_description" <?php if($column == "progress_description"){ echo " selected";} ?> >進度說明</option>
+			<option value="proposed_unit" <?php if($column == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
+			<option value="proposer" <?php if($column == "proposer"){ echo " selected";} ?> >提案人</option>
+			<option value="established_date" <?php if($column == "established_date"){ echo " selected";} ?> >立案日期</option>
+			<option value="idea_examination" <?php if($column == "idea_examination"){ echo " selected";} ?> >提案審核履歷</option>
+			<option value="Idea" <?php if($column == "Idea"){ echo " selected";} ?> >I階段文件檢核</option>
+			<option value="Requirement" <?php if($column == "Requirement"){ echo " selected";} ?> >R階段文件檢核</option>
+			<option value="Feasibility" <?php if($column == "Feasibility"){ echo " selected";} ?> >F階段文件檢核</option>
+			<option value="Prototype" <?php if($column == "Prototype"){ echo " selected";} ?> >P階段文件檢核</option>
+			<option value="note" <?php if($column == "note"){ echo " selected";} ?> >備註</option>
+			<option value="adoption" <?php if($column == "adoption"){ echo " selected";} ?> >導入車型/先期式樣</option>
+			<option value="applied_patent" <?php if($column == "applied_patent"){ echo " selected";} ?> >專利申請/取得</option>
+			<option value="resurrection_application_qualified" <?php if($column == "resurrection_application_qualified"){ echo " selected";} ?> >具備敗部復活申請資格</option>
+			<option value="resurrection_applied" <?php if($column == "resurrection_applied"){ echo " selected";} ?> >敗部復活申請</option>
+			<option value="PM_in_charge" <?php if($column == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
+			<option value="closed_case" <?php if($column == "closed_case"){ echo " selected";} ?> >結案</option>
 		</select>
 		<br/>
 		<?php
@@ -309,56 +293,51 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		?>
 		<input type="button" value="確定" onclick="adjust_news_display_column_by_menu()">
 	</div>
-	<!--</form>-->
 </div>
 <div id="external_tech_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
-	<!--<form action="project/adjust_item" method="post" onsubmit="return validate()">-->
-		<div style="text-align:center">
-		<?php 
-		//$title_array陣列存放select調整欄位選單的名稱
-		$title_array = array('0' => '欄位', '1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六');
-		$titlename_array = array('0' => 'first', '1' => 'second', '2' => 'third', '3' => 'fourth', '4' => 'fifth', '5' => 'sixth', '6' => 'seventh');
-		//$item_array存放列表上有顯示的欄位
-		$item_array = array('0' => 'external_tech_first_item', '1' => 'external_tech_second_item', '2' => 'external_tech_third_item', '3' => 'external_tech_fourth_item', '4' => 'external_tech_fifth_item', '5' => 'external_tech_sixth_item', '6' => 'external_tech_seventh_item');
-		//印出六個欄位選單
+	<div style="text-align:center">
+		<?php 		
+		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六'); //$title存放select選單的名稱
 		?>
-		<select id="external_tech_col_0" name="first" style="display:none">
+		<select id="external_tech_col_0" style="display:none">
 			<option value="idea_name" selected></option>
 		</select>
 		<?php
 		for ($i=1; $i<=6; $i++)
-		{					
-			echo $title_array[$i];
-			$all_item[$i]=$this->session->userdata($item_array[$i]);  //取得該欄位目前顯示的欄位名稱
+		{
+		?>		
+			<label for="external_tech_col_<?php echo $i;?>"><?php echo $title[$i];?></label>
+		<?php	
+			$column = $external_tech_column_setting['column'.($i+1)];  //資料庫的第一個欄位編號由1開始
 		?>
-		<select id="external_tech_col_<?php echo $i;?>" name="<?php echo $titlename_array[$i];?>" style="margin-bottom:10px">
-			<option value="null" <?php if($all_item[$i] == "null"){ echo " selected";} ?>>不顯示</option>
-			<option value="year" <?php if($all_item[$i] == "year"){ echo " selected";} ?>>年度</option>
-			<option value="idea_id" <?php if($all_item[$i] == "idea_id"){ echo " selected";} ?> >提案編號</option>
-			<option value="idea_name" <?php if($all_item[$i] == "idea_name"){ echo " selected";} ?> >提案名稱</option>
-			<option value="idea_source" <?php if($all_item[$i] == "idea_source"){ echo " selected";} ?> >提案來源</option>
-			<option value="scenario_d" <?php if($all_item[$i] == "scenario_d"){ echo " selected";} ?> >情境說明</option>
-			<option value="function_d" <?php if($all_item[$i] == "function_d"){ echo " selected";} ?> >功能構想</option>
-			<option value="distinction_d" <?php if($all_item[$i] == "distinction_d"){ echo " selected";} ?> >差異化</option>
-			<option value="value_d" <?php if($all_item[$i] == "value_d"){ echo " selected";} ?> >價值性</option>
-			<option value="feasibility_d" <?php if($all_item[$i] == "feasibility_d"){ echo " selected";} ?> >可行性</option>
-			<option value="stage" <?php if($all_item[$i] == "stage"){ echo " selected";} ?> >階段狀態</option>
-			<option value="progress_description" <?php if($all_item[$i] == "progress_description"){ echo " selected";} ?> >進度說明</option>
-			<option value="proposed_unit" <?php if($all_item[$i] == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
-			<option value="proposer" <?php if($all_item[$i] == "proposer"){ echo " selected";} ?> >提案人</option>
-			<option value="established_date" <?php if($all_item[$i] == "established_date"){ echo " selected";} ?> >立案日期</option>
-			<option value="idea_examination" <?php if($all_item[$i] == "idea_examination"){ echo " selected";} ?> >提案審核履歷</option>
-			<option value="Idea" <?php if($all_item[$i] == "Idea"){ echo " selected";} ?> >I階段文件檢核</option>
-			<option value="Requirement" <?php if($all_item[$i] == "Requirement"){ echo " selected";} ?> >R階段文件檢核</option>
-			<option value="Feasibility" <?php if($all_item[$i] == "Feasibility"){ echo " selected";} ?> >F階段文件檢核</option>
-			<option value="Prototype" <?php if($all_item[$i] == "Prototype"){ echo " selected";} ?> >P階段文件檢核</option>
-			<option value="note" <?php if($all_item[$i] == "note"){ echo " selected";} ?> >備註</option>
-			<option value="adoption" <?php if($all_item[$i] == "adoption"){ echo " selected";} ?> >導入車型/先期式樣</option>
-			<option value="applied_patent" <?php if($all_item[$i] == "applied_patent"){ echo " selected";} ?> >專利申請/取得</option>
-			<option value="resurrection_application_qualified" <?php if($all_item[$i] == "resurrection_application_qualified"){ echo " selected";} ?> >具備敗部復活申請資格</option>
-			<option value="resurrection_applied" <?php if($all_item[$i] == "resurrection_applied"){ echo " selected";} ?> >敗部復活申請</option>
-			<option value="PM_in_charge" <?php if($all_item[$i] == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
-			<option value="closed_case" <?php if($all_item[$i] == "closed_case"){ echo " selected";} ?> >結案</option>
+		<select id="external_tech_col_<?php echo $i;?>" style="margin-bottom:10px">
+			<option value="null" <?php if($column == "null"){ echo " selected";} ?>>不顯示</option>
+			<option value="year" <?php if($column == "year"){ echo " selected";} ?>>年度</option>
+			<option value="idea_id" <?php if($column == "idea_id"){ echo " selected";} ?> >提案編號</option>
+			<option value="idea_name" <?php if($column == "idea_name"){ echo " selected";} ?> >提案名稱</option>
+			<option value="idea_source" <?php if($column == "idea_source"){ echo " selected";} ?> >提案來源</option>
+			<option value="scenario_d" <?php if($column == "scenario_d"){ echo " selected";} ?> >情境說明</option>
+			<option value="function_d" <?php if($column == "function_d"){ echo " selected";} ?> >功能構想</option>
+			<option value="distinction_d" <?php if($column == "distinction_d"){ echo " selected";} ?> >差異化</option>
+			<option value="value_d" <?php if($column == "value_d"){ echo " selected";} ?> >價值性</option>
+			<option value="feasibility_d" <?php if($column == "feasibility_d"){ echo " selected";} ?> >可行性</option>
+			<option value="stage" <?php if($column == "stage"){ echo " selected";} ?> >階段狀態</option>
+			<option value="progress_description" <?php if($column == "progress_description"){ echo " selected";} ?> >進度說明</option>
+			<option value="proposed_unit" <?php if($column == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
+			<option value="proposer" <?php if($column == "proposer"){ echo " selected";} ?> >提案人</option>
+			<option value="established_date" <?php if($column == "established_date"){ echo " selected";} ?> >立案日期</option>
+			<option value="idea_examination" <?php if($column == "idea_examination"){ echo " selected";} ?> >提案審核履歷</option>
+			<option value="Idea" <?php if($column == "Idea"){ echo " selected";} ?> >I階段文件檢核</option>
+			<option value="Requirement" <?php if($column == "Requirement"){ echo " selected";} ?> >R階段文件檢核</option>
+			<option value="Feasibility" <?php if($column == "Feasibility"){ echo " selected";} ?> >F階段文件檢核</option>
+			<option value="Prototype" <?php if($column == "Prototype"){ echo " selected";} ?> >P階段文件檢核</option>
+			<option value="note" <?php if($column == "note"){ echo " selected";} ?> >備註</option>
+			<option value="adoption" <?php if($column == "adoption"){ echo " selected";} ?> >導入車型/先期式樣</option>
+			<option value="applied_patent" <?php if($column == "applied_patent"){ echo " selected";} ?> >專利申請/取得</option>
+			<option value="resurrection_application_qualified" <?php if($column == "resurrection_application_qualified"){ echo " selected";} ?> >具備敗部復活申請資格</option>
+			<option value="resurrection_applied" <?php if($column == "resurrection_applied"){ echo " selected";} ?> >敗部復活申請</option>
+			<option value="PM_in_charge" <?php if($column == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
+			<option value="closed_case" <?php if($column == "closed_case"){ echo " selected";} ?> >結案</option>
 		</select>
 		<br/>
 		<?php
@@ -366,42 +345,36 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		?>
 		<input type="button" value="確定" onclick="adjust_external_tech_display_column_by_menu()">
 	</div>
-	<!--</form>-->
 </div>
 <div id="manager_opinion_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
-	<!--<form action="project/adjust_item" method="post" onsubmit="return validate()">-->
-		<div style="text-align:center">
-		<?php 
-		//$title_array陣列存放select調整欄位選單的名稱
-		$title_array = array('0' => '欄位', '1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六');
-		$titlename_array = array('0' => 'first', '1' => 'second', '2' => 'third', '3' => 'fourth', '4' => 'fifth', '5' => 'sixth', '6' => 'seventh');
-		//$item_array存放列表上有顯示的欄位
-		$item_array = array('0' => 'manager_opinion_first_item', '1' => 'manager_opinion_second_item', '2' => 'manager_opinion_third_item', '3' => 'manager_opinion_fourth_item', '4' => 'manager_opinion_fifth_item');
-		//印出六個欄位選單
+	<div style="text-align:center">
+		<?php 		
+		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四'); //$title存放select選單的名稱
 		?>
-		<select id="manager_opinion_col_0" name="first" style="display:none">
+		<select id="manager_opinion_col_0" style="display:none">
 			<option value="topic" selected></option>
 		</select>
 		<?php
 		for ($i=1; $i<=4; $i++)
-		{					
-			echo $title_array[$i];
-			$all_item[$i]=$this->session->userdata($item_array[$i]);  //取得該欄位目前顯示的欄位名稱
+		{
+		?>		
+			<label for="manager_opinion_col_<?php echo $i;?>"><?php echo $title[$i];?></label>
+		<?php	
+			$column = $manager_opinion_column_setting['column'.($i+1)];  //資料庫的第一個欄位編號由1開始
 		?>
-		<select id="manager_opinion_col_<?php echo $i;?>" name="<?php echo $titlename_array[$i];?>" style="margin-bottom:10px">
-			<option value="null" <?php if($all_item[$i] == "null"){ echo " selected";} ?>>不顯示</option>
-			<option value="content" <?php if($all_item[$i] == "content"){ echo " selected";} ?>>內容</option>
-			<option value="in_charge" <?php if($all_item[$i] == "in_charge"){ echo " selected";} ?> >主擔(承辦)</option>
-			<option value="time" <?php if($all_item[$i] == "time"){ echo " selected";} ?> >時間</option>
-			<option value="people" <?php if($all_item[$i] == "people"){ echo " selected";} ?> >與會人員</option>
+		<select id="manager_opinion_col_<?php echo $i;?>" style="margin-bottom:10px">
+			<option value="null" <?php if($column == "null"){ echo " selected";} ?>>不顯示</option>
+			<option value="content" <?php if($column == "content"){ echo " selected";} ?>>內容</option>
+			<option value="in_charge" <?php if($column == "in_charge"){ echo " selected";} ?> >主擔(承辦)</option>
+			<option value="time" <?php if($column == "time"){ echo " selected";} ?> >時間</option>
+			<option value="people" <?php if($column == "people"){ echo " selected";} ?> >與會人員</option>
 		</select>
 		<br/>
 		<?php
 		}
 		?>
-		<input type="button" value="確定" onclick="adjust_manager_opinion_display_column_by_menu()">
-	</div>
-	<!--</form>-->
+		<input type="button" value="確定" onclick="adjust_manager_opinion_display_column_by_menu()">		
+	</div>	
 </div>
 <span id="width_tmp" style="display:none"></span>
 <!--PDF檔案預覽區塊-->
@@ -412,7 +385,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 </div>
 <div id="background_mask" class="background_mask" onclick="close_view_file(this.id)"></div>
 <script>
-$(document).ready(function() {		
+$(document).ready(function() {	
 	$('th select').width(function(){ //設定各select box的初始寬度, 依據選擇的option
 		$("#width_tmp").html($("option:selected", this).text());
 		$(this).width($("#width_tmp").width()+38);
@@ -424,21 +397,102 @@ $(document).ready(function() {
 	var project_display_columns = [];
 	var news_display_columns = [];
 	var external_tech_display_columns = [];
-	var manager_opinion_display_columns = [];
-	var search_str = "<?php echo $search;?>";
-	var i;	
-	for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
+	var manager_opinion_display_columns = [];	
+	var search_str = "<?php echo $search;?>";	
+	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/user_column_setting";
+	var user_id = document.getElementById('user_id').value;
+	$.ajax({
+		url: request_url,  //The URL for the request
+		data:{			 //The data to send(will be converted to a query string)
+			"user_id": user_id,
+			"class": 1
+		},
+		type:"POST",		 //Whether this is a POST or GET request(以POST或GET型態送出data屬性設定的資料)
+		dataType:"json", //The type of data we expect back 回傳的資料型態
+		//Code to run if the request succeeds. The response is passed to the function
+		async:false,   //設定同步(false)與非同步請求(true)
+		success:function(json){ 
+			var i;
+			for(i=0;i<4;i++)
+			{
+				//alert();
+				switch(json.data[i].table_class)
+				{
+					case "1":
+						project_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
+						break;
+					case "2":
+						news_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
+						break;
+					case "3":
+						external_tech_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
+						break;
+					case "4":
+						manager_opinion_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4];
+						break;
+				}
+			}
+			for(i=0;i<7;i++)
+			{
+				document.getElementById('pro_col_select_box_'+i).value = project_display_columns[i];
+				document.getElementById('col_'+i).value = project_display_columns[i];
+			}
+			for(i=0;i<7;i++)
+			{
+				document.getElementById('news_col_select_box_'+i).value = news_display_columns[i];
+				document.getElementById('news_col_'+i).value = news_display_columns[i];
+			}
+			for(i=0;i<7;i++)
+			{
+				document.getElementById('external_tech_col_select_box_'+i).value = external_tech_display_columns[i];
+				document.getElementById('external_tech_col_'+i).value = external_tech_display_columns[i];
+			}
+			for(i=0;i<5;i++)
+			{
+				document.getElementById('manager_opinion_col_select_box_'+i).value = manager_opinion_display_columns[i];
+				document.getElementById('manager_opinion_col_'+i).value = manager_opinion_display_columns[i];
+			}
+			/*project_display_columns = [json.column0, json.column1, json.column2, json.column3, json.column4, json.column5, json.column6];
+			var i;
+			for(i=0;i<7;i++)
+			{
+				document.getElementById('pro_col_select_box_'+i).value = project_display_columns[i];
+				document.getElementById('col_'+i).value = project_display_columns[i];
+			}*/
+			//var jsonString = JSON.stringify(json);  //將json物件轉成字串
+			//$("<h1>").text(json.title).appendTo("body");
+			//$("<div class=\"content\">").html(json.html).appendTo("body");
+		},
+		//Code to run if the request fails; the raw request and status codes are passed to the function
+		error:function(xhr, status, errorThrown){
+			alert("Sorry, there was a problem!");
+			console.log("Error: " + errorThrown);
+			console.log("Status: " + status);
+			console.dir( xhr );
+		},
+		//Code to run regardless of success or failure
+		complete:function( xhr, status ){
+			//alert("The request is complete!");
+		}
+	});
+	/*alert(project_display_columns[1]);
+	var i=0;
+	for(i=0;i<project_display_columns.length;i++)
+	{
+		alert(project_display_columns[i]);
+	}*/
+	/*for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
 	{
 		if(document.getElementById('pro_col_select_box_' + i) == null || document.getElementById('pro_col_select_box_' + i).value == "null")
-		{
+		{			
 			project_display_columns[project_display_columns.length] = "null";
 		}
 		else if(document.getElementById('pro_col_select_box_' + i).value != null)
-		{
+		{			
 			project_display_columns[project_display_columns.length] = document.getElementById('pro_col_select_box_' + i).value;
-		}
+		}		
 		if(document.getElementById('news_col_select_box_' + i) == null || document.getElementById('news_col_select_box_' + i).value == "null")
-		{
+		{			
 			news_display_columns[news_display_columns.length] = "null";
 		}
 		else if(document.getElementById('news_col_select_box_' + i).value != null)
@@ -464,22 +518,14 @@ $(document).ready(function() {
 		{
 			manager_opinion_display_columns[manager_opinion_display_columns.length] = document.getElementById('manager_opinion_col_select_box_' + i).value;
 		}
-	}
+	}*/
 	load_news_list(is_load, start_record, order_column, order_method, search_str, news_display_columns);
 	load_external_tech_list(is_load, start_record, order_column, order_method, search_str, external_tech_display_columns);
 	load_manager_opinion_list(is_load, start_record, order_column, order_method, search_str, manager_opinion_display_columns);
 	load_project_list(is_load, start_record, order_column, order_method, search_str, project_display_columns);	
 });
 	
-function pro_show_select_box(value)
-{
-	$('#pro_col_select_box_'+value).mouseover(function(){  //change
-		$("#width_tmp").html($('#pro_col_select_box_'+value+' option:selected').text());
-		$(this).width($("#width_tmp").width()+38); // 35 : the size of the down arrow of the select box 
-	});
-	document.getElementById("pro_col_select_box_"+value).style.display="block";		
-	document.getElementById("pro_col_plain_text_"+value).style.display="none";
-}
+
 
 function news_show_select_box(value)
 {

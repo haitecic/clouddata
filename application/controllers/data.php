@@ -5,6 +5,7 @@ class Data extends CI_Controller
     {
         parent::__construct();
 		$this->load->model('project_model');  //載入已定義的模型與資料庫做連接
+		$this->load->model('account_management_model');  //載入已定義的模型與資料庫做連接
     }
     
 	public function project_table()
@@ -15,13 +16,14 @@ class Data extends CI_Controller
         $obj = $_GET['Data'];
 		$columns = array();
 		//將列表所要的欄位記錄在session中
-		$this->session->set_userdata('project_first_item', $obj['column0']);
-		$this->session->set_userdata('project_second_item', $obj['column1']);
-		$this->session->set_userdata('project_third_item', $obj['column2']);
-		$this->session->set_userdata('project_fourth_item', $obj['column3']);
-		$this->session->set_userdata('project_fifth_item', $obj['column4']);
-		$this->session->set_userdata('project_sixth_item', $obj['column5']);
-		$this->session->set_userdata('project_seventh_item', $obj['column6']);
+		//$this->session->set_userdata('project_first_item', $obj['column0']);
+		//$this->session->set_userdata('project_second_item', $obj['column1']);
+		//$this->session->set_userdata('project_third_item', $obj['column2']);
+		//$this->session->set_userdata('project_fourth_item', $obj['column3']);
+		//$this->session->set_userdata('project_fifth_item', $obj['column4']);
+		//$this->session->set_userdata('project_sixth_item', $obj['column5']);
+		//$this->session->set_userdata('project_seventh_item', $obj['column6']);
+		$this->account_management_model->set_project_column_setting(1, 1, $obj);//$user_id, $class, obj
 		array_push($columns, 'id');
 		for($i=0; $i<7;$i++)
 		{
@@ -143,13 +145,13 @@ class Data extends CI_Controller
         $obj = $_GET['Data'];
 		$columns = array();
 		//將列表所要的欄位記錄在session中
-		$this->session->set_userdata('news_first_item', $obj['column0']);
-		$this->session->set_userdata('news_second_item', $obj['column1']);
-		$this->session->set_userdata('news_third_item', $obj['column2']);
-		$this->session->set_userdata('news_fourth_item', $obj['column3']);
-		$this->session->set_userdata('news_fifth_item', $obj['column4']);
-		$this->session->set_userdata('news_sixth_item', $obj['column5']);
-		$this->session->set_userdata('news_seventh_item', $obj['column6']);
+		//$this->session->set_userdata('news_second_item', $obj['column1']);
+		//$this->session->set_userdata('news_third_item', $obj['column2']);
+		//$this->session->set_userdata('news_fourth_item', $obj['column3']);
+		//$this->session->set_userdata('news_fifth_item', $obj['column4']);
+		//$this->session->set_userdata('news_sixth_item', $obj['column5']);
+		//$this->session->set_userdata('news_seventh_item', $obj['column6']);
+		$this->account_management_model->set_news_column_setting(1, 2, $obj);
 		array_push($columns, 'id');
 		for($i=0; $i<7;$i++)
 		{
@@ -174,13 +176,14 @@ class Data extends CI_Controller
         $obj = $_GET['Data'];
 		$columns = array();
 		//將列表所要的欄位記錄在session中
-		$this->session->set_userdata('external_tech_first_item', $obj['column0']);
-		$this->session->set_userdata('external_tech_second_item', $obj['column1']);
-		$this->session->set_userdata('external_tech_third_item', $obj['column2']);
-		$this->session->set_userdata('external_tech_fourth_item', $obj['column3']);
-		$this->session->set_userdata('external_tech_fifth_item', $obj['column4']);
-		$this->session->set_userdata('external_tech_sixth_item', $obj['column5']);
-		$this->session->set_userdata('external_tech_seventh_item', $obj['column6']);
+		//$this->session->set_userdata('external_tech_first_item', $obj['column0']);
+		//$this->session->set_userdata('external_tech_second_item', $obj['column1']);
+		//$this->session->set_userdata('external_tech_third_item', $obj['column2']);
+		//$this->session->set_userdata('external_tech_fourth_item', $obj['column3']);
+		//$this->session->set_userdata('external_tech_fifth_item', $obj['column4']);
+		//$this->session->set_userdata('external_tech_sixth_item', $obj['column5']);
+		//$this->session->set_userdata('external_tech_seventh_item', $obj['column6']);
+		$this->account_management_model->set_external_tech_column_setting(1, 3, $obj);
 		array_push($columns, 'id');
 		for($i=0; $i<7;$i++)
 		{
@@ -205,13 +208,12 @@ class Data extends CI_Controller
         $obj = $_GET['Data'];
 		$columns = array();
 		//將列表所要的欄位記錄在session中
-		$this->session->set_userdata('manager_opinion_first_item', $obj['column0']);
-		$this->session->set_userdata('manager_opinion_second_item', $obj['column1']);
-		$this->session->set_userdata('manager_opinion_third_item', $obj['column2']);
-		$this->session->set_userdata('manager_opinion_fourth_item', $obj['column3']);
-		$this->session->set_userdata('manager_opinion_fifth_item', $obj['column4']);
-		//$this->session->set_userdata('manager_opinion_sixth_item', $obj['column5']);
-		//$this->session->set_userdata('manager_opinion_seventh_item', $obj['column6']);
+		//$this->session->set_userdata('manager_opinion_first_item', $obj['column0']);
+		//$this->session->set_userdata('manager_opinion_second_item', $obj['column1']);
+		//$this->session->set_userdata('manager_opinion_third_item', $obj['column2']);
+		//$this->session->set_userdata('manager_opinion_fourth_item', $obj['column3']);
+		//$this->session->set_userdata('manager_opinion_fifth_item', $obj['column4']);
+		$this->account_management_model->set_manager_opinion_column_setting(1, 4, $obj);
 		array_push($columns, 'id');
 		for($i=0; $i<5;$i++)
 		{
@@ -229,6 +231,6 @@ class Data extends CI_Controller
 		$parameter = array('draw'=>$draw,'start_record'=>$start_record, 'display_length'=>$display_length, 'order_column'=>$order_column, 'order_method'=>$order_method, 'search'=>$search);		
 		$json_data = $this->project_model->get_manager_opinion_datatable_record($parameter, $DB_table, $columns);
 		echo $json_data;
-	}
+	}		
 }
 ?>

@@ -219,7 +219,7 @@
 			{
 			?>
 				<div id="origin_file_<?php echo $i;?>" class="statusbar" style="width:98%;margin-left:15px;">
-					<?php $preview_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['convert_to_pdf'];
+					<?php $preview_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'_convert/'.$file['convert_to_pdf'];
 					$download_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['instance_file_name'];
 					?>
 					<div class="file_preview"><img id="preview_file_icon_<?php echo $file['id'];?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/preview.png" alt="preview" onclick="preview_file('<?php echo $preview_file_path;?>', this.id)"></img></div>

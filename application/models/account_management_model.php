@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class Account_management_model extends CI_Model{
 
 	public function __construct()
@@ -17,6 +17,139 @@ class Account_management_model extends CI_Model{
 		$user_login_data = array('account' => $account, 'password' => $password);
 		$query = $this->db->select('id, account, surname, given_names')->from('login_account')->where($user_login_data)->get();
 		return $query->row_array();
+	}
+	
+	/**
+	get_column_setting()：取得使用者欄位設定
+	*/
+	public function get_column_setting($user_id, $class)
+	{
+		$where_clause = array('user_id' => $user_id, 'class' => $class);
+		$query = $this->db->select('*')->from('user_column_setting')->where($where_clause)->get();
+		return $query->row_array();
+	}
+	
+	/**
+	get_column_setting_ajax()：取得使用者欄位設定
+	*/
+	public function get_column_setting_ajax($user_id, $class)
+	{
+		$where_clause = array('user_id' => $user_id);
+		$query = $this->db->select('*')->from('user_column_setting')->where($where_clause)->get();
+		$result = $query->result_array();		
+		/*"contacts": [ 
+        {
+          "name": "Andy",
+          "sex": "male",
+          "mail": "andy@example.com"
+        },
+        {
+          "name": "May",
+          "sex": "female",
+          "mail": "may@example.com"
+        }
+    ], */
+		$json_data = '{"data":[';
+		$j=0;
+		foreach($result as $index=>$value)
+		{
+			$json_data .= '{"table_class":"'.$value['class'].'",';			
+			for($i=0; $i<7; $i++)
+			{
+				$json_data .= '"column'.$i.'":"'.$value['column'.($i+1)].'"';
+				if($i < 6)
+				{
+					$json_data .= ',';
+				}
+			}
+			$json_data .= '}';
+			if($j < 3)
+			{
+				$json_data .= ',';
+			}
+			$j++;
+		}		
+		$json_data .= ']}';
+		/*$where_clause = array('user_id' => $user_id, 'class' => $class);
+		$query = $this->db->select('*')->from('user_column_setting')->where($where_clause)->get();
+		$result = $query->row_array();
+		$json_data = "{";
+		for($i=0; $i<7; $i++)
+		{
+			$json_data .= '"column'.$i.'":"'.$result['column'.($i+1)].'"';
+			if($i < 6)
+			{
+				$json_data .= ',';
+			}
+		}
+		$json_data .= "}";*/
+		return $json_data;
+	}
+	
+	/**
+	set_project_column_setting()：設定使用者專案欄位
+	*/
+	public function set_project_column_setting($user_id, $class, $columns)
+	{
+		$data = array('column1'=>$columns['column0'],
+			'column2'=>$columns['column1'],
+			'column3'=>$columns['column2'],
+			'column4'=>$columns['column3'],
+			'column5'=>$columns['column4'],
+			'column6'=>$columns['column5'],
+			'column7'=>$columns['column6']);
+		$this->db->where('user_id', $user_id);		
+		$this->db->where('class', $class);		
+		return $this->db->update('user_column_setting', $data);
+	}	
+	
+	/**
+	set_news_column_setting()：設定使用者news欄位
+	*/
+	public function set_news_column_setting($user_id, $class, $columns)
+	{
+		$data = array('column1'=>$columns['column0'],
+			'column2'=>$columns['column1'],
+			'column3'=>$columns['column2'],
+			'column4'=>$columns['column3'],
+			'column5'=>$columns['column4'],
+			'column6'=>$columns['column5'],
+			'column7'=>$columns['column6']);
+		$this->db->where('user_id', $user_id);		
+		$this->db->where('class', $class);		
+		return $this->db->update('user_column_setting', $data);
+	}
+	
+	/**
+	set_external_tech_column_setting()：設定使用者external tech欄位
+	*/
+	public function set_external_tech_column_setting($user_id, $class, $columns)
+	{
+		$data = array('column1'=>$columns['column0'],
+			'column2'=>$columns['column1'],
+			'column3'=>$columns['column2'],
+			'column4'=>$columns['column3'],
+			'column5'=>$columns['column4'],
+			'column6'=>$columns['column5'],
+			'column7'=>$columns['column6']);
+		$this->db->where('user_id', $user_id);		
+		$this->db->where('class', $class);		
+		return $this->db->update('user_column_setting', $data);
+	}
+	
+	/**
+	set_manager_opinion_column_setting()：設定使用者manager opinion欄位
+	*/
+	public function set_manager_opinion_column_setting($user_id, $class, $columns)
+	{
+		$data = array('column1'=>$columns['column0'],
+			'column2'=>$columns['column1'],
+			'column3'=>$columns['column2'],
+			'column4'=>$columns['column3'],
+			'column5'=>$columns['column4'],);
+		$this->db->where('user_id', $user_id);		
+		$this->db->where('class', $class);		
+		return $this->db->update('user_column_setting', $data);
 	}
 
 	/**

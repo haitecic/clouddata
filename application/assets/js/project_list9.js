@@ -5,7 +5,7 @@ function load_project_list(is_load, start_record, order_column, order_method, se
 {	
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
-    project_list_tbl = $('#project_list_tbl').dataTable( {	
+	project_list_tbl = $('#project_list_tbl').dataTable( {	
 		"displayStart": start_record,
 		"searching": false,	  //global search bar
 		"sorting": false,
@@ -59,7 +59,7 @@ function load_project_list(is_load, start_record, order_column, order_method, se
 			}
 			else if(document.getElementById('col_' + j).value != "null")
 			{
-				project_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility			
+				project_list_tbl.fnSetColumnVis( j+1, true, false );			
 			}
 		}
 	}
@@ -428,18 +428,17 @@ function adjust_project_display_column_by_column()
 		else
 		{
 			display_columns[display_columns.length] = "null";
-		}
-	}	
-	
-	project_list_tbl.fnDestroy();
+		}			
+	}		
+	project_list_tbl.fnDestroy();	
 	load_project_list(first_load, start_record, order_column, order_method, search_str, display_columns);
 	var j;
 	for(j=0;j<7;j++)
-	{
+	{	
 		if(document.getElementById('pro_col_select_box_' + j).value == "null")
 		{
 			project_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
-			document.getElementById('col_' + j).value = "null";
+			document.getElementById('col_' + j).value = "null";			
 		}
 		else if(document.getElementById('pro_col_select_box_' + j).value != "null")
 		{				
@@ -447,8 +446,8 @@ function adjust_project_display_column_by_column()
 			document.getElementById('project_list_foot' + j).innerHTML = column_mapping[document.getElementById('pro_col_select_box_' + j).value];
 			document.getElementById('col_' + j).value = document.getElementById('pro_col_select_box_' + j).value;
 			project_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
-		}
-	}
+		}		
+	}	
 }
 
 function adjust_news_display_column_by_column()
@@ -629,7 +628,7 @@ function manager_opinion_collapse()
 
 function edit_project(project_id)
 {
-	user_behavior_log('row_project_img_'+project_id);	
+	user_behavior_log('row_project_img_'+project_id);
 	location.href="project_edit/"+project_id;
 }
 
@@ -720,6 +719,16 @@ function user_behavior_log(element_id, browse_file)
 		complete:function( xhr, status ){
 		}
 	});
+}
+
+function pro_show_select_box(value)
+{
+	$('#pro_col_select_box_'+value).mouseover(function(){  //change
+		$("#width_tmp").html($('#pro_col_select_box_'+value+' option:selected').text());
+		$(this).width($("#width_tmp").width()+38); // 35 : the size of the down arrow of the select box 
+	});
+	document.getElementById("pro_col_select_box_"+value).style.display="block";		
+	document.getElementById("pro_col_plain_text_"+value).style.display="none";
 }
 
 

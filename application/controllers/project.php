@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 class Project extends CI_Controller{
 	
@@ -13,14 +13,15 @@ class Project extends CI_Controller{
 		$this->load->library('typography');	
 		//$this->load->library('file_conversion');  //載入擷取檔案純文字內容的程式庫				
 		$this->load->helper('html');  		
-		$this->load->model('project_model');  //載入已定義的模型與資料庫做連接		
+		$this->load->model('project_model');  //載入已定義的模型與資料庫做連接	
+		$this->load->model('account_management_model');  //載入已定義的模型與資料庫做連接		
 		$this->load->database();
 		//$this->output->cache(180);
 		//取消快取	
 		$this->output->set_header('Last-Modified:'.gmdate('D, d M Y H:i:s').'GMT');  
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control: post-check=0, pre-check=0',false);
-		$this->output->set_header('Pragma: no-cache');		
+		$this->output->set_header('Pragma: no-cache');
 	}
 	
 	/**
@@ -171,15 +172,18 @@ class Project extends CI_Controller{
 		redirect("project_list");
 	}*/
 	
-	public function list_all_projects($page = 0, $search_bar=null,$message='')  //瀏覽所有專案資料
+	public function list_all_projects($search_bar=null)  //瀏覽所有專案資料 $page = 0, $search_bar=null,$message=''
 	{			
 		if(!$this->session->userdata('username'))  //判斷使用者是否由login頁面登入
 		{	
 			redirect('login');
 		}		
 		$data['title'] = '專案管理';
-		$data['user_id'] = $this->session->userdata('user_id');
+		$user_id = $this->session->userdata('user_id');
+		$data['user_id'] = $user_id;
 		$data['username'] = $this->session->userdata('username');
+		$search = $this->session->userdata('search_bar');
+		$data['search'] = $search;
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
 		$data['js_location'] = site_url("/application/assets/js");  
 		$data['js_path'] = site_url("/application/js");  
@@ -189,10 +193,19 @@ class Project extends CI_Controller{
 		$data['img_location'] = site_url("/application/assets/img");
         $data['project_location'] = site_url("/application/assets/project");
 		$data['plugins_location'] = site_url("/application/assets/plugins");
-		$data['message'] = $message;
+		//$data['message'] = $message;
 		//if($search_bar==null) $search_bar = $this->input->post('search_bar');
-		$search_bar = $this->input->post('search_bar');
-		$data['search'] = $search_bar;
+		//$search_bar = $this->input->post('search_bar');	
+		//$search_bar = urldecode($search_bar);		
+		//$data['search'] = $search_bar;
+		$project_column_setting = $this->account_management_model->get_column_setting($user_id, 1);  //取得使用者在專案資料的欄位設定值
+		$data['project_column_setting'] = $project_column_setting;
+		$news_column_setting = $this->account_management_model->get_column_setting($user_id, 2);
+		$data['news_column_setting'] = $news_column_setting;
+		$external_tech_column_setting = $this->account_management_model->get_column_setting($user_id, 3);
+		$data['external_tech_column_setting'] = $external_tech_column_setting;
+		$manager_opinion_column_setting = $this->account_management_model->get_column_setting($user_id, 4);
+		$data['manager_opinion_column_setting'] = $manager_opinion_column_setting;
 		$project_list = $this->project_model->get_specific_projects_data($search_bar);  //取得搜尋條件設定的專案資料
 		$data['project_list'] = $project_list;		
 		$this->load->view('templates/header1', $data);
@@ -410,6 +423,8 @@ class Project extends CI_Controller{
 		$data['user_id'] = $this->session->userdata('user_id');
 		$username = $this->session->userdata('username');
 		$data['username'] = $username;
+		$search = $this->session->userdata('search_bar');
+		$data['search'] = $search;
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
 		$data['js_location'] = site_url("/application/assets/js");  
 		$data['img_location'] = site_url("/application/assets/img");

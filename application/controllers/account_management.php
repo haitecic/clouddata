@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 class Account_management extends CI_Controller{
 	
 	public function __construct()
 	{
-		parent::__construct();
+		parent::__construct();		
 		$this->load->helper('form');  //載入Form輔助函數
 		$this->load->helper('url');
 		$this->load->library('form_validation');  //載入表單驗證程式庫		
@@ -91,38 +91,38 @@ class Account_management extends CI_Controller{
 				$username = $result['surname'].$result['given_names'];
 				$this->session->set_userdata('user_id', $user_id);
 				$this->session->set_userdata('username', $username);
+				$this->session->set_userdata('search_bar', "");  //紀錄使用者搜尋內容
 				//專案資料顯示欄位
-				$this->session->set_userdata('project_first_item', 'idea_name');
-				$this->session->set_userdata('project_second_item', 'year');
-				$this->session->set_userdata('project_third_item', 'proposed_unit');
-				$this->session->set_userdata('project_fourth_item', 'proposer');
-				$this->session->set_userdata('project_fifth_item', 'established_date');
-				$this->session->set_userdata('project_sixth_item', 'PM_in_charge');
-				$this->session->set_userdata('project_seventh_item', 'closed_case');				
+				//$this->session->set_userdata('project_first_item', 'idea_name');
+				//$this->session->set_userdata('project_second_item', 'year');
+				//$this->session->set_userdata('project_third_item', 'proposed_unit');
+				//$this->session->set_userdata('project_fourth_item', 'proposer');
+				//$this->session->set_userdata('project_fifth_item', 'established_date');
+				//$this->session->set_userdata('project_sixth_item', 'PM_in_charge');
+				//$this->session->set_userdata('project_seventh_item', 'closed_case');				
 				//news顯示欄位
-				$this->session->set_userdata('news_first_item', 'idea_name');
-				$this->session->set_userdata('news_second_item', 'year');
-				$this->session->set_userdata('news_third_item', 'proposed_unit');
-				$this->session->set_userdata('news_fourth_item', 'proposer');
-				$this->session->set_userdata('news_fifth_item', 'established_date');
-				$this->session->set_userdata('news_sixth_item', 'PM_in_charge');
-				$this->session->set_userdata('news_seventh_item', 'closed_case');				
+				//$this->session->set_userdata('news_first_item', 'idea_name');
+				//$this->session->set_userdata('news_second_item', 'year');
+				//$this->session->set_userdata('news_third_item', 'proposed_unit');
+				//$this->session->set_userdata('news_fourth_item', 'proposer');
+				//$this->session->set_userdata('news_fifth_item', 'established_date');
+				//$this->session->set_userdata('news_sixth_item', 'PM_in_charge');
+				//$this->session->set_userdata('news_seventh_item', 'closed_case');				
 				//產學研技術顯示欄位
-				$this->session->set_userdata('external_tech_first_item', 'idea_name');
-				$this->session->set_userdata('external_tech_second_item', 'year');
-				$this->session->set_userdata('external_tech_third_item', 'proposed_unit');
-				$this->session->set_userdata('external_tech_fourth_item', 'proposer');
-				$this->session->set_userdata('external_tech_fifth_item', 'established_date');
-				$this->session->set_userdata('external_tech_sixth_item', 'PM_in_charge');
-				$this->session->set_userdata('external_tech_seventh_item', 'closed_case');				
+				//$this->session->set_userdata('external_tech_first_item', 'idea_name');
+				//$this->session->set_userdata('external_tech_second_item', 'year');
+				//$this->session->set_userdata('external_tech_third_item', 'proposed_unit');
+				//$this->session->set_userdata('external_tech_fourth_item', 'proposer');
+				//$this->session->set_userdata('external_tech_fifth_item', 'established_date');
+				//$this->session->set_userdata('external_tech_sixth_item', 'PM_in_charge');
+				//$this->session->set_userdata('external_tech_seventh_item', 'closed_case');				
 				//高階意見顯示欄位
-				$this->session->set_userdata('manager_opinion_first_item', 'topic');
-				$this->session->set_userdata('manager_opinion_second_item', 'content');
-				$this->session->set_userdata('manager_opinion_third_item', 'in_charge');
-				$this->session->set_userdata('manager_opinion_fourth_item', 'time');
-				$this->session->set_userdata('manager_opinion_fifth_item', 'people');
+				//$this->session->set_userdata('manager_opinion_first_item', 'topic');
+				//$this->session->set_userdata('manager_opinion_second_item', 'content');
+				//$this->session->set_userdata('manager_opinion_third_item', 'in_charge');
+				//$this->session->set_userdata('manager_opinion_fourth_item', 'time');
+				//$this->session->set_userdata('manager_opinion_fifth_item', 'people');
 				header('Location:project_list');
-				//$this->project->list_all_projects();				
 				/*
 				$this->load->view('templates/header', $data);
 				$this->load->view('templates/navbar', $data);
@@ -143,7 +143,7 @@ class Account_management extends CI_Controller{
 	*/
 	public function user_logout()
 	{		
-		$this->session->unset_userdata('username');  //刪除使用者存放於session中的登入資料
+		$this->session->unset_userdata('username');  //刪除使用者存放於session中的登入資料		
 		header('Location:login');
 		//$this->user_login();
 	}
@@ -181,20 +181,33 @@ class Account_management extends CI_Controller{
 		{
 			return TRUE;
 		}
-	}*/
+	}*/	
 	
 	/**
 	user_behavior_log():使用者行為紀錄
 	*/
 	public function user_behavior_log()
-	{	
+	{			
 		$user_id = $this->input->post('user_id');
 		$page = $this->input->post('page');
 		$cursorX = $this->input->post('cursorX');
 		$cursorY = $this->input->post('cursorY');
 		$trigger_element_id = $this->input->post('trigger_element_id');
 		$search_keyword = $this->input->post('search_keyword');
+		$this->session->set_userdata('search_bar', $search_keyword);  //紀錄使用者搜尋內容
 		$file = $this->input->post('file');
-		$is_blocked = $this->account_management_model->set_user_behavior($user_id, $page, $cursorX, $cursorY, $trigger_element_id, $search_keyword, $file);
+		//$is_blocked = $this->account_management_model->set_user_behavior($user_id, $page, $cursorX, $cursorY, $trigger_element_id, $search_keyword, $file);
+		$this->account_management_model->set_user_behavior($user_id, $page, $cursorX, $cursorY, $trigger_element_id, $search_keyword, $file);
+	}
+	
+	/**
+	user_column_setting():使用者欄位設定
+	*/
+	public function user_column_setting()
+	{
+		$user_id = $this->input->post('user_id');
+		$class = $this->input->post('class');
+		$json_data = $this->account_management_model->get_column_setting_ajax($user_id, $class);
+		echo $json_data;
 	}
 }
