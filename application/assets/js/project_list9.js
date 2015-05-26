@@ -650,17 +650,17 @@ function show_more_content(row)
 function view_file(preview_file, trigger_element_id)
 {
 	//var file_path = 'http://127.0.0.1/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
-	var file_path = 'http://10.202.121.39/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
+	var file_path = 'http://10.202.120.190/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
 	document.getElementById("pdf_obj").data = file_path;
 	document.getElementById("preview_pdf").style.display="block";
 	document.getElementById("background_mask").style.display="block";
-	user_behavior_log(trigger_element_id, file_path);	
+	//user_behavior_log(trigger_element_id, file_path);	
 }
 function close_view_file(trigger_element_id)
 {
 	document.getElementById("preview_pdf").style.display="none";
 	document.getElementById("background_mask").style.display="none";
-	user_behavior_log(trigger_element_id, null);
+	//user_behavior_log(trigger_element_id, null);
 }
 
 /**
@@ -682,7 +682,7 @@ function user_behavior_log(element_id, browse_file)
 		pageY = event.clientY + document.body.scrollTop;
 	}	
 	//var request_url = "http://127.0.0.1/project_management/user_behavior_log";
-	var request_url = "http://10.202.121.39/project_management/user_behavior_log";
+	var request_url = "http://10.202.120.190/project_management/user_behavior_log";
 	if(element_id == "body")
 	{
 		global_element = null;

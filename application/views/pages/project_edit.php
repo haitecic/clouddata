@@ -219,14 +219,15 @@
 			{
 			?>
 				<div id="origin_file_<?php echo $i;?>" class="statusbar" style="width:98%;margin-left:15px;">
-					<?php $preview_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['convert_to_pdf'];
+					<?php $preview_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'_convert/'.$file['convert_to_pdf'];
 					$download_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['instance_file_name'];
 					?>
 					<div class="file_preview"><img id="preview_file_icon_<?php echo $file['id'];?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/preview.png" alt="preview" onclick="preview_file('<?php echo $preview_file_path;?>', this.id)"></img></div>
 					<div class="file_download"><a href="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/<?php echo $file['instance_file_name']?>" download="<?php echo $file['file_name']?>"><img id="download_file_icon_<?php echo $file['id']?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/download.png" alt="download" onclick="user_behavior_log(this.id, '<?php echo $download_file_path;?>')"></img></a></div>
 					<div class="filename"><?php echo $file['file_name'];?></div>
 					<div class="filesize" style="padding-left:30px;width:150px"><?php
-						$size = filesize('application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['instance_file_name']);
+						$filepath = $_SERVER["DOCUMENT_ROOT"] .'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['instance_file_name'];
+						$size = filesize($filepath);
 						$sizeKB = $size/1024;
 						if($sizeKB > 1024)
 						{
