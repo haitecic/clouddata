@@ -349,7 +349,7 @@ function show_file_detail(file_detail_id, file_detail_icon_id, dir, list_id)
 			{
 			var preview_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' +'/project_management/application/assets/project_attachment/' + '<?php echo $project_basic_info['id'];?>' + '_convert/' + str.list[n].convert_to_pdf;
 		    var download_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' + '/project_management/application/assets/project_attachment/'+ '<?php echo $project_basic_info['id'];?>' + '/' + str.list[n].instance_file_name;
-			if(str.list[n].instance_file_name.split(".")[1])
+			if(str.list[n].instance_file_name.split(".")[1]=='pdf')
 			{
 			var preview_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' +'/project_management/application/assets/project_attachment/' + '<?php echo $project_basic_info['id'];?>' + '/' + str.list[n].convert_to_pdf;;
 			}
