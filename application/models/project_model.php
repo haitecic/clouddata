@@ -976,7 +976,7 @@ class Project_model extends CI_Model{
 	//取得資料分類
 		public function get_category_project_attachfile($project_id) 
 	{
-		$this->db->select('dir');
+		$this->db->select('*');
 		$this->db->from('project_attachment');		
 		$this->db->where('project_attachment.project_id', $project_id);
 		$this->db->order_by("dir", "Asc"); 
@@ -986,10 +986,11 @@ class Project_model extends CI_Model{
 		return $result;			 
 	}
 	//ajax抓取資料分類
-	 public function get_file_category_detail($dir)
+	 public function get_file_category_detail($dir, $project_id)
 	 {
-	    $rule="`dir` LIKE '%" . $dir . "%'";
-	 	$query_string = "SELECT * FROM `project_attachment` WHERE ".$rule ." ORDER BY file_name ASC";
+	    $rule="(`dir` LIKE '%" . $dir . "%')";
+	 	if($dir==null) $query_string = "SELECT * FROM `project_attachment` WHERE `project_id`=$project_id ORDER BY file_name ASC";
+		else $query_string = "SELECT * FROM `project_attachment` WHERE (`project_id`=$project_id) AND ".$rule ." ORDER BY file_name ASC";
 		$query = $this->db->query($query_string);
 		//$this->db->select('*');
 		//$this->db->from('project_attachment');		
