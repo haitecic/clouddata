@@ -200,56 +200,78 @@
 				</div>
 			</div>
 		</div>					
-			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
-			<div style="margin-left:15px;font-family:微軟正黑體;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">請拖曳檔案到此(<a href="#" id="browse_file" onclick="browse_file()">瀏覽</a>檔案)</div>
+
 			<?php
 			//if(count($project_attachfile) != 0)  //當有附加檔案才呈現 
 			//{
 			?>
+			<br>
+
+<?php
+$i=0;
+foreach($project_filecategory as $cate)
+{
+?>
+			<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer" onclick="show_file_detail('<?php echo "file_detail" . $i;?>','<?php echo "file_detail_icon" . $i;?>', '<?php echo $cate['dir'];?>', '<?php echo "filelist" . $i;?>')">
+				&nbsp;<img id="file_detail_icon<?php echo $i;?>" src="<?php echo $img_location;?>/sort-asc.png"></img><?php echo $cate['dir'];?>&nbsp;
+			</div>
+			<div id="file_detail<?php echo $i;?>" style="display:none;margin-left:15px;width:98%">
+		<?php
+		/*
+		$file_dir=array();
+		$dir_layer=array();
+		$num_layer=0;
+		foreach($project_attachfile as $file)
+			{
+			$layer=explode('/', $file['dir']);			
+			$id_dir=array('id' => $file['id'],
+			              'number_lay'=> count($layer),
+			              'dir' => $layer);
+			if(count($layer)>$num_layer) $num_layer=count($layer);
+			for($x=0; $x<count($layer); $x++)
+			   {
+			   if($layer[$x]!=null)
+					{
+					if(empty($dir_layer[$x])) 
+						{
+						$dir_layer[$x]=array();
+						array_push($dir_layer[$x], $layer[$x]);
+						}
+					else
+						{
+						$q=0;
+						foreach($dir_layer[$x] as $dirname)
+								{
+								if($dirname!=$layer[$x]) $q=$q+1;
+								}
+						if($q==count($dir_layer[$x])) array_push($dir_layer[$x], $layer[$x]);
+						}
+					}
+			   }
+			array_push($file_dir, $id_dir);
+			}*/			
+		?>
 				<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
 					<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
 					<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
 					<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
 					<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
 				</div>
+				<div id="filelist<?php echo $i;?>">我想要開車</div>
+				<br>
+			</div>
 			<?php
-			//}
-			$i=0;			
-			foreach($project_attachfile as $file)
-			{
+$i=$i+1;
+}
 			?>
-				<div id="origin_file_<?php echo $i;?>" class="statusbar" style="width:98%;margin-left:15px;">
-					<?php $preview_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'_convert/'.$file['convert_to_pdf'];
-					$download_file_path = 'http://'.$_SERVER['SERVER_ADDR'].'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['instance_file_name'];
-					?>
-					<div class="file_preview"><img id="preview_file_icon_<?php echo $file['id'];?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/preview.png" alt="preview" onclick="preview_file('<?php echo $preview_file_path;?>', this.id)"></img></div>
-					<div class="file_download"><a href="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/<?php echo $file['instance_file_name']?>" download="<?php echo $file['file_name']?>"><img id="download_file_icon_<?php echo $file['id']?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/download.png" alt="download" onclick="user_behavior_log(this.id, '<?php echo $download_file_path;?>')"></img></a></div>
-					<div class="filename"><?php echo $file['file_name'];?></div>
-					<div class="filesize" style="padding-left:30px;width:150px"><?php
-						$filepath = $_SERVER["DOCUMENT_ROOT"] .'/project_management/application/assets/project_attachment/'.$project_basic_info['id'].'/'.$file['instance_file_name'];
-						$size = filesize($filepath);
-						$sizeKB = $size/1024;
-						if($sizeKB > 1024)
-						{
-							$sizeMB = $sizeKB/1024;
-							$sizeStr = number_format($sizeMB, 2)." MB";
-						}
-						else
-						{
-							$sizeStr = number_format($sizeKB, 2)." KB";
-						}
-						echo $sizeStr;
-						?>
-					</div>
-					<div class="progressBar" style="margin-left:10px;width:200px;background-color:#0BA1B5"><div style="padding-left:160px;text-align:right">100%</div></div>
-					<span style="margin-left:75px;width:100px"><?php echo $file['create_time'];?></span>
-					<div id="file_<?php echo $i;?>" class="abort" onclick="delete_file(<?php echo $i;?>)" style="<?php echo "display:none";//if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username) { echo "display:none";}?>">Delete</div>
-					<input type="hidden" id="file_id_<?php echo $i;?>" name="file_id" value="<?php echo $file['instance_file_name'];?>"/>
-				</div>				
-			<?php
-				$i++;
-			}
-			?>
+			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
+			<div style="margin-left:15px;font-family:微軟正黑體;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">請拖曳檔案到此(<a href="#" id="browse_file" onclick="browse_file()">瀏覽</a>檔案)</div>
+				<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
+					<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
+					<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
+					<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
+					<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
+				</div>			
 			<div id="status1"></div>
 			<input type="hidden" id="file_count" name="file_count" value="0"></input> <!--計算上傳的檔案數量-->
 			<input type="hidden" id="file_number" name="file_number" value="0"></input> <!--計算上傳的檔案編號-->
@@ -293,7 +315,58 @@ function close_file_preview(clicked_element_id)
 	document.getElementById("background_mask").style.display="none";
 	user_behavior_log(clicked_element_id, null);
 }
-
+function show_file_detail(file_detail_id, file_detail_icon_id, dir, list_id)
+{
+	user_behavior_log(file_detail_icon_id);
+	var file_detail = document.getElementById(file_detail_id);
+	if(file_detail.style.display == "block")
+	{
+		$("#" + file_detail_id).slideUp(500);	
+		document.getElementById(file_detail_icon_id).src="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/img/sort-asc.png";
+	}
+	else if(file_detail.style.display == "none")
+	{		
+		$("#" + file_detail_id).slideDown(500);
+		file_detail.style.display = "block";
+		document.getElementById(file_detail_icon_id).src="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/img/sort-desc.png";
+	}
+	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project/file_category_detail";
+	$.ajax({
+		url:request_url,
+		data:{
+			dir_name:dir
+		},
+		type:"POST",
+		dataType:"json",
+		async:false,
+		success:function(str)
+		{
+		//alert(str);
+		var n;
+		var files_string='';
+		
+		for(n=0; n<str.number; n++)
+			{
+			var preview_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' +'/project_management/application/assets/project_attachment/' + '<?php echo $project_basic_info['id'];?>' + '_convert/' + str.list[n].convert_to_pdf;
+		    var download_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' + '/project_management/application/assets/project_attachment/'+ '<?php echo $project_basic_info['id'];?>' + '/' + str.list[n].instance_file_name;
+			if(str.list[n].instance_file_name.split(".")[1])
+			{
+			var preview_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' +'/project_management/application/assets/project_attachment/' + '<?php echo $project_basic_info['id'];?>' + '/' + str.list[n].convert_to_pdf;;
+			}
+			files_string = files_string + 
+					'<div id="origin_file_' + n + '" class="statusbar" style="width:98%;margin-left:15px;">'+
+					'<div class="file_preview"><img id="preview_file_icon_' + str.list[n].id + '" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/preview.png" alt="preview" onclick="preview_file(' + "'" + preview_file_path + "'" +', this.id)"></img></div>' +
+					'<div class="file_download"><a href="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/' + str.list[n].instance_file_name + '" download="' + str.list[n].instance_file_name + '"><img id="download_file_icon_'+ str.list[n].id +'" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/download.png" alt="download" onclick="user_behavior_log(this.id, ' + "'" + download_file_path + "'" + ')"></img></a></div>' +
+					'<div class="filename">' + str.list[n].file_name + '</div>'+
+					'<div class="filesize" style="padding-left:30px;width:150px"></div>' +
+					'<div class="progressBar" style="margin-left:10px;width:200px;background-color:#0BA1B5"><div style="padding-left:160px;text-align:right">100%</div></div>'+
+					'<span style="margin-left:75px;width:100px">' + str.list[n].create_time + '</span>'+
+					'</div>';
+			}
+				document.getElementById(list_id).innerHTML=files_string;
+		}
+		});
+}
 function show_project_detail()
 {
 	user_behavior_log('project_detail_icon');
@@ -397,7 +470,8 @@ $(document).ready(function()
 			dataType:"text", //回傳的資料型態
 			//Code to run if the request succeeds. The response is passed to the function
 			success:function(str){
-				//alert(str);				
+				//alert(str);	
+//  str.title				
 			},
 			async:false,
 			//Code to run if the request fails; the raw request and status codes are passed to the function
