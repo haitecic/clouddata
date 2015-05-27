@@ -1,5 +1,6 @@
 <?php 
 $column_mapping = array("null"=>"不顯示","idea_id"=>"提案編號", "year"=>"年度", "idea_name"=>"提案名稱", "idea_source"=>"提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "stage"=>"階段狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "established_date"=>"立案日期",  "idea_examination"=>"提案審核履歷", "Idea"=>"I階段文件檢核", "Requirement"=>"R階段文件檢核", "Feasibility"=>"F階段文件檢核", "Prototype"=>"P階段文件檢核", "note"=>"備註", "adoption"=>"導入車型/先期式樣", "applied_patent"=>"專利申請/取得", "resurrection_application_qualified"=>"具備敗部復活申請資格", "resurrection_applied"=>"敗部復活申請", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案");
+$news_column_mapping = array("null"=>"不顯示", "title"=>"標題", "category"=>"類別", "description"=>"內容摘要", "pub_date"=>"發布日期");
 $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議題", "content"=>"內容", "in_charge"=>"主辦(承辦)", "time"=>"時間", "people"=>"與會人員");
 ?>
 <div id="main" class="container-fluid" style="background-color:#FBFBF0;font-color:#635F5F;font-family: Adobe 繁黑體 Std;"><!--8E8D93-->
@@ -75,25 +76,25 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 					<thead>
 						<tr>
 							<th id="news_list_head" style="text-align:center;font-weight:normal;width:4%;word-wrap:break-word"></th>
-							<th id="news_list_head0" style="text-align:center;font-weight:normal;width:18%;word-wrap:break-word"><span id="news_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column1']];?></span><select id="news_col_select_box_0" style="display:none"><option value="idea_name" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
-							<th id="news_list_head1" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(1)" onmouseout="news_hide_select_box(1)"><span id="news_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column2']];?></span><span><select id="news_col_select_box_1" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column2'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(2)" onmouseout="news_hide_select_box(2)"><span id="news_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column3']];?></span><span><select id="news_col_select_box_2" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column3'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head3" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(3)" onmouseout="news_hide_select_box(3)"><span id="news_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column4']];?></span><span><select id="news_col_select_box_3" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column4'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(4)" onmouseout="news_hide_select_box(4)"><span id="news_col_plain_text_4" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column5']];?></span><span><select id="news_col_select_box_4" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column5'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(5)" onmouseout="news_hide_select_box(5)"><span id="news_col_plain_text_5" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column6']];?></span><span><select id="news_col_select_box_5" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column6'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(6)" onmouseout="news_hide_select_box(6)"><span id="news_col_plain_text_6" style="margin:0px auto -21px;"><?php echo $column_mapping[$news_column_setting['column7']];?></span><span><select id="news_col_select_box_6" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($column_mapping as $index=>$value){ if($news_column_setting['column7'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head0" style="text-align:center;font-weight:normal;width:18%;word-wrap:break-word"><span id="news_col_plain_text_0" style="margin:0px auto -21px;"><?php echo $news_column_mapping[$news_column_setting['column1']];?></span><select id="news_col_select_box_0" style="display:none"><option value="title" selected></option></select><span class="sortMask"></span><!--<span id="hide_column_icon_0" class="insert_column"></span>--></th>
+							<th id="news_list_head1" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(1)" onmouseout="news_hide_select_box(1)"><span id="news_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $news_column_mapping[$news_column_setting['column2']];?></span><span><select id="news_col_select_box_1" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column2'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head2" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(2)" onmouseout="news_hide_select_box(2)"><span id="news_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $news_column_mapping[$news_column_setting['column3']];?></span><span><select id="news_col_select_box_2" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column3'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head3" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(3)" onmouseout="news_hide_select_box(3)"><span id="news_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $news_column_mapping[$news_column_setting['column4']];?></span><span><select id="news_col_select_box_3" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column4'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<!--<th id="news_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(4)" onmouseout="news_hide_select_box(4)"><span id="news_col_plain_text_4" style="margin:0px auto -21px;"><?php //echo $news_column_mapping[$news_column_setting['column5']];?></span><span><select id="news_col_select_box_4" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php //foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column5'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(5)" onmouseout="news_hide_select_box(5)"><span id="news_col_plain_text_5" style="margin:0px auto -21px;"><?php// echo $news_column_mapping[$news_column_setting['column6']];?></span><span><select id="news_col_select_box_5" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php //foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column6'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
+							<th id="news_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(6)" onmouseout="news_hide_select_box(6)"><span id="news_col_plain_text_6" style="margin:0px auto -21px;"><?php// echo $news_column_mapping[$news_column_setting['column7']];?></span><span><select id="news_col_select_box_6" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php //foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column7'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>-->
 						</tr>
 					</thead>
 					<tfoot>
 						<tr>
 							<th id="news_list_foot" style="text-align:center;font-weight:normal"></th>
-							<th id="news_list_foot0" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column1']];?></th>
-							<th id="news_list_foot1" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column2']];?></th>
-							<th id="news_list_foot2" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column3']];?></th>
-							<th id="news_list_foot3" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column4']];?></th>
-							<th id="news_list_foot4" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column5']];?></th>
-							<th id="news_list_foot5" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column6']];?></th>
-							<th id="news_list_foot6" style="text-align:center;font-weight:normal"><?php echo $column_mapping[$news_column_setting['column7']];?></th>
+							<th id="news_list_foot0" style="text-align:center;font-weight:normal"><?php echo $news_column_mapping[$news_column_setting['column1']];?></th>
+							<th id="news_list_foot1" style="text-align:center;font-weight:normal"><?php echo $news_column_mapping[$news_column_setting['column2']];?></th>
+							<th id="news_list_foot2" style="text-align:center;font-weight:normal"><?php echo $news_column_mapping[$news_column_setting['column3']];?></th>
+							<th id="news_list_foot3" style="text-align:center;font-weight:normal"><?php echo $news_column_mapping[$news_column_setting['column4']];?></th>
+							<!--<th id="news_list_foot4" style="text-align:center;font-weight:normal"><?php //echo $news_column_mapping[$news_column_setting['column5']];?></th>
+							<th id="news_list_foot5" style="text-align:center;font-weight:normal"><?php //echo $news_column_mapping[$news_column_setting['column6']];?></th>
+							<th id="news_list_foot6" style="text-align:center;font-weight:normal"><?php //echo $news_column_mapping[$news_column_setting['column7']];?></th>-->
 						</tr>
 					</tfoot>
 				</table>
@@ -245,47 +246,25 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 <div id="news_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100;display:none"><!--style="position:absolute;left:0px;top:0px;z-index:100"-->
 	<div style="text-align:center">
 		<?php 		
-		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三', '4' => '欄位四', '5' => '欄位五', '6' => '欄位六'); //$title存放select選單的名稱
+		$title = array('1' => '欄位一', '2' => '欄位二', '3' => '欄位三'); //$title存放select選單的名稱
 		?>
 		<select id="news_col_0" style="display:none">
-			<option value="idea_name" selected></option>
+			<option value="title" selected></option>
 		</select>
 		<?php
-		for ($i=1; $i<=6; $i++)
+		for ($i=1; $i < 4; $i++)
 		{
 		?>		
 			<label for="news_col_<?php echo $i;?>"><?php echo $title[$i];?></label>
 		<?php	
 			$column = $news_column_setting['column'.($i+1)];  //資料庫的第一個欄位編號由1開始
 		?>		
-		<select id="news_col_<?php echo $i;?>" style="margin-bottom:10px">
+		<select id="news_col_<?php echo $i;?>" style="margin-bottom:10px;min-width:180px">
 			<option value="null" <?php if($column == "null"){ echo " selected";} ?>>不顯示</option>
-			<option value="year" <?php if($column == "year"){ echo " selected";} ?>>年度</option>
-			<option value="idea_id" <?php if($column == "idea_id"){ echo " selected";} ?> >提案編號</option>
-			<option value="idea_name" <?php if($column == "idea_name"){ echo " selected";} ?> >提案名稱</option>
-			<option value="idea_source" <?php if($column == "idea_source"){ echo " selected";} ?> >提案來源</option>
-			<option value="scenario_d" <?php if($column == "scenario_d"){ echo " selected";} ?> >情境說明</option>
-			<option value="function_d" <?php if($column == "function_d"){ echo " selected";} ?> >功能構想</option>
-			<option value="distinction_d" <?php if($column == "distinction_d"){ echo " selected";} ?> >差異化</option>
-			<option value="value_d" <?php if($column == "value_d"){ echo " selected";} ?> >價值性</option>
-			<option value="feasibility_d" <?php if($column == "feasibility_d"){ echo " selected";} ?> >可行性</option>
-			<option value="stage" <?php if($column == "stage"){ echo " selected";} ?> >階段狀態</option>
-			<option value="progress_description" <?php if($column == "progress_description"){ echo " selected";} ?> >進度說明</option>
-			<option value="proposed_unit" <?php if($column == "proposed_unit"){ echo " selected";} ?> >提案單位</option>
-			<option value="proposer" <?php if($column == "proposer"){ echo " selected";} ?> >提案人</option>
-			<option value="established_date" <?php if($column == "established_date"){ echo " selected";} ?> >立案日期</option>
-			<option value="idea_examination" <?php if($column == "idea_examination"){ echo " selected";} ?> >提案審核履歷</option>
-			<option value="Idea" <?php if($column == "Idea"){ echo " selected";} ?> >I階段文件檢核</option>
-			<option value="Requirement" <?php if($column == "Requirement"){ echo " selected";} ?> >R階段文件檢核</option>
-			<option value="Feasibility" <?php if($column == "Feasibility"){ echo " selected";} ?> >F階段文件檢核</option>
-			<option value="Prototype" <?php if($column == "Prototype"){ echo " selected";} ?> >P階段文件檢核</option>
-			<option value="note" <?php if($column == "note"){ echo " selected";} ?> >備註</option>
-			<option value="adoption" <?php if($column == "adoption"){ echo " selected";} ?> >導入車型/先期式樣</option>
-			<option value="applied_patent" <?php if($column == "applied_patent"){ echo " selected";} ?> >專利申請/取得</option>
-			<option value="resurrection_application_qualified" <?php if($column == "resurrection_application_qualified"){ echo " selected";} ?> >具備敗部復活申請資格</option>
-			<option value="resurrection_applied" <?php if($column == "resurrection_applied"){ echo " selected";} ?> >敗部復活申請</option>
-			<option value="PM_in_charge" <?php if($column == "PM_in_charge"){ echo " selected";} ?> >創意中心窗口</option>
-			<option value="closed_case" <?php if($column == "closed_case"){ echo " selected";} ?> >結案</option>
+			<option value="title" <?php if($column == "title"){ echo " selected";} ?>>標題</option>
+			<option value="category" <?php if($column == "category"){ echo " selected";} ?> >類別</option>
+			<option value="description" <?php if($column == "description"){ echo " selected";} ?> >內容摘要</option>
+			<option value="pub_date" <?php if($column == "pub_date"){ echo " selected";} ?> >發布日期</option>
 		</select>
 		<br/>
 		<?php
@@ -310,7 +289,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		<?php	
 			$column = $external_tech_column_setting['column'.($i+1)];  //資料庫的第一個欄位編號由1開始
 		?>
-		<select id="external_tech_col_<?php echo $i;?>" style="margin-bottom:10px">
+		<select id="external_tech_col_<?php echo $i;?>" style="margin-bottom:10px;min-width:180px">
 			<option value="null" <?php if($column == "null"){ echo " selected";} ?>>不顯示</option>
 			<option value="year" <?php if($column == "year"){ echo " selected";} ?>>年度</option>
 			<option value="idea_id" <?php if($column == "idea_id"){ echo " selected";} ?> >提案編號</option>
@@ -362,7 +341,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 		<?php	
 			$column = $manager_opinion_column_setting['column'.($i+1)];  //資料庫的第一個欄位編號由1開始
 		?>
-		<select id="manager_opinion_col_<?php echo $i;?>" style="margin-bottom:10px">
+		<select id="manager_opinion_col_<?php echo $i;?>" style="margin-bottom:10px;min-width:180px">
 			<option value="null" <?php if($column == "null"){ echo " selected";} ?>>不顯示</option>
 			<option value="content" <?php if($column == "content"){ echo " selected";} ?>>內容</option>
 			<option value="in_charge" <?php if($column == "in_charge"){ echo " selected";} ?> >主擔(承辦)</option>
@@ -434,7 +413,7 @@ $(document).ready(function() {
 						project_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
 						break;
 					case "2":
-						news_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
+						news_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3];
 						break;
 					case "3":
 						external_tech_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
@@ -449,7 +428,7 @@ $(document).ready(function() {
 				document.getElementById('pro_col_select_box_'+i).value = project_display_columns[i];
 				document.getElementById('col_'+i).value = project_display_columns[i];
 			}
-			for(i=0;i<7;i++)
+			for(i=0;i<4;i++)
 			{
 				document.getElementById('news_col_select_box_'+i).value = news_display_columns[i];
 				document.getElementById('news_col_'+i).value = news_display_columns[i];
@@ -624,7 +603,7 @@ $('#project_list_tbl').on('mouseover', 'tbody tr', function(){
 	});
 });
 
-$('#news_list_tbl').on('mouseover', 'tbody tr', function(){
+/*$('#news_list_tbl').on('mouseover', 'tbody tr', function(){
     //alert('You clicked row '+ ($(this).index()) );
 	var row_index = $(this).index();
 	var project_id = document.getElementById("row_project_hidden_"+row_index).value;
@@ -660,7 +639,7 @@ $('#news_list_tbl').on('mouseover', 'tbody tr', function(){
 		complete:function( xhr, status ){
 		}
 	});
-});
+});*/
 
 $('#external_tech_list_tbl').on('mouseover', 'tbody tr', function(){
     //alert('You clicked row '+ ($(this).index()) );

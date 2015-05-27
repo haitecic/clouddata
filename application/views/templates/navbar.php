@@ -173,7 +173,7 @@ function start_search()
 						project_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
 						break;
 					case "2":
-						news_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
+						news_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3];
 						break;
 					case "3":
 						external_tech_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
@@ -318,7 +318,7 @@ $("#search_bar").keypress(function(event){
 						project_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
 						break;
 					case "2":
-						news_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];
+						news_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3];
 						break;
 					case "3":
 						external_tech_display_columns = [json.data[i].column0, json.data[i].column1, json.data[i].column2, json.data[i].column3, json.data[i].column4, json.data[i].column5, json.data[i].column6];

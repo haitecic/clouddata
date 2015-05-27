@@ -99,10 +99,7 @@ class Account_management_model extends CI_Model{
 		$data = array('column1'=>$columns['column0'],
 			'column2'=>$columns['column1'],
 			'column3'=>$columns['column2'],
-			'column4'=>$columns['column3'],
-			'column5'=>$columns['column4'],
-			'column6'=>$columns['column5'],
-			'column7'=>$columns['column6']);
+			'column4'=>$columns['column3'],);
 		$this->db->where('user_id', $user_id);		
 		$this->db->where('class', $class);		
 		return $this->db->update('user_column_setting', $data);

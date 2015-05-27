@@ -118,7 +118,24 @@ class Account_management extends CI_Controller{
 	*/
 	public function user_logout()
 	{		
-		$this->session->unset_userdata('username');  //刪除使用者存放於session中的登入資料		
+		$this->session->unset_userdata('username');  //刪除使用者存放於session中的登入資料
+		$this->session->unset_userdata('search_bar');  //紀錄使用者搜尋內容
+		$this->session->unset_userdata('project_start_record');  //從第幾筆資料開始呈現(瀏覽的分頁)
+		//$this->session->unset_userdata('project_display_length');  //一頁顯示筆數
+		//$this->session->unset_userdata('project_order_column');  //排序欄位
+		//$this->session->unset_userdata('project_order_method');  //排序方式
+		$this->session->unset_userdata('news_start_record');
+		//$this->session->unset_userdata('news_display_length');
+		//$this->session->unset_userdata('news_order_column');
+		//$this->session->unset_userdata('news_order_method');
+		$this->session->unset_userdata('external_tech_start_record');
+		//$this->session->unset_userdata('external_tech_display_length');
+		//$this->session->unset_userdata('external_tech_order_column');
+		//$this->session->unset_userdata('external_tech_order_method');
+		$this->session->unset_userdata('manager_opinion_start_record');
+		//$this->session->unset_userdata('manager_opinion_display_length');
+		//$this->session->unset_userdata('manager_opinion_order_column');
+		//$this->session->unset_userdata('manager_opinion_order_method');
 		header('Location:login');
 		//$this->user_login();
 	}

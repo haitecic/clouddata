@@ -1481,45 +1481,19 @@ class Project_model extends CI_Model{
         return json_encode($output);
 	}
 	
-	public function get_news_datatable_record($parameter, $DB_table, $columns)
+	public function get_news_datatable_record2($parameter, $DB_table, $columns)
 	{
 		if(isset($parameter['search']) && !empty($parameter['search']))
         {
 			$search_content = $parameter['search'];
 			//分析搜尋框輸入的內容
-			$rule = "";	
+			$rule = "WHERE ";	
 			$search_word = explode(' ', $search_content);
 			for($i=0;$i<count($search_word);$i++)
 			{
-				$rule = $rule."(LOWER(`year`) LIKE LOWER('%".$search_word[$i]."%') OR 				
-				LOWER(`idea_id`) LIKE LOWER('%".$search_word[$i]."%') OR 
-				LOWER(`idea_name`) LIKE LOWER('%".$search_word[$i]."%') OR 
-				LOWER(`idea_source`) LIKE LOWER('%".$search_word[$i]."%') OR 
-				LOWER(`scenario_d`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`function_d`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`distinction_d`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`value_d`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`feasibility_d`) LIKE LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`stage`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`stage_detail`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`progress_description`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`proposed_unit`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`proposer`) LIKE LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`established_date`) LIKE BINARY LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`idea_examination`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`Idea`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`Requirement`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`Feasibility`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`Prototype`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`note`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`adoption`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`applied_patent`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`resurrection_application_qualified`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`resurrection_applied`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`PM_in_charge`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`closed_case`) LIKE LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`file_name`) LIKE LOWER('%".$search_word[$i]."%') OR				
-				LOWER(`file_content`) LIKE LOWER('%".$search_word[$i]."%'))";
+				$rule = $rule."(LOWER(`title`) LIKE LOWER('%".$search_word[$i]."%') OR 				
+				LOWER(`category`) LIKE LOWER('%".$search_word[$i]."%') OR
+				LOWER(`description`) LIKE LOWER('%".$search_word[$i]."%'))"; // OR LOWER(`pub_date`) LIKE BINARY LOWER('%".$search_word[$i]."%')
 				if(($i+1) != count($search_word))
 				{
 					$rule = $rule." AND ";
@@ -1528,16 +1502,15 @@ class Project_model extends CI_Model{
 		}
 		else
 		{
-			$rule = "`year` LIKE '%%' ";
+			$rule = "";
 		}
 		$order_column = $columns[intval($this->db->escape_str($parameter['order_column']))];
 		$order_method = $this->db->escape_str($parameter['order_method']);
-		$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM (SELECT `project_all`.`id`, `year`, `idea_id`, `idea_name`, `idea_source`, `scenario_d`, `function_d`,`distinction_d`,`value_d`,`feasibility_d`, `stage`, `progress_description`,`proposed_unit`,`proposer`, `Idea`, `Requirement`, `Feasibility`, `Prototype`, `note`, `applied_patent`,`resurrection_application_qualified`,`resurrection_applied`,`PM_in_charge`, `idea_examination`,`closed_case`, established_date, adoption, `is_blocked`, `file_name`, `file_content` FROM `project_all` LEFT JOIN `project_attachment` ON `project_all`.`id` = `project_attachment`.`project_id` WHERE '.$rule.' GROUP BY `project_all`.`id`) AS T ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];  //只撈出project_list需呈現之資料
+		$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM `news` '.$rule.' ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];  //撈出news資料
 		$rResult = $this->db->query($query_string);		
-        // Data set length after filtering
 		$query = $this->db->query('SELECT FOUND_ROWS() AS `found_rows`');
 		$iFilteredTotal = $query->row()->found_rows;       
-        $iTotal = $this->db->count_all($DB_table);  // Total data set length		
+        $iTotal = $this->db->count_all($DB_table);		
 		$output = array(
             'draw' => intval($parameter['draw']),
             'recordsTotal' => intval($iTotal),
@@ -1545,8 +1518,8 @@ class Project_model extends CI_Model{
             'data' => array()
         );
 		$a = 0;
-		$row_index = 0;  //表格row的id編號
-		$column_mapping = array("idea_id"=>"提案編號", "year"=>"年度", "idea_name"=>"提案名稱", "idea_source"=>"提案來源", "scenario_d"=>"情境說明", "function_d"=>"功能構想", "distinction_d"=>"差異化", "value_d"=>"價值性", "feasibility_d"=>"可行性", "stage"=>"階段狀態", "progress_description"=>"進度說明", "proposed_unit"=>"提案單位", "proposer"=>"提案人", "established_date"=>"立案日期",  "idea_examination"=>"提案審核履歷", "Idea"=>"I階段文件檢核", "Requirement"=>"R階段文件檢核", "Feasibility"=>"F階段文件檢核", "Prototype"=>"P階段文件檢核", "note"=>"備註", "adoption"=>"導入車型/先期式樣", "applied_patent"=>"專利申請/取得", "resurrection_application_qualified"=>"具備敗部復活申請資格", "resurrection_applied"=>"敗部復活申請", "PM_in_charge"=>"創意中心窗口", "closed_case"=>"結案", "file_name"=>"於附加檔案中", "file_content"=>"於附加檔案中");
+		$row_index = 0;
+		$news_column_mapping = array("title"=>"標題", "link"=>"連結", "category"=>"類別", "description"=>"內容摘要", "pub_date"=>"發布日期");
 		foreach($rResult->result_array() as $project)
         {
 			$key_sentence = "";  //存放關鍵句子
@@ -1594,14 +1567,15 @@ class Project_model extends CI_Model{
 				{					
 					if(stripos($content, $key_sentence) !== false)
 					{		
-						if($index == "file_content")  //假如關鍵句在附加檔案中
+						/*if($index == "file_content")  //假如關鍵句在附加檔案中
 						{
 							$column = '(附加檔案)'.$project['file_name'];
 						}
 						else
-						{
-							$column = $column_mapping[$index];
-						}
+						{*/
+							//$column = $news_column_mapping[$index];
+							$column = $index;
+						//}
 						break;
 					}
 				}
@@ -1616,7 +1590,7 @@ class Project_model extends CI_Model{
 				}				
 			}			  
             $row = array();			
-			$row['DT_RowId'] = 'row_project_'.$row_index;  //增加各row的id屬性
+			//$row['DT_RowId'] = 'row_rows_'.$row_index;
             $i=0;
             foreach($columns as $col)
             {					
@@ -1626,19 +1600,144 @@ class Project_model extends CI_Model{
 				}
 				else
 				{
+					$row[$i] = $project[$col];
+					/*switch($col)
+					{
+						case 'id':	
+							$row[$i] = "<input id=\"row_news_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/link.png\" alt=\"link\" onclick=\"link_to_referece('$project[link]')\"/>"; //$project['link']
+							break;
+						case 'title':						
+							$row[$i] = '<div style="color:#23459F">'.$project[$col].'</div>'.$search_result_hint;							
+							break;
+						default:
+							$row[$i] = $project[$col];
+					}*/
+				}
+				$i++;
+            }
+			$row_index++;
+            $output['data'][] = $row;			
+        }
+        return json_encode($output);
+	}
+	
+	public function get_news_datatable_record($parameter, $DB_table, $columns)
+	{
+		if(isset($parameter['search']) && !empty($parameter['search']))
+        {
+			$search_content = $parameter['search'];
+			//分析搜尋框輸入的內容
+			$rule = "";	
+			$search_word = explode(' ', $search_content);
+			for($i=0;$i<count($search_word);$i++)
+			{
+				$rule = $rule."(LOWER(`title`) LIKE LOWER('%".$search_word[$i]."%') OR 				
+				LOWER(`category`) LIKE LOWER('%".$search_word[$i]."%') OR 
+				LOWER(`description`) LIKE LOWER('%".$search_word[$i]."%'))";
+				if(($i+1) != count($search_word))
+				{
+					$rule = $rule." AND ";
+				}
+			}	
+		}
+		else
+		{
+			$rule = "`title` LIKE '%%' ";
+		}
+		$order_column = $columns[intval($this->db->escape_str($parameter['order_column']))];
+		$order_method = $this->db->escape_str($parameter['order_method']);
+		$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM `news` WHERE '.$rule.' ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];  //撈出news紀錄資料
+		$rResult = $this->db->query($query_string);		
+		$query = $this->db->query('SELECT FOUND_ROWS() AS `found_rows`');
+		$iFilteredTotal = $query->row()->found_rows;       
+        $iTotal = $this->db->count_all($DB_table);  // Total data set length		
+		$output = array(
+            'draw' => intval($parameter['draw']),
+            'recordsTotal' => intval($iTotal),
+            'recordsFiltered' => intval($iFilteredTotal),
+            'data' => array()
+        );
+		$a = 0;
+		$row_index = 0;  //表格row的id編號
+		$news_column_mapping = array("title"=>"標題", "category"=>"類別", "description"=>"描述", "link"=>"連結", "pub_date"=>"發布日期");
+		foreach($rResult->result_array() as $project)
+        {
+			$key_sentence = "";  //存放關鍵句子
+			$column = "";  //存放關鍵句子所在的欄位		
+			$search_result_hint = "";  //查詢結果提示字串			
+			if(isset($parameter['search']) && !empty($parameter['search']))
+			{
+				$search_content = $parameter['search'];
+				$search_word = explode(' ', $search_content);
+				$temp = array();
+				$temp_score = array();
+				$all_content = "";
+				foreach($project as $index => $content)
+				{
+					$all_content = $all_content.$content.',';					
+				}
+				$all_content = str_replace('。','.',$all_content);
+				$all_content = str_replace('，',',',$all_content);
+				$all_content = str_replace('；',';',$all_content);
+				$temp = preg_split("/[?!,-.;]+/",$all_content);
+				foreach($temp as $index=>$sentence)
+				{
+					$score = 0;
+					for($j=0;$j<count($search_word);$j++)
+					{
+						if(stripos($sentence, $search_word[$j]) !== false)
+						{
+							$score = $score + substr_count(strtoupper($sentence), strtoupper($search_word[$j]));
+						}
+					}
+					array_push($temp_score, (int)$score);					
+				}	
+				$first_score = 0;
+				$sen = 0;
+				foreach($temp as $index=>$sentence)
+				{		
+					if($temp_score[$index] > $first_score)  //$first_score
+					{
+						$sen = $sentence;
+						$first_score = $temp_score[$index];
+					}					
+				}
+				$key_sentence = $sen;
+				foreach($project as $index => $content)
+				{					
+					if(stripos($content, $key_sentence) !== false)
+					{	
+						$column = $news_column_mapping[$index];
+						break;
+					}
+				}
+				if(strlen(($column.':'.$key_sentence)) > 30) //65
+				{
+					$search_result_hint = "<div id='$a' onmouseover='show_more_content(this)' onmouseout='show_more_content(this)' style='font-size:10pt;	text-overflow:ellipsis;	width:100%; overflow:hidden; white-space:nowrap;'>$column : $key_sentence</div>";
+					$a++;
+				}
+				else
+				{
+					$search_result_hint = "<div style='font-size:10pt'>$column : $key_sentence</div>";
+				}				
+			}			  
+            $row = array();			
+			$row['DT_RowId'] = 'row_news_'.$row_index;  //增加各row的id屬性
+            $i=0;
+            foreach($columns as $col)
+            {			
+				if($col == "null")
+				{
+					$row[$i] = "";
+				}
+				else
+				{		
 					switch($col)
 					{
 						case 'id':	
-							if($project['is_blocked'] == 1)	
-							{							
-								$row[$i] = "<input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/lock3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/>";
-							}
-							else if($project['is_blocked'] == 2)
-							{
-								$row[$i] = "<input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/edit3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/>";
-							}
+							$row[$i] = "<input id=\"row_news_img_$row_index\" style=\"width:27px;height:24px\" type=\"image\" src=\"./application/assets/img/link.png\" alt=\"edit\" onclick=\"link_to_reference('$project[link]')\"/>";
 							break;
-						case 'idea_name':						
+						case 'title':						
 							$row[$i] = '<div style="color:#23459F">'.$project[$col].'</div>'.$search_result_hint;							
 							break;
 						default:
