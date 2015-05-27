@@ -18,7 +18,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				</div>
 				<div class="no-move"></div>				
 			</div>
-			<div id="project_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block">
+			<div id="project_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:none"><!---->
 				<!--<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1155px;top:-10px;z-index:50;width: auto;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
 				</div>-->
@@ -26,7 +26,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
 				</div>
-				<table id="project_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px;table-layout:fixed;word-break:keep-all;text-align:justify;/*text-justify:auto;word-wrap:break-word*/">
+				<table id="project_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px;table-layout:fixed;word-break:break-all;text-align:justify;/*text-justify:auto;word-wrap:break-word*/">
 					<thead>
 						<tr>
 							<th id="project_list_head" style="text-align:center;font-weight:normal;width:4%;word-wrap:break-word"></th>
@@ -68,7 +68,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				</div>
 				<div class="no-move"></div>				
 			</div>
-			<div id="news_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block">
+			<div id="news_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
 				<div id="news_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
 				</div>
@@ -114,7 +114,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				</div>
 				<div class="no-move"></div>				
 			</div>
-			<div id="external_tech_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block">
+			<div id="external_tech_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
 				<div id="external_tech_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
 				</div>
@@ -160,7 +160,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				</div>
 				<div class="no-move"></div>				
 			</div>
-			<div id="manager_opinion_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block">
+			<div id="manager_opinion_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
 				<div id="manager_opinion_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
 				</div>
@@ -191,6 +191,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 	</div>
 	<br/>	
 </div>
+<div id="loading" class="loading" style="background-repeat: no-repeat; position:absolute;left:47%;top:45%;width:50%;height:200px;z-index:2000000"></div>
 <div id="project_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100;display:none">
 	<div style="text-align:center">
 		<?php 		
@@ -363,8 +364,10 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 	</object>
 </div>
 <div id="background_mask" class="background_mask" onclick="close_view_file(this.id)"></div>
+<!--<div id="loading_background_mask" class="loading_background_mask"></div>-->
+
 <script>
-$(document).ready(function() {	
+$(document).ready(function() {		
 	$('th select').width(function(){ //設定各select box的初始寬度, 依據選擇的option
 		$("#width_tmp").html($("option:selected", this).text());
 		$(this).width($("#width_tmp").width()+38);
@@ -503,11 +506,21 @@ $(document).ready(function() {
 		{
 			manager_opinion_display_columns[manager_opinion_display_columns.length] = document.getElementById('manager_opinion_col_select_box_' + i).value;
 		}
-	}*/
+	}*/	
 	load_news_list(is_load, news_start_record, news_display_length, news_order_column, news_order_method, search_str, news_display_columns);
 	load_external_tech_list(is_load, external_tech_start_record, external_tech_display_length, external_tech_order_column, external_tech_order_method, search_str, external_tech_display_columns);
 	load_manager_opinion_list(is_load, manager_opinion_start_record, manager_opinion_display_length, manager_opinion_order_column, manager_opinion_order_method, search_str, manager_opinion_display_columns);
 	load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);	
+	//document.getElementById("loading").style.display = "none";
+	$("#project_list_content").fadeIn(300);
+	$("#news_list_content").fadeIn(300);
+	$("#external_tech_list_content").fadeIn(300);
+	$("#manager_opinion_list_content").fadeIn(300);
+	//document.getElementById("project_list_content").style.display="block";
+	//document.getElementById("news_list_content").style.display="block";
+	//document.getElementById("external_tech_list_content").style.display="block";
+	//document.getElementById("manager_opinion_list_content").style.display="block";
+	$("#loading").fadeOut(2000);	
 });
 	
 

@@ -2474,3 +2474,20 @@ select
 	/*background-color:red;*/
 }
 
+.loading
+{
+	background-image:url(../img/ajax-loader.gif);
+}
+
+.loading_background_mask{
+  top:0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  position:fixed;
+  background-color: #D5D1D1;
+  opacity:0.6;
+  z-index: 19999;
+  /*cursor: pointer;*/
+}
+
