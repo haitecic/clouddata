@@ -968,12 +968,41 @@ class Project_model extends CI_Model{
 		$this->db->select('*');
 		$this->db->from('project_attachment');		
 		$this->db->where('project_attachment.project_id', $project_id);
-		$this->db->order_by("create_time", "desc"); 
+		$this->db->order_by("dir", "desc"); 
 		$query = $this->db->get();	
 		$result = $query->result_array();	
 		return $result;			 
 	}
-	
+	//取得資料分類
+		public function get_category_project_attachfile($project_id) 
+	{
+		$this->db->select('dir');
+		$this->db->from('project_attachment');		
+		$this->db->where('project_attachment.project_id', $project_id);
+		$this->db->order_by("dir", "Asc"); 
+		$this->db->group_by('dir'); 
+		$query = $this->db->get();	
+		$result = $query->result_array();	
+		return $result;			 
+	}
+	//ajax抓取資料分類
+	 public function get_file_category_detail($dir)
+	 {
+	    $rule="`dir` LIKE '%" . $dir . "%'";
+	 	$query_string = "SELECT * FROM `project_attachment` WHERE ".$rule ." ORDER BY file_name ASC";
+		$query = $this->db->query($query_string);
+		//$this->db->select('*');
+		//$this->db->from('project_attachment');		
+		//$this->db->where('project_attachment.dir', $dir);
+		//$this->db->order_by("file_name", "asc"); 
+		//$query = $this->db->get();	
+		$result = $query->result_array();
+        $number=count($result);		
+		$file=array();
+		$file['number']=$number;
+		$file['list']=$result;
+		return $file;
+	 }
 	/**
 	get_project_is_blocked($project_id)：取得特定專案是否被鎖住
 	$project_id：專案編號
