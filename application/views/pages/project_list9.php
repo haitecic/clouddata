@@ -360,7 +360,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 <!--PDF檔案預覽區塊-->
 <div id="preview_pdf" class="preview_pdf">
 	<object id="pdf_obj" data="" type="application/pdf" width="95%" height="95%">
-		<p>Alternative text - include a link <a href="http://127.0.0.1/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/<?php echo $file['instance_file_name']?>">to the PDF!</a></p>
+		<p>Alternative text - include a link <a href="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/<?php echo $file['instance_file_name']?>">to the PDF!</a></p>
 	</object>
 </div>
 <div id="background_mask" class="background_mask" onclick="close_view_file(this.id)"></div>

@@ -199,21 +199,31 @@
 					<p class="form-control-static"><?php echo $project_basic_info['note'];?></p>
 				</div>
 			</div>
-		</div>					
-
+		</div>	
+		<div style="font-family:Adobe 繁黑體 Std;font-size:20px;padding-left:15px"><img style="padding-bottom:3px" width="30px" height="30px" src="<?php echo $img_location;?>/attach_file2.png"></img>&nbsp;附加檔案&nbsp;</div>
+		<!--<div style="margin-left:15px;width:98%;height:1px;background-color:#cccccc;text-align:center;">
+			<span style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em">
+				
+			</span>
+		</div>	-->	
+		
 			<?php
 			//if(count($project_attachfile) != 0)  //當有附加檔案才呈現 
 			//{
 			?>
 			<br>
-
+			
 <?php
 $i=0;
 foreach($project_filecategory as $cate)
 {
 ?>
-			<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer" onclick="show_file_detail('<?php echo "file_detail" . $i;?>','<?php echo "file_detail_icon" . $i;?>', '<?php echo $cate['dir'];?>', '<?php echo "filelist" . $i;?>')">
-				&nbsp;<img id="file_detail_icon<?php echo $i;?>" src="<?php echo $img_location;?>/sort-asc.png"></img><?php echo $cate['dir'];?>&nbsp;
+			<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('<?php echo "file_detail" . $i;?>','<?php echo "file_detail_icon" . $i;?>', '<?php echo $cate['dir'];?>', '<?php echo "filelist" . $i;?>')">
+				&nbsp;<img id="file_detail_icon<?php echo $i;?>" src="<?php echo $img_location;?>/sort-asc.png"></img>
+				<?php if ($cate['dir']==null) echo "檔案總覽";
+					  else echo $cate['dir'];	
+				?>
+				&nbsp;
 			</div>
 			<div id="file_detail<?php echo $i;?>" style="display:none;margin-left:15px;width:98%">
 		<?php

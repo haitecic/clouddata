@@ -23,7 +23,7 @@ class Data extends CI_Controller
 		//$this->session->set_userdata('project_fifth_item', $obj['column4']);
 		//$this->session->set_userdata('project_sixth_item', $obj['column5']);
 		//$this->session->set_userdata('project_seventh_item', $obj['column6']);
-		$this->account_management_model->set_project_column_setting(1, 1, $obj);//$user_id, $class, obj
+		$this->account_management_model->set_project_column_setting($this->session->userdata('user_id'), 1, $obj);//$user_id, $class, obj
 		array_push($columns, 'id');
 		for($i=0; $i<7;$i++)
 		{
@@ -177,7 +177,8 @@ class Data extends CI_Controller
     {	
         $obj = $_GET['Data'];
 		$columns = array();		
-		$this->account_management_model->set_news_column_setting(1, 2, $obj);
+		//$this->account_management_model->set_news_column_setting(1, 2, $obj);
+		$this->account_management_model->set_news_column_setting($this->session->userdata('user_id'), 2, $obj);
 		array_push($columns, 'id');
 		for($i=0; $i<4;$i++)
 		{
@@ -213,7 +214,7 @@ class Data extends CI_Controller
 		//$this->session->set_userdata('external_tech_fifth_item', $obj['column4']);
 		//$this->session->set_userdata('external_tech_sixth_item', $obj['column5']);
 		//$this->session->set_userdata('external_tech_seventh_item', $obj['column6']);
-		$this->account_management_model->set_external_tech_column_setting(1, 3, $obj);
+		$this->account_management_model->set_external_tech_column_setting($this->session->userdata('user_id'), 3, $obj);
 		array_push($columns, 'id');
 		for($i=0; $i<7;$i++)
 		{
@@ -247,7 +248,7 @@ class Data extends CI_Controller
 		//$this->session->set_userdata('manager_opinion_third_item', $obj['column2']);
 		//$this->session->set_userdata('manager_opinion_fourth_item', $obj['column3']);
 		//$this->session->set_userdata('manager_opinion_fifth_item', $obj['column4']);
-		$this->account_management_model->set_manager_opinion_column_setting(1, 4, $obj);
+		$this->account_management_model->set_manager_opinion_column_setting($this->session->userdata('user_id'), 4, $obj);
 		array_push($columns, 'id');
 		for($i=0; $i<5;$i++)
 		{
