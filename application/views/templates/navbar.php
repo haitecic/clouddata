@@ -60,6 +60,7 @@
 		<!--<div style="text-align:right;color:#ffffff;float:left;magin-left:100px" >使用者：<?php echo $username;?></div>-->
 		<!--<div style="text-align:right;margin-right:10px" ><span style="color:#ffffff">使用者：<?php echo $username;?></span><span><?php echo anchor("login", "登出",'style="margin-left:15px;color:#ffffff;"');?></span></div>-->
 	</div>	
+	<input id="server_ip_address" type="hidden" value="<?php echo $_SERVER['SERVER_ADDR'];?>"></input>
 </header>
 <script>
 function start_search()
@@ -200,7 +201,7 @@ function start_search()
 	load_external_tech_list(is_load, external_tech_start_record, external_tech_display_length, external_tech_order_column, external_tech_order_method, search_str, external_tech_display_columns);
 	load_manager_opinion_list(is_load, manager_opinion_start_record, manager_opinion_display_length, manager_opinion_order_column, manager_opinion_order_method, search_str, manager_opinion_display_columns);
 	load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);	
-	$("#loading").fadeOut(2000);
+	$("#loading").fadeOut(1500);
 }
 
 $("#search_bar").keypress(function(event){   
@@ -208,7 +209,6 @@ $("#search_bar").keypress(function(event){
 	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value; 	
     if (event.keyCode == 13) 
 	{		
-		
 		user_behavior_log('search_bar', null);
 		var is_load = true;
 		//project block setting
@@ -342,7 +342,7 @@ $("#search_bar").keypress(function(event){
 		load_external_tech_list(is_load, external_tech_start_record, external_tech_display_length, external_tech_order_column, external_tech_order_method, search_str, external_tech_display_columns);
 		load_manager_opinion_list(is_load, manager_opinion_start_record, manager_opinion_display_length, manager_opinion_order_column, manager_opinion_order_method, search_str, manager_opinion_display_columns);
 		load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);
-		$("#loading").fadeOut(2000);
+		$("#loading").fadeOut(1500);
 	}
 });
 </script>

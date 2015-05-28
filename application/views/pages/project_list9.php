@@ -365,9 +365,9 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 </div>
 <div id="background_mask" class="background_mask" onclick="close_view_file(this.id)"></div>
 <!--<div id="loading_background_mask" class="loading_background_mask"></div>-->
-
 <script>
-$(document).ready(function() {		
+$(document).ready(function() {
+	document.getElementById("loading").style.display = "block";
 	$('th select').width(function(){ //設定各select box的初始寬度, 依據選擇的option
 		$("#width_tmp").html($("option:selected", this).text());
 		$(this).width($("#width_tmp").width()+38);
@@ -516,7 +516,7 @@ $(document).ready(function() {
 	$("#news_list_content").fadeIn(300);
 	//$("#external_tech_list_content").fadeIn(300);
 	$("#manager_opinion_list_content").fadeIn(300);	
-	$("#loading").fadeOut(2000);	
+	$("#loading").fadeOut(1500);	
 });
 	
 
