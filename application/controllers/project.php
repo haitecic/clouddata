@@ -430,7 +430,8 @@ class Project extends CI_Controller{
 	public function file_category_detail()
 	{
 	$dir=$this->input->post('dir_name');
-	$result=$this->project_model->get_file_category_detail($dir);
+	$project_id = $this->input->post('id');
+	$result=$this->project_model->get_file_category_detail($dir, $project_id);
 	echo json_encode($result, JSON_NUMERIC_CHECK);
 	}
 	

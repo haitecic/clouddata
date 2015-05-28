@@ -344,7 +344,8 @@ function show_file_detail(file_detail_id, file_detail_icon_id, dir, list_id)
 	$.ajax({
 		url:request_url,
 		data:{
-			dir_name:dir
+			dir_name:dir,
+			id:<?php echo $project_basic_info['id'];?>
 		},
 		type:"POST",
 		dataType:"json",
