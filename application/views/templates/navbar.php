@@ -64,6 +64,7 @@
 <script>
 function start_search()
 {
+	document.getElementById("loading").style.display = "block";
 	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value;
 	user_behavior_log('search_bar', null);
 	var is_load = true;
@@ -199,9 +200,11 @@ function start_search()
 	load_external_tech_list(is_load, external_tech_start_record, external_tech_display_length, external_tech_order_column, external_tech_order_method, search_str, external_tech_display_columns);
 	load_manager_opinion_list(is_load, manager_opinion_start_record, manager_opinion_display_length, manager_opinion_order_column, manager_opinion_order_method, search_str, manager_opinion_display_columns);
 	load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);	
+	$("#loading").fadeOut(2000);
 }
 
 $("#search_bar").keypress(function(event){   
+	document.getElementById("loading").style.display = "block";
 	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value; 	
     if (event.keyCode == 13) 
 	{		

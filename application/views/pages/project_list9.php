@@ -191,7 +191,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 	</div>
 	<br/>	
 </div>
-<div id="loading" class="loading" style="background-repeat: no-repeat; position:absolute;left:47%;top:45%;width:50%;height:200px;z-index:2000000"></div>
+<div id="loading" class="loading" style="background-repeat: no-repeat; position:absolute;left:47%;top:45%;width:50%;height:200px;z-index:2000000;"></div>
 <div id="project_column_choose_menu" title="欄位設定" style="position:relative;left:0px;top:0px;z-index:100;display:none">
 	<div style="text-align:center">
 		<?php 		
