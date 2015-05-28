@@ -101,7 +101,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 			</div>
 		</div>
 	</div>
-	<div id="external_tech" class="row">
+	<div id="external_tech" class="row" style="display:none">
 		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
 			<div class="box-header" style="margin-left:-15px;margin-right:-15px;padding-top:7px;height:40px;font-size:14pt">
 				<div class="box-name" style="color:#3A5D91">
@@ -514,12 +514,8 @@ $(document).ready(function() {
 	//document.getElementById("loading").style.display = "none";
 	$("#project_list_content").fadeIn(300);
 	$("#news_list_content").fadeIn(300);
-	$("#external_tech_list_content").fadeIn(300);
-	$("#manager_opinion_list_content").fadeIn(300);
-	//document.getElementById("project_list_content").style.display="block";
-	//document.getElementById("news_list_content").style.display="block";
-	//document.getElementById("external_tech_list_content").style.display="block";
-	//document.getElementById("manager_opinion_list_content").style.display="block";
+	//$("#external_tech_list_content").fadeIn(300);
+	$("#manager_opinion_list_content").fadeIn(300);	
 	$("#loading").fadeOut(2000);	
 });
 	
