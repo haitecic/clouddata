@@ -204,11 +204,11 @@ function start_search()
 	$("#loading").fadeOut(1500);
 }
 
-$("#search_bar").keypress(function(event){   
-	document.getElementById("loading").style.display = "block";
+$("#search_bar").keypress(function(event){   	
 	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value; 	
     if (event.keyCode == 13) 
 	{		
+		document.getElementById("loading").style.display = "block";
 		user_behavior_log('search_bar', null);
 		var is_load = true;
 		//project block setting
