@@ -2,7 +2,7 @@
 <div id="main" class="container-fluid" style="background-color:#FBFBF0">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12" style="background-color:#ffffff; height:30px;background-color:#FBFBF0;"></div>
-		<div style="padding-left:24px"><span style="font-size:21pt;font-family:微軟正黑體"><?php echo $project_basic_info['idea_name'];?></span></div>
+		<div style="padding-left:24px"></input>&nbsp;<span style="font-size:21pt;font-family:微軟正黑體"><?php echo $project_basic_info['idea_name'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="check_box" style="cursor: pointer;color:green;width: 20px;height: 20px;margin-top:2px" type="checkbox" onclick="return check_project_data('<?php echo $project_basic_info['id']?>')" <?php if($project_basic_info['is_checked'] == 1){echo " checked";}?>/>&nbsp;<?php if($project_basic_info['is_checked'] == 1){echo '<label id="check_hint_message" for="check_box" style="color:blue;cursor:default;font-size:16pt;font-family:微軟正黑體">已確認(由 '.$checked_user['surname'].$checked_user['given_names'].' 於 '.$project_basic_info['checked_time'].' 確認)</label>';} else if($project_basic_info['is_checked'] == 2){ echo '<label id="check_hint_message" for="check_box" style="color:red;cursor: pointer;font-size:16pt;font-family:微軟正黑體">尚未確認</label>';}?><input id="is_checked" type="hidden" value="<?php echo $project_basic_info['is_checked'];?>"></input></div>
 		<br/>		
 		<!--<img src="<?php echo site_url()?>application/assets/data_img/<?php echo $project_img['name']?>" >-->
 		<!--<div class="btn btn-primary qq-upload-button" style="border-color:#6483E4;background-color:#6483E4;width: auto;text-align:right;float:left;margin-left:50px;margin-top:-40px;margin-bottom:10px;"><!--;right:575-->
@@ -267,21 +267,26 @@ foreach($project_filecategory as $cate)
 					<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
 					<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
 				</div>
-				<div id="filelist<?php echo $i;?>">我想要開車</div>
+				<div id="filelist<?php echo $i;?>"></div>
 				<br>
 			</div>
 			<?php
-$i=$i+1;
-}
+			$i=$i+1;
+			}
+			if($project_basic_info['is_checked'] == 2)
+			{
 			?>
 			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
 			<div style="margin-left:15px;font-family:微軟正黑體;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">請拖曳檔案到此(<a href="#" id="browse_file" onclick="browse_file()">瀏覽</a>檔案)</div>
-				<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
-					<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
-					<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
-					<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
-					<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
-				</div>			
+			<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
+				<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
+				<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
+				<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
+				<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
+			</div>
+			<?php
+			}
+			?>
 			<div id="status1"></div>
 			<input type="hidden" id="file_count" name="file_count" value="0"></input> <!--計算上傳的檔案數量-->
 			<input type="hidden" id="file_number" name="file_number" value="0"></input> <!--計算上傳的檔案編號-->
@@ -290,9 +295,16 @@ $i=$i+1;
 			<input type="hidden" id="upload_file_dir" name="upload_file_dir"></input> <!--伺服器暫存使用者上傳檔案的資料夾-->
 			<input type="hidden" id="current_user" name="current_user" value="<?php echo $project_basic_info['current_user'];?>"></input> <!--目前正在編輯的使用者-->
 			<input type="hidden" id="login_user" name="login_user" value="<?php echo $username;?>"></input> <!--使用者(自己)-->
-			<div class="btn btn-primary qq-upload-button" style="width: auto;align:center;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username) { echo "display:none";}?>">
+			<?php
+			if($project_basic_info['is_checked'] == 2)
+			{
+			?>
+			<div id="submit_btn_block" class="btn btn-primary qq-upload-button" style="width: auto;align:center;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username) { echo "display:none";}?>">
 				<div type="submit" id="submit_btn" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i>確認送出</div>
-			</div>	
+			</div>
+			<?php
+			}
+			?>
 		</form>		
 		<!--End Content-->
 	</div>

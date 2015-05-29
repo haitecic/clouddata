@@ -957,7 +957,17 @@ class Project_model extends CI_Model{
 		$query = $this->db->get();	
 		$result = $query->row_array();	
 		return $result;			 
-	}	
+	}
+	
+	public function get_project_checked_user($user_id) 
+	{
+		$this->db->select('*');
+		$this->db->from('login_account');	
+		$this->db->where('id', $user_id);
+		$query = $this->db->get();	
+		$result = $query->row_array();	
+		return $result;			 
+	}
 	
 	/**
 	get_specific_project_attachfile($project_id)：取得特定專案的附加檔案資料
@@ -1191,6 +1201,15 @@ class Project_model extends CI_Model{
 			'update_datetime'=>date('Y-m-d H:i:s'));
 		return $this->db->insert('institute', $data);	
 	}	
+	
+	public function set_project_data_checked($project_id, $user_id, $checked_time)
+	{
+		$data = array('is_checked' => 1,
+			'checked_user' => $user_id,
+			'checked_time' => $checked_time);
+		$this->db->where('id', $project_id);		
+		return $this->db->update('project_all', $data);
+	}
 	
 	/**
 	update_institute()：更新法人資料
@@ -1489,11 +1508,11 @@ class Project_model extends CI_Model{
 						case 'id':	
 							if($project['is_blocked'] == 1)	
 							{							
-								$row[$i] = "<input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/lock3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/>";
+								$row[$i] = "<div align=\"center\"><input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/lock3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/></div>";
 							}
 							else if($project['is_blocked'] == 2)
 							{
-								$row[$i] = "<input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/edit3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/>";
+								$row[$i] = "<div align=\"center\"><input id=\"row_project_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/edit3.png\" alt=\"edit\" onclick=\"edit_project($project[$col])\"/><input type=\"hidden\" id=\"row_project_hidden_$row_index\" value=\"$project[$col]\"/></div>";
 							}
 							break;
 						case 'idea_name':						
@@ -1509,147 +1528,7 @@ class Project_model extends CI_Model{
             $output['data'][] = $row;			
         }
         return json_encode($output);
-	}
-	
-	public function get_news_datatable_record2($parameter, $DB_table, $columns)
-	{
-		if(isset($parameter['search']) && !empty($parameter['search']))
-        {
-			$search_content = $parameter['search'];
-			//分析搜尋框輸入的內容
-			$rule = "WHERE ";	
-			$search_word = explode(' ', $search_content);
-			for($i=0;$i<count($search_word);$i++)
-			{
-				$rule = $rule."(LOWER(`title`) LIKE LOWER('%".$search_word[$i]."%') OR 				
-				LOWER(`category`) LIKE LOWER('%".$search_word[$i]."%') OR
-				LOWER(`description`) LIKE LOWER('%".$search_word[$i]."%'))"; // OR LOWER(`pub_date`) LIKE BINARY LOWER('%".$search_word[$i]."%')
-				if(($i+1) != count($search_word))
-				{
-					$rule = $rule." AND ";
-				}
-			}	
-		}
-		else
-		{
-			$rule = "";
-		}
-		$order_column = $columns[intval($this->db->escape_str($parameter['order_column']))];
-		$order_method = $this->db->escape_str($parameter['order_method']);
-		$query_string = 'SELECT SQL_CALC_FOUND_ROWS * FROM `news` '.$rule.' ORDER BY '. $order_column .' '. $order_method .' LIMIT '. $parameter['start_record'] .','.$parameter['display_length'];  //撈出news資料
-		$rResult = $this->db->query($query_string);		
-		$query = $this->db->query('SELECT FOUND_ROWS() AS `found_rows`');
-		$iFilteredTotal = $query->row()->found_rows;       
-        $iTotal = $this->db->count_all($DB_table);		
-		$output = array(
-            'draw' => intval($parameter['draw']),
-            'recordsTotal' => intval($iTotal),
-            'recordsFiltered' => intval($iFilteredTotal),
-            'data' => array()
-        );
-		$a = 0;
-		$row_index = 0;
-		$news_column_mapping = array("title"=>"標題", "link"=>"連結", "category"=>"類別", "description"=>"內容摘要", "pub_date"=>"發布日期");
-		foreach($rResult->result_array() as $project)
-        {
-			$key_sentence = "";  //存放關鍵句子
-			$column = "";  //存放關鍵句子所在的欄位		
-			$search_result_hint = "";  //查詢結果提示字串			
-			if(isset($parameter['search']) && !empty($parameter['search']))
-			{
-				$search_content = $parameter['search'];
-				$search_word = explode(' ', $search_content);
-				$temp = array();
-				$temp_score = array();
-				$all_content = "";
-				foreach($project as $index => $content)
-				{
-					$all_content = $all_content.$content.',';					
-				}
-				$all_content = str_replace('。','.',$all_content);
-				$all_content = str_replace('，',',',$all_content);
-				$all_content = str_replace('；',';',$all_content);
-				$temp = preg_split("/[?!,-.;]+/",$all_content);
-				foreach($temp as $index=>$sentence)
-				{
-					$score = 0;
-					for($j=0;$j<count($search_word);$j++)
-					{
-						if(stripos($sentence, $search_word[$j]) !== false)
-						{
-							$score = $score + substr_count(strtoupper($sentence), strtoupper($search_word[$j]));
-						}
-					}
-					array_push($temp_score, (int)$score);					
-				}	
-				$first_score = 0;
-				$sen = 0;
-				foreach($temp as $index=>$sentence)
-				{		
-					if($temp_score[$index] > $first_score)  //$first_score
-					{
-						$sen = $sentence;
-						$first_score = $temp_score[$index];
-					}					
-				}
-				$key_sentence = $sen;
-				foreach($project as $index => $content)
-				{					
-					if(stripos($content, $key_sentence) !== false)
-					{		
-						/*if($index == "file_content")  //假如關鍵句在附加檔案中
-						{
-							$column = '(附加檔案)'.$project['file_name'];
-						}
-						else
-						{*/
-							//$column = $news_column_mapping[$index];
-							$column = $index;
-						//}
-						break;
-					}
-				}
-				if(strlen(($column.':'.$key_sentence)) > 30) //65
-				{
-					$search_result_hint = "<div id='$a' onmouseover='show_more_content(this)' onmouseout='show_more_content(this)' style='font-size:10pt;	text-overflow:ellipsis;	width:100%; overflow:hidden; white-space:nowrap;'>$column : $key_sentence</div>";
-					$a++;
-				}
-				else
-				{
-					$search_result_hint = "<div style='font-size:10pt'>$column : $key_sentence</div>";
-				}				
-			}			  
-            $row = array();			
-			//$row['DT_RowId'] = 'row_rows_'.$row_index;
-            $i=0;
-            foreach($columns as $col)
-            {					
-				if($col == "null")
-				{
-					$row[$i] = "";
-				}
-				else
-				{
-					$row[$i] = $project[$col];
-					/*switch($col)
-					{
-						case 'id':	
-							$row[$i] = "<input id=\"row_news_img_$row_index\" style=\"width:30px;height:24px\" type=\"image\" src=\"./application/assets/img/link.png\" alt=\"link\" onclick=\"link_to_referece('$project[link]')\"/>"; //$project['link']
-							break;
-						case 'title':						
-							$row[$i] = '<div style="color:#23459F">'.$project[$col].'</div>'.$search_result_hint;							
-							break;
-						default:
-							$row[$i] = $project[$col];
-					}*/
-				}
-				$i++;
-            }
-			$row_index++;
-            $output['data'][] = $row;			
-        }
-        return json_encode($output);
-	}
+	}	
 	
 	public function get_news_datatable_record($parameter, $DB_table, $columns)
 	{
@@ -1765,7 +1644,7 @@ class Project_model extends CI_Model{
 					switch($col)
 					{
 						case 'id':	
-							$row[$i] = "<input id=\"row_news_img_$row_index\" style=\"width:27px;height:24px\" type=\"image\" src=\"./application/assets/img/link.png\" alt=\"edit\" onclick=\"link_to_reference('$project[link]')\"/>";
+							$row[$i] = "<div align=\"center\"><input id=\"row_news_img_$row_index\" style=\"width:27px;height:24px\" type=\"image\" src=\"./application/assets/img/link.png\" alt=\"edit\" onclick=\"link_to_reference('$project[link]')\"/></div>";
 							break;
 						case 'title':						
 							$row[$i] = '<div style="color:#23459F">'.$project[$col].'</div>'.$search_result_hint;							
@@ -2079,7 +1958,7 @@ class Project_model extends CI_Model{
 					switch($col)
 					{
 						case 'id':	
-							$row[$i] = "<input id=\"row_manager_opinion_img_$row_index\" style=\"width:27px;height:24px\" type=\"image\" src=\"./application/assets/img/preview.png\" alt=\"edit\" onclick=\"view_file('$project[$col]', 'row_manager_opinion_img_".$row_index."')\"/><input type=\"hidden\" id=\"row_manager_opinion_hidden_$row_index\" value=\"$project[$col]\"/>";
+							$row[$i] = "<div align=\"center\"><input id=\"row_manager_opinion_img_$row_index\" style=\"width:27px;height:24px\" type=\"image\" src=\"./application/assets/img/preview.png\" alt=\"edit\" onclick=\"view_file('$project[$col]', 'row_manager_opinion_img_".$row_index."')\"/><input type=\"hidden\" id=\"row_manager_opinion_hidden_$row_index\" value=\"$project[$col]\"/></div>";
 							break;
 						case 'topic':						
 							$row[$i] = '<div style="color:#23459F">'.$project[$col].'</div>'.$search_result_hint;							
