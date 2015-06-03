@@ -266,12 +266,13 @@ foreach($project_filecategory as $cate)
 			?>
 			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
 			<div style="margin-left:15px;font-family:微軟正黑體;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>" id="dragandrophandler">請拖曳檔案到此(<a href="#" id="browse_file" onclick="browse_file()">瀏覽</a>檔案)</div>
-			<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
+			<div id="file_list"></div>
+			<!--<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
 				<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
 				<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
 				<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
 				<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
-			</div>
+			</div>-->
 			<?php
 			}
 			?>
@@ -461,14 +462,7 @@ function change_year_border_display_onblur(object, event)
 $(document).ready(function()
 {		
 	function project_set_unblocked()
-	{
-		//var txt;
-		//var r = confirm("Press a button!");
-		//if (r == true) {
-		//	txt = "You pressed OK!";
-		//} else {
-		//	txt = "You pressed Cancel!";
-		//}		
+	{	
 		var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_set_unblocked";
 		$.ajax({
 			url:request_url,  
@@ -479,8 +473,6 @@ $(document).ready(function()
 			dataType:"text", //回傳的資料型態
 			//Code to run if the request succeeds. The response is passed to the function
 			success:function(str){
-				//alert(str);	
-//  str.title				
 			},
 			async:false,
 			//Code to run if the request fails; the raw request and status codes are passed to the function
@@ -670,9 +662,18 @@ $(document).ready(function()
  
 		$(this).css('border', '2px dotted #0B85A1');
 		e.preventDefault();
-		var files = e.originalEvent.dataTransfer.files;  //取得drop的檔案
+		//var files = e.originalEvent.dataTransfer.files;  //取得drop的檔案
+		var items = e.originalEvent.dataTransfer.items;  //取得drop的檔案
 		user_behavior_log(this.id, null);	  //temp_comment	
-		handleFileUpload(files, file_list, upload_file_dir);
+		//handleFileUpload(files, file_list, upload_file_dir);
+		for (var i = 0; i < items.length; i++)  //處理使用者一次拖曳的一個或多個檔案
+		{
+			var entry = items[i].webkitGetAsEntry();
+			if (entry) {
+				handleFileUpload(entry, null, obj, upload_file_dir);
+			}		
+		}
+		//handleFileUpload2(items, file_list, upload_file_dir);
 	});
 	$(document).on('dragenter', function (e) 
 	{
@@ -710,11 +711,11 @@ function delete_file(id)
 //1.Read the file contents using HTML5 FormData() when the files are dropped.
 var fd = new FormData('project_create_form');
 //var status_arr = []; 
-function handleFileUpload(files, obj, upload_file_dir)  //第一個參數為拖曳的檔案; 第二個參數為拖曳檔案放置的方框區塊物件
+/*function handleFileUpload(files, obj, upload_file_dir)  //第一個參數為拖曳的檔案; 第二個參數為拖曳檔案放置的方框區塊物件
 {
 	for (var i = 0; i < files.length; i++)  //處理使用者一次拖曳的一個或多個檔案
-	{
-        fd.append('file', files[i]);
+	{	
+		fd.append('file', files[i]);
 		fd.append('upload_file_dir', upload_file_dir);
 		//在表單中記錄上傳的檔案名稱
 		var input_file = document.createElement("input");
@@ -722,19 +723,102 @@ function handleFileUpload(files, obj, upload_file_dir)  //第一個參數為拖�
 		input_file.setAttribute("id", "upload_file_"+rowCount);
 		input_file.setAttribute("name", "upload_file_"+rowCount);
 		input_file.setAttribute("value", files[i].name);
-		//append to form element that you want .
 		document.getElementById("project_create_form").appendChild(input_file);	
-		//alert(document.getElementById("upload_file_"+rowCount).value+' '+rowCount);		
 		var status = new createStatusbar(obj);  //Using this we can set progress.
         status.setFileInfo(files[i].name, files[i].size, files[i].type);
 		//status_arr.push(status);
         sendFileToServer(fd, status);
 	}
+}*/
+
+function handleFileUpload(item, path, obj, upload_file_dir)  //第一個參數為拖曳的檔案; 第二個參數為拖曳檔案放置的方框區塊物件
+{	
+	path = path || "";
+	if (item.isFile) 
+	{
+		// Get file
+		item.file(function(file) {			
+			fd.append('file', file);
+			fd.append('upload_file_dir', upload_file_dir);
+			//在表單中記錄上傳的檔案名稱
+			var input_file1 = document.createElement("input");
+			input_file1.setAttribute("type", "hidden");
+			input_file1.setAttribute("id", "upload_file_"+rowCount);
+			input_file1.setAttribute("name", "upload_file_"+rowCount);
+			input_file1.setAttribute("value", file.name);			
+			document.getElementById("project_create_form").appendChild(input_file1);
+			var input_file2 = document.createElement("input");
+			input_file2.setAttribute("type", "hidden");
+			input_file2.setAttribute("id", "folder_"+rowCount);
+			input_file2.setAttribute("name", "folder_"+rowCount);
+			input_file2.setAttribute("value", path.substring('/', path.length - 1));
+			document.getElementById("project_create_form").appendChild(input_file2);			
+			var status = new createStatusbar(obj);  //set progress bar.
+			status.setFileInfo(file.name, path.substring('/', path.length - 1), file.size, file.type);
+			sendFileToServer(fd, status);
+		});
+	}
+	else if (item.isDirectory) 
+	{
+		// Get folder contents
+		var dirReader = item.createReader();
+		dirReader.readEntries(function(entries) {
+			for (var i=0; i<entries.length; i++) {
+				handleFileUpload(entries[i], path + item.name + "/", obj, upload_file_dir);
+			}
+		});
+	}
 }
+
+/*function traverseFileTree(item, path, obj, upload_file_dir) {
+	path = path || "";
+	if (item.isFile) 
+	{
+		// Get file
+		item.file(function(file) {
+			console.log("File:", path + file.name);
+			fd.append('file', file);
+			fd.append('upload_file_dir', upload_file_dir);
+			//在表單中記錄上傳的檔案名稱
+			var input_file = document.createElement("input");
+			input_file.setAttribute("type", "hidden");
+			input_file.setAttribute("id", "upload_file_"+rowCount);
+			input_file.setAttribute("name", "upload_file_"+rowCount);
+			input_file.setAttribute("value", file.name);
+			document.getElementById("project_create_form").appendChild(input_file);		
+			var status = new createStatusbar(obj);  //set progress bar.
+			status.setFileInfo(file.name, path.substring('/', path.length - 1), file.size, file.type);
+			sendFileToServer(fd, status);
+		});
+	}
+	else if (item.isDirectory) 
+	{
+		// Get folder contents
+		var dirReader = item.createReader();
+		dirReader.readEntries(function(entries) {
+			for (var i=0; i<entries.length; i++) {
+				traverseFileTree(entries[i], path + item.name + "/", obj, upload_file_dir);
+			}
+		});
+	}
+}*/
+
 //2.Using this we can set progress.
 var rowCount=0;
 function createStatusbar(obj)
 {	
+	if(rowCount == 0)
+	{
+		this.statusbar = $("<div style='width:98%;margin-left:15px;font-size:15px;font-family:微軟正黑體;max-height:70px;min-height:40px;padding-top:10px'></div>");  //產生附加檔案欄位標題
+		/*將檔案資訊呈現所需的空間依依加進狀態列中(由左至右依序為：檔案名稱、檔案大小、檔案進度條、「abort」按鈕)*/
+		this.filename = $("<div class='filename' style='text-align:center;float:left;width:30%'>檔案名稱</div>").appendTo(this.statusbar);
+		this.folder = $("<div style='text-align:center;float:left;width:22%'>資料夾</div>").appendTo(this.statusbar);
+		this.size = $("<div style='float:left;text-align:center;width:9%'>檔案大小</div>").appendTo(this.statusbar);
+		this.progressBar = $("<div style='text-align:center;float:left;width:18%'><div>上傳進度</div></div>").appendTo(this.statusbar);
+		this.create_time = $("<div style='text-align:center;float:left;width:10%'>上傳時間</div>").appendTo(this.statusbar);
+		this.delete = $("<div style='width:10%;float:left'></div>").appendTo(this.statusbar);
+		obj.after(this.statusbar);
+	}
 	var file_count = document.getElementById("file_count").value;
 	document.getElementById("file_count").value = parseInt(file_count)+1;
 	var file_number = document.getElementById("file_number").value;
@@ -753,17 +837,19 @@ function createStatusbar(obj)
 	//this.is_send = $("<input type='hidden' id='is_send_"+(rowCount-1)+"' value='false'></input>").appendTo(this.statusbar);
     //this.file_number = $("<input type='hidden' name='file_number' value='"+(rowCount-1)+"'></input>").appendTo(this.statusbar);
 	this.file_number = $("<div style='display:none'>"+(rowCount-1)+"</div>").appendTo(this.statusbar);*/
-	this.statusbar = $("<div class='statusbar "+row+"' style='width:98%;margin-left:15px'></div>");  //先產生一個狀態列(row)
+	this.statusbar = $("<div class='statusbar "+row+"' style='width:98%;margin-left:15px;padding-left:0px'></div>");  //先產生一個狀態列(row)
 	/*將檔案資訊呈現所需的空間依依加進狀態列中(由左至右依序為：檔案名稱、檔案大小、檔案進度條、「abort」按鈕)*/
-	this.filename = $("<div class='filename' style='margin-left:100px;width:422px'></div>").appendTo(this.statusbar);
-    this.size = $("<div class='filesize' style='margin-left:45px;width:128px'></div>").appendTo(this.statusbar);
-    this.progressBar = $("<div class='progressBar' style='width:200px'><div></div></div>").appendTo(this.statusbar);
-    this.create_time = $("<span style='padding-left:80px;width:150px'></span>").appendTo(this.statusbar);
+	this.filename = $("<div class='filename' style=';float:left;width:30%;margin-left:2%'></div>").appendTo(this.statusbar);
+	this.folder = $("<div style='float:left;min-width:20%;width:20%;margin-left:1%'></div>").appendTo(this.statusbar);
+    this.size = $("<div class='filesize' style='text-align:center;width:10%;margin-left:1%'></div>").appendTo(this.statusbar);
+    this.progressBar = $("<div class='progressBar' style='width:15%;margin-left:1%'><div></div></div>").appendTo(this.statusbar);
+    this.create_time = $("<span style='width:12%;margin-left:1%'></span>").appendTo(this.statusbar);
 	/*this.abort = $("<div id='"+(rowCount-1)+"' class='abort' style='margin-left:102px'>Delete</div>").appendTo(this.statusbar);*/
-	this.abort = $("<div id='"+(rowCount-1)+"' class='abort' style='margin-left:50px;'>Delete</div>").appendTo(this.statusbar);
+	this.abort = $("<div id='"+(rowCount-1)+"' class='abort' style='margin-left:2%'>Delete</div>").appendTo(this.statusbar);
 	this.is_send = $("<div id='is_send_"+(rowCount-1)+"' style='display:none'>false</div>").appendTo(this.statusbar);
 	this.file_number = $("<div style='display:none'>"+(rowCount-1)+"</div>").appendTo(this.statusbar);
-	obj.after(this.statusbar);	
+	//obj.after(this.statusbar);	
+	$("#file_list").after(this.statusbar);
 	/*
 	<div class="file_preview"><img id="preview_file_icon_<?php echo $file['id'];?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/preview.png" alt="preview" onclick="preview_file('<?php echo $preview_file_path;?>', this.id)"></img></div>
 					<div class="file_download"><a href="http://127.0.0.1/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/<?php echo $file['instance_file_name']?>" download="<?php echo $file['file_name']?>"><img id="download_file_icon_<?php echo $file['id']?>" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/download.png" alt="download" onclick="user_behavior_log(this.id, '<?php echo $download_file_path;?>')"></img></a></div>
@@ -775,7 +861,7 @@ function createStatusbar(obj)
 					<div id="file_<?php echo $i;?>" class="abort" onclick="delete_file(<?php echo $i;?>)" style="<?php echo "display:none";//if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username) { echo "display:none";}?>">Delete</div>
 	*/
 	//在status區塊中顯示上傳檔案的檔名和大小	
-    this.setFileInfo = function(name, size, type)
+    this.setFileInfo = function(name, folder, size, type)
     {
         var sizeStr = "";
         var sizeKB = size/1024;
@@ -790,7 +876,15 @@ function createStatusbar(obj)
         }
  
         this.filename.html(name);  //指定filename區塊的呈現內容
-        this.size.html(sizeStr);  //指定size區塊的呈現內容
+		if(folder != "")
+		{
+			this.folder.html(folder);  //指定folder區塊的呈現內容
+        }
+		else
+		{
+			this.folder.html("/");
+		}
+		this.size.html(sizeStr);  //指定size區塊的呈現內容
     }
     this.setProgress = function(progress)
     {       		
@@ -812,8 +906,7 @@ function createStatusbar(obj)
     }
     this.setAbort = function(jqxhr)
     {
-        var sb = this.statusbar;		
-		//alert(this.file_number.html());
+        var sb = this.statusbar;
         this.abort.click(function()
         {		
 			var is_send = document.getElementById("is_send_"+this.id).innerHTML;			
@@ -835,9 +928,6 @@ function createStatusbar(obj)
 //3.Send FormData() to Server using jQuery AJAX API
 function sendFileToServer(formData, status)
 {	
-	//var uploadURL = "http://10.204.96.250/project_manager/project_file_upload";
-	//var uploadURL = "http://10.204.96.233/project_manager/project_file_upload";
-	//var uploadURL = "http://localhost/project_management/project_file_upload";
 	var uploadURL = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_file_upload";
     var extraData ={};	//Extra Data.
     var jqXHR=$.ajax({  //Perform an asynchronous HTTP (Ajax) request.
@@ -866,8 +956,7 @@ function sendFileToServer(formData, status)
         cache: false,
         data: formData,  //Data to be sent to the server.
         success: function(data){  //A function to be called if the request succeeds.
-			//alert("hello");
-		   //status.setProgress(100);
+			//status.setProgress(100);
             //$("#status1").append("File upload Done<br>"); 						
         }
     });

@@ -1069,6 +1069,7 @@ class Project_model extends CI_Model{
 				$ext = end(explode('.', $ori_file_name));	
 				$des_file_name = $project_id.'_'.time().$i.'.'.$ext;
 				$file_completename = $project_id.'_'.time().$i;//檔案名，不含附檔名
+				$folder = $this->input->post('folder_'.$i);
 				rename(iconv("UTF-8","BIG5//IGNORE",$ori_file_dir . $ori_file_name), iconv("UTF-8","BIG5//IGNORE",$new_file_dir . $des_file_name));  //move the file to the folder named by project ID
 				//Get the content of the upload file
 				$file_content = "";	
@@ -1098,6 +1099,7 @@ class Project_model extends CI_Model{
 				$project_file = array('project_id'=>$project_id,
 				'file_name'=>$ori_file_name,
 				'instance_file_name'=>$des_file_name,
+				'dir'=>$folder,
 				'file_content'=>$file_content);
 				$this->db->insert('project_attachment', $project_file);
 			}
