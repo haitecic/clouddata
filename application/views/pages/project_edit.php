@@ -20,28 +20,18 @@
 		echo form_open('project_edit/'. $project_basic_info['id'], $attributes);
 		?>
 		<div class="form-group">
-		<?php
-		for ($i=0;$i<count($project_img) ;$i++)
-		{
-			//echo "<label class='col-sm-1 col-sm-offset-1 control-label'><img src='" . site_url() . "application/assets/data_img/" . $project_img[$i]['name'] . "' ></label>";
-			?>
-			<div class="col-sm-3 col-sm-offset-1">
-				<img class="thumbnail" src="<?php echo site_url()."application/assets/data_img/".$project_img[$i]['name'];?>" alt="示意圖1">
-			</div>
+			<div class="fotorama" align="center" data-nav="thumbs" data-width="40%" data-height="30%" data-allowfullscreen="true">
 			<?php
-			//echo "<label class='col-sm-1 col-sm-offset-1 control-label'><img src='" . site_url() . "application/assets/data_img/" . $project_img[$i]['name'] . "' ></label>";
-			//echo "<div class='col-xs-12 col-sm-12' style='height:5px; '></div>";
-			//echo "<div style='float:left;margin-left:130px; font-size:17px;'>" . $project_img[$i]['description'] . "</div>";
-			//echo "<div class='col-xs-12 col-sm-12' style='height:5px; '></div>";
-		}
-		?>
+			for ($i=0;$i<count($project_img);$i++)
+			{
+			?>
+				<img class="thumbnail" src="<?php echo site_url()."application/assets/data_img/".$project_img[$i]['name'];?>" alt="示意圖<?php echo $i;?>">
+			<?php
+			}			
+			?>
+			</div>
 		</div>
-		<!--<div class="form-group">
-			<label class="col-sm-1  col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><span style="color:red;font-size:13pt"></span>提案編號</label>
-			<div class="col-sm-4">-->
-				<input readonly type="hidden" value="<?php echo $project_basic_info['idea_id']?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" id="idea_id" name="idea_id" class="form-control" placeholder="創意提案編號" data-toggle="tooltip" data-placement="bottom" title="創意提案編號" style="font-size:17px; font-family:微軟正黑體;">  
-			<!--</div>
-		</div>-->
+		<input readonly type="hidden" value="<?php echo $project_basic_info['idea_id']?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" id="idea_id" name="idea_id" class="form-control" placeholder="創意提案編號" data-toggle="tooltip" data-placement="bottom" title="創意提案編號" style="font-size:17px; font-family:微軟正黑體;">  
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">情境說明</label>
 			<div class="col-sm-10">
@@ -262,10 +252,8 @@ foreach($project_filecategory as $cate)
 			}*/			
 		?>
 				<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
-					<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
-					<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
-					<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
-					<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
+					<span class="filename" style="text-align:center;width:68%">檔案名稱</span>
+					<span align="center" style="padding-left:200px;text-align:center;width:10%">上傳時間</span>
 				</div>
 				<div id="filelist<?php echo $i;?>"></div>
 				<br>
@@ -364,31 +352,29 @@ function show_file_detail(file_detail_id, file_detail_icon_id, dir, list_id)
 		async:false,
 		success:function(str)
 		{
-		//alert(str);
-		var n;
-		var files_string='';
-		
-		for(n=0; n<str.number; n++)
+			var n;
+			var files_string='';
+			for(n=0; n<str.number; n++)
 			{
-			var preview_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' +'/project_management/application/assets/project_attachment/' + '<?php echo $project_basic_info['id'];?>' + '_convert/' + str.list[n].convert_to_pdf;
-		    var download_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' + '/project_management/application/assets/project_attachment/'+ '<?php echo $project_basic_info['id'];?>' + '/' + str.list[n].instance_file_name;
-			if(str.list[n].instance_file_name.split(".")[1]=='pdf')
-			{
-			var preview_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' +'/project_management/application/assets/project_attachment/' + '<?php echo $project_basic_info['id'];?>' + '/' + str.list[n].convert_to_pdf;;
-			}
-			files_string = files_string + 
+				var preview_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' +'/project_management/application/assets/project_attachment/' + '<?php echo $project_basic_info['id'];?>' + '_convert/' + str.list[n].convert_to_pdf;
+				var download_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' + '/project_management/application/assets/project_attachment/'+ '<?php echo $project_basic_info['id'];?>' + '/' + str.list[n].instance_file_name;
+				if(str.list[n].instance_file_name.split(".")[1]=='pdf')
+				{
+					var preview_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' +'/project_management/application/assets/project_attachment/' + '<?php echo $project_basic_info['id'];?>' + '/' + str.list[n].convert_to_pdf;;
+				}
+				files_string = files_string + 
 					'<div id="origin_file_' + n + '" class="statusbar" style="width:98%;margin-left:15px;">'+
 					'<div class="file_preview"><img id="preview_file_icon_' + str.list[n].id + '" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/preview.png" alt="preview" onclick="preview_file(' + "'" + preview_file_path + "'" +', this.id)"></img></div>' +
 					'<div class="file_download"><a href="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/' + str.list[n].instance_file_name + '" download="' + str.list[n].instance_file_name + '"><img id="download_file_icon_'+ str.list[n].id +'" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/download.png" alt="download" onclick="user_behavior_log(this.id, ' + "'" + download_file_path + "'" + ')"></img></a></div>' +
-					'<div class="filename">' + str.list[n].file_name + '</div>'+
-					'<div class="filesize" style="padding-left:30px;width:150px"></div>' +
-					'<div class="progressBar" style="margin-left:10px;width:200px;background-color:#0BA1B5"><div style="padding-left:160px;text-align:right">100%</div></div>'+
-					'<span style="margin-left:75px;width:100px">' + str.list[n].create_time + '</span>'+
+					'<div class="filename" style="width:70%">' + str.list[n].file_name + '</div>'+
+					'<span style="margin-left:75px;width:20%">' + str.list[n].create_time + '</span>'+
 					'</div>';
+					//'<div class="filesize" style="padding-left:30px;width:150px"></div>' +
+					//'<div class="progressBar" style="margin-left:10px;width:200px;background-color:#0BA1B5"><div style="padding-left:160px;text-align:right">100%</div></div>'+
 			}
-				document.getElementById(list_id).innerHTML=files_string;
+			document.getElementById(list_id).innerHTML = files_string;
 		}
-		});
+	});
 }
 function show_project_detail()
 {
