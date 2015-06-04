@@ -401,7 +401,9 @@ class Project extends CI_Controller{
 			}
 			else
 			{
-				move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir.'/'. iconv("UTF-8","BIG5", $_FILES["file"]["name"]));
+				$temp_file_name = $_REQUEST['temp_file_name'];
+				//move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir.'/'. iconv("UTF-8","BIG5", $_FILES["file"]["name"]));
+				move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir.'/'. $temp_file_name);
 				//echo "Uploaded File :".$_FILES["file"]["name"];
 			}
 		}
@@ -429,10 +431,10 @@ class Project extends CI_Controller{
 	
 	public function file_category_detail()
 	{
-	$dir=$this->input->post('dir_name');
-	$project_id = $this->input->post('id');
-	$result=$this->project_model->get_file_category_detail($dir, $project_id);
-	echo json_encode($result, JSON_NUMERIC_CHECK);
+		$dir=$this->input->post('dir_name');
+		$project_id = $this->input->post('id');
+		$result=$this->project_model->get_file_category_detail($dir, $project_id);
+		echo json_encode($result, JSON_NUMERIC_CHECK);
 	}
 	
 	/**
