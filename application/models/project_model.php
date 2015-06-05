@@ -984,7 +984,7 @@ class Project_model extends CI_Model{
 		return $result;			 
 	}
 	//取得資料分類
-		public function get_category_project_attachfile($project_id) 
+	public function get_category_project_attachfile($project_id) 
 	{
 		$this->db->select('*');
 		$this->db->from('project_attachment');		

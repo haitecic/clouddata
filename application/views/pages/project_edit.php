@@ -193,28 +193,44 @@
 		<!--Start:附加檔案區塊-->
 		<div style="font-family:Adobe 繁黑體 Std;font-size:20px;padding-left:15px"><img style="padding-bottom:3px" width="30px" height="30px" src="<?php echo $img_location;?>/attach_file2.png"></img>&nbsp;附加檔案&nbsp;</div>
 			<br>			
-			<?php
-			$i=0;
-			foreach($project_filecategory as $cate)
+			<?php			
+			if($project_file_category)
 			{
 			?>
-			<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('<?php echo "file_detail" . $i;?>','<?php echo "file_detail_icon" . $i;?>', '<?php echo $cate['dir'];?>', '<?php echo "filelist" . $i;?>')">
-				&nbsp;<img id="file_detail_icon<?php echo $i;?>" src="<?php echo $img_location;?>/sort-asc.png"></img>
-				<?php if ($cate['dir']==null) echo "檔案總覽";
-					else echo $cate['dir'];	
-				?>
-				&nbsp;
-			</div>
-			<div id="file_detail<?php echo $i;?>" style="display:none;margin-left:15px;width:98%">
-				<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
-					<span class="filename" style="text-align:center;width:68%">檔案名稱</span>
-					<span align="center" style="padding-left:200px;text-align:center;width:10%">上傳時間</span>
+				<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('file_detail0','file_detail_icon0', '', 'filelist0')">
+					&nbsp;<img id="file_detail_icon0" src="<?php echo $img_location;?>/sort-asc.png"></img>檔案總覽&nbsp;
 				</div>
-				<div id="filelist<?php echo $i;?>"></div>
-				<br>
-			</div>
+				<div id="file_detail0" style="display:none;margin-left:15px;width:98%">
+					<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
+						<span class="filename" style="text-align:center;width:68%">檔案名稱</span>
+						<span align="center" style="padding-left:200px;text-align:center;width:10%">上傳時間</span>
+					</div>
+					<div id="filelist0"></div>
+					<br/>
+				</div>
 			<?php
-			$i=$i+1;
+				$i=1;			
+				foreach($project_file_category as $category)
+				{
+					if ($category['dir'] == '/') 
+					{
+						continue;
+					}
+					?>
+					<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('<?php echo "file_detail" . $i;?>','<?php echo "file_detail_icon" . $i;?>', '<?php echo $category['dir'];?>', '<?php echo "filelist" . $i;?>')">
+						&nbsp;<img id="file_detail_icon<?php echo $i;?>" src="<?php echo $img_location;?>/sort-asc.png"></img><?php echo rtrim($category['dir'], "/");?>&nbsp;
+					</div>
+					<div id="file_detail<?php echo $i;?>" style="display:none;margin-left:15px;width:98%">
+						<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
+							<span class="filename" style="text-align:center;width:68%">檔案名稱</span>
+							<span align="center" style="padding-left:200px;text-align:center;width:10%">上傳時間</span>
+						</div>
+						<div id="filelist<?php echo $i;?>"></div>
+						<br>
+					</div>
+					<?php
+					$i++;
+				}			
 			}
 			if($project_basic_info['is_checked'] == 2)
 			{
@@ -276,6 +292,9 @@ function close_file_preview(clicked_element_id)
 	document.getElementById("background_mask").style.display="none";
 	user_behavior_log(clicked_element_id, null);
 }
+/**
+瀏覽附加檔案
+*/
 function show_file_detail(file_detail_id, file_detail_icon_id, dir, list_id)
 {
 	user_behavior_log(file_detail_icon_id);
@@ -304,8 +323,8 @@ function show_file_detail(file_detail_id, file_detail_icon_id, dir, list_id)
 		success:function(str)
 		{
 			var n;
-			var files_string='';
-			for(n=0; n<str.number; n++)
+			var files_string = '';
+			for(n = 0;n < str.number;n++)
 			{
 				var preview_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' +'/project_management/application/assets/project_attachment/' + '<?php echo $project_basic_info['id'];?>' + '_convert/' + str.list[n].convert_to_pdf;
 				var download_file_path='http://' + '<?php echo $_SERVER['SERVER_ADDR'];?>' + '/project_management/application/assets/project_attachment/'+ '<?php echo $project_basic_info['id'];?>' + '/' + str.list[n].instance_file_name;
@@ -618,10 +637,10 @@ function handle_file_upload_from_browse(files, obj, upload_file_dir)  //第一�
 		input_file2.setAttribute("type", "hidden");
 		input_file2.setAttribute("id", "folder_"+rowCount);
 		input_file2.setAttribute("name", "folder_"+rowCount);
-		input_file2.setAttribute("value", '');
+		input_file2.setAttribute("value", '/');
 		document.getElementById("project_create_form").appendChild(input_file2);
 		var status = new createStatusbar(obj);  //Using this we can set progress.
-        status.setFileInfo(files[i].name, '/', files[i].size, files[i].type);
+        status.setFileInfo(files[i].name, '', files[i].size, files[i].type);
         sendFileToServer(fd, status);
 	}
 }
@@ -656,10 +675,17 @@ function handleFileUpload(item, path, obj, upload_file_dir)  //第一個參數�
 			input_file2.setAttribute("type", "hidden");
 			input_file2.setAttribute("id", "folder_"+rowCount);
 			input_file2.setAttribute("name", "folder_"+rowCount);
-			input_file2.setAttribute("value", path.substring('/', path.length - 1));
+			if(path == "")
+			{
+				input_file2.setAttribute("value", '/');
+			}
+			else
+			{
+				input_file2.setAttribute("value", path); //path.substring('/', path.length - 1)
+			}
 			document.getElementById("project_create_form").appendChild(input_file2);			
 			var status = new createStatusbar(obj);  //set progress bar.
-			status.setFileInfo(file.name, path.substring('/', path.length - 1), file.size, file.type);
+			status.setFileInfo(file.name, path, file.size, file.type);
 			sendFileToServer(fd, status);
 		});
 	}
@@ -671,9 +697,9 @@ function handleFileUpload(item, path, obj, upload_file_dir)  //第一個參數�
 		var readEntries = function() {
 			dirReader.readEntries(function(results) {
 				if (!results.length) 
-				{
+				{					
 					for (var i=0; i<entries.length; i++) 
-					{
+					{						
 						handleFileUpload(entries[i], path + item.name + "/", obj, upload_file_dir);
 					}
 				} 
@@ -740,13 +766,13 @@ function createStatusbar(obj)
         }
  
         this.filename.html(name);  //指定filename區塊的呈現內容
-		if(folder != "")
-		{
-			this.folder.html(folder);  //指定folder區塊的呈現內容
+		if(folder == "")  //指定folder區塊的呈現內容
+		{			
+			this.folder.html('--');  
         }
 		else
 		{
-			this.folder.html("/");
+			this.folder.html(folder.substring('/', folder.length - 1));
 		}
 		this.size.html(sizeStr);  //指定size區塊的呈現內容
     }

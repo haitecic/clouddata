@@ -463,7 +463,7 @@ class Project extends CI_Controller{
 		$checked_user = $this->project_model->get_project_checked_user($project_basic_info['checked_user']); 
 		$data['checked_user'] = $checked_user;
 		$data['project_attachfile'] = $this->project_model->get_specific_project_attachfile($project_id);  //取得專案夾帶檔案
-		$data['project_filecategory'] = $this->project_model->get_category_project_attachfile($project_id);
+		$data['project_file_category'] = $this->project_model->get_category_project_attachfile($project_id);
 		$data['project_img']        = $this->project_model->get_img_name($data['project_basic_info']['km_id']);
 		//$data['preview_img']        = $this->project_model->get_preview_img($project_id);
 		$this->form_validation->set_error_delimiters('<label style="margin-left:5px;color:red;font-weight:100">','</label>');  //錯誤訊息顯示的樣式
