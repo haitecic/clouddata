@@ -742,11 +742,11 @@ function createStatusbar(obj)
 	/*將檔案資訊呈現所需的空間依依加進狀態列中(由左至右依序為：檔案名稱、檔案大小、檔案進度條、「abort」按鈕)*/
 	this.filename = $("<div class='filename' style=';float:left;width:30%;margin-left:2%'></div>").appendTo(this.statusbar);
 	this.folder = $("<div style='float:left;min-width:20%;width:20%;margin-left:1%'></div>").appendTo(this.statusbar);
-    this.size = $("<div class='filesize' style='text-align:center;width:10%;margin-left:1%'></div>").appendTo(this.statusbar);
-    this.progressBar = $("<div class='progressBar' style='width:15%;margin-left:1%'><div></div></div>").appendTo(this.statusbar);
-    this.create_time = $("<span style='width:12%;margin-left:1%'></span>").appendTo(this.statusbar);
+    this.size = $("<div class='filesize' style='float:left;text-align:center;width:10%;margin-left:1%'></div>").appendTo(this.statusbar);
+    this.progressBar = $("<div class='progressBar' style='float:left;width:15%;margin-left:1%'><div></div></div>").appendTo(this.statusbar);
+    this.create_time = $("<div style='float:left;min-width:11%;width:11%;margin-left:1%'></div>").appendTo(this.statusbar);
 	/*this.abort = $("<div id='"+(rowCount-1)+"' class='abort' style='margin-left:102px'>Delete</div>").appendTo(this.statusbar);*/
-	this.abort = $("<div id='"+(rowCount-1)+"' class='abort' style='margin-left:2%'>Delete</div>").appendTo(this.statusbar);
+	this.abort = $("<div id='"+(rowCount-1)+"' class='abort' style='margin-left:1%'>Delete</div>").appendTo(this.statusbar);
 	this.is_send = $("<div id='is_send_"+(rowCount-1)+"' style='display:none'>false</div>").appendTo(this.statusbar);
 	this.file_number = $("<div style='display:none'>"+(rowCount-1)+"</div>").appendTo(this.statusbar);
 	$("#upload_list_title").after(this.statusbar);
@@ -764,7 +764,7 @@ function createStatusbar(obj)
         {
             sizeStr = sizeKB.toFixed(2)+" KB";
         }
- 
+		this.create_time.html('--');  //指定filename區塊的呈現內容
         this.filename.html(name);  //指定filename區塊的呈現內容
 		if(folder == "")  //指定folder區塊的呈現內容
 		{			
