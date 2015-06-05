@@ -401,7 +401,9 @@ class Project extends CI_Controller{
 			}
 			else
 			{
-				move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir.'/'. iconv("UTF-8","BIG5", $_FILES["file"]["name"]));
+				$temp_file_name = $_REQUEST['temp_file_name'];
+				//move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir.'/'. iconv("UTF-8","BIG5", $_FILES["file"]["name"]));
+				move_uploaded_file($_FILES["file"]["tmp_name"],$output_dir.'/'. $temp_file_name);
 				//echo "Uploaded File :".$_FILES["file"]["name"];
 			}
 		}
@@ -429,10 +431,10 @@ class Project extends CI_Controller{
 	
 	public function file_category_detail()
 	{
-	$dir=$this->input->post('dir_name');
-	$project_id = $this->input->post('id');
-	$result=$this->project_model->get_file_category_detail($dir, $project_id);
-	echo json_encode($result, JSON_NUMERIC_CHECK);
+		$dir=$this->input->post('dir_name');
+		$project_id = $this->input->post('id');
+		$result=$this->project_model->get_file_category_detail($dir, $project_id);
+		echo json_encode($result, JSON_NUMERIC_CHECK);
 	}
 	
 	/**
@@ -456,7 +458,10 @@ class Project extends CI_Controller{
         $data['project_location'] = site_url("/application/assets/project");
 		$data['plugins_location'] = site_url("/application/assets/plugins");
 		/*從資料庫撈資料*/		
-		$data['project_basic_info'] = $this->project_model->get_specific_project_info($project_id);  //取得專案基本資料
+		$project_basic_info = $this->project_model->get_specific_project_info($project_id);  //取得專案基本資料
+		$data['project_basic_info'] = $project_basic_info;
+		$checked_user = $this->project_model->get_project_checked_user($project_basic_info['checked_user']); 
+		$data['checked_user'] = $checked_user;
 		$data['project_attachfile'] = $this->project_model->get_specific_project_attachfile($project_id);  //取得專案夾帶檔案
 		$data['project_filecategory'] = $this->project_model->get_category_project_attachfile($project_id);
 		$data['project_img']        = $this->project_model->get_img_name($data['project_basic_info']['km_id']);
@@ -488,6 +493,17 @@ class Project extends CI_Controller{
 			$message = "edit";  
 			redirect('project_list');
 		}	
+	}
+	
+	public function check_project_data()
+	{
+		$project_id = $this->input->post('project_id');
+		$user_id = $this->session->userdata('user_id');
+		$user_name = $this->session->userdata('username');
+		$checked_time = date('Y-m-d H:i:s');
+		$this->project_model->set_project_data_checked($project_id, $user_id, $checked_time);
+		$message = "已確認(由 $user_name 於 $checked_time 確認)";
+		echo $message;
 	}
 	
 	/**

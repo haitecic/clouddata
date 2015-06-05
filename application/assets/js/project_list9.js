@@ -936,6 +936,58 @@ function pro_show_select_box(value)
 	document.getElementById("pro_col_select_box_"+value).style.display="block";		
 	document.getElementById("pro_col_plain_text_"+value).style.display="none";
 }
+//project_edit
+function check_project_data(id)
+{
+	var is_checked = document.getElementById('is_checked').value;
+	if(is_checked == 2)  //尚未確認時
+	{
+		var be_checked;
+		be_checked = confirm("專案資料確認後，將無法修改專案資料(和附加檔案)，您確定要完成確認動作嗎?");
+		if (be_checked == true) 
+		{
+			var server_ip_address = document.getElementById("server_ip_address").value;
+			var request_url = 'http://'+server_ip_address+'/project_management/check_project_data';
+			$.ajax({
+				url:request_url,  
+				data:{
+					project_id: id
+				},
+				type:"POST",
+				dataType:"text",
+				success:function(message){
+					document.getElementById('check_hint_message').style.color = "blue";
+					document.getElementById('check_hint_message').style.cursor = "default";
+					document.getElementById('check_box').style.cursor = "default";					
+					//隱藏拖曳檔案區塊			
+					document.getElementById('dragandrophandler').style.display = "none";					
+					document.getElementById('file_list').style.display = "none";
+					//隱藏「確認送出」按鈕		
+					document.getElementById('submit_btn_block').style.display = "none";
+					document.getElementById('check_box').checked = true;
+					document.getElementById('check_hint_message').innerHTML = message;	
+					document.getElementById('is_checked').value = 1;
+				},
+				async:false,
+				error:function(xhr, status, errorThrown){
+					console.log("Error: " + errorThrown);
+					console.log("Status: " + status);
+					console.dir( xhr );
+				},
+				complete:function( xhr, status ){
+				}
+			});
+		} 
+		else 
+		{
+			document.getElementById('check_box').checked = false;
+		}	
+	}
+	else if(is_checked == 1)
+	{
+		return false;
+	}
+}
 
 
 

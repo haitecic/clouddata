@@ -70,6 +70,7 @@ $route['project_check_is_blocked'] = 'project/project_check_is_blocked';
 $route['user_behavior_log'] = 'account_management/user_behavior_log';
 $route['set_start_record'] = 'account_management/set_start_record';
 $route['project/data_processing'] = 'project/data_processing';
+$route['check_project_data'] = 'project/check_project_data';
 $route['project_file/(:num)'] = 'project/project_file/$1';
 $route['project_file/(:num)/(:any)'] = 'project/project_file/$1/$2';
 $route['project_edit/(:any)'] = 'project/edit_project_data/$1';
