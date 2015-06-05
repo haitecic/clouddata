@@ -261,13 +261,13 @@ foreach($project_filecategory as $cate)
 			array_push($file_dir, $id_dir);
 			}*/			
 		?>
-				<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
+				<div id="file_list<?php echo $i;?>" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
 					<span class="filename" style="text-align:center;width:500px">檔案名稱</span>
 					<span class="filesize" style="padding-left:30px;width:150px;">檔案大小</span>
 					<span align="center" style="padding-left:75px;width:200px;">上傳進度</span>
 					<span align="center" style="padding-left:200px;text-align:center;width:100px;">上傳時間</span>
 				</div>
-				<div id="filelist<?php echo $i;?>">我想要開車</div>
+				<div id="filelist<?php echo $i;?>"></div>
 				<br>
 			</div>
 			<?php
