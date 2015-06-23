@@ -14,7 +14,13 @@ class Account_management extends CI_Controller{
 	
 	public function index()
     {
-		$this->load->view('index');
+		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
+		$data['js_location'] = site_url("/application/assets/js");  //給予js位址資訊到要呈現之頁面
+		$data['img_location'] = site_url("/application/assets/img");  //給予img位址資訊到要呈現之頁面
+		$this->load->view('templates/index_header', $data);
+		$this->load->view('pages/index');
+		$this->load->view('templates/index_footer');
+		//$this->load->view('index');
     }	
 	
 	/**
@@ -62,9 +68,7 @@ class Account_management extends CI_Controller{
 		//$this->form_validation->set_error_delimiters('<label style="color:#6600FF">','</label>');  //錯誤訊息顯示的樣式
 		//設定表單欄位資料的驗證規則
 		$this->form_validation->set_rules('account', '帳號', 'trim|xss_clean');  //參數一：欄位名稱、參數二：錯誤訊息顯示時欄位所要表示的名稱、參數三：欄位的驗證條件(註：required表示欄位必須要有輸入)
-		$this->form_validation->set_rules('passwd', '密碼', 'trim|md5');			
-		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
-		$data['js_location'] = site_url("/application/assets/js");  //給予js位址資訊到要呈現之頁面
+		$this->form_validation->set_rules('passwd', '密碼', 'trim|md5');	
 		//撰寫表單驗證通過與不通過的對應處理方式
 		if($this->form_validation->run() === FALSE)  //當表單驗證不通過
 		{
@@ -92,7 +96,7 @@ class Account_management extends CI_Controller{
 				$this->session->set_userdata('user_id', $user_id);
 				$this->session->set_userdata('username', $username);
 				//project_list初始設定
-				$this->session->set_userdata('search_bar', "");  //紀錄使用者搜尋內容
+				//$this->session->set_userdata('search_bar', "");  //紀錄使用者搜尋內容
 				$this->session->set_userdata('project_start_record', 0);  //從第幾筆資料開始呈現(瀏覽的分頁)
 				$this->session->set_userdata('project_display_length', 10);  //一頁顯示筆數
 				$this->session->set_userdata('project_order_column', 1);  //排序欄位

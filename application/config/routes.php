@@ -45,11 +45,13 @@ $route['404_override'] = '';
 //路由有優先順序，順位較高者會優先被判斷
 //保留的路由必須放在所有萬用字元之前
 //$route['form'] = 'form';
+$route['index'] = 'account_management/index';
 $route['login'] = 'account_management/user_login';
 $route['logout'] = 'account_management/user_logout';
 $route['validation/account'] = 'account_management/reg_account_check';
 $route['validation/passwd'] = 'account_management/reg_passwd_check';
 $route['user_column_setting'] = 'account_management/user_column_setting';
+$route['search_form_index'] = 'project/search_form_index';
 $route['project_list'] = 'project/list_all_projects';
 $route['project_list/(:any)'] = 'project/list_all_projects/$1';
 //$route['project_list/(:num)/(:any)'] = 'project/list_all_projects/$1/$2';

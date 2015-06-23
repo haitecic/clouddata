@@ -172,6 +172,26 @@ class Project extends CI_Controller{
 		redirect("project_list");
 	}*/
 	
+	/**
+	在首頁進行搜尋
+	*/
+	public function search_form_index()
+	{
+		if(!$this->session->userdata('username'))  //尚未登入
+		{	
+			$search_bar = $this->input->post('index_search_bar');
+			$this->session->set_userdata('search_bar', $search_bar);
+			//記錄搜尋內容至session中
+			header('Location:login');
+		}
+		else  //已登入
+		{
+			$search_bar = $this->input->post('index_search_bar');
+			$this->session->set_userdata('search_bar', $search_bar);
+			header('Location:project_list');
+		}
+	}
+	
 	public function list_all_projects($search_bar=null)  //瀏覽所有專案資料 $page = 0, $search_bar=null,$message=''
 	{			
 		if(!$this->session->userdata('username'))  //判斷使用者是否由login頁面登入
