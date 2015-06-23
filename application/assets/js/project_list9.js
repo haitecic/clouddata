@@ -988,6 +988,3 @@ function check_project_data(id)
 		return false;
 	}
 }
-
-
-

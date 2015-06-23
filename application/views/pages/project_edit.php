@@ -199,6 +199,7 @@
 			?>
 				<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('file_detail0','file_detail_icon0', '', 'filelist0')">
 					&nbsp;<img id="file_detail_icon0" src="<?php echo $img_location;?>/sort-asc.png"></img>檔案總覽&nbsp;
+					<!--&nbsp;<img id="file_detail_icon0" width="35px" height="35px" src="<?php echo $img_location;?>/folder5.png"></img>&nbsp;檔案總覽&nbsp;-->
 				</div>
 				<div id="file_detail0" style="display:none;margin-left:15px;width:98%">
 					<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
@@ -219,6 +220,7 @@
 					?>
 					<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('<?php echo "file_detail" . $i;?>','<?php echo "file_detail_icon" . $i;?>', '<?php echo $category['dir'];?>', '<?php echo "filelist" . $i;?>')">
 						&nbsp;<img id="file_detail_icon<?php echo $i;?>" src="<?php echo $img_location;?>/sort-asc.png"></img><?php echo rtrim($category['dir'], "/");?>&nbsp;
+						<!--&nbsp;<img id="file_detail_icon<?php echo $i;?>" width="35px" height="35px" src="<?php echo $img_location;?>/folder5.png"></img>&nbsp;<?php echo rtrim($category['dir'], "/");?>&nbsp;-->
 					</div>
 					<div id="file_detail<?php echo $i;?>" style="display:none;margin-left:15px;width:98%">
 						<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
@@ -301,14 +303,14 @@ function show_file_detail(file_detail_id, file_detail_icon_id, dir, list_id)
 	var file_detail = document.getElementById(file_detail_id);
 	if(file_detail.style.display == "block")
 	{
-		$("#" + file_detail_id).slideUp(500);	
-		document.getElementById(file_detail_icon_id).src="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/img/sort-asc.png";
+		$("#" + file_detail_id).slideUp(400);	
+		document.getElementById(file_detail_icon_id).src="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/img/sort-asc.png";  //folder5.png
 	}
 	else if(file_detail.style.display == "none")
 	{		
-		$("#" + file_detail_id).slideDown(500);
+		$("#" + file_detail_id).slideDown(400);
 		file_detail.style.display = "block";
-		document.getElementById(file_detail_icon_id).src="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/img/sort-desc.png";
+		document.getElementById(file_detail_icon_id).src="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/img/sort-desc.png";  // folder2.png
 	}
 	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project/file_category_detail";
 	$.ajax({
@@ -564,8 +566,9 @@ $(document).ready(function()
 		e.preventDefault();
 		//var files = e.originalEvent.dataTransfer.files;  //取得drop的檔案
 		var items = e.originalEvent.dataTransfer.items;  //取得drop的檔案
-		user_behavior_log(this.id, null);	  //temp_comment	
+		user_behavior_log(this.id, null);	  //temp_comment
 		//handleFileUpload(files, file_list, upload_file_dir);
+		
 		for (var i = 0; i < items.length; i++)  //處理使用者一次拖曳的一個或多個檔案
 		{			
 			var entry = items[i].webkitGetAsEntry();
@@ -592,6 +595,7 @@ $(document).ready(function()
 		e.preventDefault();
 	});		
 });
+
 var delete_file_id = 0;  //記錄刪除的檔案數量
 function delete_file(id)
 {
@@ -839,6 +843,7 @@ function sendFileToServer(formData, status)
 		},
 		url: uploadURL, 
 		type: "POST",
+		async:true,
 		contentType:false,
 		processData: false,
         cache: false,
