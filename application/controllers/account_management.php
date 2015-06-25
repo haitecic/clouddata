@@ -12,15 +12,17 @@ class Account_management extends CI_Controller{
 		$this->load->database();		
 	}
 	
+	//首頁
 	public function index()
     {
+		$username = $this->session->userdata('username');
+		$data['username'] = $username;
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
 		$data['js_location'] = site_url("/application/assets/js");  //給予js位址資訊到要呈現之頁面
 		$data['img_location'] = site_url("/application/assets/img");  //給予img位址資訊到要呈現之頁面
 		$this->load->view('templates/index_header', $data);
-		$this->load->view('pages/index');
-		$this->load->view('templates/index_footer');
-		//$this->load->view('index');
+		$this->load->view('pages/index', $data);
+		$this->load->view('templates/index_footer', $data);
     }	
 	
 	/**
@@ -55,10 +57,11 @@ class Account_management extends CI_Controller{
 	login method：This method is used to handle the validation process of user login.
 	*/
 	public function user_login()
-	{		
+	{	
 		if($this->session->userdata('username'))
 		{
 			$this->session->unset_userdata('username');
+			header('Location:index');
 		}
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
 		$data['js_location'] = site_url("/application/assets/js");  //給予js位址資訊到要呈現之頁面

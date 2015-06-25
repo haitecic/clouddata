@@ -52,8 +52,10 @@ $route['validation/account'] = 'account_management/reg_account_check';
 $route['validation/passwd'] = 'account_management/reg_passwd_check';
 $route['user_column_setting'] = 'account_management/user_column_setting';
 $route['search_form_index'] = 'project/search_form_index';
+//project_list
 $route['project_list'] = 'project/list_all_projects';
 $route['project_list/(:any)'] = 'project/list_all_projects/$1';
+$route['get_chart_data'] = 'project/get_chart_data';
 //$route['project_list/(:num)/(:any)'] = 'project/list_all_projects/$1/$2';
 $route['project_detail/(:num)'] = 'project/list_project_detail/$1';
 $route['project_detail/(:num)/(:any)'] = 'project/list_project_detail/$1/$2';

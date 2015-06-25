@@ -32,6 +32,8 @@ header('Content-Type: text/html; charset=utf-8');
 	<!--load jQuery ui-->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<!--load EChart-->
+	<script src="<?php echo $js_location;?>/EChart/echarts-all.js"></script>
 	<!--preview file-->
 	<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.js"></script>

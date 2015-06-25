@@ -325,7 +325,7 @@ a.show-sidebar:hover {
   overflow: hidden;
   height: 24px;
   border-bottom: 1px solid #ccc;
-  background-color: #eaeaea;
+  background-color: #eaeaea;  
   background-image: -webkit-linear-gradient(top, #eaeaea, #e0e0e0);
   background-image:    -moz-linear-gradient(top, #eaeaea, #e0e0e0);
   background-image:     -ms-linear-gradient(top, #eaeaea, #e0e0e0);
@@ -2320,6 +2320,28 @@ select
   z-index: 19999;
   /*cursor: pointer;*/
 }
+
+/*圖表(chart)預覽區塊*/
+.view_chart_block{
+	width:1000px;
+	height:400px;
+	display:none;
+	position:fixed;
+	top:18%;
+	left:12%;
+	z-index:20000;	
+	background-color:white;
+}
+
+.view_chart{
+	width:1000px;
+	height:400px;
+	position:fixed;
+	padding-top:30px;
+	padding-right:30px;
+	z-index:25000;
+}
+
 /*PDF檔案預覽區塊*/
 .preview_pdf{
 	width:70%;

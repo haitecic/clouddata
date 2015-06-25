@@ -1033,6 +1033,100 @@ class Project_model extends CI_Model{
 		{
 			return "unblock";
 		}	 
+	}	
+	
+	public function get_chart_data_ajax($user_id, $search_keyword)
+	{
+		//$where_clause = array('user_id' => $user_id, 'class'=> 1);
+		//$query = $this->db->select('*')->from('user_column_setting')->where($where_clause)->get();
+		//$result = $query->row_array();
+		$query_string = "SELECT `year` FROM `project_all` group by `year` ASC";
+		$query = $this->db->query($query_string);
+		$year_count= $query->num_rows();
+		$years = $query->result_array();
+		$query_string = "SELECT `proposed_unit` FROM `project_all` group by `proposed_unit` ASC";
+		$query = $this->db->query($query_string);
+		$unit_count= $query->num_rows();
+		$units = $query->result_array();		
+		
+		$all_data = $this->project_model->get_specific_projects_data($search_keyword);
+		$output = array(
+            'year_count' => $year_count,
+			'unit_count' => $unit_count,
+			'year' => $years,
+            'unit' => $units,            
+            'data' => array()
+        );
+		$i = 0;
+		foreach($years as $year)
+		{
+			$temp_array = array();  //暫存各部門提案數量
+			//取得每年各部門的提案數量
+			$query_string = "SELECT `proposed_unit`, count(*) as `proposed_count` FROM `project_all` where `year`= ".$year['year']." group by `proposed_unit` ASC";
+			$query = $this->db->query($query_string);
+			$unit_year = $query->result_array();
+			foreach($units as $unit)
+			{
+				$data_index = -1;
+				foreach($unit_year as $index=>$value)
+				{
+					if($unit['proposed_unit'] == $value['proposed_unit'])
+					{
+						$data_index = $index;
+						break;
+					}
+				}
+				if($data_index != -1)  //判斷是否存在此部門,若存在取得其陣列的index值
+				{
+					array_push($temp_array, $unit_year[$data_index]['proposed_count']);
+				} 
+				else  //此部門於該年度無提案
+				{					
+					array_push($temp_array, 0);
+				}
+				/*
+				//php是5.5版本才可使用array_column函數
+				if ($index = array_search($unit, array_column($unit_year, 'proposed_unit')) !== false)  //判斷是否存在此部門,若存在取得其陣列的index值
+				{
+					array_push($temp_array, $unit_year[$index]['proposed_count']);
+				} 
+				*/
+			}
+			$output['data'][] = $temp_array;
+			$i++;
+		}
+		
+		//$department_array = array();
+		//while()
+		//$department = $this->project_model->get_proposed_unit();		
+		//$result = $this->project_model->get_specific_projects_data($search_keyword);
+		return json_encode($output);
+		//$where_clause = array('user_id' => $user_id, 'class'=> 1);
+		//$query = $this->db->select('*')->from('user_column_setting')->where($where_clause)->get();
+		//$result = $query->result_array();
+		
+		/*$json_data = '{"data":[';
+		$j=0;
+		foreach($result as $index=>$value)
+		{
+			$json_data .= '{"table_class":"'.$value['class'].'",';			
+			for($i=0; $i<7; $i++)
+			{
+				$json_data .= '"column'.$i.'":"'.$value['column'.($i+1)].'"';
+				if($i < 6)
+				{
+					$json_data .= ',';
+				}
+			}
+			$json_data .= '}';
+			if($j < 3)
+			{
+				$json_data .= ',';
+			}
+			$j++;
+		}		
+		$json_data .= ']}';*/
+		//return json_encode($row);
 	}
 	
 	/**

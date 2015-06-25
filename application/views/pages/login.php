@@ -54,7 +54,7 @@
 					</div>
 					<div class="text-center">
 						<!--<a href="http://localhost/file_manager/file_manager2/application/views/pages/project_info.php"  class="btn btn-primary" style="font-family: Adobe 繁黑體 Std; font-size:17px; ">登入</a>-->
-						<button type="submit" class="btn btn-primary" style="font-family: Adobe 繁黑體 Std; font-size:17px; ">送出</button>
+						<button type="submit" class="btn btn-primary" style="font-family: Adobe 繁黑體 Std; font-size:17px; ">登入</button>
 					</div>
 				</div>			
 			</div>

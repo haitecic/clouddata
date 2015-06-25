@@ -23,6 +23,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
 				</div>-->
 				<!--border-color:#C3DEB7;background-color:#C3DEB7;color:#821EC7 96BBDE-->
+				<a style="position:absolute;left:1020px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart()">圖表</a>
 				<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
 				</div>
@@ -357,6 +358,11 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 	</div>	
 </div>
 <span id="width_tmp" style="display:none"></span>
+<!--圖表呈現區塊-->
+<div id="view_chart_block" class="view_chart_block">
+	<div id="view_chart" class="view_chart"></div>
+</div>
+<div id="view_chart_background_mask" class="background_mask" onclick="view_chart_background_mask(this.id)"></div>
 <!--PDF檔案預覽區塊-->
 <div id="preview_pdf" class="preview_pdf">
 	<object id="pdf_obj" data="" type="application/pdf" width="95%" height="95%">
@@ -366,7 +372,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 <div id="background_mask" class="background_mask" onclick="close_view_file(this.id)"></div>
 <!--<div id="loading_background_mask" class="loading_background_mask"></div>-->
 <script>
-$(document).ready(function() {
+$(document).ready(function() {	
 	document.getElementById("loading").style.display = "block";
 	$('th select').width(function(){ //設定各select box的初始寬度, 依據選擇的option
 		$("#width_tmp").html($("option:selected", this).text());
@@ -516,7 +522,7 @@ $(document).ready(function() {
 	$("#news_list_content").fadeIn(300);
 	//$("#external_tech_list_content").fadeIn(300);
 	$("#manager_opinion_list_content").fadeIn(300);	
-	$("#loading").fadeOut(1500);	
+	$("#loading").fadeOut(1500);        
 });
 	
 

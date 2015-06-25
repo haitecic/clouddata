@@ -251,9 +251,17 @@ class Project extends CI_Controller{
 		//$this->load->view('templates/footer',$data);
 	}
 	
+	//取得圖表所需資料
+	public function get_chart_data()
+	{
+		$user_id = $this->input->post('user_id');
+		$search_keyword = $this->input->post('search_keyword');
+		$json_data = $this->project_model->get_chart_data_ajax($user_id, $search_keyword);
+		echo $json_data;
+	}
+	
 	public function project_file($project_id, $search_bar="")  //瀏覽所有專案資料
 	{
-
 		$data['css_location'] = site_url("/application/assets/css");  //給予css位址資訊到要呈現之頁面
 		$data['js_location'] = site_url("/application/assets/js");  
 		$data['img_location'] = site_url("/application/assets/img");
