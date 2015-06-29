@@ -869,7 +869,7 @@ function view_chart()
 			var legend_count = json_data.year_count;  //圖例項目數量
 			var legend = [];  //圖例項目
 			var series = [];  //資料值
-			for(var i=0;i<legend_count;i++)
+			for(var i=0;i<legend_count;i++)//legend_count
 			{
 				legend.push(json_data.year[i].year);
 				var data_set = {name:json_data.year[i].year, type:'bar', data:json_data.data[i]};
@@ -906,7 +906,8 @@ function view_chart()
 				xAxis : [
 					{
 						type : 'category',
-						data : xaxis
+						data : xaxis,
+						show : true
 					}
 				],
 				yAxis : [

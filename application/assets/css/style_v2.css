@@ -2329,11 +2329,13 @@ select
 	position:fixed;
 	top:18%;
 	left:12%;
+	/*overflow-x: scroll;*/
 	z-index:20000;	
 	background-color:white;
 }
 
 .view_chart{
+	/*width:6000px;*/
 	width:1000px;
 	height:400px;
 	position:fixed;

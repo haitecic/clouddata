@@ -1048,8 +1048,6 @@ class Project_model extends CI_Model{
 		$query = $this->db->query($query_string);
 		$unit_count= $query->num_rows();
 		$units = $query->result_array();		
-		
-		$all_data = $this->project_model->get_specific_projects_data($search_keyword);
 		$output = array(
             'year_count' => $year_count,
 			'unit_count' => $unit_count,
@@ -1062,7 +1060,63 @@ class Project_model extends CI_Model{
 		{
 			$temp_array = array();  //暫存各部門提案數量
 			//取得每年各部門的提案數量
-			$query_string = "SELECT `proposed_unit`, count(*) as `proposed_count` FROM `project_all` where `year`= ".$year['year']." group by `proposed_unit` ASC";
+			$search_content = $search_keyword;		
+			//分析搜尋框輸入的內容
+			$rule = "";
+			if(!empty($search_content) && isset($search_content))
+			{				
+				$search_word = explode(' ', $search_content);
+				for($i=0;$i<count($search_word);$i++)
+				{
+					$rule = $rule."(`km_id` LIKE '%".$search_word[$i]."%' OR
+					`idea_id` LIKE '%".$search_word[$i]."%' OR 
+					`idea_name` LIKE '%".$search_word[$i]."%' OR 
+					`idea_source` LIKE '%".$search_word[$i]."%' OR 
+					`idea_description` LIKE '%".$search_word[$i]."%' OR
+					`scenario_d` LIKE '%".$search_word[$i]."%' OR
+					`function_d` LIKE '%".$search_word[$i]."%' OR
+					`distinction_d` LIKE '%".$search_word[$i]."%' OR
+					`value_d` LIKE '%".$search_word[$i]."%' OR
+					`feasibility_d` LIKE '%".$search_word[$i]."%' OR
+					`market_survey` LIKE '%".$search_word[$i]."%' OR
+					`km_survey` LIKE '%".$search_word[$i]."%' OR
+					`dep_item` LIKE '%".$search_word[$i]."%' OR
+					`inner_or_outer` LIKE '%".$search_word[$i]."%' OR
+					`stage` LIKE '%".$search_word[$i]."%' OR
+					`stage_detail` LIKE '%".$search_word[$i]."%' OR
+					`progress_description` LIKE '%".$search_word[$i]."%' OR
+					`proposed_unit` LIKE '%".$search_word[$i]."%' OR
+					`proposer` LIKE '%".$search_word[$i]."%' OR
+					`proposed_date` LIKE BINARY'%".$search_word[$i]."%' OR
+					`valid_project` LIKE '%".$search_word[$i]."%' OR
+					`established_date` LIKE BINARY'%".$search_word[$i]."%' OR
+					`joint_unit` LIKE '%".$search_word[$i]."%' OR
+					`joint_person` LIKE '%".$search_word[$i]."%' OR
+					`co_worker` LIKE '%".$search_word[$i]."%' OR
+					`idea_examination` LIKE '%".$search_word[$i]."%' OR
+					`Idea` LIKE '%".$search_word[$i]."%' OR
+					`Requirement` LIKE '%".$search_word[$i]."%' OR
+					`Feasibility` LIKE '%".$search_word[$i]."%' OR
+					`Prototype` LIKE '%".$search_word[$i]."%' OR
+					`note` LIKE '%".$search_word[$i]."%' OR
+					`adoption` LIKE '%".$search_word[$i]."%' OR
+					`applied_patent` LIKE '%".$search_word[$i]."%' OR
+					`resurrection_application_qualified` LIKE '%".$search_word[$i]."%' OR
+					`resurrection_applied` LIKE '%".$search_word[$i]."%' OR
+					`PM_in_charge` LIKE '%".$search_word[$i]."%' OR 
+					`closed_case` LIKE '%".$search_word[$i]."%')";
+					if(($i+1) != count($search_word))
+					{
+						$rule = $rule." AND ";
+					}
+				}
+				$rule = $rule." AND `year` = ". $year['year'];				
+			}
+			else
+			{
+				$rule = "`year`= ".$year['year'];
+			}
+			$query_string = "SELECT `proposed_unit`, count(*) as `proposed_count` FROM `project_all` where ".$rule." group by `proposed_unit` ASC";
 			$query = $this->db->query($query_string);
 			$unit_year = $query->result_array();
 			foreach($units as $unit)
