@@ -853,53 +853,101 @@ function show_more_content(row)
 function view_chart()
 {
 	var server_ip_address = document.getElementById("server_ip_address").value;
-	//var file_path = 'http://'+server_ip_address+'/project_management/application/assets/vp_meeting/'+preview_file+'.pdf';
-	var myChart = echarts.init(document.getElementById('view_chart'));
-    myChart.setOption({
-        tooltip : {  //滑鼠移到bar上面所要呈現的資訊
-            trigger: 'axis'
-        },
-        legend: {  //圖例
-            data:['蒸发量','降水量']
-        },
-        toolbox: {
-            show : true,  //顯示(true)或隱藏(false)工具箱
-            feature : {  
-                mark : {show: true},
-                dataView : {show: true, readOnly: false},
-                magicType : {show: true, type: ['line', 'bar']},
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
-        },
-        calculable : true,  //是否讓使用者可以拖曳資料重新計算圖表
-        xAxis : [
-            {
-                type : 'category',
-                data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value',
-                splitArea : {show : true}  //Y軸row上有顏色區分標示
-            }
-        ],
-        series : [  //資料值
-            {
-                name:'蒸发量',
-                type:'bar',
-                data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-            },
-            {
-                name:'降水量',
-                type:'bar',
-                data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-            }
-        ]
-    });
-	document.getElementById("view_chart_block").style.display="block";
-	document.getElementById("view_chart_background_mask").style.display="block";
+	var request_url = 'http://'+server_ip_address+'/project_management/get_chart_data';	
+	var id = document.getElementById("user_id").value;	
+	var search_bar = document.getElementById("search_bar_hidden").value;
+	$.ajax({
+		url:request_url,  
+		data:{
+			user_id: id,
+			search_keyword: search_bar,
+		},
+		type:"POST",
+		dataType:"json",		
+		success:function(json_data){	
+			//產生圖例項目(開始)
+			var legend_count = json_data.year_count;  //圖例項目數量
+			var legend = "[";  //圖例項目
+			for(var i=0;i<legend_count;i++)
+			{
+				legend += "'"+json_data.year[i].year+"'";
+				if((i+1) != legend_count)
+				{
+					legend += ",";
+				}
+			}
+			legend += "]";
+			//產生圖例項目(結束)
+			//產生資料類別項目開始
+			var category_count = json_data.unit_count;  //資料類別數量
+			var xaxis = "[";  //資料類別項目
+			for(var i=0;i<category_count;i++)
+			{
+				xaxis += "'"+json_data.unit[i].proposed_unit+"'";
+				if((i+1) != category_count)
+				{
+					xaxis += ",";
+				}
+			}
+			xaxis += "]";
+			//產生資料類別項目結束
+			var chart = echarts.init(document.getElementById('view_chart'));
+			chart.setOption({
+				tooltip : {  //滑鼠移到bar上面所要呈現的資訊
+					trigger: 'axis'
+				},
+				legend: {  //圖例
+					data:['蒸發量','降水量']
+				},
+				toolbox: {
+					show : true,  //顯示(true)或隱藏(false)工具箱
+					feature : {  
+						mark : {show: true},
+						dataView : {show: true, readOnly: false},
+						magicType : {show: true, type: ['line', 'bar']},
+						restore : {show: true},
+						saveAsImage : {show: true}
+					}
+				},
+				calculable : true,  //是否讓使用者可以拖曳資料重新計算圖表
+				xAxis : [
+					{
+						type : 'category',
+						data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+					}
+				],
+				yAxis : [
+					{
+						type : 'value',
+						splitArea : {show : true}  //Y軸row上有顏色區分標示
+					}
+				],
+				series : [  //資料值
+					{
+						name:'蒸发量',
+						type:'bar',
+						data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+					},
+					{
+						name:'降水量',
+						type:'bar',
+						data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+					}
+				]
+			});
+			document.getElementById("view_chart_block").style.display="block";
+			document.getElementById("view_chart_background_mask").style.display="block";
+		},
+		async:false,
+		error:function(xhr, status, errorThrown){
+			//alert("Sorry, there was a problem!");
+			console.log("Error: " + errorThrown);
+			console.log("Status: " + status);
+			console.dir( xhr );
+		},
+		complete:function( xhr, status ){
+		}
+	});    
 }
 function close_view_chart(trigger_element_id)
 {

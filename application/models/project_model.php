@@ -1076,7 +1076,7 @@ class Project_model extends CI_Model{
 						break;
 					}
 				}
-				if($data_index != -1)  //判斷是否存在此部門,若存在取得其陣列的index值
+				if($data_index != -1)  //判斷是否存在此部門,若存在,取得其陣列的index值
 				{
 					array_push($temp_array, $unit_year[$data_index]['proposed_count']);
 				} 
