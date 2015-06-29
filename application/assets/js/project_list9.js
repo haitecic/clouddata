@@ -864,19 +864,25 @@ function view_chart()
 		},
 		type:"POST",
 		dataType:"json",		
-		success:function(json_data){	
+		success:function(json_data){
+			alert(json_data.data[0]);
 			//產生圖例項目(開始)
 			var legend_count = json_data.year_count;  //圖例項目數量
 			var legend = "[";  //圖例項目
+			var series = "[";  //資料值
 			for(var i=0;i<legend_count;i++)
 			{
 				legend += "'"+json_data.year[i].year+"'";
+				series += '{name:"'+ json_data.year[i].year + '",type:"bar",data:['+json_data.data[i]+']}';
 				if((i+1) != legend_count)
 				{
 					legend += ",";
+					series += ",";
 				}
 			}
 			legend += "]";
+			series += "]";
+			alert(series);
 			//產生圖例項目(結束)
 			//產生資料類別項目開始
 			var category_count = json_data.unit_count;  //資料類別數量
