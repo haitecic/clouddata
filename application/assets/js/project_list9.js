@@ -865,37 +865,24 @@ function view_chart()
 		type:"POST",
 		dataType:"json",		
 		success:function(json_data){
-			alert(json_data.data[0]);
-			//產生圖例項目(開始)
+			//產生(1)圖例項目(2)資料值(開始)
 			var legend_count = json_data.year_count;  //圖例項目數量
-			var legend = "[";  //圖例項目
-			var series = "[";  //資料值
+			var legend = [];  //圖例項目
+			var series = [];  //資料值
 			for(var i=0;i<legend_count;i++)
 			{
-				legend += "'"+json_data.year[i].year+"'";
-				series += '{name:"'+ json_data.year[i].year + '",type:"bar",data:['+json_data.data[i]+']}';
-				if((i+1) != legend_count)
-				{
-					legend += ",";
-					series += ",";
-				}
-			}
-			legend += "]";
-			series += "]";
-			alert(series);
-			//產生圖例項目(結束)
+				legend.push(json_data.year[i].year);
+				var data_set = {name:json_data.year[i].year, type:'bar', data:json_data.data[i]};
+				series.push(data_set);
+			}	
+			//產生(1)圖例項目(2)資料值(結束)
 			//產生資料類別項目開始
 			var category_count = json_data.unit_count;  //資料類別數量
-			var xaxis = "[";  //資料類別項目
+			var xaxis = [];  //資料類別項目
 			for(var i=0;i<category_count;i++)
 			{
-				xaxis += "'"+json_data.unit[i].proposed_unit+"'";
-				if((i+1) != category_count)
-				{
-					xaxis += ",";
-				}
-			}
-			xaxis += "]";
+				xaxis.push(json_data.unit[i].proposed_unit);
+			}			
 			//產生資料類別項目結束
 			var chart = echarts.init(document.getElementById('view_chart'));
 			chart.setOption({
@@ -903,7 +890,7 @@ function view_chart()
 					trigger: 'axis'
 				},
 				legend: {  //圖例
-					data:['蒸發量','降水量']
+					data:legend
 				},
 				toolbox: {
 					show : true,  //顯示(true)或隱藏(false)工具箱
@@ -919,7 +906,7 @@ function view_chart()
 				xAxis : [
 					{
 						type : 'category',
-						data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+						data : xaxis
 					}
 				],
 				yAxis : [
@@ -928,18 +915,7 @@ function view_chart()
 						splitArea : {show : true}  //Y軸row上有顏色區分標示
 					}
 				],
-				series : [  //資料值
-					{
-						name:'蒸发量',
-						type:'bar',
-						data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-					},
-					{
-						name:'降水量',
-						type:'bar',
-						data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-					}
-				]
+				series : series
 			});
 			document.getElementById("view_chart_block").style.display="block";
 			document.getElementById("view_chart_background_mask").style.display="block";
