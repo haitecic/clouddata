@@ -2323,24 +2323,25 @@ select
 
 /*圖表(chart)預覽區塊*/
 .view_chart_block{
-	width:1000px;
-	height:400px;
+	width:1050px;
+	height:600px;
 	display:none;
 	position:fixed;
-	top:18%;
-	left:12%;
-	/*overflow-x: scroll;*/
+	top:6%;
+	left:11%;
+	overflow-y: scroll;
 	z-index:20000;	
 	background-color:white;
 }
 
 .view_chart{
-	/*width:6000px;*/
 	width:1000px;
-	height:400px;
-	position:fixed;
+	/*width:1000px;*/
+	height:3000px;
+	/*position:fixed;*/
 	padding-top:30px;
-	padding-right:30px;
+	padding-right:20px;
+	padding-left:40px;
 	z-index:25000;
 }
 

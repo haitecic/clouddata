@@ -872,7 +872,7 @@ function view_chart()
 			for(var i=0;i<legend_count;i++)//legend_count
 			{
 				legend.push(json_data.year[i].year);
-				var data_set = {name:json_data.year[i].year, type:'bar', data:json_data.data[i]};
+				var data_set = {name:json_data.year[i].year, stack:'sum', type:'bar', itemStyle:{ normal:{label:{show:true, textStyle:{fontSize:'20px',color:'black',align:'right'}, position:'insideRight'}}}, data:json_data.data[i]};
 				series.push(data_set);
 			}	
 			//產生(1)圖例項目(2)資料值(結束)
@@ -886,10 +886,22 @@ function view_chart()
 			//產生資料類別項目結束
 			var chart = echarts.init(document.getElementById('view_chart'));
 			chart.setOption({
+				title : {  //圖表標題
+					text: '各部門提案數報表'
+				},
 				tooltip : {  //滑鼠移到bar上面所要呈現的資訊
-					trigger: 'axis'
+					trigger: 'axis',
+					axisPointer : {		  
+						type : 'shadow'   //滑鼠移到的bar的呈現方式,參數值包含shadow(bar後面呈現陰影),line(直線貫穿整個bar)
+					}
 				},
 				legend: {  //圖例
+					selected: {  //預設隱藏的類別
+						'2011' : false,
+						'2012' : false,
+						'2013' : false,
+						'2015' : false
+					},
 					data:legend
 				},
 				toolbox: {
@@ -897,23 +909,23 @@ function view_chart()
 					feature : {  
 						mark : {show: true},
 						dataView : {show: true, readOnly: false},
-						magicType : {show: true, type: ['line', 'bar']},
+						magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
 						restore : {show: true},
 						saveAsImage : {show: true}
 					}
 				},
 				calculable : true,  //是否讓使用者可以拖曳資料重新計算圖表
-				xAxis : [
+				yAxis : [
 					{
 						type : 'category',
 						data : xaxis,
 						show : true
 					}
 				],
-				yAxis : [
+				xAxis : [
 					{
-						type : 'value',
-						splitArea : {show : true}  //Y軸row上有顏色區分標示
+						type : 'value'/*,
+						splitArea : {show : true} */ //Y軸row上有顏色區分標示
 					}
 				],
 				series : series
