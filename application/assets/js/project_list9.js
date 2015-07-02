@@ -949,6 +949,129 @@ function close_view_chart(trigger_element_id)
 	document.getElementById("view_chart_block").style.display="none";
 	document.getElementById("view_chart_background_mask").style.display="none";
 }
+
+/**
+圖表瀏覽功能highchart
+*/
+function view_chart2()
+{
+	var server_ip_address = document.getElementById("server_ip_address").value;
+	var request_url = 'http://'+server_ip_address+'/project_management/get_chart_data';	
+	var id = document.getElementById("user_id").value;	
+	var search_bar = document.getElementById("search_bar_hidden").value;
+	$.ajax({
+		url:request_url,  
+		data:{
+			user_id: id,
+			search_keyword: search_bar,
+		},
+		type:"POST",
+		dataType:"json",		
+		success:function(json_data){
+			//產生(1)圖例項目(2)資料值(開始)
+			var legend_count = json_data.year_count;  //圖例項目數量
+			var legend = [];  //圖例項目
+			var myseries = [];  //資料值			
+			for(var i=0;i<legend_count;i++)//legend_count
+			{
+				legend.push(json_data.year[i].year);
+				for (j=0; j<json_data.data[i].length; ++j) {
+					json_data.data[i][j] = parseInt(json_data.data[i][j]);
+				}
+				var data_set = {name:json_data.year[i].year, data:json_data.data[i]};
+				myseries.push(data_set);
+			}	
+			//產生(1)圖例項目(2)資料值(結束)
+			//產生資料類別項目開始
+			var category_count = json_data.unit_count;  //資料類別數量
+			var xaxis = [];  //資料類別項目
+			for(var i=0;i<category_count;i++)
+			{
+				xaxis.push(json_data.unit[i].proposed_unit);
+			}	
+			//alert(parseInt(myseries[0].data[1]));
+			
+			console.log(myseries[0].name+':'+myseries[0].data);
+			console.log(myseries[1].name+':'+myseries[1].data);
+			console.log(myseries[2].name+':'+myseries[2].data);
+			console.log(myseries[3].name+':'+myseries[3].data);
+			console.log(myseries[4].name+':'+myseries[4].data);
+			var options = {  
+				chart: {
+					renderTo: 'view_chart2',
+					type: 'bar'
+				},
+				title: {
+					text: '年度部門提案數'
+				},
+				xAxis: {
+					categories: xaxis					
+				},
+				yAxis: {
+					title: {
+						text: '提案數'
+					}
+				},
+				series:myseries					
+			};	
+			
+			/*自訂圖表樣式*/
+			Highcharts.theme = {
+				colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', 
+						'#FF9655', '#FFF263', '#6AF9C4'],
+				chart: {
+					backgroundColor: {
+						linearGradient: [0, 0, 500, 500],
+						stops: [
+							[0, 'rgb(255, 255, 255)'],
+							[1, 'rgb(240, 240, 255)']
+						]
+					},
+				},
+				title: {
+					style: {
+						color: '#000',
+						font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+					}
+				},
+				subtitle: {
+					style: {
+						color: '#666666',
+						font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+					}
+				},
+			
+				legend: {
+					itemStyle: {
+						font: '9pt Trebuchet MS, Verdana, sans-serif',
+						color: 'black'
+					},
+					itemHoverStyle:{
+						color: 'gray'
+					}   
+				}
+			};
+			//Highcharts.setOptions(Highcharts.theme);  // Apply the theme
+			var chart1 = new Highcharts.Chart(options);			
+			document.getElementById("view_chart_block2").style.display="block";
+			document.getElementById("view_chart_background_mask2").style.display="block";
+		},
+		async:false,
+		error:function(xhr, status, errorThrown){
+			//alert("Sorry, there was a problem!");
+			console.log("Error: " + errorThrown);
+			console.log("Status: " + status);
+			console.dir( xhr );
+		},
+		complete:function( xhr, status ){
+		}
+	});    
+}
+function close_view_chart2(trigger_element_id)
+{
+	document.getElementById("view_chart_block2").style.display="none";
+	document.getElementById("view_chart_background_mask2").style.display="none";
+}
 /**
 開啟pdf檔案預覽功能
 */
