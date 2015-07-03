@@ -975,8 +975,22 @@ function view_chart2()
 			for(var i=0;i<legend_count;i++)//legend_count
 			{
 				legend.push(json_data.year[i].year);
-				for (j=0; j<json_data.data[i].length; ++j) {
+				/*for (j=0; j<json_data.data[i].length; ++j) {
 					json_data.data[i][j] = parseInt(json_data.data[i][j]);
+				}
+				var data_set = {name:json_data.year[i].year, data:json_data.data[i]};*/
+				for (var j=0,show_label=true,data=0; j<json_data.data[i].length; ++j) 
+				{		
+					data = parseInt(json_data.data[i][j]);
+					if(data == 0)
+					{
+						show_label = false;
+					}
+					else
+					{
+						show_label = true;
+					}
+					json_data.data[i][j] = {y: data,  dataLabels: {enabled: show_label}};
 				}
 				var data_set = {name:json_data.year[i].year, data:json_data.data[i]};
 				myseries.push(data_set);
@@ -1008,10 +1022,7 @@ function view_chart2()
 				yAxis: {
 					title: {
 						text: '提案數'
-					},
-					plotLines: [{
-						
-					}]
+					}
 				},
 				plotOptions: {   //堆疊顯示
 					series: {
@@ -1026,16 +1037,17 @@ function view_chart2()
 			
 			/*自訂圖表樣式*/
 			Highcharts.theme = {
-				colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', 
-						'#FF9655', '#FFF263', '#6AF9C4'],
+				colors: ['#24CBE5', '#64E572', 
+						'#FF9655', '#FFF263', '#6AF9C4','#058DC7','#50B432','#ED561B','#DDDF00'],
 				chart: {
-					backgroundColor: {
+					/*backgroundColor: {
 						linearGradient: [0, 0, 500, 500],
 						stops: [
 							[0, 'rgb(255, 255, 255)'],
 							[1, 'rgb(240, 240, 255)']
 						]
-					},
+					},*/
+					backgroundColor: '#FBFBF0'
 				},
 				title: {
 					style: {
@@ -1058,10 +1070,23 @@ function view_chart2()
 					itemHoverStyle:{
 						color: 'gray'
 					},
+					backgroundColor:'#FFFFFF',
 					layout: 'horizontal',
 					align: 'right',
 					verticalAlign: 'top',
 					floating: true	
+				},
+				plotOptions: {   //堆疊顯示
+					series: {
+						stacking: 'normal',
+						dataLabels: {
+							//font: '7pt sans-serif',
+							font:'新細明體',
+							//align: 'center',
+							//color:'black',
+							//backgroundColor:'blue'
+						}
+					}
 				}
 			};
 			Highcharts.setOptions(Highcharts.theme);  // Apply the theme
