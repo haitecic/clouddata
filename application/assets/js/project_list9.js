@@ -988,14 +988,7 @@ function view_chart2()
 			for(var i=0;i<category_count;i++)
 			{
 				xaxis.push(json_data.unit[i].proposed_unit);
-			}	
-			//alert(parseInt(myseries[0].data[1]));
-			
-			console.log(myseries[0].name+':'+myseries[0].data);
-			console.log(myseries[1].name+':'+myseries[1].data);
-			console.log(myseries[2].name+':'+myseries[2].data);
-			console.log(myseries[3].name+':'+myseries[3].data);
-			console.log(myseries[4].name+':'+myseries[4].data);
+			}
 			var options = {  
 				chart: {
 					renderTo: 'view_chart2',
@@ -1004,12 +997,28 @@ function view_chart2()
 				title: {
 					text: '年度部門提案數'
 				},
+				tooltip: {  
+					backgroundColor: '#FCFFC5',
+					borderRadius: 8,
+					borderWidth: 2
+				},
 				xAxis: {
-					categories: xaxis					
+					categories: xaxis
 				},
 				yAxis: {
 					title: {
 						text: '提案數'
+					},
+					plotLines: [{
+						
+					}]
+				},
+				plotOptions: {   //堆疊顯示
+					series: {
+						stacking: 'normal',
+						dataLabels: {
+							enabled:true
+						}
 					}
 				},
 				series:myseries					
@@ -1048,10 +1057,14 @@ function view_chart2()
 					},
 					itemHoverStyle:{
 						color: 'gray'
-					}   
+					},
+					layout: 'horizontal',
+					align: 'right',
+					verticalAlign: 'top',
+					floating: true	
 				}
 			};
-			//Highcharts.setOptions(Highcharts.theme);  // Apply the theme
+			Highcharts.setOptions(Highcharts.theme);  // Apply the theme
 			var chart1 = new Highcharts.Chart(options);			
 			document.getElementById("view_chart_block2").style.display="block";
 			document.getElementById("view_chart_background_mask2").style.display="block";

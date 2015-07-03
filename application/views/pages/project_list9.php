@@ -367,7 +367,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 <div id="view_chart_background_mask" class="background_mask" onclick="close_view_chart(this.id)"></div>
 <!--圖表呈現區塊-->
 <div id="view_chart_block2" class="view_chart_block">
-	<div id="view_chart2" style="width:80%;height:1000px"></div>
+	<div id="view_chart2" style="width:80%;height:5000px"></div>
 </div>
 <div id="view_chart_background_mask2" class="background_mask" onclick="close_view_chart2(this.id)"></div>
 <!--PDF檔案預覽區塊-->

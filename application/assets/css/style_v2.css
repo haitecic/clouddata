@@ -2336,9 +2336,9 @@ select
 }
 
 .view_chart{
-	width:1050px;
+	width:1100px;
 	/*width:1000px;*/
-	height:3000px;
+	height:4000px;
 	/*position:fixed;*/
 	padding-top:30px;
 	padding-right:10px;
