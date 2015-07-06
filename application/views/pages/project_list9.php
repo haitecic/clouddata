@@ -18,14 +18,16 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				</div>
 				<div class="no-move"></div>				
 			</div>
-			<div id="project_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:none"><!---->
+			<div id="project_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:none">
 				<!--<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1155px;top:-10px;z-index:50;width: auto;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
 				</div>-->
 				<!--border-color:#C3DEB7;background-color:#C3DEB7;color:#821EC7 96BBDE-->				
 				<!--<a style="position:absolute;left:1000px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()">圖表</a>-->
-				<a style="position:absolute;left:930px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()">highchart</a>
-				<a style="position:absolute;left:1010px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart()">echart</a>
+				<!--<a style="position:absolute;left:930px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()">highchart</a>-->
+				<img src="<?php echo $img_location?>/report8.png" alt="圖表" style="cursor:pointer;position:absolute;left:1000px;top:15px;z-index:50;width: 62px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>
+				<!--Echart-->
+				<!--<a style="position:absolute;left:1010px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart()">echart</a>-->
 				<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
 				</div>
@@ -360,12 +362,12 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 	</div>	
 </div>
 <span id="width_tmp" style="display:none"></span>
-<!--圖表呈現區塊-->
+<!--圖表呈現區塊echarts-->
 <div id="view_chart_block" class="view_chart_block">
 	<div id="view_chart" class="view_chart"></div>
 </div>
 <div id="view_chart_background_mask" class="background_mask" onclick="close_view_chart(this.id)"></div>
-<!--圖表呈現區塊-->
+<!--圖表呈現區塊highcharts-->
 <div id="view_chart_block2" class="view_chart_block">
 	<div id="view_chart2" style="width:80%;height:5000px"></div>
 </div>
@@ -402,7 +404,10 @@ $(document).ready(function() {
 	var manager_opinion_start_record = "<?php echo $manager_opinion_start_record;?>";
 	var manager_opinion_display_length = "<?php echo $manager_opinion_display_length;?>";
 	var manager_opinion_order_column = "<?php echo $manager_opinion_order_column;?>";
-	var manager_opinion_order_method = "<?php echo $manager_opinion_order_method;?>";	
+	var manager_opinion_order_method = "<?php echo $manager_opinion_order_method;?>";
+	var project_list_content = document.getElementById("project_list_content");	
+	var news_list_content = document.getElementById("news_list_content");	
+	var manager_opinion_list_content = document.getElementById("manager_opinion_list_content");
 	var project_display_columns = [];
 	var news_display_columns = [];
 	var external_tech_display_columns = [];
@@ -411,14 +416,13 @@ $(document).ready(function() {
 	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/user_column_setting";
 	var user_id = document.getElementById('user_id').value;
 	$.ajax({
-		url: request_url,  //The URL for the request
-		data:{			 //The data to send(will be converted to a query string)
+		url: request_url,
+		data:{
 			"user_id": user_id
 		},
-		type:"POST",		 //Whether this is a POST or GET request(以POST或GET型態送出data屬性設定的資料)
-		dataType:"json", //The type of data we expect back 回傳的資料型態
-		//Code to run if the request succeeds. The response is passed to the function
-		async:false,   //設定同步(false)與非同步請求(true)
+		type:"POST",
+		dataType:"json",
+		async:false,
 		success:function(json){ 
 			var i;
 			for(i=0;i<4;i++)
@@ -524,69 +528,15 @@ $(document).ready(function() {
 	load_external_tech_list(is_load, external_tech_start_record, external_tech_display_length, external_tech_order_column, external_tech_order_method, search_str, external_tech_display_columns);
 	load_manager_opinion_list(is_load, manager_opinion_start_record, manager_opinion_display_length, manager_opinion_order_column, manager_opinion_order_method, search_str, manager_opinion_display_columns);
 	load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);	
-	//document.getElementById("loading").style.display = "none";
 	$("#project_list_content").fadeIn(300);
 	$("#news_list_content").fadeIn(300);
 	//$("#external_tech_list_content").fadeIn(300);
-	$("#manager_opinion_list_content").fadeIn(300);	
-	$("#loading").fadeOut(1500);        
+	$("#manager_opinion_list_content").fadeIn(300);		
+	project_list_content.style.display = "block";
+	news_list_content.style.display = "block";
+	manager_opinion_list_content.style.display = "block";
+	$("#loading").fadeOut(1500);  //隱藏資料載入動畫圖示      
 });
-	
-
-
-function news_show_select_box(value)
-{
-	$('#news_col_select_box_'+value).mouseover(function(){  //change
-		$("#width_tmp").html($('#news_col_select_box_'+value+' option:selected').text());
-		$(this).width($("#width_tmp").width()+38); // 35 : the size of the down arrow of the select box 
-	});
-	document.getElementById("news_col_select_box_"+value).style.display="block";		
-	document.getElementById("news_col_plain_text_"+value).style.display="none";
-}
-
-function external_tech_show_select_box(value)
-{
-	$('#external_tech_col_select_box_'+value).mouseover(function(){  //change
-		$("#width_tmp").html($('#external_tech_col_select_box_'+value+' option:selected').text());
-		$(this).width($("#width_tmp").width()+38); // 35 : the size of the down arrow of the select box 
-	});
-	document.getElementById("external_tech_col_select_box_"+value).style.display="block";		
-	document.getElementById("external_tech_col_plain_text_"+value).style.display="none";
-}
-
-function manager_opinion_show_select_box(value)
-{
-	$('#manager_opinion_col_select_box_'+value).mouseover(function(){  //change
-		$("#width_tmp").html($('#manager_opinion_col_select_box_'+value+' option:selected').text());
-		$(this).width($("#width_tmp").width()+38); // 35 : the size of the down arrow of the select box 
-	});
-	document.getElementById("manager_opinion_col_select_box_"+value).style.display="block";		
-	document.getElementById("manager_opinion_col_plain_text_"+value).style.display="none";
-}
-
-function pro_hide_select_box(value)
-{
-	document.getElementById("pro_col_select_box_"+value).style.display="none";
-	document.getElementById("pro_col_plain_text_"+value).style.display="block";
-}
-
-function news_hide_select_box(value)
-{
-	document.getElementById("news_col_select_box_"+value).style.display="none";
-	document.getElementById("news_col_plain_text_"+value).style.display="block";
-}
-
-function external_tech_hide_select_box(value)
-{
-	document.getElementById("external_tech_col_select_box_"+value).style.display="none";
-	document.getElementById("external_tech_col_plain_text_"+value).style.display="block";
-}
-
-function manager_opinion_hide_select_box(value)
-{
-	document.getElementById("manager_opinion_col_select_box_"+value).style.display="none";
-	document.getElementById("manager_opinion_col_plain_text_"+value).style.display="block";
-}
 
 $('#project_list_tbl').on('mouseover', 'tbody tr', function(){
 	var row_index = $(this).index();

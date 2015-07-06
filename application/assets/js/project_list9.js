@@ -1009,20 +1009,24 @@ function view_chart2()
 					type: 'bar'
 				},
 				title: {
-					text: '年度部門提案數'
+					text: '年度部門提案件數'
 				},
 				tooltip: {  
 					backgroundColor: '#FCFFC5',
 					borderRadius: 8,
-					borderWidth: 2
+					borderWidth: 2,
+					formatter:function(){
+						return this.x + '<br/>' + this.series.name + '年<br/>提案數:'+ this.y +'件';
+					}
 				},
 				xAxis: {
 					categories: xaxis
 				},
 				yAxis: {
 					title: {
-						text: '提案數'
-					}
+						text: '提案件數'
+					},
+					tickInterval: 10
 				},
 				plotOptions: {   //堆疊顯示
 					series: {
@@ -1048,7 +1052,7 @@ function view_chart2()
 						]
 					},*/
 					backgroundColor: '#FBFBF0'
-				},
+				},				
 				title: {
 					style: {
 						color: '#000',
@@ -1061,7 +1065,6 @@ function view_chart2()
 						font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
 					}
 				},
-			
 				legend: {
 					itemStyle: {
 						font: '9pt Trebuchet MS, Verdana, sans-serif',
@@ -1082,8 +1085,8 @@ function view_chart2()
 						dataLabels: {
 							//font: '7pt sans-serif',
 							font:'新細明體',
-							//align: 'center',
-							//color:'black',
+							//align: 'right',
+							color:'#7C7272',
 							//backgroundColor:'blue'
 						}
 					}
@@ -1191,15 +1194,114 @@ function user_behavior_log(element_id, browse_file)
 	});
 }
 
-function pro_show_select_box(value)
-{
-	$('#pro_col_select_box_'+value).mouseover(function(){  //change
-		$("#width_tmp").html($('#pro_col_select_box_'+value+' option:selected').text());
-		$(this).width($("#width_tmp").width()+38); // 35 : the size of the down arrow of the select box 
-	});
-	document.getElementById("pro_col_select_box_"+value).style.display="block";		
-	document.getElementById("pro_col_plain_text_"+value).style.display="none";
+function pro_show_select_box(id)
+{	
+	$("#width_tmp").html($('#pro_col_select_box_'+id+' option:selected').text());
+	var column_width = $("#project_list_head"+id).width();
+	var select_box_width = $("#width_tmp").width()+38;  //38px為下拉式選單之箭頭的寬度	
+	if(column_width < select_box_width)  //判斷選擇框的寬度是否大於其所在之head的欄位寬度
+	{
+		$('#pro_col_select_box_'+id).width(column_width-7);  //在下拉式選單與調整排序按鈕之間保持7px的間隔
+	}
+	else if(column_width < (select_box_width+7))
+	{
+		$('#pro_col_select_box_'+id).width(column_width-7);  //在下拉式選單與調整排序按鈕之間保持7px的間隔
+	}
+	else
+	{
+		$('#pro_col_select_box_'+id).width(select_box_width);
+	}
+	document.getElementById("pro_col_select_box_"+id).style.display="block";		
+	document.getElementById("pro_col_plain_text_"+id).style.display="none";
 }
+
+function news_show_select_box(id)
+{
+	$("#width_tmp").html($('#news_col_select_box_'+id+' option:selected').text());
+	var column_width = $("#news_list_head"+id).width();
+	var select_box_width = $("#width_tmp").width()+38;  //38px為下拉式選單之箭頭的寬度	
+	if(column_width < select_box_width)  //判斷選擇框的寬度是否大於其所在之head的欄位寬度
+	{
+		$('#news_col_select_box_'+id).width(column_width-7);  //在下拉式選單與調整排序按鈕之間保持7px的間隔
+	}
+	else if(column_width < (select_box_width+7))
+	{
+		$('#news_col_select_box_'+id).width(column_width-7);  //在下拉式選單與調整排序按鈕之間保持7px的間隔
+	}
+	else
+	{
+		$('#news_col_select_box_'+id).width(select_box_width);
+	}
+	document.getElementById("news_col_select_box_"+id).style.display="block";		
+	document.getElementById("news_col_plain_text_"+id).style.display="none";
+}
+
+function external_tech_show_select_box(id)
+{
+	$("#width_tmp").html($('#external_tech_col_select_box_'+id+' option:selected').text());
+	var column_width = $("#external_tech_list_head"+id).width();
+	var select_box_width = $("#width_tmp").width()+38;  //38px為下拉式選單之箭頭的寬度	
+	if(column_width < select_box_width)  //判斷選擇框的寬度是否大於其所在之head的欄位寬度
+	{
+		$('#external_tech_col_select_box_'+id).width(column_width-7);  //在下拉式選單與調整排序按鈕之間保持7px的間隔
+	}
+	else if(column_width < (select_box_width+7))
+	{
+		$('#external_tech_col_select_box_'+id).width(column_width-7);  //在下拉式選單與調整排序按鈕之間保持7px的間隔
+	}
+	else
+	{
+		$('#external_tech_col_select_box_'+id).width(select_box_width);
+	}
+	document.getElementById("external_tech_col_select_box_"+id).style.display="block";		
+	document.getElementById("external_tech_col_plain_text_"+id).style.display="none";
+}
+
+function manager_opinion_show_select_box(id)
+{
+	$("#width_tmp").html($('#manager_opinion_col_select_box_'+id+' option:selected').text());
+	var column_width = $("#manager_opinion_list_head"+id).width();
+	var select_box_width = $("#width_tmp").width()+38;  //38px為下拉式選單之箭頭的寬度	
+	if(column_width < select_box_width)  //判斷選擇框的寬度是否大於其所在之head的欄位寬度
+	{
+		$('#manager_opinion_col_select_box_'+id).width(column_width-7);  //在下拉式選單與調整排序按鈕之間保持7px的間隔
+	}
+	else if(column_width < (select_box_width+7))
+	{
+		$('#manager_opinion_col_select_box_'+id).width(column_width-7);  //在下拉式選單與調整排序按鈕之間保持7px的間隔
+	}
+	else
+	{
+		$('#manager_opinion_col_select_box_'+id).width(select_box_width);
+	}
+	document.getElementById("manager_opinion_col_select_box_"+id).style.display="block";		
+	document.getElementById("manager_opinion_col_plain_text_"+id).style.display="none";
+}
+
+function pro_hide_select_box(id)
+{
+	document.getElementById("pro_col_select_box_"+id).style.display="none";
+	document.getElementById("pro_col_plain_text_"+id).style.display="block";
+}
+
+function news_hide_select_box(id)
+{
+	document.getElementById("news_col_select_box_"+id).style.display="none";
+	document.getElementById("news_col_plain_text_"+id).style.display="block";
+}
+
+function external_tech_hide_select_box(id)
+{
+	document.getElementById("external_tech_col_select_box_"+id).style.display="none";
+	document.getElementById("external_tech_col_plain_text_"+id).style.display="block";
+}
+
+function manager_opinion_hide_select_box(id)
+{
+	document.getElementById("manager_opinion_col_select_box_"+id).style.display="none";
+	document.getElementById("manager_opinion_col_plain_text_"+id).style.display="block";
+}
+
 //project_edit
 function check_project_data(id)
 {
