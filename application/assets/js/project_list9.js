@@ -771,13 +771,16 @@ function adjust_manager_opinion_display_column_by_column()
 function project_collapse()
 {
 	var project_list_content = document.getElementById("project_list_content");
+	var project_list_collapse_icon = document.getElementById("project_list_collapse_icon");
 	if(project_list_content.style.display == "block")
 	{
 		project_list_content.style.display = "none";
+		project_list_collapse_icon.className = "fa fa-chevron-down";
 	}
 	else
 	{
 		project_list_content.style.display = "block";
+		project_list_collapse_icon.className = "fa fa-chevron-up";
 	}
 	$("#project_column_choose_menu").dialog("close");
 }
@@ -785,13 +788,16 @@ function project_collapse()
 function news_collapse()
 {
 	var news_list_content = document.getElementById("news_list_content");
+	var news_list_collapse_icon = document.getElementById("news_list_collapse_icon");
 	if(news_list_content.style.display == "block")
 	{
 		news_list_content.style.display = "none";
+		news_list_collapse_icon.className = "fa fa-chevron-down";
 	}
 	else
 	{
 		news_list_content.style.display = "block";
+		news_list_collapse_icon.className = "fa fa-chevron-up";
 	}
 	$("#news_column_choose_menu").dialog("close");
 }
@@ -799,13 +805,16 @@ function news_collapse()
 function external_tech_collapse()
 {
 	var external_tech_list_content = document.getElementById("external_tech_list_content");
+	var external_tech_list_collapse_icon = document.getElementById("external_tech_list_collapse_icon");
 	if(external_tech_list_content.style.display == "block")
 	{
 		external_tech_list_content.style.display = "none";
+		external_tech_list_collapse_icon.className = "fa fa-chevron-down";
 	}
 	else
 	{
 		external_tech_list_content.style.display = "block";
+		external_tech_list_collapse_icon.className = "fa fa-chevron-up";
 	}
 	$("#external_tech_column_choose_menu").dialog("close");
 }
@@ -813,13 +822,16 @@ function external_tech_collapse()
 function manager_opinion_collapse()
 {
 	var manager_opinion_list_content = document.getElementById("manager_opinion_list_content");
+	var manager_opinion_list_collapse_icon = document.getElementById("manager_opinion_list_collapse_icon");
 	if(manager_opinion_list_content.style.display == "block")
 	{
 		manager_opinion_list_content.style.display = "none";
+		manager_opinion_list_collapse_icon.className = "fa fa-chevron-down";
 	}
 	else
 	{
 		manager_opinion_list_content.style.display = "block";
+		manager_opinion_list_collapse_icon.className = "fa fa-chevron-up";
 	}
 	$("#manager_opinion_column_choose_menu").dialog("close");
 }

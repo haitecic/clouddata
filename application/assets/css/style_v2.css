@@ -337,7 +337,7 @@ a.show-sidebar:hover {
   line-height: 24px;
 }
 .box-name:hover {
-  cursor: move;
+  /*cursor: move;*/
 }
 .box-name > i {
   margin-right:5px;

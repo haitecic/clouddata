@@ -13,7 +13,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link" style="padding-top:13px;width:40px;height:40px" onclick="project_collapse()">
-						<i class="fa fa-chevron-up"></i>
+						<i id="project_list_collapse_icon" class="fa fa-chevron-up"></i>
 					</a>
 				</div>
 				<div class="no-move"></div>				
@@ -68,7 +68,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link" style="padding-top:13px;width:40px;height:40px" onclick="news_collapse()">
-						<i class="fa fa-chevron-up"></i>
+						<i id="news_list_collapse_icon" class="fa fa-chevron-up"></i>
 					</a>
 				</div>
 				<div class="no-move"></div>				
@@ -114,7 +114,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link" style="padding-top:13px;width:40px;height:40px" onclick="external_tech_collapse()">
-						<i class="fa fa-chevron-up"></i>
+						<i id="external_tech_list_collapse_icon" class="fa fa-chevron-up"></i>
 					</a>
 				</div>
 				<div class="no-move"></div>				
@@ -160,7 +160,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				</div>
 				<div class="box-icons">
 					<a class="collapse-link" style="padding-top:13px;width:40px;height:40px" onclick="manager_opinion_collapse()">
-						<i class="fa fa-chevron-up"></i>
+						<i id="manager_opinion_list_collapse_icon" class="fa fa-chevron-up"></i>
 					</a>
 				</div>
 				<div class="no-move"></div>				
@@ -531,7 +531,8 @@ $(document).ready(function() {
 	$("#project_list_content").fadeIn(300);
 	$("#news_list_content").fadeIn(300);
 	//$("#external_tech_list_content").fadeIn(300);
-	$("#manager_opinion_list_content").fadeIn(300);		
+	$("#manager_opinion_list_content").fadeIn(300);
+	document.getElementById("project_list_collapse_icon").className = "fa fa-chevron-up";	
 	project_list_content.style.display = "block";
 	news_list_content.style.display = "block";
 	manager_opinion_list_content.style.display = "block";
