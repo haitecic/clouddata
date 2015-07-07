@@ -25,12 +25,14 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<!--border-color:#C3DEB7;background-color:#C3DEB7;color:#821EC7 96BBDE-->				
 				<!--<a style="position:absolute;left:1000px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()">圖表</a>-->
 				<!--<a style="position:absolute;left:930px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()">highchart</a>-->
-				<img src="<?php echo $img_location?>/report8.png" alt="圖表" style="cursor:pointer;position:absolute;left:1000px;top:15px;z-index:50;width: 62px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>
+				<!--<img src="<?php echo $img_location?>/report8.png" alt="圖表" style="cursor:pointer;position:absolute;left:1000px;top:15px;z-index:50;width: 62px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>-->
+				<img src="<?php echo $img_location?>/report8.png" alt="圖表" style="cursor:pointer;position:absolute;left:1052px;top:15px;z-index:50;width: 62px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>
 				<!--Echart-->
 				<!--<a style="position:absolute;left:1010px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart()">echart</a>-->
-				<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
+				<img id="column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon7.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
+				<!--<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
-				</div>
+				</div>-->
 				<table id="project_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px;table-layout:fixed;word-break:break-all;text-align:justify;/*text-justify:auto;word-wrap:break-word*/">
 					<thead>
 						<tr>
@@ -74,9 +76,10 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<div class="no-move"></div>				
 			</div>
 			<div id="news_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
-				<div id="news_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
+				<img id="news_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon7.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
+				<!--<div id="news_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
-				</div>
+				</div>-->
 				<table id="news_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px;table-layout:fixed;word-break:break-all;word-wrap:break-word">	
 					<thead>
 						<tr>
@@ -120,9 +123,10 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<div class="no-move"></div>				
 			</div>
 			<div id="external_tech_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
-				<div id="external_tech_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
+				<img id="external_tech_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon7.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
+				<!--<div id="external_tech_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
-				</div>
+				</div>-->
 				<table id="external_tech_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px;table-layout:fixed;word-break:break-all;word-wrap:break-word">	
 					<thead>
 						<tr>
@@ -166,9 +170,10 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<div class="no-move"></div>				
 			</div>
 			<div id="manager_opinion_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
-				<div id="manager_opinion_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
+				<img id="manager_opinion_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon7.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
+				<!--<div id="manager_opinion_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
-				</div>
+				</div>-->
 				<table id="manager_opinion_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px;table-layout:fixed;word-break:break-all;word-wrap:break-word">	
 					<thead>
 						<tr>
