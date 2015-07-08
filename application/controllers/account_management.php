@@ -42,87 +42,87 @@ class Account_management extends MY_Controller{//CI_Controller{
 		}
 		else  //表單驗證通過
 		{
-			//ldap驗證登入帳密
-			$ad_server = '10.202.112.2';
-			$port = '389';  
-			$conn_account      = '陳健發';
-			$conn_password     = 'AZSXDCFV';
-			$ldap_tree    = "CN=$conn_account,OU=BCDXX,OU=IA_User,DC=IA,DC=COM,DC=TW"; 
-			$search_tree    = "DC=IA,DC=COM,DC=TW";
-			$ldap_conn = ldap_connect($ad_server, $port) or die("Failed to connect the AD server !");
-			ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
-			ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
-			if($ldap_conn) 
-			{					
-				$account = $this->input->post('account');
-				$passwd = $this->input->post('passwd');
-				$ldap_bind = @ldap_bind($ldap_conn, $ldap_tree, $conn_password);
-				if ($ldap_bind) 
-				{							
-					$result = ldap_search($ldap_conn, $search_tree, "(sn=$account)");
-					$user_ldap_data = ldap_get_entries($ldap_conn, $result);
-					$user_ldap_name = $user_ldap_data[0]["distinguishedname"][0];  //取得使用者ldap的名稱
-					ldap_close($ldap_conn);
-					$ldap_conn = ldap_connect($ad_server, $port) or die("Failed to connect to the LDAP server.");
-					ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
-					ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
-					if($ldap_conn) 
-					{								
-						$ldapbind = @ldap_bind($ldap_conn, $user_ldap_name, $passwd);
-						if($ldapbind)
-						{
-							$result = ldap_search($ldap_conn, $search_tree, "(sn=$account)");
-							$user_ldap_data = ldap_get_entries($ldap_conn, $result);
-							$name = $user_ldap_data[0]["name"][0];
-							$result = $this->account_management_model->get_login_account();					
-							if(empty($result))   //帳號不存在於資料表中
+			$login_success = false;
+			$account = $this->input->post('account');
+			$passwd = $this->input->post('passwd');
+			if(!empty($account) && !empty($passwd))  //判斷使用者是否有輸入帳號密碼
+			{
+				//ldap驗證登入帳密
+				$ad_server = '10.202.112.2';
+				$port = '389';  
+				$conn_account      = '陳健發';
+				$conn_password     = 'AZSXDCFV';
+				$ldap_tree    = "CN=$conn_account,OU=BCDXX,OU=IA_User,DC=IA,DC=COM,DC=TW"; 
+				$search_tree    = "DC=IA,DC=COM,DC=TW";
+				$ldap_conn = ldap_connect($ad_server, $port) or die("Failed to connect the AD server !");
+				ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+				ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
+				if($ldap_conn) 
+				{				
+					$ldap_bind = @ldap_bind($ldap_conn, $ldap_tree, $conn_password);
+					if ($ldap_bind) 
+					{							
+						$result = ldap_search($ldap_conn, $search_tree, "(sn=$account)");
+						$user_ldap_data = ldap_get_entries($ldap_conn, $result);
+						$user_ldap_name = $user_ldap_data[0]["distinguishedname"][0];  //取得使用者ldap的名稱
+						ldap_close($ldap_conn);
+						$ldap_conn = ldap_connect($ad_server, $port) or die("Failed to connect to the LDAP server.");
+						ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+						ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
+						if($ldap_conn) 
+						{								
+							$ldapbind = @ldap_bind($ldap_conn, $user_ldap_name, $passwd);
+							if($ldapbind)
 							{
-								$user_id = $this->account_management_model->set_user_basic_info($account, $name);
-								$this->account_management_model->set_user_personal_setting($user_id);						
+								$result = ldap_search($ldap_conn, $search_tree, "(sn=$account)");
+								$user_ldap_data = ldap_get_entries($ldap_conn, $result);
+								$username = $user_ldap_data[0]["name"][0];
+								$result = $this->account_management_model->get_login_account();					
+								if(empty($result))   //帳號不存在於資料表中
+								{
+									$user_id = $this->account_management_model->set_user_basic_info($account, $name);
+									$this->account_management_model->set_user_personal_setting($user_id);						
+								}
+								else
+								{
+									$user_id = $result['id'];						
+								}			
+								ldap_close($ldap_conn);												
+								$this->session->set_userdata('user_id', $user_id);  //儲存使用者資料至session
+								$this->session->set_userdata('username', $username);											
+								$this->session->set_userdata('project_start_record', 0);  //從第幾筆資料開始呈現(瀏覽的分頁)
+								$this->session->set_userdata('project_display_length', 10);  //一頁顯示筆數
+								$this->session->set_userdata('project_order_column', 1);  //排序欄位
+								$this->session->set_userdata('project_order_method', "asc");  //排序方式
+								$this->session->set_userdata('news_start_record', 0);
+								$this->session->set_userdata('news_display_length', 10);
+								$this->session->set_userdata('news_order_column', 1);
+								$this->session->set_userdata('news_order_method', "asc");
+								$this->session->set_userdata('external_tech_start_record', 0);
+								$this->session->set_userdata('external_tech_display_length', 10);
+								$this->session->set_userdata('external_tech_order_column', 1);
+								$this->session->set_userdata('external_tech_order_method', "asc");
+								$this->session->set_userdata('manager_opinion_start_record', 0);
+								$this->session->set_userdata('manager_opinion_display_length', 10);
+								$this->session->set_userdata('manager_opinion_order_column', 1);
+								$this->session->set_userdata('manager_opinion_order_method', "asc");								
+								$login_success = true;								
 							}
-							else
-							{
-								$user_id = $result['id'];						
-							}
-							$username = $name;					
-							ldap_close($ldap_conn);												
-							$this->session->set_userdata('user_id', $user_id);  //儲存使用者資料至session
-							$this->session->set_userdata('username', $username);											
-							$this->session->set_userdata('project_start_record', 0);  //從第幾筆資料開始呈現(瀏覽的分頁)
-							$this->session->set_userdata('project_display_length', 10);  //一頁顯示筆數
-							$this->session->set_userdata('project_order_column', 1);  //排序欄位
-							$this->session->set_userdata('project_order_method', "asc");  //排序方式
-							$this->session->set_userdata('news_start_record', 0);
-							$this->session->set_userdata('news_display_length', 10);
-							$this->session->set_userdata('news_order_column', 1);
-							$this->session->set_userdata('news_order_method', "asc");
-							$this->session->set_userdata('external_tech_start_record', 0);
-							$this->session->set_userdata('external_tech_display_length', 10);
-							$this->session->set_userdata('external_tech_order_column', 1);
-							$this->session->set_userdata('external_tech_order_method', "asc");
-							$this->session->set_userdata('manager_opinion_start_record', 0);
-							$this->session->set_userdata('manager_opinion_display_length', 10);
-							$this->session->set_userdata('manager_opinion_order_column', 1);
-							$this->session->set_userdata('manager_opinion_order_method', "asc");
-							header('Location:project_list');
-						}
-						else
-						{
-							$data['error_message'] = "帳號密碼輸入錯誤!";							
-							$this->load->view('templates/login_header', $data);
-							$this->load->view('pages/login', $data);
-							$this->load->view('templates/login_footer');
-						}
-					}					
-				}
-				else
-				{		
-					$data['error_message'] = "帳號密碼輸入錯誤!";
-					$this->load->view('templates/login_header', $data);
-					$this->load->view('pages/login', $data);
-					$this->load->view('templates/login_footer');
+						}					
+					}
 				}
 			}			
+			if($login_success)
+			{
+				header('Location:project_list');
+			}
+			else
+			{
+				$data['error_message'] = "帳號密碼輸入錯誤!";
+				$this->load->view('templates/login_header', $data);
+				$this->load->view('pages/login', $data);
+				$this->load->view('templates/login_footer');
+			}
 		}
 	}	
 	

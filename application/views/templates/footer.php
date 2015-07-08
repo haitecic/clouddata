@@ -1,14 +1,18 @@
-﻿	<!--End Container-->
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<!--<script src="http://code.jquery.com/jquery.js"></script>-->
-	<script src="<?php echo $plugins_location;?>/jquery/jquery.min.js"></script>
-	<script src="<?php echo $plugins_location;?>/jquery-ui/jquery-ui.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="<?php echo $plugins_location;?>/bootstrap/bootstrap.min.js"></script>
-	<script src="<?php echo $plugins_location;?>/justified-gallery/jquery.justifiedGallery.min.js"></script>
-	<script src="<?php echo $plugins_location;?>/tinymce/tinymce.min.js"></script>
-	<script src="<?php echo $plugins_location;?>/tinymce/jquery.tinymce.min.js"></script>
-	<!-- All functions for this theme + document.ready processing -->	
-	<script src="<?php echo $js_location;?>/devoops.js"></script>
+﻿	<!--End Container-->	
+	<!--load jQuery ui-->
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>	
+	<!--<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>-->
+	<!--preview file-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.js"></script>
+	<script type="text/javascript" src="<?php echo $js_location?>/pdfobject.js"></script>	
+	<!--load highchart-->
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<!--load EChart-->
+	<!--<script src="<?php echo $js_location;?>/EChart/echarts-all.js"></script>-->
+	<!--load self-defined js-->
+	<script type="text/javascript" src="<?php echo $js_location?>/project_list9.js"></script>
+	<!--load datatable-->
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="http://cdn.datatables.net/plug-ins/1.10.6/api/fnPagingInfo.js"></script>
 	</body>
 </html>

@@ -792,6 +792,4 @@ $(function() {
 	});
 });
 </script>
-</body>
-</html>
 

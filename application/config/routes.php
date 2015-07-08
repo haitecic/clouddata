@@ -56,7 +56,6 @@ $route['search_form_index'] = 'project/search_form_index';
 $route['project_list'] = 'project/list_all_projects';
 $route['project_list/(:any)'] = 'project/list_all_projects/$1';
 $route['get_chart_data'] = 'project/get_chart_data';
-//$route['project_list/(:num)/(:any)'] = 'project/list_all_projects/$1/$2';
 $route['project_detail/(:num)'] = 'project/list_project_detail/$1';
 $route['project_detail/(:num)/(:any)'] = 'project/list_project_detail/$1/$2';
 $route['project_record_create/(:num)'] = 'project/create_project_record_data/$1';
@@ -80,22 +79,18 @@ $route['project_file/(:num)/(:any)'] = 'project/project_file/$1/$2';
 $route['project_edit/(:any)'] = 'project/edit_project_data/$1';
 $route['project/test_template'] = 'project/test_template';
 $route['project/index'] = 'project/index';
-/*$route['data/getTable'] = 'project/getTable';
-$route['data/getTable1'] = 'project/getTable1';
-$route['data/getTable2'] = 'project/getTable2';
-$route['data/getTable3'] = 'account_management/getTable3';*/
 $route['data/project_table'] = 'data/project_table';
 $route['data/news_table'] = 'data/news_table';
 $route['data/external_tech_table'] = 'data/external_tech_table';
 $route['data/manager_opinion_table'] = 'data/manager_opinion_table';
+$route['default_controller'] = 'institute/register';
+
+/*
 //$route['data/project_table'] = 'data/project_table';
 //$route['data/project_table'] = 'data/project_table';
 //$route['data/getTable4'] = 'data/getTable4';
 //$route['get_data'] = 'project/get_data';
 //$route['institute/register'] = 'institute/register';
-$route['default_controller'] = 'institute/register';
-
-/*
 $route['university_project/university_view_all_projects'] = 'university_project/university_view_all_projects';
 $route['university_project/view'] = 'university_project/view';
 $route['university_project/view_detail'] = 'university_project/view';

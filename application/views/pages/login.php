@@ -44,6 +44,17 @@
 					<div class="text-center">
 						<h3 class="page-header" style="font-family: Adobe 繁黑體 Std;">專案管理系統</h3>
 					</div>
+					<?php 					
+					//顯示登入錯誤訊息
+					if(isset($error_message) && !empty($error_message))
+					{
+					?>
+					<div class="form-group">
+						<div style="font-family:微軟正黑體;font-size:12pt;text-align:center;color:red"><?php echo $error_message;?></div>
+					</div>
+					<?php 
+					}
+					?>					
 					<div class="form-group">
 						<label class="control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">帳號</label>
 						<input type="text" class="form-control" name="account" />
