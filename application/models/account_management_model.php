@@ -4,18 +4,17 @@ class Account_management_model extends CI_Model{
 	public function __construct()
 	{
 		$this->load->database();  //載入資料庫程式庫
-	}
+	}	
 	
 	/**
-	get_login_account()：Check the login account is available.
+	get_login_account()：Check the login account is available. (validate using ldap)
 	*/	
 	public function get_login_account()
 	{
 		//取得使用者帳密
-		$account = $this->input->post('account');
-		$password = $this->input->post('passwd');
-		$user_login_data = array('account' => $account, 'password' => $password);
-		$query = $this->db->select('id, account, surname, given_names')->from('login_account')->where($user_login_data)->get();
+		$account = $this->input->post('account');		
+		$user_login_data = array('account' => $account);
+		$query = $this->db->select('id, account, name')->from('login_account')->where($user_login_data)->get();
 		return $query->row_array();
 	}
 	
@@ -138,6 +137,36 @@ class Account_management_model extends CI_Model{
 	}
 
 	/**
+	set_user_basic_info()：紀錄使用者基本資料
+	*/
+	public function set_user_basic_info($account, $name)
+	{
+		$new_record = array('account'=>$account,
+			'name'=>$name);			
+		$this->db->insert('login_account', $new_record);
+		$insert_id = $this->db->insert_id();
+		return $insert_id;
+	}
+	
+	/**
+	set_user_personal_setting()：紀錄使用者個人化設定
+	*/
+	public function set_user_personal_setting($user_id)
+	{
+		$new_record = array(
+			array('user_id'=>$user_id, 'class'=>1, 'column1'=>'idea_name', 'column2'=>'year', 'column3'=>'idea_id', 'column4'=>'proposed_unit', 'column5'=>'proposer', 'column6'=>'established_date', 'column7'=>'progress_description', 'sort_column'=>1, 'sort_method'=>'asc'),
+			array('user_id'=>$user_id, 'class'=>2, 'column1'=>'title', 'column2'=>'category', 'column3'=>'description', 'column4'=>'pub_date', 'sort_column'=>1, 'sort_method'=>'asc'),
+			array('user_id'=>$user_id, 'class'=>3, 'column1'=>'idea_name', 'column2'=>'year', 'column3'=>'idea_id', 'column4'=>'proposed_unit', 'column5'=>'proposer', 'column6'=>'established_date', 'column7'=>'progress_description', 'sort_column'=>1, 'sort_method'=>'asc'),
+			array('user_id'=>$user_id, 'class'=>4, 'column1'=>'topic', 'column2'=>'content', 'column3'=>'in_charge', 'column4'=>'time', 'column5'=>'people','sort_column'=>1, 'sort_method'=>'asc')
+		);		
+		for($i=0; $i<count($new_record); $i++)
+		{
+			$this->db->insert('user_column_setting', $new_record[$i]);
+		}
+		return ;
+	}
+	
+	/**
 	set_user_behavior()：紀錄使用者行為
 	*/
 	public function set_user_behavior($user_id, $page, $cursorX, $cursorY, $trigger_element_id, $search_keyword, $file)
@@ -152,4 +181,17 @@ class Account_management_model extends CI_Model{
 		$this->db->insert('user_behavior_log', $new_record);
 		return ;
 	}
+	
+	/**
+	get_login_account()：Check the login account is available. (validating by DB)
+	*/	
+	/*public function get_login_account()
+	{
+		//取得使用者帳密
+		$account = $this->input->post('account');
+		$password = $this->input->post('passwd');
+		$user_login_data = array('account' => $account, 'password' => $password);
+		$query = $this->db->select('id, account, surname, given_names')->from('login_account')->where($user_login_data)->get();
+		return $query->row_array();
+	}*/
 }
