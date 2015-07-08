@@ -1,5 +1,4 @@
 <?php
-
 class Project extends MY_Controller{
 	
 	public function __construct()
@@ -85,7 +84,7 @@ class Project extends MY_Controller{
 		$data['project_list'] = $project_list;
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/navbar', $data);
-		$this->load->view('pages/project_list9', $data);
+		$this->load->view('pages/project_list', $data);
 		$this->load->view('templates/footer',$data);
 	}
 	
@@ -257,7 +256,7 @@ class Project extends MY_Controller{
 			redirect('login');
 		}
 		$data = $this->resource_path;
-		$data['title'] = '專案管理系統';
+		$data['title'] = '專案管理';
 		$data['user_id'] = $this->session->userdata('user_id');
 		$username = $this->session->userdata('username');
 		$data['username'] = $username;
