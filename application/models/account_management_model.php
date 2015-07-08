@@ -57,19 +57,6 @@ class Account_management_model extends CI_Model{
 			$j++;
 		}		
 		$json_data .= ']}';
-		/*$where_clause = array('user_id' => $user_id, 'class' => $class);
-		$query = $this->db->select('*')->from('user_column_setting')->where($where_clause)->get();
-		$result = $query->row_array();
-		$json_data = "{";
-		for($i=0; $i<7; $i++)
-		{
-			$json_data .= '"column'.$i.'":"'.$result['column'.($i+1)].'"';
-			if($i < 6)
-			{
-				$json_data .= ',';
-			}
-		}
-		$json_data .= "}";*/
 		return $json_data;
 	}
 	

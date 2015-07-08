@@ -11,10 +11,10 @@
     <title>專案管理系統</title>
 
     <!-- Bootstrap core CSS -->
-	<link href="<?php echo $css_location;?>/bootstrap.css" type="text/css" rel="stylesheet">
+	<link href="<?php echo $template_location;?>/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-	<link href="<?php echo $css_location;?>/main.css" type="text/css" rel="stylesheet">
+	<link href="<?php echo $css_location;?>/index.css" type="text/css" rel="stylesheet">
 
     <!-- Fonts from Google Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>

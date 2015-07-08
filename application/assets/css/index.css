@@ -1,560 +1,152 @@
-@charset "UTF-8";
-
-
 /*
-Fishbecat Reset CSS
-(c) 2008, 小魚扮貓 http://www.fishbecat.com/
-Based on YUI http://developer.yahoo.com/yui/reset/ and Eric Meyer http://meyerweb.com/eric/tools/css/reset/
-version: 1.2 | create: 20080901 | update: 20101127
-*/
+ * Author: Carlos Alvarez
+ * URL: http://alvarez.is
+ *
+ * Project Name: FLATTY - Free Bootstrap 3 Theme
+ * Version: 1.0
+ * URL: http://blacktie.co
+ */
 
-
-/*將有內距外距的元素歸零，避免不同瀏覽器內外距不同而錯位*/
-body, h1, h2, h3, h4, h5, h6, p, blockquote, th, td, div, dl, dt, dd, ul, ol, li, pre, code, form, fieldset, legend, input, button, textarea {
-        margin: 0;
-        padding: 0;
+body {
+  background-color: #f2f2f2;
+    font-family: 'Lato', sans-serif, Microsoft JhengHei;
+    font-weight: 300;
+    font-size: 16px;
+    color: #555;
+	
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
 }
 
-
-/*重置頁面基本字型大小及行高*/
-body,td,th {
-         font-family: Verdana, Geneva, sans-serif;
-        font-size: 100%;
-        line-height: 1;
-}
-
-
-/*將標題的字型大小及粗細都重置*/
+/* Titles */
 h1, h2, h3, h4, h5, h6 {
-        font-size: 100%;
-        font-weight: normal;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: #333;
 }
 
-
-/*將影像及欄位集的邊框歸零*/
-img, fieldset {
-        border: 0;
+h1 {
+	font-size: 40px;
 }
 
-
-/*將清單樣式清除，其實只要list-style: none就好了，後面都是為了特定瀏覽器*/
-ol, ul {
-        list-style: none;
+h3 {
+	color: #95a5a6;
+	font-weight: 400;
 }
 
-
-/*將表格的邊框設定為結合，小魚覺得分離好醜；其實一行就夠了，第二行是為了特定瀏覽器*/
-table {
-        border-collapse: collapse;
-        border-spacing: 0;
-}
-
-
-/*重置表格註解及標題儲存格的對齊*/
-caption, th {
-        text-align: left;
-}
-
-
-/*將連結、底線重置；其實應該要再加上一個 del 刪除線的，但小魚常常用del就不重置了*/
-a, ins {
-        text-decoration: none;
-}
-
-
-/*部份瀏覽器在表單元素的字型樣式跟內文會不一樣，故設為繼承保持一致*/
-input, button, textarea, select, optgroup, option {
-        font-family: inherit;
-        font-size: inherit;
-        font-style: inherit;
-        font-weight: inherit;
-}
-
-
-/*將這些瀏覽器可能會有字型外觀樣式的元素重置字型樣式及粗細*/
-address, caption, cite, code, dfn, em, strong, th, var, optgroup {
-        font-style: normal;
-        font-weight: normal;
-}
-
-
-/*將註解的邊框及大小寫重置，acronym沒用就不重置了*/
-abbr {
-        border: 0;
-        font-variant: normal;
-}
-
-
-/*重置上標、下標的樣式*/
-sup, sub {
-        font-size: 100%;
-        vertical-align: baseline;
-}
-
-
-/*將引用重置，避免樣式不同及引號*/
-blockquote, q {
-        quotes: none;
-}
-blockquote:before, blockquote:after, q:before, q:after {
-        content: "";
-}
-
-
-/*最後也順便把這些小魚會用到的元素也重設吧*/
-code, kbd, samp {
-        font-size: 100%;
-}
-
-
-
-/* ================================================*/
-@keyframes animatedBackground { /*背景動畫keyframe設定(IE)*/
-  from { background-position: 0 25%; }
-  to { background-position: 100% 25%; }
-}
-
-@-webkit-keyframes animatedBackground { /*背景動畫keyframe設定(Chrome)*/
-  from { background-position: 0 25%; }
-  to { background-position: 100% 25%; }
-}
-
-@-moz-keyframes animatedBackground { /*背景動畫keyframe設定(Firefox)*/
-  from { background-position: 0 25%; }
-  to { background-position: 100% 25%; }
-}
-
-
-html{
-  -moz-user-select: -moz-none; /*禁止選取文字*/
-  -khtml-user-select: none;  /*禁止選取文字*/
-  -webkit-user-select: none;  /*禁止選取文字*/
-  -o-user-select: none;  /*禁止選取文字*/
-  user-select: none;  /*禁止選取文字*/
-  -ms-user-select: none;  /*禁止選取文字*/
-
-  height: 100%;
-  background-color: #e7e7e7;
-  background-image: url(../img/U6.png);
-  /*background-position: 0px 400px;*/
-  background-repeat: repeat-x;
-  animation: animatedBackground 40s linear infinite; /*背景動畫運作設定(IE)*/
-  -webkit-animation: animatedBackground 40s linear infinite; /*背景動畫運作設定(Chrome)*/
-  -moz-animation: animatedBackground 40s linear infinite; /*背景動畫運作設定(Firefox)*/
-}
-
-body{
-  font-family: "微軟正黑體";
-}
-
-#wrap{
-
-	/*min-height: 100%;
-	height:auto;*/
-	/*width:500px;*/
-	margin:0 auto -60px;
-	padding: 0 0 60px;
-	/*border: solid 1px #000000;*/
- /* padding-bottom: 60px; /*footer置底*/
-  /*position: relative;*/   /*重要！保证footer是相对于wapper位置绝对*/  
-  height: auto;          /* 保证页面能撑开浏览器高度时显示正常*/  
-}
-
-#wrap .container{
-	border-radius: 10px;
-	width: 250px;
-	height: 345px;   /*325px*/
-	/*border:1px solid #000000;*/
-	box-shadow: 3px 3px 15px #000000;
-	background-color: #ffffff;
-	
-	position:relative;
-	margin: auto;
-	top:80px;
+h4 {
+	color: #95a5a6;
+	font-weight: 400;
 	font-size: 20px;
 }
 
+/* Paragraph & Typographic */
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
 
-/*#header{
+.centered {
+    text-align: center;
+}
+
+/* Links */
+a {
+    color: #3498db;
+    word-wrap: break-word;
+
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+a:hover,
+a:focus {
+    color: #7b7b7b;
+    text-decoration: none;
+    outline: 0;
+}
+
+a:before,
+a:after {
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+ hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.navbar-default {
+	background-color: #3498db;
+	border-color: transparent;
+}
+
+.navbar-default .navbar-brand {
+	color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: white;
+}
+
+/* Helpers */
+
+.mt {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.form-control {
+	height: 42px;
+	font-size: 18px;
+	width: 280px;
+}
+
+i {
+	margin: 8px;
+	color: #3498db; 
+}
+
+
+/* HeaderWrap */
+#headerwrap {
+	/* background: url(../img/bg01.jpg) no-repeat center top; */
+	background-color: #3498db;/*2677AE;#;*/
+	margin-top: -20px;
+	padding-top:200px;
+	background-attachment: relative;
+	background-position: center center;
+	min-height: 650px;
 	width: 100%;
-	height: 50px;
-	background-color: #3c3c3c;
-	font-size: 20px;
-	text-align: center;
-	line-height:50px;
-	color: #ffffff;
-}*/
-
-/* ================================================*/
-#pic{  /*創意在現Logo*/
-	position: absolute;
-  top:20px; 
-  left:30px; 
-	background-image: url(../img/logo.jpg);
-	border-radius: 10px;
-	border: 1px solid #666666; 
-	width: 190px;
-	height: 68px;
-}
-
-/* ================================================*/
-#xxx{  /*取消按鈕*/
-  position:absolute;
-  top:10px; 
-  left:200px; 
-  background-image: url(../img/xxx.jpg);
- /* box-shadow: 1px 1px 5px #000000;*/
-  border-radius: 5px;
-  border: 1px solid #348af4; 
-  width: 40px;
-  height: 43px;
-  display:none; 
-}
-
-
-#xxx:hover{  /*取消按鈕(滑入效果)*/
-  position:absolute;
-  top:10px; 
-  left:200px; 
-  background-image: url(../img/xxx_rollover.jpg);
- /* box-shadow: 1px 1px 5px #000000;*/
-  border-radius: 5px;
-  border: 1px solid #348af4; 
-  width: 40px;
-  height: 43px;
-  display:none; 
-}
-
-
-/* ================================================*/
-#xxx_02{  /*取消按鈕_02*/
-  position:absolute;
-  top:10px; 
-  left:200px; 
-  background-image: url(../img/xxx.jpg);
- /* box-shadow: 1px 1px 5px #000000;*/
-  border-radius: 5px;
-  border: 1px solid #348af4; 
-  width: 40px;
-  height: 43px;
-  display:none; 
-}
-
-
-#xxx_02:hover{  /*取消按鈕_02(滑入效果)*/
-  position:absolute;
-  top:10px; 
-  left:200px; 
-  background-image: url(../img/xxx_rollover.jpg);
- /* box-shadow: 1px 1px 5px #000000;*/
-  border-radius: 5px;
-  border: 1px solid #348af4; 
-  width: 40px;
-  height: 43px;
-  display:none; 
-}
-
-
-/* ================================================*/
-#identity{   /*身分文字*/
-	position: relative;
-  top:50px; 
-  left:15px; 
-  color: #717171;
-}
-
-#options{  /*登入身分選擇*/
-	position: relative;
-  top:50px; 
-  left:20px; 
-  width: 130px;
-}
-
-/* ================================================*/
-#account_text{  /*帳號文字*/
-	position: absolute;
-  top:105px; 
-  left:35px; 
-  color: #717171;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-#account{   /*帳號輸入欄位*/
-	position: absolute;
-  top:130px; 
-  left:35px; 
-  width: 180px;
-  /*height: 30px;
-  font-size: 12px;*/
-}
-
-/* ================================================*/
-#passwd_text{  /*密碼文字*/
-	position: absolute;
-  top:170px; 
-  left:35px; 
-  color: #717171;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-#passwd{   /*帳號輸入欄位*/
-	position: absolute;
-  top:195px; 
-  left:35px; 
-  width: 180px;
-}
-
-
-/* ================================================*/
 	
-.btn-primary { /*登入按鈕*/
-	position: absolute;
-  top:240px; 
-  left:65px; 
-  width: 120px;
-  height: 60px;
-  font-size: 20px;
-  background-image: url(../img/btn_bg.jpg);
-  border-radius: 28px;
-  border: 1px solid #006cf5;
-  color: #ffffff;
-  outline: none;
-  text-shadow:1px 1px 1px #333333;  /*文字陰影*/
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-.btn-primary:hover{ /*登入按鈕(滑入效果)*/
-	position: absolute;
-  top:240px; 
-  left:65px; 
-  width: 120px;
-  height: 60px;
-  font-size: 20px;
-  background-image: url(../img/btn_bg.jpg);
-  border-radius: 28px;
-  /*box-shadow: 0px 0px 15px 6px #f2f04d;*/
-  box-shadow: 0px 0px 15px 6px #6ef3ff;
-  outline: none;
-}
-
-.btn-primary:active{ /*登入按鈕(按下效果)*/
-	position: absolute;
-  top:240px; 
-  left:65px; 
-  width: 120px;
-  height: 60px;
-  font-size: 20px;
-  background-image: url(../img/btn_bg.jpg);
-  border-radius: 28px;
-  box-shadow: 0px 0px 30px 1px #0049cc inset;
-  outline: none;
-}
-
-/* ================================================*/
-#reg_account_text, #reg_account_input, #reg_passwd_text, #reg_passwd_input, 
-#reg_passwd_text_checked, #reg_passwd_input_checked, #identity, #options, 
-#error_reg_01,#error_reg_02,#error_reg_03,#error_reg_04,.btn-primary_02{  /*隱藏註冊欄位*/
-  display:none;  
-}
-
-#reg_account_text{  /*註冊帳號文字*/
-  position:absolute;
-  top:60px; 
-  left:30px; 
-  color: #717171;
-  font-size: 16px;
-}
-  
-#reg_account_input{  /*註冊帳號輸入欄位*/
-  position:absolute;
-  top:82px; 
-  left:30px; 
-  width: 190px;
-  font-size: 16px;
-}
-
-#error_reg_01{
-  position:absolute;
-  top:107px; 
-  left:30px; 
-  width: 190px;
-  font-size: 15px;
-  color: #ee1212;
-  font-weight: bold;
-}
-
-#reg_passwd_text{  /*註冊密碼文字*/
-  position:absolute;
-  top:135px; 
-  left:30px; 
-  color: #717171;
-  font-size: 16px;
-}
-
-#reg_passwd_input{  /*註冊密碼輸入欄位*/
-  position:absolute;
-  top:157px; 
-  left:30px; 
-  width: 190px;
-  font-size: 16px;
-}
-
-#error_reg_02{
-  position:absolute;
-  top:182px; 
-  left:30px; 
-  width: 190px;
-  font-size: 15px;
-  color: #ee1212;
-  font-weight: bold;
-}
-
-
-#reg_passwd_text_checked{  /*再次確認密碼文字*/
-  position:absolute;
-  top:210px; 
-  left:30px; 
-  color: #717171;
-  font-size: 16px;
-}
-
- #reg_passwd_input_checked{  /*再次確認密碼輸入欄位*/
-  position:absolute;
-  top:232px; 
-  left:30px; 
-  width: 190px;
-  font-size: 16px;
-}
-
-#error_reg_03{
-  position:absolute;
-  top:257px; 
-  left:30px; 
-  width: 190px;
-  font-size: 15px;
-  color: #ee1212;
-  font-weight: bold;
-}
-
-
-#identity{  /*確認身分文字*/
-  position:absolute;
-  top:285px; 
-  left:30px; 
-  color: #717171;
-  font-size: 16px;
-}
-
-#options{  /*確認身分欄位*/
-  position:absolute;
-  top:307px; 
-  left:30px; 
-  width: 190px;
-  font-size: 16px;
-}
-
-#error_reg_04{
-  position:absolute;
-  top:335px; 
-  left:30px; 
-  width: 190px;
-  font-size: 14px;
-  color: #ee1212;
-  font-weight: bold;
-}
-
-
-.btn-primary_02 { /*送出按鈕*/
-  position: absolute;
-  top:370px; 
-  left:80px; 
-  width: 90px;
-  height: 45px;
-  font-size: 20px;
-  background-image: url(../img/btn_bg_02.jpg);
-  border: 1px solid #006cf5;     /*#2887b8*/
-  border-radius: 28px;
-  color: #ffffff;
-  outline: none;
-  text-shadow:1px 1px 1px #333333;  /*文字陰影*/
-}
-
-.btn-primary_02:hover{ /*送出按鈕(滑入效果)*/
-  position: absolute;
-  top:370px; 
-  left:80px; 
-  width: 90px;
-  height: 45px;
-  font-size: 20px;
-  background-image: url(../img/btn_bg_02.jpg);
-  border-radius: 28px;
-  /*box-shadow: 0px 0px 15px 6px #f2f04d;*/
-  box-shadow: 0px 0px 10px 6px #6ef3ff;
-  outline: none;
-  color: #ffffff;
-}
-
-.btn-primary_02:active{ /*送出按鈕(按下效果)*/
-  position: absolute;
-  top:370px; 
-  left:80px; 
-  width: 90px;
-  height: 45px;
-  font-size: 20px;
-  background-image: url(../img/btn_bg_02.jpg);
-  border-radius: 28px;
-  box-shadow: 0px 0px 30px 1px #0049cc inset;   /* #0049cc*/
-  outline: none;
-}
-
-/* ================================================*/
-.registration{  /*快速註冊連結*/
-	position: absolute;
-  top:355px;  /*335px*/
-  left:20px; 
-  text-decoration: underline;
-  font-weight: bold;
-  color: #1748a0;
-  font-size: 18px;
-}
-
-.forget{  /*忘記密碼連結*/
-	position: absolute;
-  top:355px; /*335px*/
-  left:150px; 
-  text-decoration: underline;
-  font-weight: bold;
-  color: #1748a0;
-  font-size: 18px;
-}
-
-#footer{
-	/*height: 60px;*/
-	background-color: #3c3c3c;
-	font-size: 16px;
-	text-align: center;
-	line-height:60px;
-	color: #ffffff;
-
-  width:100%; 
-  height:60px;
-  position:fixed; 
-  bottom:0px; 
- /* z-index:1;
-*/
-}
-
-#error_01{
-
-  position: absolute;
-  top:315px;
-  left:35px;
-  color: #ee1212;
-  font-size: 16px;
-  /*border: solid 1px #000000;*/
-  width: 180px;
-  text-align: center;
-  font-weight: bold;
-  /*text-shadow:1px 1px 1px #333333;*/
+#headerwrap h1 {
+	margin-top: 60px;
+	margin-bottom: 15px;
+	color: white;
+	font-size: 45px;
+	font-weight: 300;
+	letter-spacing: 1px;
 }

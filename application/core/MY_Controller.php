@@ -12,8 +12,8 @@ class MY_Controller extends CI_Controller
             'css_location' => site_url("/application/assets/css"),  //css引用檔案路徑
             'js_location' => site_url("/application/assets/js"),  //js引用檔案路徑
             'img_location' => site_url("/application/assets/img"), //img檔案路徑
-			'plugins_location' => site_url("/application/assets/plugins"),
-			'plugin_path' => site_url("/application/plugin"),
+			//'plugins_location' => site_url("/application/assets/plugins"),
+			'template_location' => site_url("/application/assets/plugin"),  //模板檔案路徑
 			'project_location' => site_url("/application/assets/project")
         );			
     }
