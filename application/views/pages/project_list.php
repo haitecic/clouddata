@@ -3,7 +3,7 @@ $column_mapping = array("null"=>"不顯示","idea_id"=>"提案編號", "year"=>"
 $news_column_mapping = array("null"=>"不顯示", "title"=>"標題", "category"=>"類別", "description"=>"內容摘要", "pub_date"=>"發布日期");
 $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議題", "content"=>"內容", "in_charge"=>"主辦(承辦)", "time"=>"時間", "people"=>"與會人員");
 ?>
-<div id="main" class="container-fluid" style="background-color:#FBFBF0;font-color:#635F5F;font-family: Adobe 繁黑體 Std;"><!--8E8D93-->
+<div id="main" class="container-fluid" style="margin-top:50px;background-color:#FBFBF0;font-color:#635F5F;font-family: Adobe 繁黑體 Std;"><!--8E8D93-->
 	<div class="row">
 		<div class="col-xs-12" style="margin-top:10px;border:1px #ccc solid;margin-left:8px;margin-right:8px;width:99%">
 			<div class="box-header" style="margin-left:-15px;margin-right:-15px;padding-top:7px;height:40px;font-size:14pt">
@@ -393,7 +393,6 @@ $(document).ready(function() {
 		$(this).width($("#width_tmp").width()+38);
 	});	
 	var is_load = true;
-	//var start_record = 0;var order_column = 1;var order_method = "asc";
 	var project_start_record = "<?php echo $project_start_record;?>";
 	var project_display_length = "<?php echo $project_display_length;?>";
 	var project_order_column = <?php echo $project_order_column;?>;
@@ -468,16 +467,6 @@ $(document).ready(function() {
 				document.getElementById('manager_opinion_col_select_box_'+i).value = manager_opinion_display_columns[i];
 				document.getElementById('manager_opinion_col_'+i).value = manager_opinion_display_columns[i];
 			}
-			/*project_display_columns = [json.column0, json.column1, json.column2, json.column3, json.column4, json.column5, json.column6];
-			var i;
-			for(i=0;i<7;i++)
-			{
-				document.getElementById('pro_col_select_box_'+i).value = project_display_columns[i];
-				document.getElementById('col_'+i).value = project_display_columns[i];
-			}*/
-			//var jsonString = JSON.stringify(json);  //將json物件轉成字串
-			//$("<h1>").text(json.title).appendTo("body");
-			//$("<div class=\"content\">").html(json.html).appendTo("body");
 		},
 		error:function(xhr, status, errorThrown){
 			//alert("Sorry, there was a problem!");
@@ -485,50 +474,7 @@ $(document).ready(function() {
 			console.log("Status: " + status);
 			console.dir( xhr );
 		}
-	});
-	/*var i=0;
-	for(i=0;i<project_display_columns.length;i++)
-	{
-		alert(project_display_columns[i]);
-	}*/
-	/*for(i=0;i<7;i++)  //將所有欄位項目放入陣列中
-	{
-		if(document.getElementById('pro_col_select_box_' + i) == null || document.getElementById('pro_col_select_box_' + i).value == "null")
-		{			
-			project_display_columns[project_display_columns.length] = "null";
-		}
-		else if(document.getElementById('pro_col_select_box_' + i).value != null)
-		{			
-			project_display_columns[project_display_columns.length] = document.getElementById('pro_col_select_box_' + i).value;
-		}		
-		if(document.getElementById('news_col_select_box_' + i) == null || document.getElementById('news_col_select_box_' + i).value == "null")
-		{			
-			news_display_columns[news_display_columns.length] = "null";
-		}
-		else if(document.getElementById('news_col_select_box_' + i).value != null)
-		{
-			news_display_columns[news_display_columns.length] = document.getElementById('news_col_select_box_' + i).value;
-		}
-		if(document.getElementById('external_tech_col_select_box_' + i) == null || document.getElementById('external_tech_col_select_box_' + i).value == "null")
-		{
-			external_tech_display_columns[external_tech_display_columns.length] = "null";
-		}
-		else if(document.getElementById('external_tech_col_select_box_' + i).value != null)
-		{
-			external_tech_display_columns[external_tech_display_columns.length] = document.getElementById('external_tech_col_select_box_' + i).value;
-		}		
-	}
-	for(i=0;i<5;i++)
-	{
-		if(document.getElementById('manager_opinion_col_select_box_' + i) == null || document.getElementById('manager_opinion_col_select_box_' + i).value == "null")
-		{
-			manager_opinion_display_columns[manager_opinion_display_columns.length] = "null";
-		}
-		else if(document.getElementById('manager_opinion_col_select_box_' + i).value != null)
-		{
-			manager_opinion_display_columns[manager_opinion_display_columns.length] = document.getElementById('manager_opinion_col_select_box_' + i).value;
-		}
-	}*/	
+	});	
 	load_news_list(is_load, news_start_record, news_display_length, news_order_column, news_order_method, search_str, news_display_columns);
 	load_external_tech_list(is_load, external_tech_start_record, external_tech_display_length, external_tech_order_column, external_tech_order_method, search_str, external_tech_display_columns);
 	load_manager_opinion_list(is_load, manager_opinion_start_record, manager_opinion_display_length, manager_opinion_order_column, manager_opinion_order_method, search_str, manager_opinion_display_columns);

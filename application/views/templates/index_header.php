@@ -9,10 +9,12 @@
     <link rel="shortcut icon" href="<?php echo $img_location;?>/favicon.png">
 
     <title>專案管理系統</title>
-
-    <!-- Bootstrap core CSS -->
+	<!--load jQuery-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	
+    <!-- Bootstrap core css-->
 	<link href="<?php echo $template_location;?>/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet">
-
+	
     <!-- Custom styles for this template -->
 	<link href="<?php echo $css_location;?>/index.css" type="text/css" rel="stylesheet">
 

@@ -69,69 +69,6 @@ function load_project_list(is_load, start_record, page_length, order_column, ord
 	}
 }
 
-/*var news_list_tbl;
-function load_news_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns)
-{			
-	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],	"column3":display_columns[3]};
-    news_list_tbl = $('#news_list_tbl').dataTable( {	
-		"displayStart": start_record,
-		"pageLength": page_length,
-		"searching": false,	  //global search bar
-		"sorting": false,
-		"order": [ order_column, order_method ],  //ordered column and method
-		"oSearch":{"sSearch":search_str},  //initial search string value
-        "processing": true,
-        "serverSide": true,
-		"ajax": {
-			"url": "data/news_table",
-			"data":{			 	
-				"Data":sendData
-			},
-			"async":false,
-			"type":"GET",
-			"complete": function(){
-				$("body").scrollTop(($("#news").offset().top)-50);  //由該分頁的第一筆紀錄開始瀏覽
-			}
-		}, 
-		"columns": [
-            { "data": 0, "orderable": false},
-            { "data": 1 },
-            { "data": 2 },
-            { "data": 3 },
-            { "data": 4 }
-        ],
-		"oLanguage":{
-			"sProcessing":"資料載入中...",
-            "sLengthMenu":"顯示筆數: _MENU_ ",
-            "sZeroRecords":"找不到符合的結果",
-            "sInfo":"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-            "sInfoEmpty":"顯示第 0 至 0 項結果，共 0 項",
-            "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
-            "sSearch":"查詢:",
-            "oPaginate":{
-				"sFirst":"第一頁",
-                "sPrevious":"上一頁",
-                "sNext":"下一頁",
-                "sLast":"最後一頁"}
-        }
-    } );
-	if(is_load == true)	
-	{
-		var j;
-		for(j=0;j<4;j++)
-		{
-			if((document.getElementById('news_col_' + j) == null) || (document.getElementById('news_col_' + j).value == "null"))
-			{
-				news_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
-			}
-			else if(document.getElementById('news_col_' + j).value != "null")
-			{				
-				news_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility			
-			}			
-		}
-	}
-}*/
-
 var news_list_tbl;
 function load_news_list(is_load, start_record, page_length, order_column, order_method, search_str, display_columns)
 {	
@@ -986,11 +923,7 @@ function view_chart2()
 			var myseries = [];  //資料值			
 			for(var i=0;i<legend_count;i++)//legend_count
 			{
-				legend.push(json_data.year[i].year);
-				/*for (j=0; j<json_data.data[i].length; ++j) {
-					json_data.data[i][j] = parseInt(json_data.data[i][j]);
-				}
-				var data_set = {name:json_data.year[i].year, data:json_data.data[i]};*/
+				legend.push(json_data.year[i].year);				
 				for (var j=0,show_label=true,data=0; j<json_data.data[i].length; ++j) 
 				{		
 					data = parseInt(json_data.data[i][j]);

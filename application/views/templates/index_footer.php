@@ -1,4 +1,4 @@
-﻿	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="<?php echo $js_location;?>/bootstrap.min.js" ></script>   
+﻿	<!-- Bootstrap core js-->
+	<script type="text/javascript" src="<?php echo $template_location;?>/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
 	</body>
 </html>

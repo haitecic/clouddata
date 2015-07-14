@@ -4,8 +4,8 @@
 	<script src="<?php echo $template_location;?>/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
 	<!--load jQuery ui-->
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<!--preview file-->
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.3/fotorama.js"></script>
+	<!--preview file-->	
+	<script type="text/javascript" src="<?php echo $js_location?>/fotorama.js"></script>
 	<script type="text/javascript" src="<?php echo $js_location?>/pdfobject.js"></script>	
 	<!--load highchart-->
 	<script src="http://code.highcharts.com/highcharts.js"></script>

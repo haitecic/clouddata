@@ -22,21 +22,61 @@
 		</div>
 	</div>
 </div>
+
 <header class="navbar">
 	<div class="container-fluid expanded-panel">
-		<div class="row">
-			<div id="logo" class="col-xs-12 col-sm-2 ">
-				<a id="logo_icon" href="<?php echo site_url().'project_list'?>" style="font-family: Adobe 繁黑體 Std;" onclick="user_behavior_log(this.id, null)">專案管理系統</a><!--font-family: Adobe 繁黑體 Std;微軟正黑體;font-size:18pt;font-weight:300-->
-			</div>
+		<div class="row">			
+			<nav role="navigation" class="navbar navbar-default" style="background-color:#505559">
+				<div class="col-xs-12 col-sm-3 col-md-2">
+					<div id="logo" class="col-xs-10 col-sm-11 col-md-12" style="padding-left:5px;padding-right:0px">
+						<a id="logo_icon" class="navbar_logo" href="<?php echo site_url().'project_list'?>" style="padding-right:0px;font-family: Adobe 繁黑體 Std;" onclick="user_behavior_log(this.id, null)">專案管理系統</a>
+					</div>
+					<div class="col-xs-2 col-sm-1">
+						<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-9 col-md-10">
+					<div id="navbarCollapse" class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li id="search" style="margin-top:10px;" class="search_bar">
+								<input id="search_bar" type="text" placeholder="輸入搜尋項目" name="search_bar" value="<?php 
+									if(isset($search) && !empty($search))
+									{
+										echo $search;
+									}
+									?>"/>
+									<input id="search_bar_hidden" type="hidden" value="<?php 
+									if(isset($search) && !empty($search))
+									{
+										echo $search;
+									}
+									?>"/>
+								<i class="fa fa-search" onclick="start_search()"></i>
+							</li>
+							<li><a href="#">專案資料</a></li>
+							<li><a href="#">News</a></li>
+						</ul>						
+						<ul class="nav navbar-nav navbar-right">
+							<li style="margin-top:15px;padding-left:12px;"><div style="color:#ffffff;margin-right:10px">使用者：<?php echo $username;?></div></li>
+							<li style="margin-top:15px;padding-left:12px;"><div id="logout" onclick="user_behavior_log(this.id, null)"><?php echo anchor("login", "登出",'style="color:#ffffff;"');?></div></li>
+						</ul>						
+					</div>
+				</div>
+			</nav>
 			<?php
 			$attributes = array('id' => 'project_search_form', 'name'=>'project_search_form');
 			//echo form_open('project_list', $attributes);
 			?>
-			<div id="top-panel" class="col-xs-12 col-sm-10">
+			<!--<div id="top-panel" class="col-xs-12 col-sm-9 col-md-10">
 				<div class="row">
-					<div class="col-xs-8 col-sm-4" style="margin-top:10px">
+					<div class="col-xs-8 col-sm-4" style="margin-top:10px;">
 						<div id="search">
-							<input id="search_bar" style="width:400px" type="text" placeholder="search" name="search_bar" value="<?php 
+							<input id="search_bar" style="/*width:400px*/" type="text" placeholder="輸入搜尋項目" name="search_bar" value="<?php 
 							if(isset($search) && !empty($search))
 							{
 								echo $search;
@@ -50,18 +90,22 @@
 							?>"/>
 							<i class="fa fa-search" onclick="start_search()"></i>
 						</div>
-					</div>
-					<div style="text-align:right;margin-right:23px;" ><span style="color:#ffffff">使用者：<?php echo $username;?></span><span id="logout" onclick="user_behavior_log(this.id, null)"><?php echo anchor("login", "登出",'style="margin-left:15px;color:#ffffff;"');?></span></div>
-					<input id="user_id" type="hidden" value="<?php echo $user_id?>"/>
-				</div>				
-			</div>
+					</div>-->
+					<!--<div style="text-align:right;margin-right:23px;" ><span style="color:#ffffff">使用者：<?php echo $username;?></span><span id="logout" onclick="user_behavior_log(this.id, null)"><?php echo anchor("login", "登出",'style="margin-left:15px;color:#ffffff;"');?></span></div>-->
+					<!--<div style="text-align:right;margin-right:23px;" ><div style="color:#ffffff">使用者：<?php echo $username;?></div><div id="logout" onclick="user_behavior_log(this.id, null)"><?php echo anchor("login", "登出",'style="margin-left:15px;color:#ffffff;"');?></div></div>
+					<input id="user_id" type="hidden" value="<?php echo $user_id?>"/>-->
+				<!--</div>				
+			</div>-->
 			<!--</form>-->
 		</div>
 		<!--<div style="text-align:right;color:#ffffff;float:left;magin-left:100px" >使用者：<?php echo $username;?></div>-->
 		<!--<div style="text-align:right;margin-right:10px" ><span style="color:#ffffff">使用者：<?php echo $username;?></span><span><?php echo anchor("login", "登出",'style="margin-left:15px;color:#ffffff;"');?></span></div>-->
 	</div>	
+	<input id="user_id" type="hidden" value="<?php echo $user_id?>"/>
 	<input id="server_ip_address" type="hidden" value="<?php echo $_SERVER['SERVER_ADDR'];?>"></input>
 </header>
+
+
 <script>
 function start_search()
 {
