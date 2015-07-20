@@ -19,20 +19,12 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<div class="no-move"></div>				
 			</div>
 			<div id="project_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:none">
-				<!--<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1155px;top:-10px;z-index:50;width: auto;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
-					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>調整瀏覽項目</div>
-				</div>-->
-				<!--border-color:#C3DEB7;background-color:#C3DEB7;color:#821EC7 96BBDE-->				
-				<!--<a style="position:absolute;left:1000px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()">圖表</a>-->
-				<!--<a style="position:absolute;left:930px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()">highchart</a>-->
-				<!--<img src="<?php echo $img_location?>/report8.png" alt="圖表" style="cursor:pointer;position:absolute;left:1000px;top:15px;z-index:50;width: 62px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>-->
-				<img src="<?php echo $img_location?>/report8.png" alt="圖表" style="cursor:pointer;position:absolute;left:1052px;top:15px;z-index:50;width: 62px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>
 				<!--Echart-->
 				<!--<a style="position:absolute;left:1010px;top:21px;z-index:50;width: auto;height:30px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart()">echart</a>-->
-				<img id="column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon7.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
-				<!--<div id="column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
-					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
-				</div>-->
+				<!--<img src="<?php echo $img_location?>/report.png" alt="圖表" style="cursor:pointer;position:absolute;left:80.5%;top:1.65%;z-index:50;width: 62px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>
+				<img id="column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:84.5%;top:1.65%;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>--><!--original-->
+				<!--<img src="<?php echo $img_location?>/report.png" alt="圖表" style="cursor:pointer;z-index:50;width: 62px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>
+				<img id="column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon.png" alt="欄位設定" style="cursor:pointer;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>-->
 				<table id="project_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px;table-layout:fixed;word-break:break-all;text-align:justify;/*text-justify:auto;word-wrap:break-word*/">
 					<thead>
 						<tr>
@@ -76,7 +68,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<div class="no-move"></div>				
 			</div>
 			<div id="news_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
-				<img id="news_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon7.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
+				<img id="news_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
 				<!--<div id="news_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
 				</div>-->
@@ -123,7 +115,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<div class="no-move"></div>				
 			</div>
 			<div id="external_tech_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
-				<img id="external_tech_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon7.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
+				<img id="external_tech_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
 				<!--<div id="external_tech_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
 					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
 				</div>-->
@@ -487,7 +479,8 @@ $(document).ready(function() {
 	project_list_content.style.display = "block";
 	news_list_content.style.display = "block";
 	manager_opinion_list_content.style.display = "block";
-	$("#loading").fadeOut(1500);  //隱藏資料載入動畫圖示      
+	$("#loading").fadeOut(1500);  //隱藏資料載入動畫圖示
+	set_project_datatables_element();
 });
 
 $('#project_list_tbl').on('mouseover', 'tbody tr', function(){
@@ -527,58 +520,18 @@ $('#project_list_tbl').on('mouseover', 'tbody tr', function(){
 	});
 });
 
-/*$('#news_list_tbl').on('mouseover', 'tbody tr', function(){
-    //alert('You clicked row '+ ($(this).index()) );
-	var row_index = $(this).index();
-	var project_id = document.getElementById("row_project_hidden_"+row_index).value;
-	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_check_is_blocked";
-	var block_status;
-	$.ajax({
-		url:request_url,  
-		data:{			 //The data to send(will be converted to a query string)
-			id:project_id
-		},
-		type:"POST",		 //Whether this is a POST or GET request
-		dataType:"text", //回傳的資料型態
-		//Code to run if the request succeeds. The response is passed to the function
-		success:function(str){
-			block_status = $.trim(str);
-			if(block_status == "block")
-			{	
-				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/lock3.png";
-			}
-			else if(block_status == "unblock")
-			{
-				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/edit3.png";
-			}
-		},
-		async:true,
-		//Code to run if the request fails; the raw request and status codes are passed to the function
-		error:function(xhr, status, errorThrown){
-			//alert("Sorry, there was a problem!");
-			console.log("Error: " + errorThrown);
-			console.log("Status: " + status);
-			console.dir( xhr );
-		},
-		complete:function( xhr, status ){
-		}
-	});
-});*/
-
 $('#external_tech_list_tbl').on('mouseover', 'tbody tr', function(){
-    //alert('You clicked row '+ ($(this).index()) );
 	var row_index = $(this).index();
 	var project_id = document.getElementById("row_project_hidden_"+row_index).value;
 	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_check_is_blocked";
 	var block_status;
 	$.ajax({
 		url:request_url,  
-		data:{			 //The data to send(will be converted to a query string)
+		data:{			 
 			id:project_id
 		},
-		type:"POST",		 //Whether this is a POST or GET request
-		dataType:"text", //回傳的資料型態
-		//Code to run if the request succeeds. The response is passed to the function
+		type:"POST",
+		dataType:"text",
 		success:function(str){
 			block_status = $.trim(str);
 			if(block_status == "block")
@@ -591,7 +544,6 @@ $('#external_tech_list_tbl').on('mouseover', 'tbody tr', function(){
 			}
 		},
 		async:true,
-		//Code to run if the request fails; the raw request and status codes are passed to the function
 		error:function(xhr, status, errorThrown){
 			//alert("Sorry, there was a problem!");
 			console.log("Error: " + errorThrown);
@@ -602,44 +554,6 @@ $('#external_tech_list_tbl').on('mouseover', 'tbody tr', function(){
 		}
 	});
 });
-
-/*$('#manager_opinion_list_tbl').on('mouseover', 'tbody tr', function(){
-    //alert('You clicked row '+ ($(this).index()) );
-	var row_index = $(this).index();
-	var project_id = document.getElementById("row_project_hidden_"+row_index).value;
-	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_check_is_blocked";
-	var block_status;
-	$.ajax({
-		url:request_url,  
-		data:{			 //The data to send(will be converted to a query string)
-			id:project_id
-		},
-		type:"POST",		 //Whether this is a POST or GET request
-		dataType:"text", //回傳的資料型態
-		//Code to run if the request succeeds. The response is passed to the function
-		success:function(str){
-			block_status = $.trim(str);
-			if(block_status == "block")
-			{	
-				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/lock3.png";
-			}
-			else if(block_status == "unblock")
-			{
-				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/edit3.png";
-			}
-		},
-		async:true,
-		//Code to run if the request fails; the raw request and status codes are passed to the function
-		error:function(xhr, status, errorThrown){
-			//alert("Sorry, there was a problem!");
-			console.log("Error: " + errorThrown);
-			console.log("Status: " + status);
-			console.dir( xhr );
-		},
-		complete:function( xhr, status ){
-		}
-	});
-});*/
 
 /*datatables header點擊div class為sort的區域才排序*/
 $('th').on("click.DT", function (e) {
@@ -652,9 +566,10 @@ $('th').on("click", function (e) {
         e.stopImmediatePropagation();
     }
 });
-	
-/*調整瀏覽項目dialog*/			
-$(function() {
+
+/*調整瀏覽項目dialog*/	
+function show_pro_column_setting_dialog()
+{
 	$("#project_column_choose_menu").dialog({
 		autoOpen : false,
 		show : {
@@ -670,10 +585,8 @@ $(function() {
 			duration : 300
 		}						
 	});
-	$("#column_adjustment_btn").click(function() {	
-		$("#project_column_choose_menu").dialog("open");
-	});
-});	
+	$("#project_column_choose_menu").dialog("open");
+}
 
 $(function() {
 	$("#news_column_choose_menu").dialog({
@@ -737,5 +650,82 @@ $(function() {
 		$("#manager_opinion_column_choose_menu").dialog("open");
 	});
 });
+
+
+/*$('#news_list_tbl').on('mouseover', 'tbody tr', function(){
+    //alert('You clicked row '+ ($(this).index()) );
+	var row_index = $(this).index();
+	var project_id = document.getElementById("row_project_hidden_"+row_index).value;
+	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_check_is_blocked";
+	var block_status;
+	$.ajax({
+		url:request_url,  
+		data:{			 //The data to send(will be converted to a query string)
+			id:project_id
+		},
+		type:"POST",		 //Whether this is a POST or GET request
+		dataType:"text", //回傳的資料型態
+		//Code to run if the request succeeds. The response is passed to the function
+		success:function(str){
+			block_status = $.trim(str);
+			if(block_status == "block")
+			{	
+				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/lock3.png";
+			}
+			else if(block_status == "unblock")
+			{
+				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/edit3.png";
+			}
+		},
+		async:true,
+		//Code to run if the request fails; the raw request and status codes are passed to the function
+		error:function(xhr, status, errorThrown){
+			//alert("Sorry, there was a problem!");
+			console.log("Error: " + errorThrown);
+			console.log("Status: " + status);
+			console.dir( xhr );
+		},
+		complete:function( xhr, status ){
+		}
+	});
+});*/
+
+/*$('#manager_opinion_list_tbl').on('mouseover', 'tbody tr', function(){
+    //alert('You clicked row '+ ($(this).index()) );
+	var row_index = $(this).index();
+	var project_id = document.getElementById("row_project_hidden_"+row_index).value;
+	var request_url = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_check_is_blocked";
+	var block_status;
+	$.ajax({
+		url:request_url,  
+		data:{			 //The data to send(will be converted to a query string)
+			id:project_id
+		},
+		type:"POST",		 //Whether this is a POST or GET request
+		dataType:"text", //回傳的資料型態
+		//Code to run if the request succeeds. The response is passed to the function
+		success:function(str){
+			block_status = $.trim(str);
+			if(block_status == "block")
+			{	
+				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/lock3.png";
+			}
+			else if(block_status == "unblock")
+			{
+				document.getElementById("row_project_img_"+row_index).src = "<?php echo $img_location?>/edit3.png";
+			}
+		},
+		async:true,
+		//Code to run if the request fails; the raw request and status codes are passed to the function
+		error:function(xhr, status, errorThrown){
+			//alert("Sorry, there was a problem!");
+			console.log("Error: " + errorThrown);
+			console.log("Status: " + status);
+			console.dir( xhr );
+		},
+		complete:function( xhr, status ){
+		}
+	});
+});*/
 </script>
 

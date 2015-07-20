@@ -2300,13 +2300,11 @@ td{
 }
 
 .dataTables_length{
-	position:relative;
-	/*left:1155px;
-	top:0px;*/
-	/*left:1065px;*/
-	left:1170px;
+	float: right;
+	text-align: right;
+	/*left:90%;
 	top:-3px;
-	text-align:right;
+	text-align:right;*/
 	padding-bottom:10px;
 	font-size:11pt;
 	font-family:新細明體;
@@ -2558,3 +2556,45 @@ select
 	background-color:white;
 }
 
+.project_datatables_menu
+{
+	float: right;
+	text-align: right;
+}
+/*圖表呈現按鈕*/
+.chart
+{
+	float:left;
+	margin-left:7px;
+	margin-right:7px;
+}
+/*專案資料呈現之欄位設定按鈕*/
+.project_column_setting
+{
+	float:left;
+	margin-left:7px;
+	margin-right:7px;
+}
+/*資料呈現筆數欄位設定選單*/
+.project_data_length_setting
+{
+	float:left;
+	margin-left:7px;
+	margin-right:7px;
+}
+
+@media (min-width: 801px) {
+	.project_table
+	{
+		width:100%;
+		overflow-x: hidden;
+	}
+}
+
+@media (max-width: 800px) {
+	.project_table
+	{
+		width:100%;
+		overflow-x: scroll;
+	}
+}

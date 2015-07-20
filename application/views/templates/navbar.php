@@ -246,6 +246,7 @@ function start_search()
 	load_manager_opinion_list(is_load, manager_opinion_start_record, manager_opinion_display_length, manager_opinion_order_column, manager_opinion_order_method, search_str, manager_opinion_display_columns);
 	load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);	
 	$("#loading").fadeOut(1500);
+	set_project_datatables_element();
 }
 
 $("#search_bar").keypress(function(event){   	
@@ -387,6 +388,7 @@ $("#search_bar").keypress(function(event){
 		load_manager_opinion_list(is_load, manager_opinion_start_record, manager_opinion_display_length, manager_opinion_order_column, manager_opinion_order_method, search_str, manager_opinion_display_columns);
 		load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);
 		$("#loading").fadeOut(1500);
+		set_project_datatables_element();
 	}
 });
 </script>

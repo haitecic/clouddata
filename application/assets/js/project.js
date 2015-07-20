@@ -1,3 +1,5 @@
+const ip_address = document.getElementById("server_ip_address").value;
+const img_location = 'http://'+ip_address+'/project_management/application/assets/img';
 var column_mapping = {idea_id:"提案編號", year:"年度", idea_name:"提案名稱", idea_source:"提案來源", scenario_d:"情境說明", function_d:"功能構想", distinction_d:"差異化", value_d:"價值性", feasibility_d:"可行性", stage:"階段狀態", progress_description:"進度說明", proposed_unit:"提案單位", proposer:"提案人", established_date:"立案日期", idea_examination:"提案審核履歷", Idea:"I階段文件檢核", Requirement:"R階段文件檢核", Feasibility:"F階段文件檢核", Prototype:"P階段文件檢核", note:"備註", adoption:"導入車型/先期式樣", applied_patent:"專利申請/取得", resurrection_application_qualified:"具備敗部復活申請資格", resurrection_applied:"敗部復活申請", PM_in_charge:"創意中心窗口", closed_case:"結案"};
 var news_column_mapping = {title:"標題", category:"類別", link:"連結", description:"內容摘要", pub_date:"發布日期"};
 var manager_opinion_column_mapping = {topic:"討論議題", content:"內容", content:"內容", in_charge:"主辦(承辦)", time:"時間", people:"與會人員"};
@@ -6,7 +8,8 @@ function load_project_list(is_load, start_record, page_length, order_column, ord
 {	
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
-	project_list_tbl = $('#project_list_tbl').dataTable( {	
+	project_list_tbl = $('#project_list_tbl').dataTable( {
+		"dom": '<<"#project_datatables_menu"<"#chart"><"#project_column_setting"><"project_data_length_setting"l>>r<"project_table"t>ip>',
 		"displayStart": start_record,
 		"pageLength": page_length,
 		"searching": false,	  //global search bar
@@ -74,7 +77,8 @@ function load_news_list(is_load, start_record, page_length, order_column, order_
 {	
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3]};
-    news_list_tbl = $('#news_list_tbl').dataTable( {	
+    news_list_tbl = $('#news_list_tbl').dataTable( {
+		"dom": '<<"#news_datatables_menu"<"#news_column_setting"><"news_data_length_setting"l>>r<"news_table"t>ip>',
 		"displayStart": start_record,
 		"pageLength": page_length,
 		"searching": false,	  //global search bar
@@ -316,7 +320,8 @@ function adjust_project_display_column_by_menu()
 			project_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
 		}
 	}
-	$("#project_column_choose_menu").dialog("close");	
+	$("#project_column_choose_menu").dialog("close");
+	set_project_datatables_element();
 }
 
 function adjust_news_display_column_by_menu()
@@ -534,7 +539,8 @@ function adjust_project_display_column_by_column()
 			document.getElementById('col_' + j).value = document.getElementById('pro_col_select_box_' + j).value;
 			project_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
 		}		
-	}	
+	}
+	set_project_datatables_element();	
 }
 
 function adjust_news_display_column_by_column()
@@ -1298,4 +1304,24 @@ function check_project_data(id)
 	{
 		return false;
 	}
+}
+
+function set_project_datatables_element()
+{
+	document.getElementById('project_datatables_menu').className = 'project_datatables_menu';
+	document.getElementById('chart').innerHTML = '<img src="'+img_location+'/report2.png" alt="圖表" style="margin-top:-7px;cursor:pointer;z-index:50;width: 35px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>';
+	document.getElementById('chart').className = 'chart';
+	document.getElementById('project_column_setting').innerHTML = '<img id="column_adjustment_btn" onclick="show_pro_column_setting_dialog()" src="'+img_location+'/table_setting_icon1.png" alt="欄位設定" style="margin-top:-7px;cursor:pointer;position:relative;z-index:50;width: 37px;height:37px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>';
+	document.getElementById('project_column_setting').className = 'project_column_setting';
+	document.getElementById("project_data_length_setting").className = 'project_data_length_setting';
+}
+
+function set_news_datatables_element()
+{
+	document.getElementById('project_datatables_menu').className = 'project_datatables_menu';
+	document.getElementById('chart').innerHTML = '<img src="'+img_location+'/report2.png" alt="圖表" style="margin-top:-7px;cursor:pointer;z-index:50;width: 35px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>';
+	document.getElementById('chart').className = 'chart';
+	document.getElementById('project_column_setting').innerHTML = '<img id="column_adjustment_btn" onclick="show_pro_column_setting_dialog()" src="'+img_location+'/table_setting_icon1.png" alt="欄位設定" style="margin-top:-7px;cursor:pointer;position:relative;z-index:50;width: 37px;height:37px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>';
+	document.getElementById('project_column_setting').className = 'project_column_setting';
+	document.getElementById("project_data_length_setting").className = 'project_data_length_setting';
 }
