@@ -247,6 +247,7 @@ function start_search()
 	load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);	
 	$("#loading").fadeOut(1500);
 	set_project_datatables_element();
+	set_news_datatables_element();
 }
 
 $("#search_bar").keypress(function(event){   	
@@ -389,6 +390,7 @@ $("#search_bar").keypress(function(event){
 		load_project_list(is_load, project_start_record, project_display_length, project_order_column, project_order_method, search_str, project_display_columns);
 		$("#loading").fadeOut(1500);
 		set_project_datatables_element();
+		set_news_datatables_element();
 	}
 });
 </script>

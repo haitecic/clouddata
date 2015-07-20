@@ -9,7 +9,7 @@ function load_project_list(is_load, start_record, page_length, order_column, ord
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4],"column5":display_columns[5],"column6":display_columns[6]};
 	project_list_tbl = $('#project_list_tbl').dataTable( {
-		"dom": '<<"#project_datatables_menu"<"#chart"><"#project_column_setting"><"project_data_length_setting"l>>r<"project_table"t>ip>',
+		"dom": '<<"#project_datatables_menu"<"#chart"><"#project_column_setting"><"#project_data_length_setting"l>>r<"project_table"t>ip>',
 		"displayStart": start_record,
 		"pageLength": page_length,
 		"searching": false,	  //global search bar
@@ -78,7 +78,7 @@ function load_news_list(is_load, start_record, page_length, order_column, order_
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3]};
     news_list_tbl = $('#news_list_tbl').dataTable( {
-		"dom": '<<"#news_datatables_menu"<"#news_column_setting"><"news_data_length_setting"l>>r<"news_table"t>ip>',
+		"dom": '<<"#news_datatables_menu"<"#news_column_setting"><"#news_data_length_setting"l>>r<"news_table"t>ip>',
 		"displayStart": start_record,
 		"pageLength": page_length,
 		"searching": false,	  //global search bar
@@ -210,6 +210,7 @@ function load_manager_opinion_list(is_load, start_record, page_length, order_col
 	var sendData = {"column0":display_columns[0],"column1":display_columns[1],"column2":display_columns[2],
 		"column3":display_columns[3],"column4":display_columns[4]};
     manager_opinion_list_tbl = $('#manager_opinion_list_tbl').dataTable( {	
+		"dom": '<<"#manager_opinion_datatables_menu"<"#manager_opinion_column_setting"><"#manager_opinion_data_length_setting"l>>r<"manager_opinion_table"t>ip>',
 		"displayStart": start_record,
 		"pageLength": page_length,
 		"searching": false,	  //global search bar
@@ -375,7 +376,8 @@ function adjust_news_display_column_by_menu()
 			news_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
 		}
 	}
-	$("#news_column_choose_menu").dialog("close");	
+	$("#news_column_choose_menu").dialog("close");
+	set_news_datatables_element();		
 }
 
 function adjust_external_tech_display_column_by_menu()
@@ -483,7 +485,8 @@ function adjust_manager_opinion_display_column_by_menu()
 			manager_opinion_list_tbl.fnSetColumnVis( j+1, false, false );  //設定欄位的 visibility
 		}
 	}
-	$("#manager_opinion_column_choose_menu").dialog("close");	
+	$("#manager_opinion_column_choose_menu").dialog("close");
+	set_manager_opinion_datatables_element();
 }
 
 function adjust_project_display_column_by_column()
@@ -597,6 +600,7 @@ function adjust_news_display_column_by_column()
 			news_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
 		}
 	}
+	set_news_datatables_element();
 }
 
 function adjust_external_tech_display_column_by_column()
@@ -709,6 +713,7 @@ function adjust_manager_opinion_display_column_by_column()
 			manager_opinion_list_tbl.fnSetColumnVis( j+1, true, false );  //設定欄位的 visibility
 		}
 	}
+	set_manager_opinion_datatables_element();
 }
 
 function project_collapse()
@@ -1311,17 +1316,23 @@ function set_project_datatables_element()
 	document.getElementById('project_datatables_menu').className = 'project_datatables_menu';
 	document.getElementById('chart').innerHTML = '<img src="'+img_location+'/report2.png" alt="圖表" style="margin-top:-7px;cursor:pointer;z-index:50;width: 35px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>';
 	document.getElementById('chart').className = 'chart';
-	document.getElementById('project_column_setting').innerHTML = '<img id="column_adjustment_btn" onclick="show_pro_column_setting_dialog()" src="'+img_location+'/table_setting_icon1.png" alt="欄位設定" style="margin-top:-7px;cursor:pointer;position:relative;z-index:50;width: 37px;height:37px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>';
+	document.getElementById('project_column_setting').innerHTML = '<img id="column_adjustment_btn" onclick="show_project_column_setting_dialog()" src="'+img_location+'/table_setting_icon1.png" alt="欄位設定" style="margin-top:-7px;cursor:pointer;position:relative;z-index:50;width: 37px;height:37px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>';
 	document.getElementById('project_column_setting').className = 'project_column_setting';
 	document.getElementById("project_data_length_setting").className = 'project_data_length_setting';
 }
 
 function set_news_datatables_element()
-{
-	document.getElementById('project_datatables_menu').className = 'project_datatables_menu';
-	document.getElementById('chart').innerHTML = '<img src="'+img_location+'/report2.png" alt="圖表" style="margin-top:-7px;cursor:pointer;z-index:50;width: 35px;height:35px;font-size:13pt;font-family: Adobe 繁黑體 Std" onclick="view_chart2()"></img>';
-	document.getElementById('chart').className = 'chart';
-	document.getElementById('project_column_setting').innerHTML = '<img id="column_adjustment_btn" onclick="show_pro_column_setting_dialog()" src="'+img_location+'/table_setting_icon1.png" alt="欄位設定" style="margin-top:-7px;cursor:pointer;position:relative;z-index:50;width: 37px;height:37px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>';
-	document.getElementById('project_column_setting').className = 'project_column_setting';
-	document.getElementById("project_data_length_setting").className = 'project_data_length_setting';
+{		
+	document.getElementById('news_datatables_menu').className = 'news_datatables_menu';
+	document.getElementById('news_column_setting').innerHTML = '<img id="news_column_adjustment_btn" onclick="show_news_column_setting_dialog()" src="'+img_location+'/table_setting_icon1.png" alt="欄位設定" style="margin-top:-7px;cursor:pointer;position:relative;z-index:50;width: 37px;height:37px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>';
+	document.getElementById('news_column_setting').className = 'news_column_setting';
+	document.getElementById("news_data_length_setting").className = 'news_data_length_setting';
+}
+
+function set_manager_opinion_datatables_element()
+{		
+	document.getElementById('manager_opinion_datatables_menu').className = 'manager_opinion_datatables_menu';
+	document.getElementById('manager_opinion_column_setting').innerHTML = '<img id="manager_opinion_column_adjustment_btn" onclick="show_manager_opinion_column_setting_dialog()" src="'+img_location+'/table_setting_icon1.png" alt="欄位設定" style="margin-top:-7px;cursor:pointer;position:relative;z-index:50;width: 37px;height:37px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>';
+	document.getElementById('manager_opinion_column_setting').className = 'manager_opinion_column_setting';
+	document.getElementById("manager_opinion_data_length_setting").className = 'manager_opinion_data_length_setting';
 }

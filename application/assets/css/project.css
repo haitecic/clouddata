@@ -2561,6 +2561,19 @@ select
 	float: right;
 	text-align: right;
 }
+
+.news_datatables_menu
+{
+	float: right;
+	text-align: right;
+}
+
+.manager_opinion_datatables_menu
+{
+	float: right;
+	text-align: right;
+}
+
 /*圖表呈現按鈕*/
 .chart
 {
@@ -2575,8 +2588,37 @@ select
 	margin-left:7px;
 	margin-right:7px;
 }
+
+.news_column_setting
+{
+	float:left;
+	margin-left:7px;
+	margin-right:7px;
+}
+
+.manager_opinion_column_setting
+{
+	float:left;
+	margin-left:7px;
+	margin-right:7px;
+}
+
 /*資料呈現筆數欄位設定選單*/
 .project_data_length_setting
+{
+	float:left;
+	margin-left:7px;
+	margin-right:7px;
+}
+
+.news_data_length_setting
+{
+	float:left;
+	margin-left:7px;
+	margin-right:7px;
+}
+
+.manager_opinion_data_length_setting
 {
 	float:left;
 	margin-left:7px;
@@ -2589,10 +2631,30 @@ select
 		width:100%;
 		overflow-x: hidden;
 	}
+	.news_table
+	{
+		width:100%;
+		overflow-x: hidden;
+	}
+	.manager_opinion_table
+	{
+		width:100%;
+		overflow-x: hidden;
+	}
 }
 
 @media (max-width: 800px) {
 	.project_table
+	{
+		width:100%;
+		overflow-x: scroll;
+	}
+	.news_table
+	{
+		width:100%;
+		overflow-x: scroll;
+	}
+	.manager_opinion_table
 	{
 		width:100%;
 		overflow-x: scroll;

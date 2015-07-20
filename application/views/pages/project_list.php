@@ -68,10 +68,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<div class="no-move"></div>				
 			</div>
 			<div id="news_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
-				<img id="news_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
-				<!--<div id="news_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
-					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
-				</div>-->
+				<!--<img id="news_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>-->
 				<table id="news_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px;table-layout:fixed;word-break:break-all;word-wrap:break-word">	
 					<thead>
 						<tr>
@@ -80,9 +77,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 							<th id="news_list_head1" style="text-align:center;font-weight:normal;min-width:140px;max-width:350px;/*width:13%;*/word-wrap:break-word" onmouseover="news_show_select_box(1)" onmouseout="news_hide_select_box(1)"><span id="news_col_plain_text_1" style="margin:0px auto -21px;"><?php echo $news_column_mapping[$news_column_setting['column2']];?></span><span><select id="news_col_select_box_1" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column2'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
 							<th id="news_list_head2" style="text-align:center;font-weight:normal;min-width:140px;max-width:350px;/*width:13%;*/word-wrap:break-word" onmouseover="news_show_select_box(2)" onmouseout="news_hide_select_box(2)"><span id="news_col_plain_text_2" style="margin:0px auto -21px;"><?php echo $news_column_mapping[$news_column_setting['column3']];?></span><span><select id="news_col_select_box_2" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column3'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
 							<th id="news_list_head3" style="text-align:center;font-weight:normal;min-width:140px;max-width:350px;/*width:13%;*/word-wrap:break-word" onmouseover="news_show_select_box(3)" onmouseout="news_hide_select_box(3)"><span id="news_col_plain_text_3" style="margin:0px auto -21px;"><?php echo $news_column_mapping[$news_column_setting['column4']];?></span><span><select id="news_col_select_box_3" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column4'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<!--<th id="news_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(4)" onmouseout="news_hide_select_box(4)"><span id="news_col_plain_text_4" style="margin:0px auto -21px;"><?php //echo $news_column_mapping[$news_column_setting['column5']];?></span><span><select id="news_col_select_box_4" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php //foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column5'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head5" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(5)" onmouseout="news_hide_select_box(5)"><span id="news_col_plain_text_5" style="margin:0px auto -21px;"><?php// echo $news_column_mapping[$news_column_setting['column6']];?></span><span><select id="news_col_select_box_5" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php //foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column6'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>
-							<th id="news_list_head6" style="text-align:center;font-weight:normal;width:12%;word-wrap:break-word" onmouseover="news_show_select_box(6)" onmouseout="news_hide_select_box(6)"><span id="news_col_plain_text_6" style="margin:0px auto -21px;"><?php// echo $news_column_mapping[$news_column_setting['column7']];?></span><span><select id="news_col_select_box_6" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php //foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column7'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>-->
+							<!--<th id="news_list_head4" style="text-align:center;font-weight:normal;width:13%;word-wrap:break-word" onmouseover="news_show_select_box(4)" onmouseout="news_hide_select_box(4)"><span id="news_col_plain_text_4" style="margin:0px auto -21px;"><?php //echo $news_column_mapping[$news_column_setting['column5']];?></span><span><select id="news_col_select_box_4" onchange="adjust_news_display_column_by_column()" style="border:#BEBBBB 1px solid;border-radius: 5px;background-color:#FBFBF0;margin:0px auto -21px;display:none"><?php //foreach($news_column_mapping as $index=>$value){ if($news_column_setting['column5'] == $index){echo '<option value="'.$index.'" selected>'.$value.'</option>';} else{echo '<option value="'.$index.'">'.$value.'</option>';}}?></select></span><span class="sortMask"></span></th>-->
 						</tr>
 					</thead>
 					<tfoot>
@@ -92,9 +87,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 							<th id="news_list_foot1" style="text-align:center;font-weight:normal"><?php echo $news_column_mapping[$news_column_setting['column2']];?></th>
 							<th id="news_list_foot2" style="text-align:center;font-weight:normal"><?php echo $news_column_mapping[$news_column_setting['column3']];?></th>
 							<th id="news_list_foot3" style="text-align:center;font-weight:normal"><?php echo $news_column_mapping[$news_column_setting['column4']];?></th>
-							<!--<th id="news_list_foot4" style="text-align:center;font-weight:normal"><?php //echo $news_column_mapping[$news_column_setting['column5']];?></th>
-							<th id="news_list_foot5" style="text-align:center;font-weight:normal"><?php //echo $news_column_mapping[$news_column_setting['column6']];?></th>
-							<th id="news_list_foot6" style="text-align:center;font-weight:normal"><?php //echo $news_column_mapping[$news_column_setting['column7']];?></th>-->
+							<!--<th id="news_list_foot4" style="text-align:center;font-weight:normal"><?php //echo $news_column_mapping[$news_column_setting['column5']];?></th>-->
 						</tr>
 					</tfoot>
 				</table>
@@ -162,10 +155,7 @@ $manager_opinion_column_mapping = array("null"=>"不顯示", "topic"=>"討論議
 				<div class="no-move"></div>				
 			</div>
 			<div id="manager_opinion_list_content" class="box-content no-padding table-responsive" style="clear:left;width:100%;border:0px;font-family:新細明體;margin-bottom:10px;display:block;display:none">
-				<img id="manager_opinion_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon7.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>
-				<!--<div id="manager_opinion_column_adjustment_btn" class="btn btn-primary qq-upload-button" style="position:absolute;left:1200px;top:-6px;z-index:50;width: auto;height:38px;font-size:16pt;border-color:#5181A6;background-color:#5181A6">
-					<div style="font-family: Adobe 繁黑體 Std; font-size:16px"><i></i>欄位設定</div>
-				</div>-->
+				<!--<img id="manager_opinion_column_adjustment_btn" src="<?php echo $img_location?>/table_setting_icon7.png" alt="欄位設定" style="cursor:pointer;position:absolute;left:1100px;top:15px;z-index:50;width: 64px;height:36px;font-size:13pt;font-family: Adobe 繁黑體 Std"></img>-->
 				<table id="manager_opinion_list_tbl" class="display table table-bordered table-striped table-heading table-datatable" cellspacing="0" width="99%" style="margin-left:7px;margin-right:11px;border:1px #cccccc solid;margin-bottom:10px;table-layout:fixed;word-break:break-all;word-wrap:break-word">	
 					<thead>
 						<tr>
@@ -481,6 +471,8 @@ $(document).ready(function() {
 	manager_opinion_list_content.style.display = "block";
 	$("#loading").fadeOut(1500);  //隱藏資料載入動畫圖示
 	set_project_datatables_element();
+	set_news_datatables_element();
+	set_manager_opinion_datatables_element();
 });
 
 $('#project_list_tbl').on('mouseover', 'tbody tr', function(){
@@ -568,7 +560,7 @@ $('th').on("click", function (e) {
 });
 
 /*調整瀏覽項目dialog*/	
-function show_pro_column_setting_dialog()
+function show_project_column_setting_dialog()
 {
 	$("#project_column_choose_menu").dialog({
 		autoOpen : false,
@@ -588,26 +580,27 @@ function show_pro_column_setting_dialog()
 	$("#project_column_choose_menu").dialog("open");
 }
 
-$(function() {
-	$("#news_column_choose_menu").dialog({
-		autoOpen : false,
-		show : {
-			effect : "blind",
-			duration : 300
-		},
-		position: { 
-			my: "center top", 
-			at: "center top", 
-			of: "#news_list_tbl" },
-		hide : {
-			effect : "blind",
-			duration : 300
-		}						
+function show_news_column_setting_dialog()
+{
+	$(function() {
+		$("#news_column_choose_menu").dialog({
+			autoOpen : false,
+			show : {
+				effect : "blind",
+				duration : 300
+			},
+			position: { 
+				my: "center top", 
+				at: "center top", 
+				of: "#news_list_tbl" },
+			hide : {
+				effect : "blind",
+				duration : 300
+			}						
+		});
+		$("#news_column_choose_menu").dialog("open");		
 	});
-	$("#news_column_adjustment_btn").click(function() {		
-		$("#news_column_choose_menu").dialog("open");
-	});
-});
+}
 
 $(function() {
 	$("#external_tech_column_choose_menu").dialog({
@@ -630,26 +623,28 @@ $(function() {
 	});
 });
 
-$(function() {
-	$("#manager_opinion_column_choose_menu").dialog({
-		autoOpen : false,
-		show : {
-			effect : "blind",
-			duration : 300
-		},
-		position: { 
-			my: "center top", 
-			at: "center top", 
-			of: "#manager_opinion_list_tbl" },
-		hide : {
-			effect : "blind",
-			duration : 300
-		}						
-	});
-	$("#manager_opinion_column_adjustment_btn").click(function() {		
+
+function show_manager_opinion_column_setting_dialog()
+{
+	$(function() {
+		$("#manager_opinion_column_choose_menu").dialog({
+			autoOpen : false,
+			show : {
+				effect : "blind",
+				duration : 300
+			},
+			position: { 
+				my: "center top", 
+				at: "center top", 
+				of: "#manager_opinion_list_tbl" },
+			hide : {
+				effect : "blind",
+				duration : 300
+			}						
+		});	
 		$("#manager_opinion_column_choose_menu").dialog("open");
 	});
-});
+}
 
 
 /*$('#news_list_tbl').on('mouseover', 'tbody tr', function(){
