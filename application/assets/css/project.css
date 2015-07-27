@@ -2660,3 +2660,20 @@ select
 		overflow-x: scroll;
 	}
 }
+
+.form_label
+{
+	font-weight: bold;
+	font-family: 微軟正黑體;
+	font-weight: bold; 
+	font-size:17px;
+	line-height:37px;
+}
+
+.form_content
+{
+	font-size:12pt;
+	font-family:微軟正黑體;
+	line-height:30px;
+	text-align:justify;
+}

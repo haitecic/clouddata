@@ -1,25 +1,25 @@
 <!--Start Container-->
 <div id="main" class="container-fluid" style="background-color:#FBFBF0">
 	<div class="row">
-		<div class="col-xs-12 col-sm-12" style="background-color:#ffffff; height:30px;background-color:#FBFBF0;"></div>
-		<div style="padding-left:24px"></input>&nbsp;<span style="font-size:21pt;font-family:微軟正黑體"><?php echo $project_basic_info['idea_name'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="check_box" style="cursor: pointer;color:green;width: 20px;height: 20px;margin-top:2px" type="checkbox" onclick="return check_project_data('<?php echo $project_basic_info['id']?>')" <?php if($project_basic_info['is_checked'] == 1){echo " checked";}?>/>&nbsp;<?php if($project_basic_info['is_checked'] == 1){echo '<label id="check_hint_message" for="check_box" style="color:blue;cursor:default;font-size:16pt;font-family:微軟正黑體">已確認(由 '.$checked_user['surname'].$checked_user['given_names'].' 於 '.$project_basic_info['checked_time'].' 確認)</label>';} else if($project_basic_info['is_checked'] == 2){ echo '<label id="check_hint_message" for="check_box" style="color:red;cursor: pointer;font-size:16pt;font-family:微軟正黑體">尚未確認</label>';}?><input id="is_checked" type="hidden" value="<?php echo $project_basic_info['is_checked'];?>"></input></div>
-		<br/>		
-		<!--<img src="<?php echo site_url()?>application/assets/data_img/<?php echo $project_img['name']?>" >-->
-		<!--<div class="btn btn-primary qq-upload-button" style="border-color:#6483E4;background-color:#6483E4;width: auto;text-align:right;float:left;margin-left:50px;margin-top:-40px;margin-bottom:10px;"><!--;right:575-->
-			<!--<div id="sub_button" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i> 資料送出</div>-->
-			<!--<div id="list_project_button" onclick="list_project()" style="font-family: Adobe 繁黑體 Std; font-size:16px;"><i></i>專案列表</div>-->
-		<!--</div>-->		
-		<?php
-		/*當專案被鎖住，顯示提示訊息*/
-		if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username)
-		{
-			echo "<div style='text-align:center;font-size:12pt;color:blue;font-weight:normal;font-family: 新細明體'>使用者 ".$project_basic_info['current_user']." 正在編輯此專案</div><br/>";
-		}		
-		echo validation_errors();
-		$attributes = array('class' => 'form-horizontal', 'role'=>'form', 'id' => 'project_create_form', 'name'=>'project_create_form');
-		echo form_open('project_edit/'. $project_basic_info['id'], $attributes);
-		?>
-		<div class="form-group">
+		<!--<div class="col-xs-12 col-sm-12" style="background-color:#ffffff; height:30px;background-color:#FBFBF0;"></div>-->
+		<div class="col-xs-12" style="margin-top:30px;padding-left:24px">
+			<span style="font-size:16pt;color:#4DB849" class="glyphicon glyphicon-leaf"></span>&nbsp;
+			<span style="font-size:21pt;font-family:微軟正黑體"><?php echo $project_basic_info['idea_name'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input id="check_box" style="cursor: pointer;color:green;width: 20px;height: 20px;margin-top:2px" type="checkbox" onclick="return check_project_data('<?php echo $project_basic_info['id']?>')" <?php if($project_basic_info['is_checked'] == 1){echo " checked";}?>/>&nbsp;<?php if($project_basic_info['is_checked'] == 1){echo '<label id="check_hint_message" for="check_box" style="color:blue;cursor:default;font-size:16pt;font-family:微軟正黑體">已確認(由 '.$checked_user['surname'].$checked_user['given_names'].' 於 '.$project_basic_info['checked_time'].' 確認)</label>';} else if($project_basic_info['is_checked'] == 2){ echo '<label id="check_hint_message" for="check_box" style="color:red;cursor: pointer;font-size:16pt;font-family:微軟正黑體">尚未確認</label>';}?><input id="is_checked" type="hidden" value="<?php echo $project_basic_info['is_checked'];?>"></input>
+		</div>	
+	</div>
+	<?php
+	/*當專案被鎖住，顯示提示訊息*/
+	if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username)
+	{
+		echo "<div class='row'><div class='col-xs-12' style='text-align:center;font-size:12pt;color:blue;font-weight:normal;font-family: 新細明體'>使用者 ".$project_basic_info['current_user']." 正在編輯此專案</div></div>";
+	}		
+	//echo validation_errors();
+	$attributes = array('class' => 'form-horizontal', 'role'=>'form', 'id' => 'project_create_form', 'name'=>'project_create_form');
+	echo form_open('project_edit/'. $project_basic_info['id'], $attributes);
+	?>		
+	<div class="form-group">	
+		<div class="col-xs-12">
 			<div class="fotorama" align="center" data-nav="thumbs" data-width="40%" data-height="30%" data-allowfullscreen="true">
 			<?php
 			for ($i=0;$i<count($project_img);$i++)
@@ -31,239 +31,247 @@
 			?>
 			</div>
 		</div>
+	</div>
+	<!--<div class="form-group">
 		<input readonly type="hidden" value="<?php echo $project_basic_info['idea_id']?>" onfocus="change_border_display_onfocus(this)" onchange="change_border_display(this)" onblur="change_border_display_onblur(this)" id="idea_id" name="idea_id" class="form-control" placeholder="創意提案編號" data-toggle="tooltip" data-placement="bottom" title="創意提案編號" style="font-size:17px; font-family:微軟正黑體;">  
-		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">情境說明</label>
-			<div class="col-sm-10">
-				<p class="form-control-static" style="font-size:12pt;font-family:微軟正黑體"><?php echo $project_basic_info['scenario_d'];?></p>
-			</div>
+	</div>-->
+	<div class="form-group">
+		<label class="col-sm-1 col-sm-offset-1 control-label form_label">情境說明</label>
+		<div class="col-sm-9">
+			<p class="form-control-static form_content"><?php echo $project_basic_info['scenario_d'];?></p>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">功能構想</label>
-			<div class="col-sm-10">
-				<p class="form-control-static" style="font-size:12pt;font-family:微軟正黑體"><?php echo $project_basic_info['function_d'];?></p>
-			</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-1 col-sm-offset-1 control-label form_label">功能構想</label>
+		<div class="col-sm-9">
+			<p class="form-control-static form_content"><?php echo $project_basic_info['function_d'];?></p>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">差異化</label>
-			<div class="col-sm-10">
-				<p class="form-control-static"><?php echo $project_basic_info['distinction_d'];?></p>
-			</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-1 col-sm-offset-1 control-label form_label">差異化</label>
+		<div class="col-sm-9">
+			<p class="form-control-static form_content"><?php echo $project_basic_info['distinction_d'];?></p>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">價值性</label>
-			<div class="col-sm-10">
-				<p class="form-control-static"><?php echo $project_basic_info['value_d'];?></p>
-			</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-1 col-sm-offset-1 control-label form_label">價值性</label>
+		<div class="col-sm-10">
+			<p class="form-control-static form_content"><?php echo $project_basic_info['value_d'];?></p>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">可行性</label>
-			<div class="col-sm-10">
-				<p class="form-control-static"><?php echo $project_basic_info['feasibility_d'];?></p>
-			</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-1 col-sm-offset-1 control-label form_label">可行性</label>
+		<div class="col-sm-10">
+			<p class="form-control-static form_content"><?php echo $project_basic_info['feasibility_d'];?></p>
 		</div>
+	</div>
+	<div class="form-group">
 		<div style="margin-left:15px;width:98%;height:1px;background-color:#cccccc;text-align:center;">
-			<span style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer" onclick="show_project_detail()">
+			<span style="font-family: 微軟正黑體;font-weight: bold;;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer" onclick="show_project_detail()">
 				&nbsp;<img id="project_detail_icon" src="<?php echo $img_location;?>/sort-asc.png"></img>詳細資料&nbsp;
 			</span>
 		</div>
-		<br/>
-		<div id="project_detail" style="display:none;margin-left:15px;width:98%">
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">年度</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['year'];?></p>
-				</div>
+	</div>
+	<div id="project_detail" style="display:none">
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">年度</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['year'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">提案編號</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['idea_id'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">提案編號</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['idea_id'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">提案來源</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['idea_source'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">提案來源</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['idea_source'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">階段狀態</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['stage'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">階段狀態</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['stage'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">進度說明</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['progress_description'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">進度說明</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['progress_description'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">I階段文件檢核</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php if($project_basic_info['Idea'] != null){echo "審核通過";} else {echo "無";}?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">I階段文件檢核</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php if($project_basic_info['Idea'] != null){echo "審核通過";} else {echo "無";}?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">R階段文件檢核</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php if($project_basic_info['Requirement'] != null){echo "審核通過";} else {echo "無";}?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">R階段文件檢核</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php if($project_basic_info['Requirement'] != null){echo "審核通過";} else {echo "無";}?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">F階段文件檢核</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php if($project_basic_info['Feasibility'] != null){echo "審核通過";} else {echo "無";}?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">F階段文件檢核</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php if($project_basic_info['Feasibility'] != null){echo "審核通過";} else {echo "無";}?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">P階段文件檢核</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php if($project_basic_info['Prototype'] != null){echo "審核通過";} else {echo "無";}?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">P階段文件檢核</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php if($project_basic_info['Prototype'] != null){echo "審核通過";} else {echo "無";}?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">提案單位</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['proposed_unit'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">提案單位</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['proposed_unit'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">提案人</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['proposer'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">提案人</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['proposer'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">創意中心窗口</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['PM_in_charge'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">創意中心窗口</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['PM_in_charge'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">提案審核履歷</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['idea_examination'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">提案審核履歷</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['idea_examination'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">敗部復活申請</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['resurrection_application_qualified'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">敗部復活申請</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['resurrection_application_qualified'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">具備敗部復活申請資格</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['resurrection_applied'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">具備敗部復活申請資格</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['resurrection_applied'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">立案日期</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['established_date'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">立案日期</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['established_date'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">導入車型/先期式樣</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['adoption'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">導入車型/先期式樣</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['adoption'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">專利申請/取得</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['applied_patent'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label form_label">專利申請/取得</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['applied_patent'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">結案</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['closed_case'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">結案</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['closed_case'];?></p>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-1 col-sm-offset-1 control-label" style="font-family: Adobe 繁黑體 Std; font-size:17px;">備註</label>
-				<div class="col-sm-10">
-					<p class="form-control-static"><?php echo $project_basic_info['note'];?></p>
-				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 col-sm-offset-1 control-label form_label">備註</label>
+			<div class="col-sm-9">
+				<p class="form-control-static form_content"><?php echo $project_basic_info['note'];?></p>
 			</div>
-		</div>	
-		<!--Start:附加檔案區塊-->
-		<div style="font-family:Adobe 繁黑體 Std;font-size:20px;padding-left:15px"><img style="padding-bottom:3px" width="30px" height="30px" src="<?php echo $img_location;?>/attach_file2.png"></img>&nbsp;附加檔案&nbsp;</div>
-			<br>			
-			<?php			
-			if($project_file_category)
+		</div>
+	</div>	
+	<!--Start:附加檔案區塊-->
+	<div class="form-group">
+		<div class="col-sm-12">
+			<span width="30px" height="30px" style="color:green;font-size:12pt;margin-left:10px" class="glyphicon glyphicon-paperclip"></span>
+			<!--<img style="font-family:微軟正黑體;margin-left:15px;padding-bottom:3px" width="30px" height="30px" src="<?php echo $img_location;?>/attach_file2.png"></img>--><span style="font-family:微軟正黑體;font-weight:bold;font-size:20px;">&nbsp;附加檔案&nbsp;</span>
+		</div>
+	</div>			
+		<?php			
+		if($project_file_category)
+		{
+		?>
+			<div style="font-family: 微軟正黑體;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('file_detail0','file_detail_icon0', '', 'filelist0')">
+				&nbsp;<img id="file_detail_icon0" src="<?php echo $img_location;?>/sort-asc.png"></img>檔案總覽&nbsp;
+				<!--&nbsp;<img id="file_detail_icon0" width="35px" height="35px" src="<?php echo $img_location;?>/folder5.png"></img>&nbsp;檔案總覽&nbsp;-->
+			</div>
+			<div id="file_detail0" style="display:none;margin-left:15px;width:98%">
+				<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
+					<span class="filename" style="text-align:center;width:68%">檔案名稱</span>
+					<span align="center" style="padding-left:200px;text-align:center;width:10%">上傳時間</span>
+				</div>
+				<div id="filelist0"></div>
+				<br/>
+			</div>
+		<?php
+			$i=1;			
+			foreach($project_file_category as $category)
 			{
-			?>
-				<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('file_detail0','file_detail_icon0', '', 'filelist0')">
-					&nbsp;<img id="file_detail_icon0" src="<?php echo $img_location;?>/sort-asc.png"></img>檔案總覽&nbsp;
-					<!--&nbsp;<img id="file_detail_icon0" width="35px" height="35px" src="<?php echo $img_location;?>/folder5.png"></img>&nbsp;檔案總覽&nbsp;-->
+				if ($category['dir'] == '/') 
+				{
+					continue;
+				}
+				?>
+				<div style="font-family: 微軟正黑體;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('<?php echo "file_detail" . $i;?>','<?php echo "file_detail_icon" . $i;?>', '<?php echo $category['dir'];?>', '<?php echo "filelist" . $i;?>')">
+					&nbsp;<img id="file_detail_icon<?php echo $i;?>" src="<?php echo $img_location;?>/sort-asc.png"></img><?php echo rtrim($category['dir'], "/");?>&nbsp;
+					<!--&nbsp;<img id="file_detail_icon<?php echo $i;?>" width="35px" height="35px" src="<?php echo $img_location;?>/folder5.png"></img>&nbsp;<?php echo rtrim($category['dir'], "/");?>&nbsp;-->
 				</div>
-				<div id="file_detail0" style="display:none;margin-left:15px;width:98%">
+				<div id="file_detail<?php echo $i;?>" style="display:none;margin-left:15px;width:98%">
 					<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
 						<span class="filename" style="text-align:center;width:68%">檔案名稱</span>
 						<span align="center" style="padding-left:200px;text-align:center;width:10%">上傳時間</span>
 					</div>
-					<div id="filelist0"></div>
-					<br/>
+					<div id="filelist<?php echo $i;?>"></div>
+					<br>
 				</div>
-			<?php
-				$i=1;			
-				foreach($project_file_category as $category)
-				{
-					if ($category['dir'] == '/') 
-					{
-						continue;
-					}
-					?>
-					<div style="font-family: Adobe 繁黑體 Std;font-size:17px;background-color: #FBFBF0; position: relative; top: -0.5em;cursor:pointer;padding-left:15px" onclick="show_file_detail('<?php echo "file_detail" . $i;?>','<?php echo "file_detail_icon" . $i;?>', '<?php echo $category['dir'];?>', '<?php echo "filelist" . $i;?>')">
-						&nbsp;<img id="file_detail_icon<?php echo $i;?>" src="<?php echo $img_location;?>/sort-asc.png"></img><?php echo rtrim($category['dir'], "/");?>&nbsp;
-						<!--&nbsp;<img id="file_detail_icon<?php echo $i;?>" width="35px" height="35px" src="<?php echo $img_location;?>/folder5.png"></img>&nbsp;<?php echo rtrim($category['dir'], "/");?>&nbsp;-->
-					</div>
-					<div id="file_detail<?php echo $i;?>" style="display:none;margin-left:15px;width:98%">
-						<div id="file_list" class="statusbar" style="width:98%;margin-left:15px;padding-bottom:10px">
-							<span class="filename" style="text-align:center;width:68%">檔案名稱</span>
-							<span align="center" style="padding-left:200px;text-align:center;width:10%">上傳時間</span>
-						</div>
-						<div id="filelist<?php echo $i;?>"></div>
-						<br>
-					</div>
-					<?php
-					$i++;
-				}			
-			}
-			if($project_basic_info['is_checked'] == 2)
-			{
-			?>
-			<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
-			<div  id="dragandrophandler" style="margin-left:15px;font-family:微軟正黑體;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>">請拖曳檔案到此(<a href="#" id="browse_file" onclick="browse_file()">瀏覽</a>檔案)</div>
-			<?php
-			}
-			?>
-			<!--End:附加檔案區塊-->
-			<div id="status1"></div>
-			<input type="hidden" id="file_count" name="file_count" value="0"></input> <!--計算上傳的檔案數量-->
-			<input type="hidden" id="file_number" name="file_number" value="0"></input> <!--計算上傳的檔案編號-->
-			<input type="hidden" id="file_success_upload_count" name="file_success_upload_count" value="0"></input> <!--計算上傳成功的檔案數量-->
-			<input type="hidden" id="delete_file_count" name="delete_file_count" value="0"></input> <!--原本上傳之檔案被刪除的數量-->
-			<input type="hidden" id="upload_file_dir" name="upload_file_dir"></input> <!--伺服器暫存使用者上傳檔案的資料夾-->
-			<input type="hidden" id="current_user" name="current_user" value="<?php echo $project_basic_info['current_user'];?>"></input> <!--目前正在編輯的使用者-->
-			<input type="hidden" id="login_user" name="login_user" value="<?php echo $username;?>"></input> <!--使用者(自己)-->
-			<?php
-			if($project_basic_info['is_checked'] == 2)
-			{
-			?>
-			<div id="submit_btn_block" class="btn btn-primary qq-upload-button" style="width: auto;align:center;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username) { echo "display:none";}?>">
-				<div type="submit" id="submit_btn" style="font-family: Adobe 繁黑體 Std; font-size:17px;"><i class="fa fa-check-circle-o"></i>確認送出</div>
-			</div>
-			<?php
-			}
-			?>
+				<?php
+				$i++;
+			}			
+		}
+		if($project_basic_info['is_checked'] == 2)
+		{
+		?>
+		<input id="file_input" style="display:none" onchange="browse_upload()" type="file" name="my_file[]" multiple>
+		<div  id="dragandrophandler" style="margin-left:15px;font-family:微軟正黑體;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['is_blocked'] != $username){echo "display:none";}?>">請拖曳檔案到此(<a href="#" id="browse_file" onclick="browse_file()">瀏覽</a>檔案)</div>
+		<?php
+		}
+		?>
+		<!--End:附加檔案區塊-->
+		<div id="status1"></div>
+		<input type="hidden" id="file_count" name="file_count" value="0"></input> <!--計算上傳的檔案數量-->
+		<input type="hidden" id="file_number" name="file_number" value="0"></input> <!--計算上傳的檔案編號-->
+		<input type="hidden" id="file_success_upload_count" name="file_success_upload_count" value="0"></input> <!--計算上傳成功的檔案數量-->
+		<input type="hidden" id="delete_file_count" name="delete_file_count" value="0"></input> <!--原本上傳之檔案被刪除的數量-->
+		<input type="hidden" id="upload_file_dir" name="upload_file_dir"></input> <!--伺服器暫存使用者上傳檔案的資料夾-->
+		<input type="hidden" id="current_user" name="current_user" value="<?php echo $project_basic_info['current_user'];?>"></input> <!--目前正在編輯的使用者-->
+		<input type="hidden" id="login_user" name="login_user" value="<?php echo $username;?>"></input> <!--使用者(自己)-->
+		<?php
+		if($project_basic_info['is_checked'] == 2)
+		{
+		?>
+		<div id="submit_btn_block" class="btn btn-primary qq-upload-button" style="width: auto;align:center;<?php if($project_basic_info['is_blocked'] == 1 && $project_basic_info['current_user'] != $username) { echo "display:none";}?>">
+			<div type="submit" id="submit_btn" style="font-family: 微軟正黑體; font-size:17px;"><i class="fa fa-check-circle-o"></i>確認送出</div>
+		</div>
+		<?php
+		}
+		?>
 		</form>		
 		<!--End Content-->
-	</div>
+	<!--</div>End Row-->
 	<br/>	
 	<!--檔案預覽-->
 	<div id="preview_pdf" class="preview_pdf">

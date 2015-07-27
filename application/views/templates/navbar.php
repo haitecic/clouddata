@@ -58,8 +58,8 @@
 									?>"/>
 								<i class="fa fa-search" onclick="start_search()"></i>
 							</li>
-							<li><a href="#">專案資料</a></li>
-							<li><a href="#">News</a></li>
+							<!--<li><a href="#">專案資料</a></li>
+							<li><a href="#">News</a></li>-->
 						</ul>						
 						<ul class="nav navbar-nav navbar-right">
 							<li style="margin-top:15px;padding-left:12px;"><div style="color:#ffffff;margin-right:10px">使用者：<?php echo $username;?></div></li>
@@ -105,10 +105,12 @@
 	<input id="server_ip_address" type="hidden" value="<?php echo $_SERVER['SERVER_ADDR'];?>"></input>
 </header>
 
-
 <script>
 function start_search()
 {
+	document.getElementById("navbarCollapse").className = 'navbar-collapse collapse';  //在螢幕較小之畫面,使用者搜尋後,選單要被收摺
+	var navbar_collapse = document.getElementById("navbarCollapse");
+	navbar_collapse.setAttribute("aria-expanded", false);
 	document.getElementById("loading").style.display = "block";
 	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value;
 	user_behavior_log('search_bar', null);
@@ -251,6 +253,9 @@ function start_search()
 }
 
 $("#search_bar").keypress(function(event){   	
+	document.getElementById("navbarCollapse").className = 'navbar-collapse collapse';  //在螢幕較小之畫面,使用者搜尋後,選單要被收摺
+	var navbar_collapse = document.getElementById("navbarCollapse");
+	navbar_collapse.setAttribute("aria-expanded", false);
 	document.getElementById("search_bar_hidden").value = document.getElementById("search_bar").value; 	
     if (event.keyCode == 13) 
 	{		
