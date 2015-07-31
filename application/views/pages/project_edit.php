@@ -3,9 +3,9 @@
 	<div class="row">
 		<!--<div class="col-xs-12 col-sm-12" style="background-color:#ffffff; height:30px;background-color:#FBFBF0;"></div>-->
 		<div class="col-xs-12" style="margin-top:30px;padding-left:24px">
-			<span style="font-size:16pt;color:#4DB849" class="glyphicon glyphicon-leaf"></span>&nbsp;
-			<span style="font-size:21pt;font-family:微軟正黑體"><?php echo $project_basic_info['idea_name'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input id="check_box" style="cursor: pointer;color:green;width: 20px;height: 20px;margin-top:2px" type="checkbox" onclick="return check_project_data('<?php echo $project_basic_info['id']?>')" <?php if($project_basic_info['is_checked'] == 1){echo " checked";}?>/>&nbsp;<?php if($project_basic_info['is_checked'] == 1){echo '<label id="check_hint_message" for="check_box" style="color:blue;cursor:default;font-size:16pt;font-family:微軟正黑體">已確認(由 '.$checked_user['surname'].$checked_user['given_names'].' 於 '.$project_basic_info['checked_time'].' 確認)</label>';} else if($project_basic_info['is_checked'] == 2){ echo '<label id="check_hint_message" for="check_box" style="color:red;cursor: pointer;font-size:16pt;font-family:微軟正黑體">尚未確認</label>';}?><input id="is_checked" type="hidden" value="<?php echo $project_basic_info['is_checked'];?>"></input>
+			<span style="font-size:16pt;color:#446BAB;/*#4DB849*/" class="glyphicon glyphicon-leaf"></span>&nbsp;
+			<span style="font-size:21pt;color:#446BAB/*#*/;font-family:微軟正黑體"><?php echo $project_basic_info['idea_name'];?></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<!--<input id="check_box" style="cursor: pointer;color:green;width: 20px;height: 20px;margin-top:2px" type="checkbox" onclick="return check_project_data('<?php echo $project_basic_info['id']?>')" <?php if($project_basic_info['is_checked'] == 1){echo " checked";}?>/>&nbsp;<?php if($project_basic_info['is_checked'] == 1){echo '<label id="check_hint_message" for="check_box" style="color:blue;cursor:default;font-size:16pt;font-family:微軟正黑體">已確認(由 '.$checked_user['surname'].$checked_user['given_names'].' 於 '.$project_basic_info['checked_time'].' 確認)</label>';} else if($project_basic_info['is_checked'] == 2){ echo '<label id="check_hint_message" for="check_box" style="color:red;cursor: pointer;font-size:16pt;font-family:微軟正黑體">尚未確認</label>';}?><input id="is_checked" type="hidden" value="<?php echo $project_basic_info['is_checked'];?>"></input>-->
 		</div>	
 	</div>
 	<?php
@@ -44,25 +44,25 @@
 	<div class="form-group">
 		<label class="col-sm-1 col-sm-offset-1 control-label form_label">功能構想</label>
 		<div class="col-sm-9">
-			<p class="form-control-static form_content"><?php echo $project_basic_info['function_d'];?></p>
+			<p class="form-control-static form_content"><?php if($project_basic_info['function_d']!=null){echo $project_basic_info['function_d'];}else{echo "無";}?></p>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-1 col-sm-offset-1 control-label form_label">差異化</label>
 		<div class="col-sm-9">
-			<p class="form-control-static form_content"><?php echo $project_basic_info['distinction_d'];?></p>
+			<p class="form-control-static form_content"><?php if($project_basic_info['distinction_d']!=null){echo $project_basic_info['distinction_d'];}else{echo "無";}?></p>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-1 col-sm-offset-1 control-label form_label">價值性</label>
 		<div class="col-sm-10">
-			<p class="form-control-static form_content"><?php echo $project_basic_info['value_d'];?></p>
+			<p class="form-control-static form_content"><?php if($project_basic_info['value_d']!=null){echo $project_basic_info['value_d'];}else{echo "無";}?></p>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-1 col-sm-offset-1 control-label form_label">可行性</label>
 		<div class="col-sm-10">
-			<p class="form-control-static form_content"><?php echo $project_basic_info['feasibility_d'];?></p>
+			<p class="form-control-static form_content"><?php if($project_basic_info['feasibility_d']!=null){echo $project_basic_info['feasibility_d'];}else{echo "無";}?></p>
 		</div>
 	</div>
 	<div class="form-group">
@@ -76,31 +76,31 @@
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">年度</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['year'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['year']!=null){echo $project_basic_info['year'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">提案編號</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['idea_id'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['idea_id']!=null){echo $project_basic_info['idea_id'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">提案來源</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['idea_source'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['idea_source']!=null){echo $project_basic_info['idea_source'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">階段狀態</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['stage'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['stage']!=null){echo $project_basic_info['stage'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">進度說明</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['progress_description'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['stage']!=null){echo $project_basic_info['progress_description'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
@@ -130,67 +130,67 @@
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">提案單位</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['proposed_unit'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['proposed_unit']!=null){echo $project_basic_info['proposed_unit'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">提案人</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['proposer'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['proposer']!=null){echo $project_basic_info['proposer'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label form_label">創意中心窗口</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['PM_in_charge'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['PM_in_charge']!=null){echo $project_basic_info['PM_in_charge'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label form_label">提案審核履歷</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['idea_examination'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['idea_examination']!=null){echo $project_basic_info['idea_examination'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label form_label">敗部復活申請</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['resurrection_application_qualified'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['resurrection_application_qualified']!=null){echo $project_basic_info['resurrection_application_qualified'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label form_label">具備敗部復活申請資格</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['resurrection_applied'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['resurrection_applied']!=null){echo $project_basic_info['resurrection_applied'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">立案日期</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['established_date'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['established_date']!=null){echo $project_basic_info['established_date'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label form_label">導入車型/先期式樣</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['adoption'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['adoption']!=null){echo $project_basic_info['adoption'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label form_label">專利申請/取得</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['applied_patent'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['applied_patent']!=null){echo $project_basic_info['applied_patent'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">結案</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['closed_case'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['closed_case']!=null){echo $project_basic_info['closed_case'];}else{echo "無";}?></p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-1 col-sm-offset-1 control-label form_label">備註</label>
 			<div class="col-sm-9">
-				<p class="form-control-static form_content"><?php echo $project_basic_info['note'];?></p>
+				<p class="form-control-static form_content"><?php if($project_basic_info['note']!=null){echo $project_basic_info['note'];}else{echo "無";}?></p>
 			</div>
 		</div>
 	</div>	
@@ -259,6 +259,7 @@
 		<input type="hidden" id="upload_file_dir" name="upload_file_dir"></input> <!--伺服器暫存使用者上傳檔案的資料夾-->
 		<input type="hidden" id="current_user" name="current_user" value="<?php echo $project_basic_info['current_user'];?>"></input> <!--目前正在編輯的使用者-->
 		<input type="hidden" id="login_user" name="login_user" value="<?php echo $username;?>"></input> <!--使用者(自己)-->
+		<input type="hidden" id="idea_id" name="idea_id" value="<?php echo $project_basic_info['idea_id']?>">
 		<?php
 		if($project_basic_info['is_checked'] == 2)
 		{
@@ -271,7 +272,7 @@
 		?>
 		</form>		
 		<!--End Content-->
-	<!--</div>End Row-->
+	<!--</ddiv>End Row-->
 	<br/>	
 	<!--檔案預覽-->
 	<div id="preview_pdf" class="preview_pdf">
@@ -347,7 +348,7 @@ function show_file_detail(file_detail_id, file_detail_icon_id, dir, list_id)
 					'<div class="file_preview"><img id="preview_file_icon_' + str.list[n].id + '" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/preview.png" alt="preview" onclick="preview_file(' + "'" + preview_file_path + "'" +', this.id)"></img></div>' +
 					'<div class="file_download"><a href="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/' + str.list[n].instance_file_name + '" download="' + str.list[n].file_name + '"><img id="download_file_icon_'+ str.list[n].id +'" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/download.png" alt="download" onclick="user_behavior_log(this.id, ' + "'" + download_file_path + "'" + ')"></img></a></div>' +
 					'<div class="filename" style="width:70%">' + str.list[n].file_name + '</div>'+
-					'<span style="margin-left:75px;width:20%">' + str.list[n].create_time + '</span>'+
+					'<span style="margin-left:75px;width:20%">' + str.list[n].create_time + '</span>'
 					'</div>';
 					//'<div class="filesize" style="padding-left:30px;width:150px"></div>' +
 					//'<div class="progressBar" style="margin-left:10px;width:200px;background-color:#0BA1B5"><div style="padding-left:160px;text-align:right">100%</div></div>'+
@@ -415,122 +416,8 @@ $(document).ready(function()
 	document.getElementById("upload_file_dir").value = upload_file_dir;
 	var obj = $("#dragandrophandler");
 	$("#submit_btn").click(function () {  //按下資料送出的處理函數sub_button
-		/*
-		Validation Field
-		Validate Item：(1)各欄位的值不為空且不能只是空白或其他特殊字元，(2)年份值合理，(3)有夾帶檔案
-		
-		var pass_validation = true;
-		var validation_message = "表單未送出，原因如下：\n";		
-		var project_name =  document.getElementById("project_name").value;
-		var year = document.getElementById("year").value;
-		var haitec_unit = document.getElementById("haitec_unit").value;
-		var outer_unit = document.getElementById("outer_unit").value;
-		var pm = document.getElementById("pm").value;				
-		var keyword = document.getElementById("keyword").value;
-		var idea_id = document.getElementById("idea_id").value;
-		//將輸入框恢復至本來的顏色
-		document.getElementById("project_name").style.borderColor = "#CCCCCC";
-		document.getElementById("year").style.borderColor = "#CCCCCC";
-		document.getElementById("haitec_unit").style.borderColor = "#CCCCCC";
-		document.getElementById("outer_unit").style.borderColor = "#CCCCCC";
-		document.getElementById("pm").style.borderColor = "#CCCCCC";
-		document.getElementById("keyword").style.borderColor = "#CCCCCC";
-		document.getElementById("idea_id").style.borderColor = "#CCCCCC";
-		//以陣列取代
-		if(project_name == "" || project_name == null)
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 「專案主題」未填寫\n";
-			document.getElementById("project_name").style.borderColor = "red";  //標記未填寫之輸入欄位
-		}
-		var text = /^[0-9]+$/;
-		var current_year = new Date().getFullYear();
-		if(year == "" || year == null)
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 「專案年份」未填寫\n";
-			document.getElementById("year").style.borderColor = "red";
-		}
-		else if((!text.test(year)) || year.length != 4)
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 「專案年份」欄位格式輸入錯誤!須輸入有效西元年(如:2015)\n";
-			document.getElementById("year").style.borderColor = "red";
-		}
-		else if((year < 2005) || (year > current_year))
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 「專案年份」須介於2005年至"+current_year+"年\n";
-			document.getElementById("year").style.borderColor = "red";
-		}
-		if(haitec_unit == "" || haitec_unit == null)
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 「華創單位」未填寫\n";
-			document.getElementById("haitec_unit").style.borderColor = "red";
-		}
-		if(outer_unit == "" || outer_unit == null)
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 「外部單位」未填寫\n";
-			document.getElementById("outer_unit").style.borderColor = "red";
-		}
-		if(pm == "" || pm == null)
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 「創意中心負責人」未填寫\n";
-			document.getElementById("pm").style.borderColor = "red";
-		}
-		if(keyword == "" || keyword == null)
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 「關鍵子」未填寫\n";
-			document.getElementById("keyword").style.borderColor = "red";
-		}
-		if(idea_id == "" || idea_id == null)
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 「提案編號」未填寫\n";
-			document.getElementById("idea_id").style.borderColor = "red";
-		}
-		//判斷是否有上傳檔案
-		if(document.getElementById("file_count").value == 0 && document.getElementById("delete_file_count").value == <?php echo count($project_attachfile) ?>)
-		{
-			pass_validation = false;
-			validation_message = validation_message+"● 未上傳任何附加檔案\n";
-			document.getElementById("dragandrophandler").style.borderColor = "red";
-		}	
-		else
-		{
-			var k;
-			for(k=0;k < document.getElementById("file_number").value;k++)
-			{				
-				var myElem = document.getElementById('is_send_'+ k);				
-				if (myElem == null)
-				{								
-					continue;
-				}
-				else  //當有此元素存在
-				{  					
-					if(document.getElementById('is_send_'+ k).innerHTML == "false")
-					{						
-						pass_validation = false;
-						validation_message = validation_message+"● 附加檔案未上傳完成，請等待上傳完成後，再將資料送出。\n";
-						break;
-					}
-				}
-			}			
-		}		
-		has_sent = true;  //標記曾試圖送出表單，但未通過欄位驗證		
-		if(pass_validation == false)
-		{
-			alert(validation_message);			
-		}		
-		else if(pass_validation == true)
-		{	*/	
-		user_behavior_log(this.id, null)	  //temp commemt	
-		document.getElementById("project_create_form").submit();			
-		/*}*/
+		user_behavior_log(this.id, null);	
+		document.getElementById("project_create_form").submit();
     });
 	/**
 	使用者點選瀏覽檔案「Browse」按鈕上傳檔案
@@ -541,7 +428,7 @@ $(document).ready(function()
 	{
 		e.stopPropagation();
 		e.preventDefault();		
-		user_behavior_log(this.id, null);  //temp comment
+		user_behavior_log(this.id, null);
 		$("#file_input").trigger('click');
 	}); 
 	
@@ -658,7 +545,7 @@ function handle_file_upload_from_browse(files, obj, upload_file_dir)  //第一�
 }
 
 function handleFileUpload(item, path, obj, upload_file_dir)  //第一個參數為拖曳的檔案; 第二個參數為拖曳檔案放置的方框區塊物件
-{	
+{		
 	path = path || "";
 	if (item.isFile) 
 	{
@@ -699,7 +586,7 @@ function handleFileUpload(item, path, obj, upload_file_dir)  //第一個參數�
 			var status = new createStatusbar(obj);  //set progress bar.
 			status.setFileInfo(file.name, path, file.size, file.type);
 			sendFileToServer(fd, status);
-		});
+		});		
 	}
 	else if (item.isDirectory) 
 	{
@@ -827,7 +714,7 @@ function createStatusbar(obj)
 }
 //3.Send FormData() to Server using jQuery AJAX API
 function sendFileToServer(formData, status)
-{	
+{		
 	var uploadURL = "http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/project_file_upload";
     var extraData ={};
     var jqXHR=$.ajax({
