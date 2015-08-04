@@ -348,7 +348,7 @@ function show_file_detail(file_detail_id, file_detail_icon_id, dir, list_id)
 					'<div class="file_preview"><img id="preview_file_icon_' + str.list[n].id + '" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/preview.png" alt="preview" onclick="preview_file(' + "'" + preview_file_path + "'" +', this.id)"></img></div>' +
 					'<div class="file_download"><a href="http://<?php echo $_SERVER['SERVER_ADDR'];?>/project_management/application/assets/project_attachment/<?php echo $project_basic_info['id']?>/' + str.list[n].instance_file_name + '" download="' + str.list[n].file_name + '"><img id="download_file_icon_'+ str.list[n].id +'" style="width:26px;height:24px;cursor:pointer" src="<?php echo $img_location;?>/download.png" alt="download" onclick="user_behavior_log(this.id, ' + "'" + download_file_path + "'" + ')"></img></a></div>' +
 					'<div class="filename" style="width:70%">' + str.list[n].file_name + '</div>'+
-					'<span style="margin-left:75px;width:20%">' + str.list[n].create_time + '</span>'
+					'<span style="margin-left:75px;width:20%">' + str.list[n].create_time + '</span>'+
 					'</div>';
 					//'<div class="filesize" style="padding-left:30px;width:150px"></div>' +
 					//'<div class="progressBar" style="margin-left:10px;width:200px;background-color:#0BA1B5"><div style="padding-left:160px;text-align:right">100%</div></div>'+
